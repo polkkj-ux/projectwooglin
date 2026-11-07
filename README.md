@@ -1,4 +1,43 @@
 
+## Product page at `/`, application at `/app` (v10)
+
+- **`/`** (`public/index.html`) is the public product page: an editorial hero with a screenshot of the working Portfolio Overview, the problem and the Detect / Quantify / Verify platform, a three-step BOR-01 walkthrough built from real application screenshots, and the trust and methodology section. Every "Explore Live Demo" and "Open Application" link goes to `/app` with no sign-up.
+- **`/app`** (`public/app.html`) is the monitoring application, unchanged in function. `vercel.json` rewrites `/app` to `public/app.html`; `server.js` serves the same routes locally.
+- **Old links keep working.** A short script at the top of the product page forwards application hashes (`/#overview`, `/#borrowers`, `/#analysis`, `/#design`, `/#method`, `/#how`, `/#borrower-…`) to `/app#…`. Product-page anchors (`#platform`, `#how-it-works`, `#methodology`) never collide with them.
+- **Figures on the product page come from the engine.** BOR-01's numbers are written into the page and then refreshed from `/api/covenants` on load, so they cannot drift. The screenshots in `public/assets/` were captured from the running application (1× and 2× WebP).
+- **Shared brand:** the same wordmark, palette (midnight navy, ivory, champagne accent) and type. Newsreader (SIL OFL, `public/fonts/LICENSE-Newsreader.txt`) is used for headings on both pages; Inter for everything else.
+- **Inspired by 21st.dev, built without new dependencies.** 21st components are React and Tailwind; this project is plain HTML with no build step and a strict Content-Security-Policy, so three patterns were rebuilt directly: a hero screenshot that settles from a slight tilt as you scroll, a header that condenses with a sliding indicator under the current section, and quarter-trend sparklines on the dashboard's headline figures. All three switch off for reduced motion.
+- The Content-Security-Policy now also allows `img-src 'self'` for the screenshots.
+
+## Four covenants in the redesigned interface (v9)
+
+Liam's v7 engine work (below) is merged into the v8 institutional redesign. The backend is his, unchanged; the redesigned page now reads every covenant the engine returns instead of only leverage and DSCR.
+
+- **Portfolio Overview:** the four headline KPIs stay; a *Covenants in force* strip shows each covenant's mode (maintenance, springing at the trigger, not applied) and how many borrowers fail it. The borrower table has a column per covenant; dormant springing tests show as hollow markers with "Not triggered" (or "Not triggered; would fail"). Status labels count failed tests ("2 tests failed").
+- **Covenant terms** (header button): portfolio-wide mode per covenant and the springing trigger, with the cited springing provision and a list of borrower-specific overrides. Changes recalculate on the server; a failed change leaves the previous results in place.
+- **Borrower page:** a test card per covenant (dormant ones dashed, with "if it applied" wording), a covenant picker for the quarterly chart, all ratios in the history table, a per-borrower terms panel with revolver utilisation, and policy evidence from both documents: the organizer policy and the team addendum, each with highlighted sentences, character positions and SHA-256.
+- **Covenant Analysis:** headroom charts for every applied covenant, compliance gaps per covenant, FCCR/current-ratio/springing definitions, and springing data-quality notes (for example missing revolver figures).
+- **Covenant Designer** page in the redesign's style, and Methodology sections for FCCR, current ratio, springing covenants and the Designer.
+
+**Verification for this merge:** `npm test` (43 pass); an independent Python `Decimal` recomputation of all four covenants and the springing rule from the raw CSV (773 field comparisons against the API, 0 mismatches); 81 browser checks against the running app (every KPI, filter count, status label and table ratio per quarter, all 36 borrower pages, both demos, terms changes and overrides, the Designer at 25% and 10% cushion); 26 upload and policy checks; edge-case files; no horizontal overflow at 1440, 1280, 1024 or 390 px.
+
+**Demo add-on, adjusted for the redesign.** Pick Q2 2026: the banner says 2 borrowers would fail a springing FCCR test. Open **BOR-02** (status *Springing test would fail*). In *Covenant terms for BOR-02*, set FCCR to *Maintenance*: BOR-02 now fails, $6,000.00 short of the $286,000.00 needed. Then **Covenant Designer → Use sample statements** (leverage ≤ 4.00x) and drag the cushion to 10% (3.25x).
+
+## Four covenants, springing terms and the Covenant Designer (v7)
+
+**New covenants.** Besides leverage and DSCR, the engine now tests **fixed-charge coverage** (FCCR = (TTM EBITDA − unfinanced capex − cash taxes − distributions) ÷ fixed charges) and the **current ratio** (current assets ÷ current liabilities). They apply to any row that has `min_fccr` or `min_current_ratio`; files without those columns behave exactly as before. Every covenant shares one result shape (`numerator_headroom_usd`, `denominator_limit_usd`, …) so the page renders any covenant the same way.
+
+**Springing covenants.** The lender chooses, per covenant, **Maintenance** (tested every quarter), **Springing** (tested only when revolver drawn ÷ commitment is at or above the trigger, default 35%) or **Not applied**. Use **Covenant terms** in the header for the whole portfolio, or the terms panel on a borrower's page for that borrower only. A dormant springing test is shown with what it *would* be, but counts as neither passing nor failing. If revolver figures are missing, the test is run anyway (conservative). Default: FCCR springing, others maintenance. The API takes the same settings: `POST /api/covenants {"settings":{"trigger_pct":"35","modes":{"fccr":"maintenance"},"borrowers":{"BOR-02":{"modes":{"fccr":"off"}}}}}`.
+
+**Covenant Designer** (`#design`). Upload a company's statements as a CSV of `line_item,amount_usd` (or use the sample). The backend (`lib/recommend.js`, `POST /api/recommend`) derives EBITDA, debt, debt service and the four ratios, then recommends which covenants to include, at what level (so results could fall by the chosen cushion, default 25%, before breach), and whether each should be springing. It shows every figure's source line, the rules used, and draft term-sheet language. It is deterministic; no LLM.
+
+**Data.** The default dataset is `data/team/loan_covenants_extended.csv`: the organizer's `loan_covenants.csv` values unchanged, plus team-made **synthetic** capex, tax, distribution, working-capital and revolver columns (`scripts/make-extended-fixture.js`). FCCR, current ratio and springing definitions come from `data/team/covenant-policy-addendum.txt`, a team-written synthetic addendum cited separately from the organizer policy. The organizer files are untouched.
+
+### Demo add-on (1 minute)
+
+1. **Springing (30s).** On Overview (Q2 2026), point to the banner: FCCR is dormant for 5 borrowers, 2 would fail. Open **BOR-02**: within limits, but its springing FCCR would fail at 1.08x. Change FCCR to *Maintenance* in its terms panel: BOR-02 now fails, $6,000.00 short of the $286,000.00 needed.
+2. **Designer (30s).** Open **Covenant Designer → Use sample statements**: leverage ≤ 4.00x, FCCR ≥ 1.10x springing at 35%, current ratio ≥ 1.20x, DSCR optional. Drag the cushion to 10% and the leverage maximum tightens to 3.25x.
+
 ## Borrower analysis page (v5)
 
 Click **Review** on any borrower (Overview, Borrowers table) to open `#borrower-<ID>`. The page answers five questions: what happened, which requirement failed, how far from compliance, improving or deteriorating, and what data and policy text support it. "Show calculation" and "View policy evidence" expand to formulas, inputs, the cited policy sentences (with offsets and SHA-256) and the raw row.
