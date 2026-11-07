@@ -92,3 +92,22 @@ All five were reproduced by the Modeler's own run, by an independent check model
 3. Artifact paths are returned as bare file names. A failed FeasRelax now returns an explicit `waiver_error`. Input validation was added.
 4. An OPTIMAL status with a non-zero MIP gap is treated as an error, not a plan.
 5. A clause map C1..C5 → exact policy sentences was added. The tests check that each sentence occurs verbatim.
+
+## Verification (Gurobi Explainer cross-check)
+
+The Explainer (Gurobi MCP) was run on the model files written by `opt/cure_model.py`. It was given this context: C1 and C2 are covenant thresholds the lender can waive, and C3, C4 and C5 are facts.
+
+**T4 infeasibility (`BOR-09_2026-Q3_T4.lp`).** The Explainer computed the IIS independently and got {C1, C3, C4, C5}, the same as ours. It reduced the four constraints to `0 <= -45000`.
+In plain terms, the borrower has no cures left (C4), so the equity cure must be zero (C3). Minimum liquidity caps repayment at $250,000 (C5). Leverage
+needs at least $295,000 of repayment (C1). That leaves the borrower $45,000 short. C2 (DSCR) plays no part in the conflict. With FeasRelax restricted to the C1 and C2 right-hand
+sides and minimum total violation, only C1 moves, by exactly 45,000. C2 is untouched. Repayment is $250,000, no equity cure is used, and the leverage limit becomes
+1,020,000 / 325,000 = 3.1385, which rounds up to **3.14x**. That matches our waiver and the brief's T4. The Explainer re-solved the repaired model and found it optimal.
+
+**T1 sensitivity (`BOR-09_2026-Q3_T1_fixed.lp`, binaries fixed at y=1, s=1, solved as an LP).** The Explainer found that the equity cure cap (C3) and the
+minimum-liquidity paydown cap (C5) are both slack, with a shadow price of $0.
+- **C3:** the cheapest plan uses $68,333.33 of the $100,000 cap. Raising the cap saves nothing, and the cap could fall to $68,333.33 before it starts to cost money.
+- **C5:** the plan repays nothing, so the $250,000 paydown capacity has no value at any level from $0 upward. In this plan, repayment costs $1.01 per dollar and is worth only $0.33 of equity, so it loses to equity.
+- **C1:** this is the only binding constraint. Each $1 of relief on the leverage test's right-hand side saves about $0.33 of cure cost, valid for right-hand-side values from −390,000 to −103,800.
+- **Our own check:** we confirmed these figures with the shadow prices (Pi) and right-hand-side ranges (SARHS) on the same file.
+
+The Explainer's reports and repaired models were saved to `gurobi_generated/`, which is git-ignored and not committed.

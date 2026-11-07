@@ -156,6 +156,7 @@ def extract_result(m, d, lp_path, fixed_lp_path):
         res["plan"] = {"E": E, "P": P, "y": y, "s": s, "cost": m.ObjVal, "pro_forma": _pro_forma(d, E, P, s),
                        "binding": [c.ConstrName for c in m.getConstrs() if abs(c.Slack) <= 1e-6]}
         fixed = m.copy()
+        fixed.ModelName = m.ModelName + "_fixed"
         for name, val in (("y", y), ("s", s)):
             v = fixed.getVarByName(name)
             v.LB = v.UB = val

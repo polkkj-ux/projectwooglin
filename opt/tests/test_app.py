@@ -11,7 +11,9 @@ def test_health():
     assert j["ok"] is True and j["gurobi_version"].count(".") == 2
 
 
-def test_solve_t1_and_validation():
+def test_solve_t1_and_validation(monkeypatch, tmp_path):
+    real = appmod.solve_cure
+    monkeypatch.setattr(appmod, "solve_cure", lambda d, **kw: real(d, out_dir=str(tmp_path), **kw))
     r = client.post("/solve", json=dict(BOR09, case="apitest"))
     assert r.status_code == 200
     p = r.json()["options"]["cheapest"]["plan"]
