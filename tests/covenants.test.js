@@ -32,7 +32,7 @@ test('dataset results reconcile to source rows, covenantCheck and cited policy t
  const rows=parseCSV(await rd('loan_covenants.csv'));const policy=await rd('documents/loan-policy.txt');
  const out=monitorCovenants(rows,policy);
  assert.equal(out.results.length,36);
- assert.deepEqual(out.summary,{rows:36,pass:6,exceptions:30,invalid:0,leverage_breaches:27,dscr_breaches:18,unevaluable:0});
+ assert.deepEqual(out.summary,{rows:36,pass:6,exceptions:30,invalid:0,leverage_breaches:27,dscr_breaches:18,fccr_breaches:0,current_ratio_breaches:0,unevaluable:0,dormant:0,untested:0});
  for(const [i,res] of out.results.entries()){
   const src=rows[i],ref=covenantCheck(src);
   assert.equal(res.record_id,src.record_id);assert.equal(res.period,src.period);

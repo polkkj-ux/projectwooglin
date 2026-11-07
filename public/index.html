@@ -180,8 +180,8 @@ dl.kv.small{font-size:13px}
  #tbl{min-width:0}#tbl thead{display:none}
  #tbl tbody tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
  #tbl tbody td{border:0;padding:10px 14px}
- #tbl tbody td:nth-child(1),#tbl tbody td:nth-child(2),#tbl tbody td:nth-child(6){grid-column:1/-1}
- #tbl tbody td:nth-child(1){padding-bottom:0}
+ #tbl tbody td.c-b,#tbl tbody td.c-s,#tbl tbody td.act{grid-column:1/-1}
+ #tbl tbody td.c-b{padding-bottom:0}
  #tbl tbody td[data-label]:before{content:attr(data-label);display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
  #tbl tbody td.chg{display:none}
 }
@@ -218,6 +218,38 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi:nth-child(2){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--line)}.two,.how{grid-template-columns:1fr}.attn .row{grid-template-columns:90px 1fr;}.attn .row>:nth-child(n+3){grid-column:2}}
 @media (max-width:860px){.app{grid-template-columns:minmax(0,1fr)}.side{min-width:0}.side{position:static;height:auto;padding:14px 0 0}.brand{padding:0 20px 14px;border:0}.nav{flex-direction:row;padding:0 8px;overflow-x:auto}.nav a{border-left:0;border-bottom:3px solid transparent;white-space:nowrap}.nav a[aria-current=page]{border-bottom-color:#6fc0c7}.sidefoot{display:none}.top,main{padding-left:18px;padding-right:18px}h1{font-size:26px}.kpi .big{font-size:38px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* four covenants, terms, designer */
+#tbl{min-width:1040px}
+#tbl tbody td{padding:14px 12px}#tbl thead th>span,#tbl thead th>button{padding:12px}
+.c-s .meta{margin-top:6px;font-size:12.5px}
+.chg div{font-size:12.5px}
+.cov.dorm .fig{color:var(--faint)}
+.track .fill.dorm{background:repeating-linear-gradient(45deg,var(--faint) 0 4px,#d7d4cc 4px 8px);opacity:.9}
+.chip.btnchip{cursor:pointer;font:inherit;font-size:12.5px}.chip.btnchip:hover{border-color:var(--navy);color:var(--navy)}
+.toast{font-size:13.5px;margin:-4px 0 12px;min-height:0}.toast:empty{display:none}.toast.err{color:var(--bad);font-weight:600}.toast.okmsg{color:var(--ok);font-weight:600}
+.trow{display:grid;grid-template-columns:minmax(150px,1fr) auto;gap:10px 16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2)}.trow:last-child{border-bottom:0}
+.trow .tn b{display:block}.trow .tn span{font-size:12.5px;color:var(--mute)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.seg label{display:block;cursor:pointer}.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:7px 12px;font-size:13.5px;border-right:1px solid var(--line);white-space:nowrap}.seg label:last-child span{border-right:0}
+.seg input:checked+span{background:var(--navy);color:#fff;font-weight:600}.seg input:focus-visible+span{outline:3px solid var(--teal);outline-offset:-3px}
+.trig{display:flex;gap:8px;align-items:center;margin-top:10px}.trig input{width:90px;border:1px solid var(--line);border-radius:3px;padding:8px 10px;background:#fff}
+.termsbox{background:#fff;border:1px solid var(--line);padding:16px 20px;max-width:900px}
+.termsbox .trow select{min-width:170px}
+.termsbox .head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.design{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:start}
+.design textarea{min-height:230px}
+.design input[type=text]{width:100%;border:1px solid var(--line);border-radius:3px;padding:8px 10px;background:#fff;margin-top:4px}
+.design input[type=file]{margin-top:10px;font-size:14px;color:var(--mute);max-width:100%}
+.design input[type=file]::file-selector-button{background:#fff;border:1px solid var(--navy);color:var(--navy);padding:8px 14px;border-radius:3px;font:600 14px var(--sans);margin-right:12px;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--navy)}
+.cushval{font:400 34px/1 var(--serif);color:var(--navy);margin:8px 0 2px}
+.pkg{background:var(--navy);color:#fff;padding:18px 22px}.pkg h3{color:#9fb0c9;margin-bottom:6px}.pkg p{margin:0;font:400 19px/1.45 var(--serif)}
+.reccard ul{margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--char)}.reccard li{margin-bottom:4px}
+.reccard.dec-recommended{border-top:4px solid var(--ok)}.reccard.dec-fails_at_signing{border-top:4px solid var(--bad)}.reccard.dec-optional{border-top:4px solid var(--warn)}
+.sheet{white-space:pre-wrap;background:var(--paper);border:1px solid var(--line);padding:12px 14px;font:14px/1.6 var(--serif);margin:8px 0 10px}
+@media (max-width:1100px){.design{grid-template-columns:1fr}}
+@media (max-width:640px){.trow{grid-template-columns:1fr}.seg span{padding:7px 9px}}
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="app">
@@ -227,6 +259,7 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
    <a href="#overview" data-view="overview">Overview</a>
    <a href="#borrowers" data-view="borrowers">Borrowers</a>
    <a href="#analysis" data-view="analysis">Covenant Analysis</a>
+   <a href="#design" data-view="design">Covenant Designer</a>
    <a href="#how" data-view="how">How it works</a>
   </nav>
   <div class="sidefoot">Fictional, synthetic data for a hackathon exercise. Not investment, credit or legal advice.</div>
@@ -235,12 +268,14 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
   <header class="top">
    <div><h1>Covenant Monitor</h1><p class="sub">Monitor borrower financial health and identify potential covenant breaches.</p></div>
    <div class="ctrls">
-    <div class="field"><label for="period">Reporting period</label><select id="period" aria-describedby="periodnote"></select></div>
+    <div class="field" id="periodField"><label for="period">Reporting period</label><select id="period" aria-describedby="periodnote"></select></div>
+    <button class="btn quiet" id="openTerms" type="button">Covenant terms</button>
     <button class="btn quiet" id="openSources" type="button">Data &amp; policy sources</button>
    </div>
   </header>
   <main id="main" tabindex="-1">
    <div class="banners" id="banners" aria-live="polite"></div>
+   <div class="toast" id="toast" role="status"></div>
    <div class="ctx" id="ctx"><span id="periodnote"></span></div>
 
    <div data-pane="overview">
@@ -265,14 +300,7 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
      <div class="count" id="count" role="status"></div>
     </div>
     <div class="tablewrap"><table id="tbl"><caption class="vh">Borrower covenant status for the selected quarter</caption>
-     <thead><tr>
-      <th scope="col" data-key="borrower"><button type="button">Borrower</button></th>
-      <th scope="col" data-key="status"><button type="button">Overall status</button></th>
-      <th scope="col" data-key="lev"><button type="button">Leverage</button></th>
-      <th scope="col" data-key="dscr"><button type="button">Debt-service coverage</button></th>
-      <th scope="col"><span>Change vs prior quarter</span></th>
-      <th scope="col"><span>Review action</span></th>
-     </tr></thead><tbody id="tbody"></tbody></table></div>
+     <thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
    </div>
 
    <div data-pane="analysis" hidden>
@@ -281,6 +309,29 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
     <div class="two" id="dists"></div>
     <section class="block"><h3>Agreement definitions</h3><div class="two" id="defs"></div></section>
     <section class="block"><h3>Data quality and unverified items</h3><div class="card dq" id="dq"></div></section>
+   </div>
+
+   <div data-pane="design" hidden>
+    <h2>Covenant Designer</h2>
+    <p class="lede">Load a borrower’s financial statements and get a recommended covenant package: which tests to include, at what level, and whether each should be maintenance or springing. Every figure is calculated by the backend from the lines you supply.</p>
+    <div class="design">
+     <div class="card"><h3>1 · Financial statements</h3>
+      <div class="meta">A CSV with two columns, <b>line_item</b> and <b>amount_usd</b>: trailing-twelve-month income and cash flow lines, period-end balance sheet lines. Save an Excel sheet as CSV. Parentheses or minus signs for outflows are fine.</div>
+      <div class="row2"><button class="btn" id="stSample" type="button">Use sample statements</button></div>
+      <label class="vh" for="stUp">Upload statements CSV</label><input id="stUp" type="file" accept=".csv,text/csv,.txt,text/plain">
+      <div class="field" style="margin-top:14px"><label for="stCo">Company name (optional)</label><input id="stCo" type="text" maxlength="100" autocomplete="off"></div>
+      <div class="field" style="margin-top:12px"><label for="stText">Statement lines (you can edit these)</label><textarea id="stText" spellcheck="false" placeholder="line_item,amount_usd&#10;EBITDA,700000.00&#10;Total debt,2000000.00&#10;Interest expense,110000.00&#10;…"></textarea></div>
+     </div>
+     <div class="card"><h3>2 · Cushion</h3>
+      <div class="meta">How far the borrower’s results could fall before breaching a covenant. A bigger cushion gives the borrower more room; a smaller one gives the lender an earlier warning.</div>
+      <div class="cushval num" id="cushOut" aria-hidden="true">25%</div>
+      <label class="vh" for="cush">Cushion percentage</label><input id="cush" type="range" min="5" max="50" step="1" value="25" aria-valuetext="25 percent">
+      <div class="axis2" aria-hidden="true"><span>5% · tight</span><span>50% · loose</span></div>
+      <div class="row2" style="margin-top:18px"><button class="btn primary" id="recBtn" type="button">Recommend covenants</button></div>
+      <div class="msg" id="dmsg" role="status"></div>
+     </div>
+    </div>
+    <div id="recOut"></div>
    </div>
 
    <div data-pane="detail" hidden id="detailPane"></div>
@@ -300,7 +351,7 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
  <div class="dhead"><div><h2 id="sTitle">Data &amp; policy sources</h2><div class="meta" id="srcLine"></div></div><button class="x" type="button" id="closeSources" aria-label="Close">×</button></div>
  <div class="sbody">
   <div class="card"><h3>Borrower data (CSV)</h3>
-   <div class="meta">Required columns: record_id, borrower_id, period (for example 2026-Q3), currency (USD), debt_usd, ttm_ebitda_usd, ttm_debt_service_usd, ttm_available_cashflow_usd, max_leverage, min_dscr.</div>
+   <div class="meta">Required columns: record_id, borrower_id, period (for example 2026-Q3), currency (USD), debt_usd, ttm_ebitda_usd, ttm_debt_service_usd, ttm_available_cashflow_usd, max_leverage, min_dscr. Optional: min_fccr with ttm_capex_usd, ttm_cash_taxes_usd, ttm_distributions_usd; min_current_ratio with current_assets_usd, current_liabilities_usd; revolver_commitment_usd and revolver_drawn_usd for springing tests.</div>
    <label class="vh" for="up">Upload borrower CSV</label><input id="up" type="file" accept=".csv,text/csv"></div>
   <div class="card"><h3>Policy document (PDF or TXT)</h3>
    <div class="meta">TXT is read locally. A PDF is sent to LlamaParse and may use your account credits. You review the extracted text before any checks run.</div>
@@ -310,6 +361,18 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);padding:10px;b
    <label class="vh" for="polText">Extracted policy text</label><textarea id="polText"></textarea>
    <div class="row2"><button class="btn primary" id="usePol" type="button">Run checks with this policy</button><button class="btn quiet" id="cancelPol" type="button">Cancel</button></div></div>
   <div class="row2" style="margin:0"><button class="btn quiet" id="reset" type="button" hidden>Back to sample data</button></div>
+ </div>
+</dialog>
+
+<dialog id="terms" class="modal" aria-labelledby="tTitle">
+ <div class="dhead"><div><h2 id="tTitle">Covenant terms</h2><div class="meta">How each covenant applies across the portfolio</div></div><button class="x" type="button" id="closeTerms" aria-label="Close">×</button></div>
+ <div class="sbody">
+  <div class="card"><h3>Covenants</h3><div class="meta"><b>Maintenance:</b> tested every quarter. <b>Springing:</b> tested only in quarters when the revolver is drawn at or above the trigger below. <b>Not applied:</b> the lender does not test it.</div><div id="termsRows"></div></div>
+  <div class="card"><h3>Springing trigger</h3><label for="trig" class="meta" style="display:block">Test springing covenants when revolver utilization (drawn ÷ commitment) at quarter end is at least</label>
+   <div class="trig"><input id="trig" type="number" min="0" max="100" step="0.5" inputmode="decimal"><span>%</span></div><div id="trigEv"></div></div>
+  <div class="card" id="ovCard" hidden><h3>Borrower-specific terms</h3><div class="meta">These borrowers have their own terms, set on their review page. They override the portfolio terms above.</div><ul id="ovList" style="margin:8px 0 0;padding-left:18px"></ul></div>
+  <div class="msg" id="tmsg" role="status"></div>
+  <div class="row2" style="margin:0"><button class="btn primary" id="applyTerms" type="button">Apply terms</button><button class="btn quiet" id="defaultTerms" type="button">Restore defaults</button><button class="btn quiet" id="cancelTerms" type="button">Cancel</button></div>
  </div>
 </dialog>
 
@@ -324,67 +387,97 @@ const sv=(tag,attrs,...kids)=>build(document.createElementNS(NS,tag),attrs,kids)
 /* ---------- formatting ---------- */
 const WATCH=0.05; // display convention only: pass, but within 5% of the limit
 const usd=s=>{if(s==null||s==='')return '—';const n=Number(s);if(!Number.isFinite(n))return '—';return (n<0?'−':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});};
-const usdK=n=>{const a=Math.abs(n);const s=a>=1e6?(a/1e6).toFixed(2).replace(/\.?0+$/,'')+'M':a>=1e3?(a/1e3).toFixed(0)+'K':a.toFixed(0);return (n<0?'−':'')+'$'+s;};
 const fx=(v,limit)=>{if(v==null)return 'n/a';let s=v.toFixed(2);if(limit!=null&&s===Number(limit).toFixed(2)&&v!==Number(limit))s=v.toFixed(4);return s+'x';};
 const lim=s=>Number(s).toFixed(2)+'x';
-const sgn=(d)=>(d>=0?'+':'−')+Math.abs(d).toFixed(2)+'x';
+const sgn=d=>(d>=0?'+':'−')+Math.abs(d).toFixed(2)+'x';
+const pctS=v=>v==null?'n/a':(v*100).toFixed(1)+'%';
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const pq=p=>{const m=/^(\d{4})-Q([1-4])$/.exec(p||'');return m?{y:+m[1],q:+m[2]}:null;};
 const plabel=p=>{const x=pq(p);return x?`Q${x.q} ${x.y}`:String(p||'unknown');};
 const pend=p=>{const x=pq(p);if(!x)return null;const md=['03-31','06-30','09-30','12-31'][x.q-1];return `${x.y}-${md}`;};
 const dlong=iso=>{if(!iso)return '';const [y,m,d]=iso.split('-').map(Number);return new Date(Date.UTC(y,m-1,d)).toLocaleDateString('en-US',{timeZone:'UTC',year:'numeric',month:'short',day:'numeric'});};
 
+/* ---------- covenant registry (labels only; every number comes from the backend) ---------- */
+const COV={
+ leverage:{name:'Leverage',short:'Leverage',dir:'max',formula:'Debt ÷ EBITDA',long:'Leverage = gross debt ÷ trailing-12-month EBITDA',num:'debt',den:'EBITDA',limCol:'max_leverage',
+  what:'How much debt the borrower carries compared with what it earns. Lower is safer.',
+  numIn:[['Gross debt','debt_usd']],denIn:[['Trailing-12-month EBITDA','ttm_ebitda_usd']]},
+ dscr:{name:'Debt-service coverage',short:'DSCR',dir:'min',formula:'Cash flow ÷ debt service',long:'DSCR = trailing-12-month available cash flow ÷ trailing-12-month debt service',num:'cash flow',den:'debt service',limCol:'min_dscr',
+  what:'Whether the borrower earns enough cash to make its loan payments. Higher is safer.',
+  numIn:[['Available cash flow','ttm_available_cashflow_usd']],denIn:[['Debt service','ttm_debt_service_usd']]},
+ fccr:{name:'Fixed-charge coverage',short:'FCCR',dir:'min',formula:'(EBITDA − capex − taxes − distributions) ÷ fixed charges',long:'FCCR = (TTM EBITDA − unfinanced capex − cash taxes − distributions) ÷ TTM fixed charges (scheduled interest and principal)',num:'cash flow after capex, taxes and distributions',den:'fixed charges',limCol:'min_fccr',
+  what:'Whether the cash left after capital spending, taxes and owner distributions covers loan payments. Higher is safer.',
+  numIn:[['Trailing-12-month EBITDA','ttm_ebitda_usd'],['less unfinanced capex','ttm_capex_usd'],['less cash taxes','ttm_cash_taxes_usd'],['less distributions','ttm_distributions_usd']],denIn:[['Fixed charges (debt service)','ttm_debt_service_usd']]},
+ current_ratio:{name:'Current ratio',short:'Current ratio',dir:'min',formula:'Current assets ÷ current liabilities',long:'Current ratio = quarter-end current assets ÷ current liabilities',num:'current assets',den:'current liabilities',limCol:'min_current_ratio',
+  what:'Whether assets that turn into cash within a year cover bills due within a year. Higher is safer.',
+  numIn:[['Current assets','current_assets_usd']],denIn:[['Current liabilities','current_liabilities_usd']]}};
+const MODE={maintenance:'Maintenance',springing:'Springing',off:'Not applied'};
+const DEFAULT_TERMS={trigger_pct:'35.00',modes:{leverage:'maintenance',dscr:'maintenance',fccr:'springing',current_ratio:'maintenance'},borrowers:{}};
+const KEYS=()=>data?.covenant_keys||['leverage','dscr'];
+const isMax=k=>COV[k].dir==='max';
+const lw=k=>isMax(k)?'maximum':'minimum';
+const covs=r=>r&&r.covenants?Object.entries(r.covenants):[];
+const anySpring=()=>!!data&&data.results.some(r=>covs(r).some(([,c])=>c.mode==='springing'));
+const trigPct=()=>Number(data?.settings?.trigger_pct??35);
+
 /* ---------- state ---------- */
 let data=null,asOf=null,periods=[],period=null,view='overview',sort={key:'status',dir:-1},search='';
-let lastCsv=null,csvName=null,lastPolicy=null,polName=null,byKey=new Map(),borrowers=[];
+let lastCsv=null,csvName=null,lastPolicy=null,polName=null,byKey=new Map(),borrowers=[],terms=null;
 const isProj=p=>!!(asOf&&pend(p)&&pend(p)>asOf);
 
 /* ---------- status model (derived only from API fields) ---------- */
 const ST={
  ok:{label:'Within limits',cls:'ok',icon:'✓',action:'No action needed',rank:0},
  watch:{label:'Within limits · thin headroom',cls:'watch',icon:'!',action:'Monitor next quarter',rank:1},
+ untested:{label:'No covenant tested',cls:'na',icon:'–',action:'Confirm covenant terms',rank:1.5},
+ dormant:{label:'Within limits · springing test would fail',cls:'watch',icon:'!',action:'Watch revolver usage; the test springs if it is drawn more',rank:1.8},
  review:{label:'Needs review · cannot calculate',cls:'watch',icon:'?',action:'Confirm inputs, then re-test',rank:2},
- error:{label:'Data error',cls:'na',icon:'?',action:'Request corrected financials',rank:2.5},
  nodata:{label:'No report this quarter',cls:'na',icon:'–',action:'Request this quarter’s report',rank:2.4},
- breach1:{label:'Needs review · 1 test failed',cls:'bad',icon:'✕',action:'Escalate to credit reviewer',rank:3},
- breach2:{label:'Needs review · 2 tests failed',cls:'bad',icon:'✕',action:'Escalate to credit reviewer',rank:4}};
+ error:{label:'Data error',cls:'na',icon:'?',action:'Request corrected financials',rank:2.5}};
+const stOf=a=>a.key==='breach'?{label:`Needs review · ${a.fails.length} test${a.fails.length>1?'s':''} failed`,cls:'bad',icon:'✕',action:'Escalate to credit reviewer',rank:3+a.fails.length}:ST[a.key];
+const gapOf=(k,c)=>{if(c.value==null)return null;const L=Number(c.limit);return isMax(k)?(c.value-L)/L:(L-c.value)/L;}; // >0 = past the limit
 function assess(r){
- if(!r)return {key:'nodata',mag:0};
- if(r.status==='invalid')return {key:'error',mag:0,reason:r.error};
- const L=r.leverage,D=r.dscr;
- const lb=L.status==='breach',db=D.status==='breach',unev=L.status==='unevaluable'||D.status==='unevaluable';
- const lOver=L.value!=null?(L.value-Number(L.max))/Number(L.max):null;       // >0 means above maximum
- const dShort=D.value!=null?(Number(D.min)-D.value)/Number(D.min):null;       // >0 means below minimum
- const mag=Math.max(lb&&lOver!=null?lOver:0,db&&dShort!=null?dShort:0);
- const n=(lb?1:0)+(db?1:0);
+ const empty={fails:[],dormantFail:[],unev:false,mag:0};
+ if(!r)return {key:'nodata',...empty};
+ if(r.status==='invalid')return {key:'error',...empty,reason:r.error};
+ const cs=covs(r),tested=cs.filter(([,c])=>c.status!=='dormant');
+ const fails=tested.filter(([,c])=>c.status==='breach').map(([k])=>k);
+ const unev=tested.some(([,c])=>c.status==='unevaluable');
+ const dormantFail=cs.filter(([,c])=>c.status==='dormant'&&c.would_status==='breach').map(([k])=>k);
+ const mag=Math.max(0,...fails.map(k=>gapOf(k,r.covenants[k])??0));
  let key;
- if(n===2)key='breach2';else if(n===1)key='breach1';else if(unev)key='review';
- else{const lh=(Number(L.max)-L.value)/Number(L.max),dh=(D.value-Number(D.min))/Number(D.min);key=(lh<WATCH||dh<WATCH)?'watch':'ok';}
- return {key,mag,lb,db,unev,lOver,dShort};
+ if(fails.length)key='breach';else if(unev)key='review';else if(!tested.length)key='untested';else if(dormantFail.length)key='dormant';
+ else key=tested.some(([k,c])=>c.value!=null&&-gapOf(k,c)<WATCH)?'watch':'ok';
+ return {key,fails,unev,mag,dormantFail};
 }
 const rowFor=(b,p)=>byKey.get(b+'|'+p);
-// Newly flagged: passed both tests last quarter, failed at least one this quarter (engine statuses only).
-function isNew(b,p){const i=periods.indexOf(p);if(i<1)return false;const pr=rowFor(b,periods[i-1]),cur=rowFor(b,p);return !!(pr&&cur&&pr.status==='pass'&&cur.status==='exception'&&(cur.leverage.status==='breach'||cur.dscr.status==='breach'));}
-const newChip=(b,p)=>isNew(b,p)?h('span',{class:'chip new',title:'Passed both tests in the prior quarter'},'New this quarter'):null;
+// Newly flagged: passed every tested covenant last quarter, failed at least one this quarter (engine statuses only).
+function isNew(b,p){const i=periods.indexOf(p);if(i<1)return false;const pr=rowFor(b,periods[i-1]),cur=rowFor(b,p);return !!(pr&&cur&&pr.status==='pass'&&cur.status==='exception'&&assess(cur).fails.length);}
+const newChip=(b,p)=>isNew(b,p)?h('span',{class:'chip new',title:'Passed every tested covenant in the prior quarter'},'New this quarter'):null;
 function reasons(r,a){
- const out=[];if(a.key==='error')return [r?.error||'Input could not be read.'];if(a.key==='nodata')return ['No row was supplied for this borrower in this quarter.'];
- if(a.lb)out.push(`Leverage ${fx(r.leverage.value,r.leverage.max)} is above the ${lim(r.leverage.max)} maximum${a.lOver!=null?` (${(a.lOver*100).toFixed(1)}% over)`:''}.`);
- if(a.db)out.push(`Debt-service coverage ${fx(r.dscr.value,r.dscr.min)} is below the ${lim(r.dscr.min)} minimum${a.dShort!=null?` (${(a.dShort*100).toFixed(1)}% short)`:''}.`);
- for(const c of [r.leverage,r.dscr])if(c.status==='unevaluable')out.push(c.reason);
- if(!out.length&&a.key==='watch')out.push('Both tests pass, but at least one is within 5% of its limit.');
+ if(a.key==='error')return [r?.error||'Input could not be read.'];if(a.key==='nodata')return ['No row was supplied for this borrower in this quarter.'];
+ if(a.key==='untested')return ['Every covenant is switched off, or springing and not triggered, this quarter.'];
+ const out=[];
+ for(const k of a.fails){const c=r.covenants[k],g=gapOf(k,c);out.push(`${COV[k].name} ${fx(c.value,c.limit)} is ${isMax(k)?'above':'below'} the ${lim(c.limit)} ${lw(k)}${g!=null?` (${(g*100).toFixed(1)}% ${isMax(k)?'over':'short'})`:''}.`);}
+ for(const [k,c] of covs(r))if(c.status==='unevaluable')out.push(`${COV[k].name}: ${c.reason}.`);
+ for(const k of a.dormantFail){const c=r.covenants[k];out.push(`${COV[k].short} would fail at ${fx(c.value,c.limit)}, but it is springing and not triggered (revolver ${pctS(c.springing.utilization)} drawn, trigger ${Number(c.springing.trigger_pct)}%).`);}
+ if(!out.length&&a.key==='watch')out.push('All tested covenants pass, but at least one is within 5% of its limit.');
  return out;
 }
 function periodSummary(p){
  const rows=borrowers.map(b=>({b,r:rowFor(b,p)})).map(x=>({...x,a:assess(x.r)}));
  const c=k=>rows.filter(x=>x.a.key===k).length;
- return {rows,monitored:borrowers.length,ok:c('ok'),watch:c('watch'),b1:c('breach1'),b2:c('breach2'),review:c('review'),error:c('error'),nodata:c('nodata'),
-  levFail:rows.filter(x=>x.a.lb).length,dscrFail:rows.filter(x=>x.a.db).length};
+ const failBy=Object.fromEntries(KEYS().map(k=>[k,rows.filter(x=>x.a.fails.includes(k)).length]));
+ return {rows,monitored:borrowers.length,ok:c('ok'),watch:c('watch'),dormant:c('dormant'),breach:c('breach'),review:c('review'),error:c('error'),nodata:c('nodata'),untested:c('untested'),failBy,
+  asleep:rows.filter(x=>covs(x.r).some(([,cv])=>cv.status==='dormant')).length,wouldFail:rows.filter(x=>x.a.dormantFail.length).length};
 }
 
 /* ---------- data load ---------- */
+function flash(t,isErr){const m=$('toast');m.className='toast'+(isErr?' err':' okmsg');m.textContent=t;}
 async function load(url,opts){
  const m=$('msg');m.className='msg';m.textContent='Loading…';
  try{const res=await fetch(url,opts);const j=await res.json();if(!res.ok)throw Error(j.error||res.statusText);ingest(j);m.textContent='';return true;}
- catch(e){m.className='msg err';m.textContent=(data?'Not applied: ':'Could not load: ')+e.message+(data?' The previous data is still shown.':'');if(!data)showFatal(e.message);return false;}
+ catch(e){const t=(data?'Not applied: ':'Could not load: ')+e.message+(data?' The previous results are still shown.':'');m.className='msg err';m.textContent=t;if(data)flash(t,true);else showFatal(e.message);return false;}
 }
 function okMsg(t){const m=$('msg');m.className='msg okmsg';m.textContent=t;}
 function showFatal(t){$('banners').replaceChildren(h('div',{class:'notice bad',role:'alert'},h('strong',null,'Could not load covenant results'),t));}
@@ -393,12 +486,20 @@ function ingest(j){
  borrowers=j.borrowers.map(b=>b.borrower_id).sort();
  periods=[...new Set(j.results.map(r=>r.period).filter(p=>/^\d{4}-Q[1-4]$/.test(p||'')))].sort();
  const a=(j.assumptions||[]).find(t=>/as-of date/i.test(t));const m=a&&/(\d{4}-\d{2}-\d{2})/.exec(a);asOf=m?m[1]:null;
+ if(!terms)terms=structuredClone(j.settings);
+ if(!sort.key||!(['borrower','status'].includes(sort.key)||KEYS().includes(sort.key)))sort={key:'status',dir:-1};
  if(!period||!periods.includes(period)){const hist=periods.filter(p=>!isProj(p));period=(hist.length?hist:periods).at(-1)||null;}
  renderAll();
 }
 
 /* ---------- rendering ---------- */
 function renderAll(){renderPeriod();renderBanners();renderOverview();renderTable();renderAnalysis();renderHow();renderSources();if(view==='detail')renderDetail();}
+function termsSummary(){
+ if(!data)return '';const s=data.settings,ks=KEYS();
+ const sp=ks.filter(k=>s.modes[k]==='springing').map(k=>COV[k].short),off=ks.filter(k=>s.modes[k]==='off').map(k=>COV[k].short);
+ const parts=[sp.length?`${sp.join(', ')} springing at ${Number(s.trigger_pct)}%`:'all maintenance',off.length?`${off.join(', ')} not applied`:null,Object.keys(s.borrowers||{}).length?`${Object.keys(s.borrowers).length} borrower override${Object.keys(s.borrowers).length>1?'s':''}`:null];
+ return 'Terms: '+parts.filter(Boolean).join(' · ');
+}
 function renderPeriod(){
  const sel=$('period');sel.replaceChildren(...periods.map(p=>h('option',{value:p,selected:p===period},`${plabel(p)}${isProj(p)?' · projected (after reporting date)':''}`)));
  const e=pend(period);
@@ -406,8 +507,9 @@ function renderPeriod(){
   h('span',{id:'periodnote'},period?`Quarter ended ${dlong(e)}. All tests use trailing-twelve-month figures.`:'No reporting periods found.'),
   asOf?h('span',{class:'chip'},`Reporting date ${dlong(asOf)}`):null,
   isProj(period)?h('span',{class:'chip proj'},'Projected, not historical'):null,
-  h('span',{class:'chip'},'Policy: '+(lastPolicy?polName+' (uploaded)':'loan-policy.txt (bundled sample)')),
-  h('span',{class:'chip'},'Data: '+(lastCsv?(csvName||'uploaded CSV')+' (uploaded)':'loan_covenants.csv (bundled sample)'))].filter(Boolean));
+  h('button',{class:'chip btnchip',type:'button',onclick:openTerms,title:'Change covenant terms'},termsSummary()),
+  h('span',{class:'chip'},'Policy: '+(lastPolicy?polName+' (uploaded)':'loan-policy.txt + team addendum (bundled sample)')),
+  h('span',{class:'chip'},'Data: '+(lastCsv?(csvName||'uploaded CSV')+' (uploaded)':'loan_covenants_extended.csv (bundled sample)'))].filter(Boolean));
 }
 function renderBanners(){
  const out=[],S=period?periodSummary(period):null;
@@ -418,98 +520,117 @@ function renderBanners(){
  if(w.length)out.push(h('div',{class:'notice bad',role:'alert'},h('strong',null,'Policy checks needing attention'),h('ul',null,w.map(t=>h('li',null,t)))));
  const unev=S?S.rows.filter(x=>x.a.unev).length:0;
  if(S&&(S.error||S.nodata||unev))out.push(h('div',{class:'notice warn'},h('strong',null,'Some borrowers could not be fully tested this quarter.'),`${S.error} data error${S.error===1?'':'s'}, ${S.nodata} without a report, ${unev} with a test that could not be calculated. None are treated as passing. See Covenant Analysis → Data quality.`));
+ if(S&&S.asleep){const sp=KEYS().filter(k=>data.settings.modes[k]==='springing').map(k=>COV[k].short);
+  out.push(h('div',{class:'notice'},h('strong',null,`Springing covenants are dormant for ${S.asleep} of ${S.monitored} borrowers in ${plabel(period)}.`),
+   `${sp.length?sp.join(', ')+(sp.length>1?' are':' is')+' tested':'Springing covenants are tested'} only when the revolver is at least ${trigPct()}% drawn. Dormant tests count as neither passing nor failing${S.wouldFail?`; ${S.wouldFail} of these borrowers would fail if the test applied`:''}. `,
+   h('button',{class:'linkbtn',type:'button',onclick:openTerms},'Change covenant terms')));}
  $('banners').replaceChildren(...out);
 }
 function kpi(cls,label,big,unit,note){return h('div',{class:'kpi '+cls},h('div',{class:'lab'},label),h('div',{class:'big num'},big,h('small',null,unit)),h('div',{class:'note'},note));}
 function renderOverview(){
  if(!period){$('kpis').replaceChildren();$('attn').replaceChildren(h('div',{class:'empty'},'No quarter could be read from this data. See Covenant Analysis → Data quality.'));$('attnLede').textContent='';$('qrows').replaceChildren();return;}
- const S=periodSummary(period),need=S.b1+S.b2+S.review,issues=S.error+S.nodata,within=S.ok+S.watch;
+ const S=periodSummary(period),need=S.breach+S.review,issues=S.error+S.nodata,within=S.ok+S.watch+S.dormant;
+ const failTxt=KEYS().filter(k=>S.failBy[k]).map(k=>`${COV[k].short} ${S.failBy[k]}`).join(' · ');
  $('kpis').replaceChildren(
   kpi('','Borrowers monitored',S.monitored,'borrowers',`Loans with data in this dataset`),
-  kpi(within?'k-ok':'',`Within limits`,within,`of ${S.monitored}`,S.watch?`${S.watch} with thin headroom (<5% from a limit)`:within?'Both tests pass':'No borrower passes both tests'),
-  kpi(need?'k-bad':'','Need review',need,`of ${S.monitored}`,need?`Leverage failing: ${S.levFail} · Coverage failing: ${S.dscrFail}`:'No failed tests'),
+  kpi(within?'k-ok':'',`Within limits`,within,`of ${S.monitored}`,S.watch||S.dormant?[S.watch?`${S.watch} with thin headroom`:null,S.dormant?`${S.dormant} with a dormant springing test that would fail`:null].filter(Boolean).join('; '):within?'Every tested covenant passes':'No borrower passes every tested covenant'),
+  kpi(need?'k-bad':'','Need review',need,`of ${S.monitored}`,need?`Failing: ${failTxt||'none'}`:'No failed tests'),
   kpi(issues?'k-na':'','Data issues',issues,`of ${S.monitored}`,issues?'Errors or missing reports (never counted as passing)':'All inputs readable'));
- const att=S.rows.filter(x=>ST[x.a.key].rank>=2).sort((a,b)=>ST[b.a.key].rank-ST[a.a.key].rank||b.a.mag-a.a.mag||a.b.localeCompare(b.b));
+ const att=S.rows.filter(x=>stOf(x.a).rank>=1.8).sort((a,b)=>stOf(b.a).rank-stOf(a.a).rank||b.a.mag-a.a.mag||a.b.localeCompare(b.b));
  const nNew=S.rows.filter(x=>isNew(x.b,period)).length;
  $('attnLede').textContent=att.length?`${att.length} of ${S.monitored} borrowers need attention in ${plabel(period)}${nNew?`, ${nNew} of them newly flagged this quarter`:''}. Most serious first. A failed test is a calculation result for analyst review, not a legal finding of default.`:`No borrowers need attention in ${plabel(period)}.`;
- $('attn').replaceChildren(...(att.length?att.map(x=>{const s=ST[x.a.key],rs=reasons(x.r,x.a);
+ $('attn').replaceChildren(...(att.length?att.map(x=>{const rs=reasons(x.r,x.a);
   return h('div',{class:'row'},
    h('div',null,h('button',{class:'linkbtn',type:'button',tabindex:'-1','aria-label':`Review ${x.b}`,onclick:()=>openDetail(x.b)},x.b)),
-   h('div',{class:'pillwrap'},pill(x.a.key),newChip(x.b,period)),
-   h('div',{class:'why'},rs[0],rs.length>1?h('small',null,rs.slice(1).join(' ')):null,null),
+   h('div',{class:'pillwrap'},pill(x.a),newChip(x.b,period)),
+   h('div',{class:'why'},rs[0],rs.length>1?h('small',null,rs.slice(1).join(' ')):null),
    h('button',{class:'btn quiet',type:'button',onclick:()=>openDetail(x.b),'aria-label':`Review ${x.b}`},'Review'));}):[h('div',{class:'empty'},'Every borrower is within its limits.')]));
- $('qrows').replaceChildren(...periods.map(p=>{const s=periodSummary(p),f=s.b1+s.b2,o=s.ok+s.watch,n=s.error+s.nodata+s.review,tot=s.monitored||1;
+ $('qrows').replaceChildren(...periods.map(p=>{const s=periodSummary(p),f=s.breach,o=s.ok+s.watch+s.dormant,n=s.error+s.nodata+s.review+s.untested,tot=s.monitored||1;
   return h('div',{class:'qrow'},h('div',null,h('b',null,plabel(p)),isProj(p)?h('div',{class:'meta'},'projected'):null),
    h('div',{class:'qbar',role:'img','aria-label':`${plabel(p)}: ${f} failed, ${o} within limits, ${n} not testable`},h('span',{class:'f',style:`width:${f/tot*100}%`}),h('span',{class:'n',style:`width:${n/tot*100}%`}),h('span',{class:'o',style:`width:${o/tot*100}%`})),
    h('div',{class:'num'},`${f} failed · ${o} within`+(n?` · ${n} n/a`:'')));}));
 }
-function pill(key){const s=ST[key];return h('span',{class:'pill '+s.cls},h('i',{'aria-hidden':'true'},s.icon),s.label);}
+function pill(a){const s=typeof a==='string'?ST[a]:stOf(a);return h('span',{class:'pill '+s.cls},h('i',{'aria-hidden':'true'},s.icon),s.label);}
 
-function covCell(c,kind,r){
- if(!r||r.status==='invalid')return h('td',null,h('span',{class:'meta'},'—'));
- const st=c.status,limit=kind==='lev'?c.max:c.min;
- const lbl=st==='pass'?'Within limit':st==='breach'?(kind==='lev'?'Above maximum':'Below minimum'):'Cannot calculate';
+function covCell(r,k){
+ const lab=COV[k].name;
+ if(!r||r.status==='invalid')return h('td',{class:'cov','data-label':lab},h('span',{class:'meta'},r?'Not calculated':'—'));
+ const c=r.covenants[k];
+ if(!c)return h('td',{class:'cov','data-label':lab},h('span',{class:'meta'},r.not_applied?.includes(k)?'Not applied':'Not in agreement'));
+ const L=c.limit,st=c.status;
+ if(st==='dormant')return h('td',{class:'cov dorm','data-label':lab},h('div',{class:'fig num'},fx(c.value,L)),h('div',{class:'lbl na'},'◌ Springing · not tested'),h('div',{class:'lim'},`Would ${c.would_status==='breach'?'fail':'pass'} · ${cap(lw(k))} ${lim(L)}`));
+ const lbl=st==='pass'?'Within limit':st==='breach'?(isMax(k)?'Above maximum':'Below minimum'):'Cannot calculate';
  const cls=st==='pass'?'ok':st==='breach'?'bad':'na';
- return h('td',{class:'cov','data-label':kind==='lev'?'Leverage':'Debt-service coverage'},h('div',{class:'fig num'},fx(c.value,limit)),h('div',{class:'lbl '+cls},(st==='pass'?'✓ ':st==='breach'?'✕ ':'? ')+lbl),h('div',{class:'lim'},(kind==='lev'?'Maximum ':'Minimum ')+lim(limit)));
+ return h('td',{class:'cov','data-label':lab},h('div',{class:'fig num'},fx(c.value,L)),h('div',{class:'lbl '+cls},(st==='pass'?'✓ ':st==='breach'?'✕ ':'? ')+lbl),h('div',{class:'lim'},cap(lw(k))+' '+lim(L)+(c.mode==='springing'?(c.springing.triggered===null?' · springing, trigger unknown so tested':' · springing, tested'):'')));
 }
+const wk=(k,cur,pr)=>cur===pr?'Unchanged':(isMax(k)?cur>pr:cur<pr)?'Weaker':'Stronger';
 function changeCell(b){
  const i=periods.indexOf(period),pp=i>0?periods[i-1]:null,cur=rowFor(b,period),pr=pp?rowFor(b,pp):null;
- const ok=r=>r&&r.status!=='invalid'&&r.leverage.value!=null&&r.dscr.value!=null;
  if(!pp)return h('td',{class:'chg'},h('span',{class:'meta'},'First period'));
- if(!ok(cur)||!ok(pr))return h('td',{class:'chg'},h('span',{class:'meta'},`Not comparable with ${plabel(pp)}`));
- const dl=cur.leverage.value-pr.leverage.value,dd=cur.dscr.value-pr.dscr.value,weaker=dl>0.0049||dd<-0.0049,stronger=dl<-0.0049||dd>0.0049;
- const tag=weaker&&stronger?'Mixed':weaker?'▼ Weaker':stronger?'▲ Stronger':'Unchanged';
- return h('td',{class:'chg'},h('div',{class:'tag'},tag),h('div',{class:'num'},`Leverage ${sgn(dl)}`),h('div',{class:'num'},`Coverage ${sgn(dd)}`),h('div',{class:'meta'},`vs ${plabel(pp)}`));
+ const lines=[];let weak=0,strong=0;
+ if(okRow(cur)&&okRow(pr))for(const k of KEYS()){const a=cur.covenants[k],p=pr.covenants[k];if(!a||!p||a.value==null||p.value==null)continue;const d=a.value-p.value;
+  if(Math.abs(d)>0.0049){if(wk(k,a.value,p.value)==='Weaker')weak++;else strong++;}lines.push(h('div',{class:'num'},`${COV[k].short} ${sgn(d)}`));}
+ if(!lines.length)return h('td',{class:'chg'},h('span',{class:'meta'},`Not comparable with ${plabel(pp)}`));
+ const tag=weak&&strong?'Mixed':weak?'▼ Weaker':strong?'▲ Stronger':'Unchanged';
+ return h('td',{class:'chg'},h('div',{class:'tag'},tag),lines,h('div',{class:'meta'},`vs ${plabel(pp)}`));
+}
+function renderHead(){
+ const th=(key,label)=>h('th',{scope:'col','data-key':key,'aria-sort':sort.key===key?(sort.dir>0?'ascending':'descending'):'none'},h('button',{type:'button',onclick:()=>{sort=sort.key===key?{key,dir:-sort.dir}:{key,dir:key==='borrower'?1:-1};renderTable();}},label));
+ $('thead').replaceChildren(h('tr',null,th('borrower','Borrower'),th('status','Overall status'),KEYS().map(k=>th(k,COV[k].name)),h('th',{scope:'col'},h('span',null,'Change vs prior quarter'))));
 }
 function renderTable(){
- if(!period){$('tbody').replaceChildren(h('tr',null,h('td',{colspan:'6'},h('div',{class:'empty'},'No quarter could be read from this data.'))));$('count').textContent='';return;}
+ renderHead();const cols=3+KEYS().length;
+ if(!period){$('tbody').replaceChildren(h('tr',null,h('td',{colspan:String(cols)},h('div',{class:'empty'},'No quarter could be read from this data.'))));$('count').textContent='';return;}
  let rows=periodSummary(period).rows;const t=search.trim().toLowerCase();
- if(t)rows=rows.filter(x=>x.b.toLowerCase().includes(t)||ST[x.a.key].label.toLowerCase().includes(t));
- const val={borrower:x=>x.b,status:x=>ST[x.a.key].rank*1000+x.a.mag*100,lev:x=>x.r?.leverage?.value??-1,dscr:x=>x.r?.dscr?.value??-1}[sort.key];
+ if(t)rows=rows.filter(x=>x.b.toLowerCase().includes(t)||stOf(x.a).label.toLowerCase().includes(t));
+ const val=sort.key==='borrower'?x=>x.b:sort.key==='status'?x=>stOf(x.a).rank*1000+x.a.mag*100:x=>x.r?.covenants?.[sort.key]?.value??-1;
  rows=[...rows].sort((a,b)=>{const va=val(a),vb=val(b);const c=typeof va==='string'?va.localeCompare(vb):va-vb;return c*sort.dir||a.b.localeCompare(b.b);});
  $('tbody').replaceChildren(...rows.map(x=>h('tr',{onclick:e=>{if(!e.target.closest('button'))openDetail(x.b);}},
-  h('td',null,h('button',{class:'linkbtn bname',type:'button',tabindex:'-1','aria-label':`Review ${x.b}`,onclick:()=>openDetail(x.b)},x.b)),
-  h('td',null,h('div',{class:'pillwrap'},pill(x.a.key),newChip(x.b,period))),
-  x.r&&x.r.status!=='invalid'?covCell(x.r.leverage,'lev',x.r):h('td',null,h('span',{class:'meta'},x.a.key==='error'?'Not calculated':'—')),
-  x.r&&x.r.status!=='invalid'?covCell(x.r.dscr,'dscr',x.r):h('td',null,h('span',{class:'meta'},x.a.key==='error'?'Not calculated':'—')),
-  changeCell(x.b),h('td',{class:'act'},h('div',null,ST[x.a.key].action),h('button',{class:'btn quiet sm',type:'button',onclick:()=>openDetail(x.b),'aria-label':`Review ${x.b}`},'Review →')))));
- if(!rows.length)$('tbody').replaceChildren(h('tr',null,h('td',{colspan:'6'},h('div',{class:'empty'},'No borrowers match your search.'))));
+  h('td',{class:'c-b'},h('button',{class:'linkbtn bname',type:'button',tabindex:'-1','aria-label':`Review ${x.b}`,onclick:()=>openDetail(x.b)},x.b)),
+  h('td',{class:'c-s'},h('div',{class:'pillwrap'},pill(x.a),newChip(x.b,period)),h('div',{class:'meta'},'Next: '+stOf(x.a).action)),
+  KEYS().map(k=>covCell(x.r,k)),
+  changeCell(x.b))));
+ if(!rows.length)$('tbody').replaceChildren(h('tr',null,h('td',{colspan:String(cols)},h('div',{class:'empty'},'No borrowers match your search.'))));
  $('count').textContent=`Showing ${rows.length} of ${borrowers.length} borrowers`;
- document.querySelectorAll('#tbl thead th[data-key]').forEach(th=>th.setAttribute('aria-sort',th.dataset.key===sort.key?(sort.dir>0?'ascending':'descending'):'none'));
 }
 
 /* ---------- analysis ---------- */
-function distPanel(kind){
- const S=periodSummary(period),rows=S.rows.filter(x=>x.r&&x.r.status!=='invalid'&&(kind==='lev'?x.r.leverage:x.r.dscr).value!=null).sort((a,b)=>a.b.localeCompare(b.b));
- const limit=rows.length?Number((kind==='lev'?rows[0].r.leverage.max:rows[0].r.dscr.min)):null;
- const vals=rows.map(x=>(kind==='lev'?x.r.leverage:x.r.dscr).value);
- const top=limit==null?1:Math.max(limit*(kind==='lev'?1.3:1.6),Math.max(...vals)*1.05);
- const title=kind==='lev'?'Leverage: lower is safer':'Debt-service coverage: higher is safer';
- const sub=kind==='lev'?`Debt ÷ EBITDA. Bar ends at each borrower’s ratio; the dark line is the maximum${limit!=null?` (${limit.toFixed(2)}x)`:''}.`:`Cash flow ÷ debt service. Bar ends at each borrower’s ratio; the dark line is the minimum${limit!=null?` (${limit.toFixed(2)}x)`:''}.`;
- return h('div',{class:'card'},h('h3',null,title),h('p',{class:'meta',style:'margin:-4px 0 12px'},sub),
-  h('div',{class:'dist'},rows.length?rows.map(x=>{const c=kind==='lev'?x.r.leverage:x.r.dscr,l=kind==='lev'?c.max:c.min,cls=c.status==='breach'?'bad':ST[x.a.key].key==='watch'?'watch':'';
-   const tr=h('div',{class:'track'},h('div',{class:'fill '+cls}),h('div',{class:'tick'}));tr.style.setProperty('--t',(Number(l)/top*100)+'%');tr.firstChild.style.setProperty('--w',Math.min(100,c.value/top*100)+'%');
-   return h('button',{class:'drow',type:'button',onclick:()=>openDetail(x.b),'aria-label':`${x.b}: ${fx(c.value,l)} versus ${lim(l)} ${kind==='lev'?'maximum':'minimum'}, ${c.status==='breach'?'failing':'passing'}`},h('span',{class:'bname'},x.b),tr,h('span',{class:'num'},fx(c.value,l)));}):[h('div',{class:'empty'},'No testable borrowers this quarter.')]),
+function track(value,limit,top,cls){const tr=h('div',{class:'track'},h('div',{class:'fill '+(cls||'')}),h('div',{class:'tick'}));tr.style.setProperty('--t',(Number(limit)/top*100)+'%');tr.firstChild.style.setProperty('--w',Math.max(0,Math.min(100,value/top*100))+'%');return tr;}
+const topFor=(k,limit,vals)=>Math.max(Number(limit)*(isMax(k)?1.3:1.6),...vals.map(v=>v*1.05));
+function distPanel(k){
+ const S=periodSummary(period),rows=S.rows.filter(x=>x.r?.covenants?.[k]?.value!=null).sort((a,b)=>a.b.localeCompare(b.b));
+ const limit=rows.length?Number(rows[0].r.covenants[k].limit):null;
+ const top=limit==null?1:topFor(k,limit,rows.map(x=>x.r.covenants[k].value));
+ const C=COV[k],dorm=rows.some(x=>x.r.covenants[k].status==='dormant');
+ return h('div',{class:'card'},h('h3',null,`${C.name}: ${isMax(k)?'lower':'higher'} is safer`),h('p',{class:'meta',style:'margin:-4px 0 12px'},`${C.formula}. Bar ends at each borrower’s ratio; the dark line is the ${lw(k)}${limit!=null?` (${limit.toFixed(2)}x)`:''}.${dorm?' Striped bars are springing tests that were not triggered.':''}`),
+  h('div',{class:'dist'},rows.length?rows.map(x=>{const c=x.r.covenants[k],room=-gapOf(k,c),cls=c.status==='dormant'?'dorm':c.status==='breach'?'bad':room<WATCH?'watch':'';
+   return h('button',{class:'drow',type:'button',onclick:()=>openDetail(x.b),'aria-label':`${x.b}: ${fx(c.value,c.limit)} versus ${lim(c.limit)} ${lw(k)}, ${c.status==='dormant'?'springing, not tested':c.status==='breach'?'failing':'passing'}`},h('span',{class:'bname'},x.b),track(c.value,c.limit,top,cls),h('span',{class:'num'},fx(c.value,c.limit)));}):[h('div',{class:'empty'},'No testable borrowers this quarter.')]),
   h('div',{class:'axis','aria-hidden':'true'},h('span',null,'0.00x'),h('span',null,top.toFixed(2)+'x')));
 }
-function defCard(kind){
- const d=data.policy?.definitions?.[kind];const title=kind==='leverage'?'Leverage':'Debt-service coverage ratio (DSCR)';
- const formula=kind==='leverage'?'Leverage = gross debt ÷ trailing-twelve-month EBITDA':'DSCR = trailing-twelve-month available cash flow ÷ trailing-twelve-month debt service';
- return h('div',{class:'card'},h('h3',null,title),h('div',{class:'meta'},'Formula used by this tool'),h('div',{style:'font-family:var(--serif);font-size:17px;color:var(--navy);margin:2px 0 10px'},formula),
-  d?[h('div',{class:'meta'},'Agreement definition'),h('div',{class:'quote'},d.quote),h('div',{class:'meta'},`${d.source_document} · characters ${d.start}–${d.end} · sha256 ${d.sha256.slice(0,12)}…`)]:h('div',{class:'notice bad'},h('strong',null,'No definition found'),'The policy text does not contain a recognizable definition, so breaches cannot be linked to the agreement.'));
+const defMeta=d=>h('div',{class:'meta'},`${d.source_document} · characters ${d.start}–${d.end} · sha256 ${d.sha256.slice(0,12)}…`);
+function defCard(k){
+ const d=data.policy?.definitions?.[k];
+ return h('div',{class:'card'},h('h3',null,COV[k].name),h('div',{class:'meta'},'Formula used by this tool'),h('div',{style:'font-family:var(--serif);font-size:17px;color:var(--navy);margin:2px 0 10px'},COV[k].long),
+  d?[h('div',{class:'meta'},'Agreement definition'),h('div',{class:'quote'},d.quote),defMeta(d)]:h('div',{class:'notice bad'},h('strong',null,'No definition found'),'The policy text does not contain a recognizable definition, so breaches cannot be linked to the agreement.'));
+}
+function springCard(){
+ const d=data.policy?.definitions?.springing;
+ return h('div',{class:'card'},h('h3',null,'Springing covenants'),h('div',{class:'meta'},'Rule used by this tool'),h('div',{style:'font-family:var(--serif);font-size:17px;color:var(--navy);margin:2px 0 10px'},`Tested only when revolver drawn ÷ commitment is at least ${trigPct()}% at quarter end`),
+  d?[h('div',{class:'meta'},'Agreement provision'),h('div',{class:'quote'},d.quote),defMeta(d)]:h('div',{class:'notice bad'},h('strong',null,'No springing provision found'),'The policy text does not describe springing covenants, so the trigger is a setting chosen in this tool.'));
 }
 function renderAnalysis(){
  if(!period||!data)return;
- $('dists').replaceChildren(distPanel('lev'),distPanel('dscr'));
- $('defs').replaceChildren(defCard('leverage'),defCard('dscr'));
+ $('dists').replaceChildren(...KEYS().map(distPanel));
+ $('defs').replaceChildren(...KEYS().filter(k=>k==='leverage'||k==='dscr'||data.applied_covenants.includes(k)).map(defCard),anySpring()?springCard():null);
  const bad=data.results.filter(r=>r.status==='invalid'),S=periodSummary(period),items=[];
  for(const r of bad)items.push(h('li',null,h('b',null,`${r.record_id||'Row'}`),` (${r.borrower_id||'unknown borrower'}, ${r.period?plabel(r.period):'unknown period'}): ${r.error}. Not tested, not counted as passing.`));
  for(const x of S.rows)if(x.a.key==='nodata')items.push(h('li',null,h('b',null,x.b),`: no row for ${plabel(period)}. Not tested.`));
- for(const x of S.rows)if(x.a.unev)items.push(h('li',null,h('b',null,x.b),`: ${[x.r.leverage,x.r.dscr].filter(c=>c.status==='unevaluable').map(c=>c.reason).join(' ')} That test is not counted as passing.`));
+ for(const x of S.rows)if(x.a.unev)items.push(h('li',null,h('b',null,x.b),`: ${covs(x.r).filter(([,c])=>c.status==='unevaluable').map(([k,c])=>`${COV[k].short}: ${c.reason}.`).join(' ')} That test is not counted as passing.`));
+ for(const x of S.rows){const n=covs(x.r).find(([,c])=>c.springing?.triggered===null);if(n)items.push(h('li',null,h('b',null,x.b),`: ${n[1].springing.note}`));}
  for(const w of data.policy?.warnings||[])items.push(h('li',null,w));
  if(lastPolicy)items.push(h('li',null,`Policy “${polName}” was uploaded by a user and is not independently verified against the signed agreement.`));
- if(!lastPolicy)items.push(h('li',null,'The bundled sample policy is a fictional document written for this exercise.'));
- if(!lastCsv)items.push(h('li',null,'Borrower figures are synthetic sample data and are taken as supplied; they are not verified against borrower financial statements.'));
+ if(!lastPolicy)items.push(h('li',null,'The bundled sample policy is a fictional document written for this exercise. FCCR, current ratio and springing definitions come from a team-written synthetic addendum (team/covenant-policy-addendum.txt).'));
+ if(!lastCsv)items.push(h('li',null,'Borrower figures are synthetic sample data and are taken as supplied; they are not verified against borrower financial statements. Capex, taxes, distributions, current assets and liabilities and revolver figures are team-made synthetic additions to the organizer’s sample.'));
  $('dq').replaceChildren(h('ul',{style:'margin:0;padding-left:18px'},items));
 }
 function renderHow(){
@@ -520,12 +641,14 @@ function renderHow(){
   c('What is a covenant?',h('p',null,'A covenant is a promise in a loan agreement that the borrower will keep certain financial ratios within agreed limits. Lenders test them every quarter. A failed test is an early warning: it usually means the lender should look closer, talk to the borrower and check the agreement.')),
   c('Leverage',h('div',{class:'formula'},'Debt ÷ EBITDA'),h('p',null,'Roughly how many years of earnings it would take to repay the debt. EBITDA is earnings before interest, taxes, depreciation and amortization, a common measure of operating profit, measured over the last twelve months. The agreement sets a maximum. Higher is riskier, so a borrower fails when leverage is above the maximum.')),
   c('Debt-service coverage (DSCR)',h('div',{class:'formula'},'Cash flow ÷ debt service'),h('p',null,'Whether the borrower earns enough cash to cover its loan payments. Debt service is the scheduled interest and principal due over the last twelve months. The agreement sets a minimum. Lower is riskier, so a borrower fails when coverage is below the minimum.')),
+  c('Fixed-charge coverage (FCCR)',h('div',{class:'formula'},'(EBITDA − capex − taxes − distributions) ÷ fixed charges'),h('p',null,'A stricter cousin of DSCR. Before comparing cash flow with loan payments, it subtracts money the business must or chooses to spend first: equipment purchases (capex), taxes and payouts to owners. A company can pass DSCR and still fail FCCR if it spends heavily or pays large distributions.')),
+  c('Current ratio',h('div',{class:'formula'},'Current assets ÷ current liabilities'),h('p',null,'A liquidity test. Current assets (cash, receivables, inventory) should comfortably cover bills due within a year. Below the minimum, the borrower may struggle to pay suppliers and short-term lenders.')),
+  c('Springing covenants',h('p',null,'A springing covenant only “springs” into effect when a trigger is hit, usually when the borrower draws heavily on its revolving credit line. Until then the test is dormant: it is shown, but counts as neither passing nor failing. Use Covenant terms in the header to choose maintenance, springing or not applied for each covenant, for the whole portfolio or for one borrower on its review page.')),
   c('Headroom',h('p',null,'Headroom is the cushion before a limit is reached, shown in dollars. Positive means the borrower could take on that much more debt, or lose that much cash flow, and still pass. Negative means it is already past the limit by that amount.')),
-  c('Reading the status labels',h('p',null,`Within limits: both tests pass. Within limits · thin headroom: both pass, but at least one is within ${WATCH*100}% of its limit. This 5% band is a display convention of this tool, not a term from the agreement. Needs review: one or both tests failed, or a test could not be calculated. Data error and No report: the inputs were unreadable or missing. These are never counted as passing.`)),
+  c('Reading the status labels',h('p',null,`Within limits: every tested covenant passes. Thin headroom: at least one is within ${WATCH*100}% of its limit (a display convention of this tool, not a term from the agreement). Springing test would fail: everything tested passes, but a dormant springing test would fail if it applied. Needs review: a test failed or could not be calculated. Data error and No report: inputs were unreadable or missing. These are never counted as passing.`)),
+  c('Covenant Designer',h('p',null,'Load a company’s financial statements as a CSV of line items. The tool computes the four ratios, picks which covenants fit the business, sets each level so results could fall by your chosen cushion before a breach, and suggests springing tests where the company has a revolver. It shows every rule it used.')),
   c('What this tool does not decide',h('p',null,'A failed test here is a calculation, not a legal determination of default. Whether an event of default has occurred can depend on the full agreement, grace or cure periods, waivers and the lender’s judgment. Figures are taken as supplied and are not checked against borrower statements.')),
-  c('Where the numbers come from',h('p',null,'Every ratio and dollar figure on this page is calculated by the application’s backend from the borrower CSV. Dollar amounts use exact cent arithmetic. Each breach links to the sentence in the policy document that defines the test, with its character position and a hash so it can be checked.')),
-  c('Using it',h('p',null,'Start on Overview to see who needs attention and why. Use Borrowers to search and sort. Open any borrower for the exact calculation, headroom, trend and evidence. Use “Data & policy sources” in the header to load your own CSV or policy document.')));
-
+  c('Where the numbers come from',h('p',null,'Every ratio and dollar figure on this page is calculated by the application’s backend. Dollar amounts use exact cent arithmetic. Each breach links to the sentence in the policy document that defines the test, with its character position and a hash so it can be checked.')));
 }
 
 /* ---------- borrower analysis view ----------
@@ -535,190 +658,234 @@ function openDetail(b){if(view!=='detail')returnView=view;location.hash='borrowe
 const c100=n=>Math.round(Number(n)*100);
 const usdAbs=n=>usd(String(Math.abs(Number(n))));
 const diffUsd=(a,b)=>{const d=(c100(a)-c100(b))/100;return (d>0?'+':d<0?'−':'')+'$'+Math.abs(d).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});};
-const wk=(kind,cur,pr)=>cur===pr?'Unchanged':(kind==='lev'?cur>pr:cur<pr)?'Weaker':'Stronger';
-const okRow=r=>r&&r.status!=='invalid'&&r.leverage.value!=null&&r.dscr.value!=null;
-const NAMES={lev:'Leverage',dscr:'Debt-service coverage'};
+const okRow=r=>!!(r&&r.status!=='invalid'&&r.covenants);
+const INPUT_NAMES={debt_usd:'gross debt',ttm_ebitda_usd:'EBITDA',ttm_debt_service_usd:'debt service',ttm_available_cashflow_usd:'available cash flow',ttm_capex_usd:'capex',ttm_cash_taxes_usd:'cash taxes',ttm_distributions_usd:'distributions',current_assets_usd:'current assets',current_liabilities_usd:'current liabilities',revolver_drawn_usd:'revolver borrowings'};
 function qsec(n,title,...kids){return h('section',{class:'qs','aria-labelledby':'q'+n},h('div',{class:'qlab'},'Question '+n),h('h3',{class:'qh',id:'q'+n},title),...kids);}
-
+const statusOrder=s=>({breach:0,unevaluable:1,pass:2,dormant:3}[s]??4);
+const ordered=r=>covs(r).sort((x,y)=>statusOrder(x[1].status)-statusOrder(y[1].status)).map(([k])=>k);
+function springNote(c){
+ if(c.mode!=='springing')return '';const s=c.springing;
+ if(s.triggered)return ` It is springing and was tested because the revolver was ${pctS(s.utilization)} drawn (trigger ${Number(s.trigger_pct)}%).`;
+ if(s.triggered===null)return ` It is springing, but ${s.note.charAt(0).toLowerCase()+s.note.slice(1)}`;
+ return '';
+}
+function covSentence(k,c){
+ const C=COV[k],L=c.limit,N=cap(C.num),D=C.den;
+ if(c.status==='unevaluable')return `${C.name} could not be calculated. ${c.reason}.`;
+ if(c.status==='dormant'){const s=c.springing;return `${C.name} is springing and was not tested: the revolver was ${pctS(s.utilization)} drawn, below the ${Number(s.trigger_pct)}% trigger. Had it been tested it would ${c.would_status==='breach'?'fail':'pass'} at ${fx(c.value,L)} against a ${lim(L)} ${lw(k)}.`;}
+ const sp=springNote(c);
+ if(isMax(k))return c.status==='breach'
+  ?`${C.name} is ${fx(c.value,L)}, above the ${lim(L)} maximum. ${N} of ${usd(c.numerator_usd)} is ${usdAbs(c.numerator_headroom_usd)} more than the ${usd(c.numerator_limit_usd)} that ${usd(c.denominator_usd)} of ${D} supports at the limit.`+sp
+  :`${C.name} is ${fx(c.value,L)} against a ${lim(L)} maximum, so it is within the limit. ${N} could rise by ${usd(c.numerator_headroom_usd)} (to ${usd(c.numerator_limit_usd)}) before reaching it.`+sp;
+ return c.status==='breach'
+  ?`${C.name} is ${fx(c.value,L)}, below the ${lim(L)} minimum. ${N} was ${usd(c.numerator_usd)} against ${D} of ${usd(c.denominator_usd)}. To meet the minimum it needed ${usd(c.numerator_limit_usd)}, so it was ${usdAbs(c.numerator_headroom_usd)} short.`+sp
+  :`${C.name} is ${fx(c.value,L)} against a ${lim(L)} minimum. ${N} of ${usd(c.numerator_usd)} is ${usd(c.numerator_headroom_usd)} above the ${usd(c.numerator_limit_usd)} the minimum requires.`+sp;
+}
 function summaryBlock(b,r,a,pr,pp){
  const P=plabel(period),p=(cls,...k)=>h('p',{class:cls},...k);
  if(!r)return [p('lead',`No row was supplied for ${b} in ${P}, so no covenant test could be run.`),p('',`${ST.nodata.action}. The borrower is not treated as passing.`)];
  if(r.status==='invalid')return [p('lead',`The ${P} data for ${b} could not be read, so no covenant test was run.`),p('',`${r.error}. The borrower is not treated as passing.`)];
- const L=r.leverage,D=r.dscr,i=r.inputs,fails=[];
- if(a.lb)fails.push('leverage');if(a.db)fails.push('debt-service coverage');
- let lead;
- if(fails.length===2)lead=`${b} did not meet either financial requirement in ${P}. Leverage is above its maximum and debt-service coverage is below its minimum.`;
- else if(fails.length===1){const other=a.lb?D:L,on=a.lb?'debt-service coverage':'leverage';lead=`${b} did not meet its ${fails[0]} requirement in ${P}. `+(other.status==='pass'?`The other test, ${on}, still passes.`:`The other test, ${on}, could not be calculated.`);}
+ const cs=covs(r),tested=cs.filter(([,c])=>c.status!=='dormant'),passing=tested.filter(([,c])=>c.status==='pass').length,unevN=tested.filter(([,c])=>c.status==='unevaluable').length;
+ const nf=a.fails.length;let lead;
+ if(nf)lead=`${b} did not meet ${nf===1?`its ${COV[a.fails[0]].name.toLowerCase()} requirement`:`${nf} of its ${tested.length} tested financial requirements (${a.fails.map(k=>COV[k].short).join(', ')})`} in ${P}.`+(passing?` ${passing===1?'The other tested requirement still passes.':`The other ${passing} tested requirements still pass.`}`:'')+(unevN?` ${unevN} could not be calculated.`:'');
  else if(a.unev)lead=`${b} could not be fully tested in ${P}.`;
- else lead=`${b} met both financial requirements in ${P}.`+(a.key==='watch'?' Headroom is thin on at least one of them.':'');
+ else if(!tested.length)lead=`No covenant was tested for ${b} in ${P}: every covenant is switched off or springing and not triggered.`;
+ else lead=`${b} met ${tested.length===1?'its tested financial requirement':`all ${tested.length} tested financial requirements`} in ${P}.`+(a.key==='watch'?' Headroom is thin on at least one of them.':'')+(a.key==='dormant'?' A springing test that is not yet in effect would fail.':'');
  if(isProj(period))lead='Projected, not reported: '+lead;
- const parts=[];
- if(D.value!=null)parts.push([a.db,D.status==='breach'
-  ?`Debt-service coverage is ${fx(D.value,D.min)}, below the ${lim(D.min)} minimum. The borrower produced ${usd(i.ttm_available_cashflow_usd)} of cash flow available to pay its loans, against ${usd(i.ttm_debt_service_usd)} of debt service. To meet the minimum it needed ${usd(D.cashflow_required_usd)}, so it was ${usdAbs(D.cashflow_headroom_usd)} short.`
-  :`Debt-service coverage is ${fx(D.value,D.min)} against a ${lim(D.min)} minimum. Cash flow of ${usd(i.ttm_available_cashflow_usd)} covers debt service of ${usd(i.ttm_debt_service_usd)}, which is ${usd(D.cashflow_headroom_usd)} above the ${usd(D.cashflow_required_usd)} the minimum requires.`]);
- else parts.push([false,`Debt-service coverage could not be calculated. ${D.reason}`]);
- if(L.value!=null)parts.push([a.lb,L.status==='breach'
-  ?`Leverage is ${fx(L.value,L.max)}, above the ${lim(L.max)} maximum. Debt of ${usd(i.debt_usd)} is ${usdAbs(L.debt_headroom_usd)} more than the ${usd(L.max_debt_usd)} that ${usd(i.ttm_ebitda_usd)} of EBITDA supports at the limit.`
-  :`Leverage is ${fx(L.value,L.max)} against a ${lim(L.max)} maximum, so debt is within the limit. Debt could rise by ${usd(L.debt_headroom_usd)} (to ${usd(L.max_debt_usd)}) before reaching it.`]);
- else parts.push([false,`Leverage could not be calculated. ${L.reason}`]);
- parts.sort((x,y)=>(y[0]?1:0)-(x[0]?1:0));
- const out=[p('lead',lead),...parts.map(x=>p('',x[1]))];
+ const out=[p('lead',lead),...ordered(r).map(k=>p('',covSentence(k,r.covenants[k])))];
  if(okRow(pr)&&pp){
-  const ph=(name,cur,prev,l)=>cur===prev?`${name} held at ${fx(cur,l)}`:`${name} ${cur>prev?'rose':'fell'} from ${fx(prev,l)} to ${fx(cur,l)}`;
-  const lw=wk('lev',L.value,pr.leverage.value),dw=wk('dscr',D.value,pr.dscr.value);
-  const weak=[lw,dw].filter(x=>x==='Weaker').length,strong=[lw,dw].filter(x=>x==='Stronger').length;
-  const verdict=weak===2?'Both measures moved toward their limits, so the position has deteriorated.':strong===2?'Both measures moved away from their limits, so the position has improved.':weak&&strong?'Movement was mixed.':weak?'The position has weakened slightly.':strong?'The position has improved slightly.':'Nothing changed.';
-  const ins=[['gross debt','debt_usd'],['EBITDA','ttm_ebitda_usd'],['debt service','ttm_debt_service_usd'],['available cash flow','ttm_available_cashflow_usd']];
-  const moved=ins.filter(([,k])=>c100(i[k])!==c100(pr.inputs[k])).map(([n,k])=>`${n} ${c100(i[k])>c100(pr.inputs[k])?'rose':'fell'} ${usdAbs(diffUsd(i[k],pr.inputs[k]).replace(/[+−$,]/g,'').replace(/^/,'')===''?0:(c100(i[k])-c100(pr.inputs[k]))/100)}`);
-  const still=ins.filter(([,k])=>c100(i[k])===c100(pr.inputs[k])).map(([n])=>n);
-  out.push(p('',`Compared with ${plabel(pp)}, ${ph('leverage',L.value,pr.leverage.value,L.max)} and ${ph('debt-service coverage',D.value,pr.dscr.value,D.min)}. ${verdict}`+(moved.length?` What changed: ${moved.join(' and ')}${still.length?`; ${still.join(' and ')} ${still.length>1?'were':'was'} unchanged`:''}.`:'')));
+  const moves=[];let weak=0,strong=0;
+  for(const k of KEYS()){const c=r.covenants[k],q=pr.covenants[k];if(!c||!q||c.value==null||q.value==null)continue;
+   moves.push(c.value===q.value?`${COV[k].short} held at ${fx(c.value,c.limit)}`:`${COV[k].short} ${c.value>q.value?'rose':'fell'} from ${fx(q.value,q.limit)} to ${fx(c.value,c.limit)}`);
+   const w=wk(k,c.value,q.value);if(w==='Weaker')weak++;else if(w==='Stronger')strong++;}
+  const verdict=weak&&!strong?'Every measure that moved went toward its limit, so the position has deteriorated.':strong&&!weak?'Every measure that moved went away from its limit, so the position has improved.':weak&&strong?'Movement was mixed.':'Nothing changed.';
+  const i=r.inputs,pi=pr.inputs,ins=Object.keys(INPUT_NAMES).filter(k=>i[k]!=null&&pi[k]!=null);
+  const moved=ins.filter(k=>c100(i[k])!==c100(pi[k])).map(k=>`${INPUT_NAMES[k]} ${c100(i[k])>c100(pi[k])?'rose':'fell'} ${usdAbs((c100(i[k])-c100(pi[k]))/100)}`);
+  if(moves.length)out.push(p('',`Compared with ${plabel(pp)}: ${moves.join('; ')}. ${verdict}`+(moved.length?` What changed: ${moved.join(', ')}.`:' None of the inputs changed.')));
  }
  const first=(data.borrowers.find(x=>x.borrower_id===b)||{}).first_exception_period;
  if(first===period)out.push(p('meta',`${P} is the first quarter in which ${b} failed a test.`));
  else if(first&&first<period)out.push(p('meta',`${b} first failed a test in ${plabel(first)}.`));
  return out;
 }
-
-function covCard(r,kind){
- const c=kind==='lev'?r.leverage:r.dscr,limit=kind==='lev'?c.max:c.min,st=c.status,fail=st==='breach',un=st==='unevaluable';
- const what=kind==='lev'?'How much debt the borrower carries compared with what it earns. Lower is safer.':'Whether the borrower earns enough cash to pay its loan payments. Higher is safer.';
- const neg=v=>Number(v)<0;
- const rows=un?[]:kind==='lev'?[['Debt headroom',c.debt_headroom_usd],['EBITDA headroom',c.ebitda_headroom_usd]]:[['Cash-flow headroom',c.cashflow_headroom_usd]];
+function termsBox(b,r){
+ if(!okRow(r))return null;
+ const ks=KEYS().filter(k=>r[k]),own=terms.borrowers[b]?.modes||{};
+ const rv=r.revolver;
+ const util=rv?(rv.utilization!=null?`Revolver ${pctS(rv.utilization)} drawn this quarter (${usd(rv.revolver_drawn_usd)} of ${usd(rv.revolver_commitment_usd)}). Springing tests apply at ${trigPct()}% or more.`:rv.note):`Springing tests apply when the revolver is at least ${trigPct()}% drawn.`;
+ return h('section',{class:'termsbox','aria-labelledby':'tbH'},
+  h('div',{class:'head'},h('h4',{id:'tbH'},`Covenant terms for ${b}`),Object.keys(own).length?h('button',{class:'linkbtn',type:'button',onclick:()=>setOverride(b,null)},'Use portfolio terms'):h('span',{class:'meta'},'Using portfolio terms')),
+  h('p',{class:'meta',style:'margin:4px 0 6px'},util),
+  ks.map(k=>{const id='tb-'+k,cur=own[k]??data.settings.modes[k];
+   return h('div',{class:'trow'},h('label',{class:'tn',for:id},h('b',null,COV[k].name),h('span',null,own[k]?'Set for this borrower':'Portfolio default')),
+    h('select',{id,onchange:e=>setOverride(b,k,e.target.value)},Object.entries(MODE).map(([v,l])=>h('option',{value:v,selected:v===cur},l))));}));
+}
+function covCard(r,k){
+ const c=r.covenants[k],C=COV[k],L=c.limit,st=c.status,fail=st==='breach',un=st==='unevaluable',dorm=st==='dormant';
+ const rows=un?[]:[[`${cap(C.num)} headroom`,c.numerator_headroom_usd],[`${cap(C.den)} headroom`,c.denominator_headroom_usd]].filter(([,v])=>v!=null);
+ const mode=c.mode==='springing'?`Springing at ${Number(c.springing.trigger_pct)}% revolver use · ${c.springing.triggered?'tested this quarter':c.springing.triggered===false?'not triggered':'trigger unknown, tested'}`:'Maintenance · tested every quarter';
  return h('div',{class:'card cc'+(fail?' fail':'')},
-  h('div',{class:'cov-head'},h('h4',null,NAMES[kind]),h('span',{class:'pill '+(un?'na':fail?'bad':'ok')},h('i',{'aria-hidden':'true'},un?'?':fail?'✕':'✓'),un?'Cannot calculate':fail?(kind==='lev'?'Above maximum':'Below minimum'):'Within limit')),
-  h('p',{class:'meta',style:'margin:2px 0 10px'},what),
+  h('div',{class:'cov-head'},h('h4',null,C.name),h('span',{class:'pill '+(un||dorm?'na':fail?'bad':'ok')},h('i',{'aria-hidden':'true'},un?'?':dorm?'◌':fail?'✕':'✓'),un?'Cannot calculate':dorm?'Springing · not tested':fail?(isMax(k)?'Above maximum':'Below minimum'):'Within limit')),
+  h('p',{class:'meta',style:'margin:2px 0 4px'},C.what),h('p',{class:'meta',style:'margin:0 0 10px'},mode),
   un?h('p',{class:'err'},c.reason):[
-   h('div',{class:'figrow'},h('span',{class:'bigfig num'},fx(c.value,limit)),h('span',{class:'limtxt'},`Policy ${kind==='lev'?'maximum':'minimum'} ${lim(limit)}`)),
-   h('dl',{class:'kv',style:'margin-top:12px'},rows.flatMap(([k,v])=>[h('dt',null,k+' (USD)'),h('dd',{class:neg(v)?'neg':'pos'},usd(v))]))]);
+   h('div',{class:'figrow'},h('span',{class:'bigfig num',style:dorm?'color:var(--faint)':null},fx(c.value,L)),h('span',{class:'limtxt'},`Policy ${lw(k)} ${lim(L)}`)),
+   dorm?h('p',{class:'meta',style:'margin:6px 0 0'},`Would ${c.would_status==='breach'?'fail':'pass'} if it applied this quarter.`):null,
+   h('dl',{class:'kv',style:'margin-top:12px'},rows.flatMap(([n,v])=>[h('dt',null,n+' (USD)'),h('dd',{class:Number(v)<0?'neg':'pos'},usd(v))]))]);
 }
-function distRow(r,kind){
- const c=kind==='lev'?r.leverage:r.dscr,limit=kind==='lev'?c.max:c.min,i=r.inputs,fail=c.status==='breach';
- if(c.status==='unevaluable')return h('div',{class:'dist1'},h('h4',null,NAMES[kind]),h('p',{class:'err'},c.reason));
- const top=Math.max(Number(limit)*(kind==='lev'?1.3:1.6),c.value*1.05);
- const tr=h('div',{class:'track'},h('div',{class:'fill '+(fail?'bad':'')}),h('div',{class:'tick'}));tr.style.setProperty('--t',(Number(limit)/top*100)+'%');tr.firstChild.style.setProperty('--w',Math.min(100,c.value/top*100)+'%');
+function distRow(r,k){
+ const c=r.covenants[k],C=COV[k],L=c.limit,dorm=c.status==='dormant',fail=c.status==='breach'||(dorm&&c.would_status==='breach');
+ if(c.status==='unevaluable')return h('div',{class:'dist1'},h('h4',null,C.name),h('p',{class:'err'},c.reason));
+ const top=topFor(k,L,[c.value]),nh=c.numerator_headroom_usd,nl=c.numerator_limit_usd,dh=c.denominator_headroom_usd,dl=c.denominator_limit_usd;
  let path;
- if(kind==='lev')path=fail?`To get back within the limit, debt would need to fall by ${usdAbs(c.debt_headroom_usd)} (to ${usd(c.max_debt_usd)}), or EBITDA would need to rise by ${usdAbs(c.ebitda_headroom_usd)} (to ${usd(c.ebitda_required_usd)}).`
-  :`Room to spare: debt could rise by ${usd(c.debt_headroom_usd)} (to ${usd(c.max_debt_usd)}), or EBITDA could fall by ${usd(c.ebitda_headroom_usd)} (to ${usd(c.ebitda_required_usd)}), before the limit is reached.`;
- else path=fail?`To meet the minimum, cash flow would need to rise by ${usdAbs(c.cashflow_headroom_usd)} (to ${usd(c.cashflow_required_usd)}), or debt service would need to fall to ${c.debt_service_max_usd==null?'a level the engine could not determine':usd(c.debt_service_max_usd)} or below.`
-  :`Room to spare: cash flow could fall by ${usd(c.cashflow_headroom_usd)} (to ${usd(c.cashflow_required_usd)}), or debt service could rise to ${usd(c.debt_service_max_usd)}, before the minimum is reached.`;
- return h('div',{class:'dist1'},h('div',{class:'cov-head'},h('h4',null,NAMES[kind]),h('span',{class:'num meta'},`${fx(c.value,limit)} vs ${kind==='lev'?'max':'min'} ${lim(limit)}`)),
-  h('div',{class:'track-wrap',role:'img','aria-label':`${NAMES[kind]} ${fx(c.value,limit)}; ${kind==='lev'?'maximum':'minimum'} ${lim(limit)}; ${fail?'fails':'passes'}`},tr,h('div',{class:'axis2','aria-hidden':'true'},h('span',null,'0.00x'),h('span',null,top.toFixed(2)+'x'))),
-  h('p',{class:fail?'path bad':'path'},path));
+ if(isMax(k))path=fail?`To get back within the limit, ${C.num} would need to fall by ${usdAbs(nh)} (to ${usd(nl)}), or ${C.den} would need to rise by ${usdAbs(dh)} (to ${usd(dl)}).`
+  :`Room to spare: ${C.num} could rise by ${usd(nh)} (to ${usd(nl)}), or ${C.den} could fall by ${usd(dh)} (to ${usd(dl)}), before the limit is reached.`;
+ else path=fail?`To meet the minimum, ${C.num} would need to rise by ${usdAbs(nh)} (to ${usd(nl)}), or ${C.den} would need to fall to ${dl==null?'a level the engine could not determine':usd(dl)} or below.`
+  :`Room to spare: ${C.num} could fall by ${usd(nh)} (to ${usd(nl)}), or ${C.den} could rise to ${usd(dl)}, before the minimum is reached.`;
+ if(dorm)path='Not in effect this quarter (springing, not triggered). If it applied: '+path.charAt(0).toLowerCase()+path.slice(1);
+ return h('div',{class:'dist1'},h('div',{class:'cov-head'},h('h4',null,C.name),h('span',{class:'num meta'},`${fx(c.value,L)} vs ${isMax(k)?'max':'min'} ${lim(L)}`)),
+  h('div',{class:'track-wrap',role:'img','aria-label':`${C.name} ${fx(c.value,L)}; ${lw(k)} ${lim(L)}; ${dorm?'springing, not tested':fail?'fails':'passes'}`},track(c.value,L,top,dorm?'dorm':fail?'bad':''),h('div',{class:'axis2','aria-hidden':'true'},h('span',null,'0.00x'),h('span',null,top.toFixed(2)+'x'))),
+  h('p',{class:fail&&!dorm?'path bad':'path'},path));
 }
-function ratioChart(b,kind){
- const pts=periods.map(p=>{const r=rowFor(b,p);const c=r&&r.status!=='invalid'?(kind==='lev'?r.leverage:r.dscr):null;return {p,v:c&&c.value!=null?c.value:null,st:c?c.status:null,l:c?Number(kind==='lev'?c.max:c.min):null};});
+function ratioChart(b,k){
+ const C=COV[k];
+ const pts=periods.map(p=>{const r=rowFor(b,p);const c=r?.covenants?.[k];return {p,v:c&&c.value!=null?c.value:null,st:c?c.status:null,l:c?Number(c.limit):null};});
  const have=pts.filter(x=>x.v!=null);
- const title=kind==='lev'?'Leverage (lower is safer)':'Debt-service coverage (higher is safer)';
+ const title=`${C.name} (${isMax(k)?'lower':'higher'} is safer)`;
  if(!have.length)return h('div',{class:'card'},h('h4',null,title),h('div',{class:'empty'},'No values to chart.'));
  const W=520,H=210,L=44,R=18,T=26,B=40;
  const all=[...have.map(x=>x.v),...have.map(x=>x.l)];let lo=Math.min(...all),hi=Math.max(...all);const pad=(hi-lo||0.4)*.2;lo-=pad;hi+=pad;
  const X=i=>periods.length===1?L+(W-L-R)/2:L+i*(W-L-R)/(periods.length-1),Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
- const g=sv('svg',{class:'chart',viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':`${title} by quarter: `+have.map(x=>`${plabel(x.p)} ${fx(x.v,x.l)} (${x.st==='breach'?'fails':'passes'}, limit ${x.l.toFixed(2)}x)`).join('; ')});
+ const g=sv('svg',{class:'chart',viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':`${title} by quarter: `+have.map(x=>`${plabel(x.p)} ${fx(x.v,x.l)} (${x.st==='dormant'?'springing, not tested':x.st==='breach'?'fails':'passes'}, limit ${x.l.toFixed(2)}x)`).join('; ')});
  const lims=have.map(x=>x.l),constant=lims.every(v=>v===lims[0]);
- if(constant){const y=Y(lims[0]);const zt=kind==='lev'?T:y,zh=kind==='lev'?y-T:H-B-y;g.append(sv('rect',{x:L,y:zt,width:W-L-R,height:Math.max(0,zh),fill:'#a23b3b','fill-opacity':.07}),sv('text',{x:kind==='lev'?W-R-4:L+4,y:kind==='lev'?T+13:H-B-6,'text-anchor':kind==='lev'?'end':'start',style:'fill:#a23b3b;font-weight:600'},'Fails'));}
- const lp=have.map(x=>`${X(periods.indexOf(x.p))},${Y(x.l)}`).join(' ');
- g.append(sv('polyline',{points:lp,fill:'none',stroke:'#0b1f3a','stroke-width':1.8,'stroke-dasharray':'6 4'}));
- const lastl=have.at(-1).l;g.append(sv('text',{x:L-6,y:Y(lims[0])+4,'text-anchor':'end',style:'fill:#0b1f3a;font-weight:700'},lims[0].toFixed(2)+'x'),sv('text',{x:L+4,y:Y(lims[0])+(kind==='lev'?15:-6),style:'fill:#0b1f3a;font-weight:700'},(kind==='lev'?'Maximum ':'Minimum ')+(constant?lims[0].toFixed(2):lastl.toFixed(2))+'x'));
- pts.forEach((x,i)=>g.append(sv('text',{x:X(i),y:H-12,'text-anchor':'middle',style:x.p===period?'fill:#0b1f3a;font-weight:700':''},plabel(x.p).replace(' ',' ')+(isProj(x.p)?'*':''))));
+ if(constant){const y=Y(lims[0]);const zt=isMax(k)?T:y,zh=isMax(k)?y-T:H-B-y;g.append(sv('rect',{x:L,y:zt,width:W-L-R,height:Math.max(0,zh),fill:'#a23b3b','fill-opacity':.07}),sv('text',{x:isMax(k)?W-R-4:L+4,y:isMax(k)?T+13:H-B-6,'text-anchor':isMax(k)?'end':'start',style:'fill:#a23b3b;font-weight:600'},'Fails'));}
+ g.append(sv('polyline',{points:have.map(x=>`${X(periods.indexOf(x.p))},${Y(x.l)}`).join(' '),fill:'none',stroke:'#0b1f3a','stroke-width':1.8,'stroke-dasharray':'6 4'}));
+ g.append(sv('text',{x:L-6,y:Y(lims[0])+4,'text-anchor':'end',style:'fill:#0b1f3a;font-weight:700'},lims[0].toFixed(2)+'x'),sv('text',{x:L+4,y:Y(lims[0])+(isMax(k)?15:-6),style:'fill:#0b1f3a;font-weight:700'},cap(lw(k))+' '+(constant?lims[0]:have.at(-1).l).toFixed(2)+'x'));
+ pts.forEach((x,i)=>g.append(sv('text',{x:X(i),y:H-12,'text-anchor':'middle',style:x.p===period?'fill:#0b1f3a;font-weight:700':''},plabel(x.p)+(isProj(x.p)?'*':''))));
  for(let i=1;i<pts.length;i++){const a=pts[i-1],c=pts[i];if(a.v==null||c.v==null)continue;g.append(sv('line',{x1:X(i-1),y1:Y(a.v),x2:X(i),y2:Y(c.v),stroke:'#1f6f78','stroke-width':2.2,'stroke-dasharray':isProj(c.p)?'5 4':null}));}
- pts.forEach((x,i)=>{if(x.v==null)return;const bad=x.st==='breach',col=bad?'#a23b3b':'#2a7352',pr=isProj(x.p);
+ pts.forEach((x,i)=>{if(x.v==null)return;const dorm=x.st==='dormant',col=dorm?'#8a929d':x.st==='breach'?'#a23b3b':'#2a7352',hollow=isProj(x.p)||dorm;
   if(x.p===period)g.append(sv('circle',{cx:X(i),cy:Y(x.v),r:9,fill:'none',stroke:'#0b1f3a','stroke-width':1.5}));
-  g.append(sv('circle',{cx:X(i),cy:Y(x.v),r:5,fill:pr?'#fff':col,stroke:col,'stroke-width':2}),sv('text',{x:X(i),y:Y(x.v)+(kind==='lev'?-14:20),'text-anchor':'middle',style:`fill:${col};font-weight:700;paint-order:stroke;stroke:#fff;stroke-width:3px`},fx(x.v,x.l).replace('x','x')));});
- return h('div',{class:'card'},h('h4',null,title),g,h('div',{class:'legend'},'Dashed navy line = covenant limit. Shaded area = fails. Ringed point = quarter being reviewed. Hollow point * = after the reporting date (projected).'));
+  g.append(sv('circle',{cx:X(i),cy:Y(x.v),r:5,fill:hollow?'#fff':col,stroke:col,'stroke-width':2}),sv('text',{x:X(i),y:Y(x.v)+(isMax(k)?-14:20),'text-anchor':'middle',style:`fill:${col};font-weight:700;paint-order:stroke;stroke:#fff;stroke-width:3px`},fx(x.v,x.l)));});
+ return h('div',{class:'card'},h('h4',null,title),g,h('div',{class:'legend'},'Dashed navy line = covenant limit. Shaded area = fails. Ringed point = quarter being reviewed. Hollow point * = projected. Grey point = springing test not triggered.'));
 }
 function compareTable(b,r,pr,pp){
  if(!okRow(r)||!okRow(pr))return h('p',{class:'meta'},pp?`${plabel(pp)} cannot be compared because one of the two quarters has no usable result.`:'This is the first reporting period, so there is no earlier quarter to compare with.');
- const lv=r.leverage,dv=r.dscr,pl=pr.leverage,pd=pr.dscr;
  const row=(name,prev,cur,chg,word,note)=>h('tr',null,h('th',{scope:'row'},name,note?h('div',{class:'meta'},note):null),h('td',{class:'num'},prev),h('td',{class:'num'},cur),h('td',{class:'num'},chg),h('td',{class:'w '+(word==='Weaker'?'bad':word==='Stronger'?'ok':'')},word==='Weaker'?'▼ Weaker':word==='Stronger'?'▲ Stronger':'– Unchanged'));
  const hw=(cur,prev)=>c100(cur)===c100(prev)?'Unchanged':c100(cur)>c100(prev)?'Stronger':'Weaker';
+ const body=[];
+ for(const k of KEYS()){const c=r.covenants[k],q=pr.covenants[k];if(!c||!q||c.value==null||q.value==null)continue;
+  body.push(row(COV[k].name,fx(q.value,q.limit),fx(c.value,c.limit),sgn(c.value-q.value),wk(k,c.value,q.value),`limit ${lim(c.limit)} ${isMax(k)?'max':'min'}${c.status==='dormant'?' · springing, not tested':''}`));
+  if(c.numerator_headroom_usd!=null&&q.numerator_headroom_usd!=null)body.push(row(`${cap(COV[k].num)} headroom`,usd(q.numerator_headroom_usd),usd(c.numerator_headroom_usd),diffUsd(c.numerator_headroom_usd,q.numerator_headroom_usd),hw(c.numerator_headroom_usd,q.numerator_headroom_usd)));}
  return h('div',{class:'tablewrap'},h('table',{class:'ct cmp'},h('caption',{class:'vh'},`Change from ${plabel(pp)} to ${plabel(period)}`),
-  h('thead',null,h('tr',null,h('th',{scope:'col'},'Measure'),h('th',{scope:'col'},plabel(pp)),h('th',{scope:'col'},plabel(period)),h('th',{scope:'col'},'Change'),h('th',{scope:'col'},'Direction'))),
-  h('tbody',null,
-   row('Leverage',fx(pl.value,pl.max),fx(lv.value,lv.max),sgn(lv.value-pl.value),wk('lev',lv.value,pl.value),`limit ${lim(lv.max)} max`),
-   row('Debt-service coverage',fx(pd.value,pd.min),fx(dv.value,dv.min),sgn(dv.value-pd.value),wk('dscr',dv.value,pd.value),`limit ${lim(dv.min)} min`),
-   row('Debt headroom',usd(pl.debt_headroom_usd),usd(lv.debt_headroom_usd),diffUsd(lv.debt_headroom_usd,pl.debt_headroom_usd),hw(lv.debt_headroom_usd,pl.debt_headroom_usd)),
-   row('Cash-flow headroom',usd(pd.cashflow_headroom_usd),usd(dv.cashflow_headroom_usd),diffUsd(dv.cashflow_headroom_usd,pd.cashflow_headroom_usd),hw(dv.cashflow_headroom_usd,pd.cashflow_headroom_usd)))));
+  h('thead',null,h('tr',null,h('th',{scope:'col'},'Measure'),h('th',{scope:'col'},plabel(pp)),h('th',{scope:'col'},plabel(period)),h('th',{scope:'col'},'Change'),h('th',{scope:'col'},'Direction'))),h('tbody',null,body)));
 }
 function calcSection(r){
- const i=r.inputs,L=r.leverage,D=r.dscr;
+ const i=r.inputs;
  const tbl=rows=>h('div',{class:'tablewrap'},h('table',{class:'ct'},h('thead',null,h('tr',null,['Item','Value','Where it comes from'].map(t=>h('th',{scope:'col'},t)))),
   h('tbody',null,rows.map(([a,b,c,s])=>h('tr',{class:s?'strong':null},h('td',null,a),h('td',{class:'num'},b),h('td',{class:'meta'},c))))));
- const stat=c=>c.status==='pass'?'Pass':c.status==='breach'?'Fail':'Cannot calculate';
- return [h('p',{class:'meta'},'Everything below is calculated by the application’s backend using exact whole-cent arithmetic. This page only displays it.'),
-  h('p',{class:'glossary'},h('b',null,'Terms: '),'Trailing-12-month (TTM) means the last four quarters added together. EBITDA is earnings before interest, taxes, depreciation and amortization, a common measure of operating profit. Debt service is the scheduled interest and principal payments on the loans.'),
-  h('h4',{class:'subh'},'Leverage'),h('p',{class:'formula'},'Leverage = gross debt ÷ trailing-12-month EBITDA'),
-  tbl([['Gross debt',usd(i.debt_usd),'Input · debt_usd'],['Trailing-12-month EBITDA',usd(i.ttm_ebitda_usd),'Input · ttm_ebitda_usd'],
-   ['Leverage',L.value==null?'n/a':`${fx(L.value,L.max)}  (stored ${L.value})`,'Engine · rounded down to 4 decimals for display; the test itself does not use the rounded figure',true],
-   ['Policy maximum',lim(L.max),'Input · max_leverage'],
-   ['Most debt allowed at this EBITDA',usd(L.max_debt_usd),'Engine · maximum × EBITDA, rounded down to the cent'],['Debt headroom',usd(L.debt_headroom_usd),'Engine · allowed debt − actual debt'],
-   ['EBITDA needed at this debt',usd(L.ebitda_required_usd),'Engine · debt ÷ maximum, rounded up to the cent'],['EBITDA headroom',usd(L.ebitda_headroom_usd),'Engine · actual EBITDA − needed EBITDA'],
-   ['Result',stat(L),'Pass if debt ≤ maximum × EBITDA, compared exactly in cents. A ratio exactly at the limit passes.',true]]),
-  h('h4',{class:'subh'},'Debt-service coverage (DSCR)'),h('p',{class:'formula'},'DSCR = trailing-12-month available cash flow ÷ trailing-12-month debt service'),
-  tbl([['Available cash flow',usd(i.ttm_available_cashflow_usd),'Input · ttm_available_cashflow_usd'],['Debt service',usd(i.ttm_debt_service_usd),'Input · ttm_debt_service_usd'],
-   ['DSCR',D.value==null?'n/a':`${fx(D.value,D.min)}  (stored ${D.value})`,'Engine · rounded down to 4 decimals for display; the test itself does not use the rounded figure',true],
-   ['Policy minimum',lim(D.min),'Input · min_dscr'],
-   ['Cash flow needed to meet the minimum',usd(D.cashflow_required_usd),'Engine · minimum × debt service, rounded up to the cent'],['Cash-flow headroom',usd(D.cashflow_headroom_usd),'Engine · actual cash flow − needed cash flow'],
-   ['Most debt service that still passes',D.debt_service_max_usd==null?'n/a':usd(D.debt_service_max_usd),'Engine · cash flow ÷ minimum, rounded down to the cent'],
-   ['Result',stat(D),'Pass if cash flow ≥ minimum × debt service, compared exactly in cents. A ratio exactly at the minimum passes.',true]])];
+ const stat=c=>c.status==='pass'?'Pass':c.status==='breach'?'Fail':c.status==='dormant'?`Not tested (springing, not triggered); would ${c.would_status==='breach'?'fail':'pass'}`:'Cannot calculate';
+ const out=[h('p',{class:'meta'},'Everything below is calculated by the application’s backend using exact whole-cent arithmetic. This page only displays it.'),
+  h('p',{class:'glossary'},h('b',null,'Terms: '),'Trailing-12-month (TTM) means the last four quarters added together. EBITDA is earnings before interest, taxes, depreciation and amortization, a common measure of operating profit. Debt service is the scheduled interest and principal payments on the loans. Capex is spending on equipment and property.')];
+ for(const k of ordered(r)){const c=r.covenants[k],C=COV[k],mx=isMax(k);
+  out.push(h('h4',{class:'subh'},C.name),h('p',{class:'formula'},C.long));
+  if(c.status==='unevaluable'&&c.value==null&&!c.numerator_usd){out.push(h('p',{class:'err'},c.reason));continue;}
+  const rows=[...C.numIn.map(([n,f])=>[n,usd(i[f]),'Input · '+f]),
+   ...(k==='fccr'?[[cap(C.num),usd(c.numerator_usd),'Engine · EBITDA − capex − taxes − distributions']]:[]),
+   ...C.denIn.map(([n,f])=>[n,usd(i[f]),'Input · '+f]),
+   [C.name,c.value==null?'n/a':`${fx(c.value,c.limit)}  (stored ${c.value})`,'Engine · rounded down to 4 decimals for display; the test itself does not use the rounded figure',true],
+   [`Policy ${lw(k)}`,lim(c.limit),'Input · '+C.limCol],
+   [mx?`Most ${C.num} allowed at this ${C.den}`:`${cap(C.num)} needed to meet the minimum`,usd(c.numerator_limit_usd),mx?'Engine · maximum × '+C.den+', rounded down to the cent':'Engine · minimum × '+C.den+', rounded up to the cent'],
+   [`${cap(C.num)} headroom`,usd(c.numerator_headroom_usd),mx?'Engine · allowed − actual':'Engine · actual − needed'],
+   [mx?`${cap(C.den)} needed at this ${C.num}`:`Most ${C.den} that still passes`,c.denominator_limit_usd==null?'n/a':usd(c.denominator_limit_usd),mx?`Engine · ${C.num} ÷ maximum, rounded up to the cent`:`Engine · ${C.num} ÷ minimum, rounded down to the cent`]];
+  if(c.mode==='springing')rows.push(['Covenant type',`Springing at ${Number(c.springing.trigger_pct)}%`,c.springing.utilization==null?c.springing.note:`Revolver utilization ${pctS(c.springing.utilization)} (input · revolver_drawn_usd ÷ revolver_commitment_usd)`]);
+  rows.push(['Result',stat(c),`Pass if ${C.num} ${mx?'≤ maximum':'≥ minimum'} × ${C.den}, compared exactly in cents. A ratio exactly at the limit passes.`,true]);
+  out.push(tbl(rows));}
+ return out;
 }
 function evidenceSection(r){
  const warns=data.policy?.warnings||[],defs=data.policy?.definitions||{};
- const one=(kind,key,label,limit)=>{const d=defs[key];const mism=warns.some(w=>w.includes(`for ${key} `));
+ const one=(k,label,limit)=>{const d=defs[k];const mism=warns.some(w=>w.includes(`for ${k} `));
   return h('div',{class:'ev'},h('h4',{class:'subh'},label),d?[h('div',{class:'quote'},d.quote),
    h('dl',{class:'kv small'},h('dt',null,'Source document'),h('dd',null,d.source_document),h('dt',null,'Location in text'),h('dd',null,`characters ${d.start}–${d.end}`),h('dt',null,'SHA-256 of the quotation'),h('dd',{class:'mono'},d.sha256)),
-   h('p',{class:mism?'err':'meta'},mism?`⚠ The ${kind==='lev'?'maximum':'minimum'} in the data row (${lim(limit)}) does not appear in this sentence. Confirm which value governs.`:`✓ The ${kind==='lev'?'maximum':'minimum'} used for this row (${lim(limit)}) appears in this sentence.`)]
-   :h('div',{class:'notice bad'},h('strong',null,'No definition found'),'The policy text does not contain a recognizable definition for this test, so the result is not linked to agreement language.'));};
- const i=r.inputs;
+   limit==null?null:h('p',{class:mism?'err':'meta'},mism?`⚠ The ${lw(k)} in the data row (${lim(limit)}) does not appear in this sentence. Confirm which value governs.`:`✓ The ${lw(k)} used for this row (${lim(limit)}) appears in this sentence.`)]
+   :h('div',{class:'notice bad'},h('strong',null,'No definition found'),'The policy text does not contain a recognizable definition, so the result is not linked to agreement language.'));};
+ const sp=covs(r).some(([,c])=>c.mode==='springing');
+ const raw=[['record_id',r.record_id],['borrower_id',r.borrower_id],['period',r.period],['source_document',r.source_document||'unknown'],...Object.entries(r.inputs),['max_leverage',r.leverage.max],['min_dscr',r.dscr.min]];
  return [h('p',{class:'meta'},'These are the policy sentences that define each test, quoted with their exact position. The backend confirms every quotation matches the policy text before it is shown.'),
-  one('lev','leverage','Leverage definition',r.leverage.max),one('dscr','dscr','Debt-service coverage definition',r.dscr.min),
+  ordered(r).map(k=>one(k,`${COV[k].name} definition`,r.covenants[k].limit)),sp?one('springing','Springing provision',null):null,
   h('h4',{class:'subh'},'Original financial data used'),
   h('div',{class:'tablewrap'},h('table',{class:'ct'},h('thead',null,h('tr',null,['Field','Value'].map(t=>h('th',{scope:'col'},t)))),h('tbody',null,
-   [['record_id',r.record_id],['borrower_id',r.borrower_id],['period',r.period],['source_document',r.source_document||'unknown'],['debt_usd',i.debt_usd],['ttm_ebitda_usd',i.ttm_ebitda_usd],['ttm_debt_service_usd',i.ttm_debt_service_usd],['ttm_available_cashflow_usd',i.ttm_available_cashflow_usd],['max_leverage',r.leverage.max],['min_dscr',r.dscr.min]].map(([k,v])=>h('tr',null,h('td',{class:'mono'},k),h('td',{class:'num mono'},String(v))))))),
-  h('p',{class:'meta'},lastCsv?'Figures come from the uploaded CSV and are taken as supplied.':'Figures are from the bundled synthetic loan_covenants.csv and are taken as supplied. They are not verified against borrower financial statements.')];
+   raw.map(([k,v])=>h('tr',null,h('td',{class:'mono'},k),h('td',{class:'num mono'},String(v))))))),
+  h('p',{class:'meta'},lastCsv?'Figures come from the uploaded CSV and are taken as supplied.':'Figures are from the bundled synthetic data and are taken as supplied. They are not verified against borrower financial statements.')];
 }
 
 function renderDetail(){
  const pane=$('detailPane'),b=detailFor;
- const back=h('a',{class:'back',href:'#'+returnView},'← Back to '+({overview:'Overview',borrowers:'Borrowers',analysis:'Covenant Analysis',how:'How it works'}[returnView]||'Overview'));
+ const back=h('a',{class:'back',href:'#'+returnView},'← Back to '+({overview:'Overview',borrowers:'Borrowers',analysis:'Covenant Analysis',design:'Covenant Designer',how:'How it works'}[returnView]||'Overview'));
  if(!data||!period)return;
  if(!borrowers.includes(b)){pane.replaceChildren(h('div',{class:'dhero'},back,h('h2',{id:'dTitle',tabindex:'-1'},'Borrower not found')),h('div',{class:'dwrap'},h('div',{class:'notice bad'},`No borrower “${b}” exists in the current data.`)));return;}
- const r=rowFor(b,period),a=assess(r),s=ST[a.key];
+ const r=rowFor(b,period),a=assess(r),s=stOf(a);
  const i=periods.indexOf(period),pp=i>0?periods[i-1]:null,pr=pp?rowFor(b,pp):null;
  const hero=h('div',{class:'dhero'},back,
-  h('div',{class:'dtitle'},h('h2',{id:'dTitle',tabindex:'-1'},b),pill(a.key),newChip(b,period)),
+  h('div',{class:'dtitle'},h('h2',{id:'dTitle',tabindex:'-1'},b),pill(a),newChip(b,period)),
   h('div',{class:'dmeta'},h('span',null,`Reporting quarter: ${plabel(period)}`),h('span',null,`Quarter ended ${dlong(pend(period))}`),h('span',null,'Borrower name: not provided in the data'),isProj(period)?h('span',{class:'chip proj'},'Projected, not historical'):null));
- const parts=[hero];
  const wrap=h('div',{class:'dwrap'});
  if(isProj(period))wrap.append(h('div',{class:'notice warn'},h('strong',null,'Projected period'),`This quarter ends after the ${dlong(asOf)} reporting date. Treat it as projected or mislabelled until confirmed.`));
- // 1. what happened
  const act=h('p',{class:'next'},h('b',null,'Suggested next step: '),s.action+'.');
  wrap.append(qsec(1,'What happened?',h('div',{class:'summary '+(s.cls==='na'?'':s.cls)},...summaryBlock(b,r,a,pr,pp),act),
-  h('div',{class:'legal'},h('span',{class:'lg','aria-hidden':'true'},'§'),h('div',null,h('b',null,a.lb||a.db?'Potential financial covenant breach, not a legal default determination.':'Covenant test result, not a legal default determination.'),' This compares reported figures with the covenant levels in the policy text. Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers, and the lender’s decisions. This tool evaluates none of those.'))));
- if(okRow(r)){
-  // 2. which requirement
-  const first=[['lev',a.lb],['dscr',a.db]].sort((x,y)=>(y[1]?1:0)-(x[1]?1:0));
-  wrap.append(qsec(2,'Which financial requirement was not met?',h('div',{class:'cards2'},first.map(([k])=>covCard(r,k)))));
-  // 3. how far
-  wrap.append(qsec(3,'How far is the borrower from compliance?',h('div',{class:'dist'},first.map(([k])=>distRow(r,k))),h('p',{class:'meta'},'Each option changes one input and holds the others constant. Amounts are from the calculation engine.')));
-  // 4. trend
-  wrap.append(qsec(4,'Has the situation improved or deteriorated?',h('div',{class:'cards2'},ratioChart(b,'lev'),ratioChart(b,'dscr')),compareTable(b,r,pr,pp)));
-  // 5. evidence
+  h('div',{class:'legal'},h('span',{class:'lg','aria-hidden':'true'},'§'),h('div',null,h('b',null,a.fails.length?'Potential financial covenant breach, not a legal default determination.':'Covenant test result, not a legal default determination.'),' This compares reported figures with the covenant levels in the policy text. Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers, and the lender’s decisions. This tool evaluates none of those.'))));
+ const tb=termsBox(b,r);if(tb)wrap.append(tb);
+ if(okRow(r)&&covs(r).length){
+  const ks=ordered(r);
+  wrap.append(qsec(2,'Which financial requirement was not met?',h('div',{class:'cards2'},ks.map(k=>covCard(r,k)))));
+  wrap.append(qsec(3,'How far is the borrower from compliance?',h('div',{class:'dist'},ks.map(k=>distRow(r,k))),h('p',{class:'meta'},'Each option changes one input and holds the others constant. Amounts are from the calculation engine.')));
+  wrap.append(qsec(4,'Has the situation improved or deteriorated?',h('div',{class:'cards2'},ks.map(k=>ratioChart(b,k))),compareTable(b,r,pr,pp)));
   wrap.append(qsec(5,'What data and policy language support this conclusion?',
    h('details',{class:'xp'},h('summary',null,'Show calculation'),h('div',{class:'xb'},...calcSection(r))),
    h('details',{class:'xp'},h('summary',null,'View policy evidence'),h('div',{class:'xb'},...evidenceSection(r)))));
- }else{
+ }else if(!okRow(r)){
   wrap.append(qsec(2,'What is missing?',h('div',{class:'notice bad'},h('strong',null,r?`${r.record_id||'Row'} could not be read`:'No report for this quarter'),r?`${r.error}. Nothing was tested for this quarter and the borrower is not treated as passing.`:'Nothing was tested for this quarter and the borrower is not treated as passing.')));
  }
- parts.push(wrap);pane.replaceChildren(...parts);
+ pane.replaceChildren(hero,wrap);
 }
 
-/* ---------- sources dialog (existing upload flow, unchanged API calls) ---------- */
+/* ---------- covenant terms (maintenance / springing / off) ---------- */
+const post=b=>({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+async function run(){const b={settings:terms};if(lastCsv)b.csv=lastCsv;if(lastPolicy){b.policy=lastPolicy;b.policy_name=polName;}return load('/api/covenants',post(b));}
+async function applyTerms(T,msg){const prev=terms;terms=T;if(await run()){if(msg)flash(msg);return true;}terms=prev;return false;}
+function setOverride(b,k,v){
+ const T=structuredClone(terms);
+ if(k==null)delete T.borrowers[b];
+ else{const o={...(T.borrowers[b]?.modes||{})};if(v===T.modes[k])delete o[k];else o[k]=v;if(Object.keys(o).length)T.borrowers[b]={modes:o};else delete T.borrowers[b];}
+ applyTerms(T,k==null?`${b} now uses the portfolio terms.`:`${b}: ${COV[k].name} set to ${MODE[v].toLowerCase()}.`);
+}
+function openTerms(){
+ if(!data)return;
+ $('termsRows').replaceChildren(...KEYS().map(k=>h('div',{class:'trow'},
+  h('div',{class:'tn',id:'tl-'+k},h('b',null,COV[k].name),h('span',null,COV[k].formula)),
+  h('div',{class:'seg',role:'radiogroup','aria-labelledby':'tl-'+k},Object.entries(MODE).map(([v,l])=>h('label',null,h('input',{type:'radio',name:'m-'+k,value:v,checked:terms.modes[k]===v}),h('span',null,l)))))));
+ $('trig').value=Number(terms.trigger_pct);
+ const d=data.policy?.definitions?.springing;
+ $('trigEv').replaceChildren(...(d?[h('div',{class:'meta',style:'margin-top:10px'},'Agreement provision'),h('div',{class:'quote'},d.quote),defMeta(d)]:[h('p',{class:'meta'},'No springing provision was found in the policy text, so the trigger is a setting chosen here.')]));
+ const ov=Object.entries(terms.borrowers);$('ovCard').hidden=!ov.length;
+ $('ovList').replaceChildren(...ov.map(([b,o])=>h('li',null,h('b',null,b),': ',Object.entries(o.modes).map(([k,v])=>`${COV[k].short} ${MODE[v].toLowerCase()}`).join(', '),' ',h('button',{class:'linkbtn',type:'button',onclick:()=>{const T=structuredClone(terms);delete T.borrowers[b];applyTerms(T,`${b} now uses the portfolio terms.`).then(()=>openTerms());}},'Clear'))));
+ $('tmsg').textContent='';if(!$('terms').open)$('terms').showModal();
+}
+$('openTerms').onclick=openTerms;$('closeTerms').onclick=$('cancelTerms').onclick=()=>$('terms').close();
+$('defaultTerms').onclick=()=>{terms=structuredClone({...DEFAULT_TERMS,borrowers:terms.borrowers});openTerms();};
+$('applyTerms').onclick=async()=>{
+ const t=$('trig').value.trim(),m=$('tmsg');
+ if(!/^\d{1,3}(\.\d{1,2})?$/.test(t)||Number(t)>100){m.className='msg err';m.textContent='Enter a trigger between 0 and 100, with at most two decimals.';return;}
+ const modes={};for(const k of KEYS())modes[k]=document.querySelector(`input[name="m-${k}"]:checked`)?.value||terms.modes[k];
+ const T={trigger_pct:t,modes:{...terms.modes,...modes},borrowers:terms.borrowers};
+ m.className='msg';m.textContent='Applying…';
+ if(await applyTerms(T,'Covenant terms applied.'))$('terms').close();else{m.className='msg err';m.textContent=$('toast').textContent;}
+};
+
+/* ---------- sources dialog (existing upload flow) ---------- */
 function renderSources(){
- $('srcLine').textContent='Data: '+(lastCsv?csvName||'uploaded CSV':'sample loan_covenants.csv')+' · Policy: '+(lastPolicy?polName:'sample loan-policy.txt');
+ $('srcLine').textContent='Data: '+(lastCsv?csvName||'uploaded CSV':'sample loan_covenants_extended.csv')+' · Policy: '+(lastPolicy?polName:'sample loan-policy.txt + team addendum');
  $('reset').hidden=!(lastCsv||lastPolicy);
 }
-const post=b=>({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
-async function run(){if(!lastCsv&&!lastPolicy)return load('/api/covenants');const b={};if(lastCsv)b.csv=lastCsv;if(lastPolicy){b.policy=lastPolicy;b.policy_name=polName;}return load('/api/covenants',post(b));}
 const b64=buf=>{let s='';const u=new Uint8Array(buf);for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);};
 function err(t){const m=$('msg');m.className='msg err';m.textContent=t;}
 $('up').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(f.size>4_000_000)return err('File too large (4 MB max). Nothing was changed.');
@@ -744,11 +911,70 @@ $('reset').onclick=async()=>{const prev=[lastCsv,csvName,lastPolicy,polName];las
 $('openSources').onclick=()=>$('sources').showModal();
 $('closeSources').onclick=()=>$('sources').close();
 
+/* ---------- Covenant Designer ---------- */
+const DEC={recommended:['ok','✓','Recommended'],optional:['watch','○','Optional'],not_recommended:['na','–','Not recommended'],insufficient_data:['na','?','Needs more data'],fails_at_signing:['bad','✕','Fails at signing']};
+let recLast=null;
+function dmsg(t,cls){const m=$('dmsg');m.className='msg'+(cls?' '+cls:'');m.textContent=t;}
+$('cush').oninput=e=>{$('cushOut').textContent=e.target.value+'%';e.target.setAttribute('aria-valuetext',e.target.value+' percent');};
+$('cush').onchange=()=>{if(recLast)recommend();};
+$('stSample').onclick=async()=>{dmsg('Loading sample…');try{const r=await fetch('/api/recommend/sample');const j=await r.json();if(!r.ok)throw Error(j.error||r.statusText);$('stText').value=j.csv;$('stCo').value='Miami Valley Fabrication Co. (fictional)';dmsg('Sample statements loaded. These are fictional figures made by the team.','okmsg');recommend();}catch(e){dmsg('Could not load the sample: '+e.message,'err');}};
+$('stUp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+ if(f.size>1_000_000)return dmsg('File too large (1 MB max).','err');
+ if(/\.(xlsx?|pdf|docx?)$/i.test(f.name))return dmsg('Save the statements as a CSV first (in Excel: File → Save As → CSV). PDF statements are not read by this tool.','err');
+ const t=await f.text();if(!t.trim())return dmsg(`“${f.name}” is empty.`,'err');
+ $('stText').value=t;if(!$('stCo').value)$('stCo').value=f.name.replace(/\.[^.]+$/,'').slice(0,100);dmsg(`Loaded “${f.name}”.`,'okmsg');recommend();};
+$('recBtn').onclick=()=>recommend();
+async function recommend(){
+ const csv=$('stText').value;if(!csv.trim())return dmsg('Load or paste statement lines first.','err');
+ dmsg('Calculating…');
+ try{const r=await fetch('/api/recommend',post({csv,cushion_pct:Number($('cush').value),company:$('stCo').value.trim()||null}));const j=await r.json();if(!r.ok)throw Error(j.error||r.statusText);
+  recLast=j;dmsg('');renderRec(j);}
+ catch(e){dmsg('Could not recommend covenants: '+e.message,'err');}
+}
+function termLine(x){
+ const C=COV[x.key],t=`${x.direction==='max'?'Maximum':'Minimum'} ${{leverage:'Total Leverage Ratio',dscr:'Debt Service Coverage Ratio',fccr:'Fixed Charge Coverage Ratio',current_ratio:'Current Ratio'}[x.key]} of ${x.threshold}x`;
+ return x.mode==='springing'?`${t}, tested quarterly only when revolver utilization is at least ${Number(x.trigger_pct)}% (springing)`:`${t}, tested quarterly`;
+}
+function recCard(x){
+ const [cls,ic,lab]=DEC[x.decision]||DEC.insufficient_data,C=COV[x.key],max=x.direction==='max';
+ const hasTh=x.threshold!=null;
+ let viz=null;
+ if(hasTh&&x.current_value!=null){const top=topFor(x.key,x.threshold,[x.current_value]);
+  viz=h('div',{class:'track-wrap',role:'img','aria-label':`Today ${fx(x.current_value)}; recommended ${max?'maximum':'minimum'} ${lim(x.threshold)}`},track(x.current_value,x.threshold,top,x.decision==='fails_at_signing'?'bad':''),h('div',{class:'axis2','aria-hidden':'true'},h('span',null,'0.00x'),h('span',null,'Bar: today · line: covenant'),h('span',null,top.toFixed(2)+'x')));}
+ const mode=x.mode==='springing'?`Springing at ${Number(x.trigger_pct)}% revolver use${x.currently_triggered===true?' · would be tested today':x.currently_triggered===false?' · not tested today':''}`:x.mode?'Maintenance · tested every quarter':null;
+ return h('div',{class:'card reccard dec-'+x.decision},
+  h('div',{class:'cov-head'},h('h4',null,x.name),h('span',{class:'pill '+cls},h('i',{'aria-hidden':'true'},ic),lab)),
+  h('p',{class:'meta',style:'margin:2px 0 10px'},C.formula),
+  hasTh?[h('div',{class:'figrow'},h('span',{class:'bigfig num'},`${max?'≤':'≥'} ${x.threshold}x`),h('span',{class:'limtxt'},max?'Maximum':'Minimum')),viz,
+   h('dl',{class:'kv',style:'margin-top:10px'},h('dt',null,'Today'),h('dd',null,fx(x.current_value)),
+    h('dt',null,'Cushion before breach'),h('dd',{class:x.implied_cushion_pct==null?'neg':'pos'},x.implied_cushion_pct==null?'None: fails today':x.implied_cushion_pct.toFixed(1)+'%'),
+    mode?[h('dt',null,'Covenant type'),h('dd',null,mode)]:null)]
+   :x.current_value!=null?h('p',{class:'meta'},`Today: ${fx(x.current_value)}`):null,
+  h('ul',null,(x.rationale||[]).map(t=>h('li',null,t))));
+}
+function renderRec(j){
+ const R=j.recommendations,pk=R.filter(x=>x.decision==='recommended'||x.decision==='fails_at_signing');
+ const tbl=(head,rows)=>h('div',{class:'tablewrap'},h('table',{class:'ct'},h('thead',null,h('tr',null,head.map(t=>h('th',{scope:'col'},t)))),h('tbody',null,rows)));
+ const sheet=pk.length?['Financial covenants (draft for credit review):',...pk.map((x,i)=>`(${String.fromCharCode(97+i)}) ${termLine(x)}.`),'Definitions to follow the credit agreement. Levels set with a '+j.cushion_pct+'% cushion to the borrower’s current results.'].join('\n'):'';
+ $('recOut').replaceChildren(
+  h('section',{class:'block','aria-labelledby':'recH'},
+   h('div',{class:'pkg'},h('h3',{id:'recH'},`Recommended package${j.company?' · '+j.company:''}`),h('p',null,pk.length?pk.map(x=>`${COV[x.key].short} ${x.direction==='max'?'≤':'≥'} ${x.threshold}x${x.mode==='springing'?` (springing at ${Number(x.trigger_pct)}%)`:''}`).join('  ·  '):'No covenant could be recommended from these statements. See each card for what is missing.')),
+   j.warnings.length?h('div',{class:'notice warn',style:'margin-top:14px'},h('strong',null,'Read before relying on this'),h('ul',null,j.warnings.map(w=>h('li',null,w)))):null),
+  h('section',{class:'block'},h('h3',null,'Each covenant'),h('div',{class:'cards2'},R.map(recCard))),
+  sheet?h('section',{class:'block'},h('h3',null,'Term sheet language'),h('div',{class:'card'},h('div',{class:'meta'},'Plain-language draft of the recommended covenants, for the credit memo or term sheet.'),h('div',{class:'sheet',id:'sheet'},sheet),
+   h('button',{class:'btn quiet',type:'button',onclick:async e=>{try{await navigator.clipboard.writeText(sheet);e.target.textContent='Copied';}catch{e.target.textContent='Select the text to copy';}}},'Copy text'))):null,
+  h('section',{class:'block'},h('h3',null,'How the ratios were calculated'),tbl(['Ratio','Formula','Numerator','Denominator','Today'],Object.entries(j.metrics).map(([k,m])=>h('tr',null,h('td',null,COV[k].name),h('td',{class:'meta'},m.formula),h('td',{class:'num'},usd(m.numerator_usd)),h('td',{class:'num'},usd(m.denominator_usd)),h('td',{class:'num w'},fx(m.value)))))),
+  h('section',{class:'block'},h('h3',null,'Figures read from the statements'),tbl(['Figure','Amount','Source'],j.figures.map(f=>h('tr',null,h('td',null,f.name),h('td',{class:'num'},usd(f.amount_usd)),h('td',{class:'meta'},f.line?`Line ${f.line}: “${f.source_label}”`:`Derived: ${f.derived}`)))),
+   (j.notes||[]).length?h('ul',{class:'meta',style:'margin:10px 0 0;padding-left:18px'},j.notes.map(t=>h('li',null,t))):null,
+   j.ignored.length?h('details',{class:'card'},h('summary',null,`${j.ignored.length} line${j.ignored.length>1?'s':''} not used`),h('ul',null,j.ignored.map(x=>h('li',null,`Line ${x.line} “${x.label}”: ${x.reason}.`)))):null),
+  h('details',{class:'card',style:'margin-top:20px'},h('summary',null,'Rules and assumptions behind these recommendations'),h('ul',null,j.assumptions.map(t=>h('li',null,t)))));
+}
+
 /* ---------- navigation & controls ---------- */
 function setView(v){
- if(!['overview','borrowers','analysis','how','detail'].includes(v))v='overview';view=v;
+ if(!['overview','borrowers','analysis','design','how','detail'].includes(v))v='overview';view=v;
  document.querySelectorAll('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==v);
- $('ctx').hidden=v==='detail'; // the borrower header already states the quarter and date
+ $('ctx').hidden=v==='detail'||v==='design';$('banners').hidden=v==='design';$('periodField').hidden=v==='design';$('toast').hidden=v==='design';
  document.querySelectorAll('.nav a').forEach(a=>{if(a.dataset.view===v||(v==='detail'&&a.dataset.view===returnView))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
 }
 function route(first){
@@ -759,8 +985,7 @@ function route(first){
 window.addEventListener('hashchange',()=>route(false));
 $('period').onchange=e=>{period=e.target.value;renderAll();};
 $('q').oninput=e=>{search=e.target.value;renderTable();};
-document.querySelectorAll('#tbl thead th[data-key] button').forEach(btn=>btn.onclick=()=>{const k=btn.parentElement.dataset.key;sort=sort.key===k?{key:k,dir:-sort.dir}:{key:k,dir:k==='borrower'?1:-1};renderTable();});
-for(const d of [$('sources')])d.addEventListener('click',e=>{if(e.target===d)d.close();});
+for(const d of [$('sources'),$('terms')])d.addEventListener('click',e=>{if(e.target===d)d.close();});
 route(true);
 load('/api/covenants');
 </script></body></html>

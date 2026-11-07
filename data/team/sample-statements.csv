@@ -1,0 +1,17 @@
+line_item,amount_usd,note
+Company,,Miami Valley Fabrication Co. (FICTIONAL team-made sample; TTM to 2026-09-30)
+Revenue,4800000.00,Income statement (TTM)
+Operating income,520000.00,Income statement (TTM)
+Depreciation and amortization,180000.00,Cash flow statement (TTM)
+Interest expense,110000.00,Income statement (TTM)
+Income taxes paid,95000.00,Cash flow statement (TTM)
+Capital expenditures,(160000.00),Cash flow statement (TTM)
+Dividends paid,(50000.00),Cash flow statement (TTM)
+Current portion of long-term debt,150000.00,Balance sheet (2026-09-30)
+Total debt,2000000.00,Balance sheet: term loan 1.80M + revolver 0.20M
+Cash and cash equivalents,210000.00,Balance sheet (2026-09-30)
+Total current assets,1450000.00,Balance sheet (2026-09-30)
+Total current liabilities,900000.00,Balance sheet (2026-09-30)
+Total assets,3900000.00,Balance sheet (2026-09-30)
+Revolver commitment,750000.00,Credit agreement
+Revolver drawn,200000.00,Balance sheet (2026-09-30)
