@@ -1,0 +1,14 @@
+TEAM PROJECT BRIEF
+Team name:
+Challenge number:
+User and job role:
+Pain point:
+One workflow we will improve:
+Inputs and data sources:
+Output or decision supported:
+Three features in scope:
+What we will leave out:
+Demo acceptance criteria:
+Tools and integrations:
+Source and permission notes:
+Known limitations:
