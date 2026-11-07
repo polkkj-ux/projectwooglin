@@ -17,7 +17,7 @@ def test_solve_t1_and_validation(monkeypatch, tmp_path):
     r = client.post("/solve", json=dict(BOR09, case="apitest"))
     assert r.status_code == 200
     p = r.json()["options"]["cheapest"]["plan"]
-    assert abs(p["E"] - 68333.33) < 0.01 and p["s"] == 1
+    assert p["E_cents"] == 6833334 and p["s"] == 1
     assert client.post("/solve", json=dict(BOR09, period="Q3-2026")).status_code == 422
     assert client.post("/solve", json=dict(BOR09, case="../x")).status_code == 422
     assert client.post("/solve", json=dict(BOR09, Lmax=0)).status_code == 400

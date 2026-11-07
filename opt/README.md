@@ -36,7 +36,8 @@ Then point the Node app at it: `$env:OPT_URL="http://127.0.0.1:8000"; npm run de
 
 The `/solve` body holds `borrower_id`, `period`, an optional `case` label, `D`, `EBITDA`, `DS`, `CF`, `Lmax`, `Dmin`, `cap`,
 `cures_remaining`, `cash`, `min_liquidity`, `k`, `premium_bps`, `has_asset`, `proceeds`, `asset_ebitda`, `asset_cf`
-and `sale_cost`. Every model is written to `opt/out/<borrower>_<period>_<case>.lp`. When a plan exists, a copy with `y` and `s`
+and `sale_cost`. It can also hold `current_assets`, `current_liabilities` and `min_current_ratio`, which add C6. Send them only when the current ratio is applied.
+Send amounts as decimal strings. The model works in exact integer cents and rejects anything finer than a cent. Every model is written to `opt/out/<borrower>_<period>_<case>.lp`. When a plan exists, a copy with `y` and `s`
 fixed is also written as `..._fixed.lp`. The `opt/out/` folder is git-ignored. Responses carry each file's SHA-256.
 
 ## Tests

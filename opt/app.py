@@ -12,7 +12,9 @@ import os
 import re
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from typing import Optional, Union
+
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
 from opt.cure_model import CureInputError, gurobi_version, solve_cure
 
@@ -40,27 +42,34 @@ ENV_PARAMS = load_env_params()
 app = FastAPI(title="Covenant Monitor cure planner", version="1.0")
 
 
+Num = Union[StrictStr, StrictInt, StrictFloat]  # decimal strings preferred; converted exactly to cents
+
+
 class SolveRequest(BaseModel):
     borrower_id: str = Field(pattern=r"^BOR-\d{1,4}$")
     period: str = Field(pattern=r"^\d{4}-Q[1-4]$")
     case: str = Field(default="live", pattern=r"^[A-Za-z0-9_-]{1,24}$")
-    D: float
-    EBITDA: float
-    DS: float
-    CF: float
-    Lmax: float
-    Dmin: float
-    cap: float
-    cures_remaining: int
-    cash: float
-    min_liquidity: float
-    k: float
-    premium_bps: float
+    D: Num
+    EBITDA: Num
+    DS: Num
+    CF: Num
+    Lmax: Num
+    Dmin: Num
+    cap: Num
+    cures_remaining: Num
+    cash: Num
+    min_liquidity: Num
+    k: Num
+    premium_bps: Num
     has_asset: bool = False
-    proceeds: float = 0
-    asset_ebitda: float = 0
-    asset_cf: float = 0
-    sale_cost: float = 0
+    proceeds: Num = 0
+    asset_ebitda: Num = 0
+    asset_cf: Num = 0
+    sale_cost: Num = 0
+    # Current ratio (C6): sent only when the monitor applies the current-ratio test this quarter.
+    current_assets: Optional[Num] = None
+    current_liabilities: Optional[Num] = None
+    min_current_ratio: Optional[Num] = None
 
 
 @app.get("/health")

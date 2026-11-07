@@ -1,0 +1,268 @@
+{
+ "borrower_id": "BOR-09",
+ "period": "2026-Q3",
+ "case": "whatif",
+ "gurobi_version": "13.0.3",
+ "params": {
+  "Threads": 1,
+  "Seed": 0,
+  "MIPGap": 0.0,
+  "IntFeasTol": 1e-09,
+  "FeasibilityTol": 1e-09
+ },
+ "units": "integer cents",
+ "constraints": [
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6"
+ ],
+ "waivable": [
+  "C1",
+  "C2"
+ ],
+ "clauses": {
+  "C1": {
+   "title": "Leverage covenant after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "documents/loan-policy.txt",
+     "quote": "Leverage is gross debt divided by trailing twelve-month EBITDA, maximum 3.00."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Asset sales: net proceeds of a permitted asset sale must repay debt, and the EBITDA and cash flow of the asset sold are removed from the trailing twelve-month figures."
+    }
+   ]
+  },
+  "C2": {
+   "title": "DSCR covenant after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "documents/loan-policy.txt",
+     "quote": "DSCR is trailing twelve-month available cash flow divided by trailing twelve-month debt service, minimum 1.20."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Prepayment: a voluntary prepayment pays the stated premium and reduces trailing twelve-month debt service by the stated amount per dollar repaid."
+    }
+   ]
+  },
+  "C3": {
+   "title": "Equity cure cap",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Equity cure: the sponsor may contribute cash that is added to EBITDA and to available cash flow for the quarter tested, up to the equity cure cap in cure_terms.csv."
+    }
+   ]
+  },
+  "C4": {
+   "title": "Cure frequency",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Cure frequency: an equity cure may be used only while cures remaining in the last four fiscal quarters is at least 1."
+    }
+   ]
+  },
+  "C5": {
+   "title": "Minimum liquidity after prepayment",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Minimum liquidity: after any voluntary prepayment the borrower must keep cash of at least the minimum liquidity in cure_terms.csv."
+    }
+   ]
+  },
+  "C6": {
+   "title": "Current ratio after cure",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "team/covenant-policy-addendum.txt",
+     "quote": "Current Ratio is current assets divided by current liabilities at quarter end, minimum 1.25."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds."
+    }
+   ]
+  }
+ },
+ "options": {
+  "cheapest": {
+   "status": "INFEASIBLE",
+   "plan": null,
+   "infeasibility": {
+    "iis": [
+     "C1",
+     "C3",
+     "C4",
+     "C6",
+     "PREMIUM"
+    ],
+    "relaxed": [
+     "C1",
+     "C2"
+    ],
+    "waiver": {
+     "E": 0.0,
+     "P": 148514.85,
+     "E_cents": 0,
+     "P_cents": 14851485,
+     "s": 1,
+     "pro_forma": {
+      "debt_cents": 97148515,
+      "ebitda_cents": 30500000,
+      "cashflow_cents": 27500000,
+      "debt_service_cents": 20626733,
+      "premium_cents": 148515,
+      "relief_cents": 5373267,
+      "leverage": 3.1851,
+      "dscr": 1.3332,
+      "current_assets_cents": 75000000,
+      "current_ratio": 1.25
+     },
+     "waiver_max_leverage_x100": 319,
+     "waiver_min_dscr_x100": 120,
+     "leverage_waived": true,
+     "dscr_waived": false
+    },
+    "waiver_error": null
+   },
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-09_2026-Q3_whatif.lp",
+    "lp_sha256": "4deadd735752bdc1070d953e646e4483512a968fb0c0ce4f9fdddc25cddec9d8",
+    "fixed_lp_file": null,
+    "fixed_lp_sha256": null,
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
+    }
+   }
+  },
+  "no_asset_sale": {
+   "status": "INFEASIBLE",
+   "plan": null,
+   "infeasibility": {
+    "iis": [
+     "C1",
+     "C3",
+     "C4",
+     "C6",
+     "PREMIUM"
+    ],
+    "relaxed": [
+     "C1",
+     "C2"
+    ],
+    "waiver": {
+     "E": 0.0,
+     "P": 148514.85,
+     "E_cents": 0,
+     "P_cents": 14851485,
+     "s": 0,
+     "pro_forma": {
+      "debt_cents": 112148515,
+      "ebitda_cents": 32500000,
+      "cashflow_cents": 30000000,
+      "debt_service_cents": 23326733,
+      "premium_cents": 148515,
+      "relief_cents": 2673267,
+      "leverage": 3.4507,
+      "dscr": 1.286,
+      "current_assets_cents": 75000000,
+      "current_ratio": 1.25
+     },
+     "waiver_max_leverage_x100": 346,
+     "waiver_min_dscr_x100": 120,
+     "leverage_waived": true,
+     "dscr_waived": false
+    },
+    "waiver_error": null
+   },
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-09_2026-Q3_whatif_no_asset_sale.lp",
+    "lp_sha256": "0c55acc80815e8ea9361a610772a28eaf583621727b067d718a0e5e19970343b",
+    "fixed_lp_file": null,
+    "fixed_lp_sha256": null,
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
+    }
+   }
+  },
+  "equity_cure_only": {
+   "status": "INFEASIBLE",
+   "plan": null,
+   "infeasibility": {
+    "iis": [
+     "C1",
+     "C3",
+     "C4"
+    ],
+    "relaxed": [
+     "C1",
+     "C2"
+    ],
+    "waiver": {
+     "E": 0.0,
+     "P": 0.0,
+     "E_cents": 0,
+     "P_cents": 0,
+     "s": 0,
+     "pro_forma": {
+      "debt_cents": 127000000,
+      "ebitda_cents": 32500000,
+      "cashflow_cents": 30000000,
+      "debt_service_cents": 26000000,
+      "premium_cents": 0,
+      "relief_cents": 0,
+      "leverage": 3.9076,
+      "dscr": 1.1538,
+      "current_assets_cents": 90000000,
+      "current_ratio": 1.5
+     },
+     "waiver_max_leverage_x100": 391,
+     "waiver_min_dscr_x100": 115,
+     "leverage_waived": true,
+     "dscr_waived": true
+    },
+    "waiver_error": null
+   },
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-09_2026-Q3_whatif_equity_cure_only.lp",
+    "lp_sha256": "c3ce45c54c99c8e4c535c87e92e7f5aa8c022a0a7def11996894fffa0a9fe24a",
+    "fixed_lp_file": null,
+    "fixed_lp_sha256": null,
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
+    }
+   }
+  }
+ }
+}

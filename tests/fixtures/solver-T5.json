@@ -6,12 +6,26 @@
  "params": {
   "Threads": 1,
   "Seed": 0,
-  "MIPGap": 0.0
+  "MIPGap": 0.0,
+  "IntFeasTol": 1e-09,
+  "FeasibilityTol": 1e-09
  },
+ "units": "integer cents",
+ "constraints": [
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+  "C5",
+  "C6"
+ ],
+ "waivable": [
+  "C2"
+ ],
  "clauses": {
   "C1": {
    "title": "Leverage covenant after cure",
-   "waivable": true,
+   "waivable": false,
    "sources": [
     {
      "source_document": "documents/loan-policy.txt",
@@ -66,6 +80,20 @@
      "quote": "Minimum liquidity: after any voluntary prepayment the borrower must keep cash of at least the minimum liquidity in cure_terms.csv."
     }
    ]
+  },
+  "C6": {
+   "title": "Current ratio after cure",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "team/covenant-policy-addendum.txt",
+     "quote": "Current Ratio is current assets divided by current liabilities at quarter end, minimum 1.25."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds."
+    }
+   ]
   }
  },
  "options": {
@@ -74,16 +102,24 @@
    "plan": {
     "E": 12000.0,
     "P": 0.0,
+    "E_cents": 1200000,
+    "P_cents": 0,
+    "premium_cents": 0,
     "y": 1,
     "s": 0,
     "cost": 12000.0,
+    "cost_cents": 1200000,
     "pro_forma": {
-     "debt": 1030000.0,
-     "ebitda": 377000.0,
-     "cashflow": 312000.0,
-     "debt_service": 260000.0,
-     "leverage": 2.7320954907161803,
-     "dscr": 1.2
+     "debt_cents": 103000000,
+     "ebitda_cents": 37700000,
+     "cashflow_cents": 31200000,
+     "debt_service_cents": 26000000,
+     "premium_cents": 0,
+     "relief_cents": 0,
+     "leverage": 2.732,
+     "dscr": 1.2,
+     "current_assets_cents": 86000000,
+     "current_ratio": 1.4098
     },
     "binding": [
      "C2",
@@ -94,14 +130,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-01_2026-Q3_live.lp",
-    "lp_sha256": "807d8196c50703c10eedc56a0c3d3995fbf45c6edf862cdcc8a988336cd86005",
+    "lp_sha256": "4471d10f6fef5eb3135951ee063dc36977496a51a409de641f8ff1e59c73d879",
     "fixed_lp_file": "BOR-01_2026-Q3_live_fixed.lp",
-    "fixed_lp_sha256": "b574e8a0756ef53de05bada454808596b1401b6acf3cfe66e7b32f0148847261",
+    "fixed_lp_sha256": "fcc84e3cbe8ddad76a62179dd833d6f5f2df4581a0f8ca16487f77fbdd0000d4",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
     }
    }
   },
@@ -110,16 +148,24 @@
    "plan": {
     "E": 12000.0,
     "P": 0.0,
+    "E_cents": 1200000,
+    "P_cents": 0,
+    "premium_cents": 0,
     "y": 1,
     "s": 0,
     "cost": 12000.0,
+    "cost_cents": 1200000,
     "pro_forma": {
-     "debt": 1030000.0,
-     "ebitda": 377000.0,
-     "cashflow": 312000.0,
-     "debt_service": 260000.0,
-     "leverage": 2.7320954907161803,
-     "dscr": 1.2
+     "debt_cents": 103000000,
+     "ebitda_cents": 37700000,
+     "cashflow_cents": 31200000,
+     "debt_service_cents": 26000000,
+     "premium_cents": 0,
+     "relief_cents": 0,
+     "leverage": 2.732,
+     "dscr": 1.2,
+     "current_assets_cents": 86000000,
+     "current_ratio": 1.4098
     },
     "binding": [
      "C2",
@@ -130,14 +176,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-01_2026-Q3_live_no_asset_sale.lp",
-    "lp_sha256": "8ffae3aa2465ee74be7660982204f879d8e117822b8dcd564594421ef3887171",
+    "lp_sha256": "bcfc53c3fa58243fab43bec606e74019e510fbc3d4827a2365a3fabdcbab1fb6",
     "fixed_lp_file": "BOR-01_2026-Q3_live_no_asset_sale_fixed.lp",
-    "fixed_lp_sha256": "7471a31b74bc75e0adb595c4cadc92b40d3bd438e0194f307c16dc0bd7bff288",
+    "fixed_lp_sha256": "7e81a721a326c0055b1f2b2cc85d25f80f513c7af3d3e181c5884d4007fc27a3",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
     }
    }
   },
@@ -146,16 +194,24 @@
    "plan": {
     "E": 12000.0,
     "P": 0.0,
+    "E_cents": 1200000,
+    "P_cents": 0,
+    "premium_cents": 0,
     "y": 1,
     "s": 0,
     "cost": 12000.0,
+    "cost_cents": 1200000,
     "pro_forma": {
-     "debt": 1030000.0,
-     "ebitda": 377000.0,
-     "cashflow": 312000.0,
-     "debt_service": 260000.0,
-     "leverage": 2.7320954907161803,
-     "dscr": 1.2
+     "debt_cents": 103000000,
+     "ebitda_cents": 37700000,
+     "cashflow_cents": 31200000,
+     "debt_service_cents": 26000000,
+     "premium_cents": 0,
+     "relief_cents": 0,
+     "leverage": 2.732,
+     "dscr": 1.2,
+     "current_assets_cents": 86000000,
+     "current_ratio": 1.4098
     },
     "binding": [
      "C2",
@@ -166,14 +222,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-01_2026-Q3_live_equity_cure_only.lp",
-    "lp_sha256": "3f9d84b8b13d0b556ef33a3f7e313bdac2a89805974d1a7bb7d50ac55ea407e4",
+    "lp_sha256": "a2c4264874916fe2fa75ed654b69e27158946db8c7222ca4fd1c1c4555e8349c",
     "fixed_lp_file": "BOR-01_2026-Q3_live_equity_cure_only_fixed.lp",
-    "fixed_lp_sha256": "e10e60cc703dd34e70c33acf8c0cd016e9d67e4f6102f348425ab5e40b0ef24a",
+    "fixed_lp_sha256": "f5a0c74d2e68cca3d32c4657a52481b23c7bd51af863e66c52962b858bc9d628",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0
+     "MIPGap": 0.0,
+     "IntFeasTol": 1e-09,
+     "FeasibilityTol": 1e-09
     }
    }
   }

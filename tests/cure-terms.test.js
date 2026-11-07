@@ -32,10 +32,10 @@ test('cure-policy.txt: one citable sentence per clause, verified by offsets and 
  assert.deepEqual(warnings,[]);
  const expect={equity_cure:/^Equity cure: .*equity cure cap in cure_terms\.csv\.$/,cure_frequency:/^Cure frequency: .*at least 1\.$/,
   minimum_liquidity:/^Minimum liquidity: .*minimum liquidity in cure_terms\.csv\.$/,prepayment:/^Prepayment: .*per dollar repaid\.$/,
-  asset_sale:/^Asset sales: .*trailing twelve-month figures\.$/};
+  asset_sale:/^Asset sales: .*trailing twelve-month figures\.$/,cure_cash:/^Cure cash: .*paid from its gross proceeds\.$/};
  for(const [k,re] of Object.entries(expect)){
   const c=clauses[k];assert.ok(c,k);assert.match(c.quote,re);assert.ok(verifyCitation(text,c));assert.equal(c.sha256,sha256(c.quote));
   assert.equal(c.source_document,'documents/cure-policy.txt');
  }
- assert.equal(cureClauseCitations('nothing here').warnings.length,5);
+ assert.equal(cureClauseCitations('nothing here').warnings.length,6);
 });
