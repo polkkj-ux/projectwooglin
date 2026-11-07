@@ -13,6 +13,8 @@ import {recommendCovenants} from './lib/recommend.js';
 // from a team-written synthetic addendum, cited separately.
 const DEFAULT_CSV='./data/team/loan_covenants_extended.csv',ADDENDUM='team/covenant-policy-addendum.txt',SAMPLE_STATEMENTS='./data/team/sample-statements.csv';
 const rdData=n=>fs.readFile(new URL(n,import.meta.url),'utf8');
+// Same policy as vercel.json: inline script/style only, self-hosted fonts and images, API calls to this origin.
+export const CSP="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self'";
 const addendum=async()=>[{name:ADDENDUM,text:await rdData('./data/'+ADDENDUM)}];
 const uuid=x=>typeof x==='string'&&/^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(x);
 async function body(req){let size=0;const chunks=[];for await(const c of req){size+=c.length;if(size>7_100_000)throw Error('Request exceeds 7 MB');chunks.push(c);}return JSON.parse(Buffer.concat(chunks).toString()||'{}');}
@@ -38,10 +40,15 @@ export async function handleRequest(req,res){
   if(req.method==='POST'&&p==='/api/runway')return send(200,runway(await body(req)));
   // Read-only: the bundled sample policy text, so the UI can show cited sentences in context.
   if(req.method==='GET'&&p==='/api/policy')return send(200,{source_document:'documents/loan-policy.txt',text:await rdData('./data/documents/loan-policy.txt'),supplements:await addendum()});
-  // Bundled Inter web fonts (SIL OFL); served statically by Vercel from public/fonts.
-  if(req.method==='GET'&&/^\/fonts\/inter-(400|500|600)\.woff$/.test(p)){res.writeHead(200,{'Content-Type':'font/woff','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(await fs.readFile(new URL('./public'+p,import.meta.url)));}
-  if(req.method==='GET'&&(p==='/'||p==='/index.html')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src 'self'; connect-src 'self'"});return res.end(await fs.readFile(new URL('./public/index.html',import.meta.url)));}
-  if(!p.startsWith('/api/'))return send(404,{error:'Not found. UI is at /, API under /api/. See README.txt.'});
+  // Bundled web fonts (Inter and Newsreader, SIL OFL) and landing-page images; served statically by Vercel from public/.
+  if(req.method==='GET'&&/^\/fonts\/(inter-(400|500|600)|newsreader-display-300|newsreader-text-400)\.woff$/.test(p)){res.writeHead(200,{'Content-Type':'font/woff','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(await fs.readFile(new URL('./public'+p,import.meta.url)));}
+  if(req.method==='GET'&&p==='/favicon.svg'){res.writeHead(200,{'Content-Type':'image/svg+xml','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(await fs.readFile(new URL('./public/favicon.svg',import.meta.url)));}
+  const asset=req.method==='GET'&&p.match(/^\/assets\/[a-z0-9-]+(?:@2x)?\.(webp|png|jpg)$/);
+  if(asset){try{const b=await fs.readFile(new URL('./public'+p,import.meta.url));res.writeHead(200,{'Content-Type':{webp:'image/webp',png:'image/png',jpg:'image/jpeg'}[asset[1]],'Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});return res.end(b);}catch{return send(404,{error:'Not found'});}}
+  // Public product page at /, the monitoring application at /app (vercel.json maps /app to public/app.html).
+  const page=req.method==='GET'&&({'/':'index.html','/index.html':'index.html','/app':'app.html','/app/':'app.html','/app.html':'app.html'})[p];
+  if(page){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':CSP});return res.end(await fs.readFile(new URL('./public/'+page,import.meta.url)));}
+  if(!p.startsWith('/api/'))return send(404,{error:'Not found. The product page is at /, the application at /app, the API under /api/.'});
   const token=req.headers.authorization?.match(/^Bearer (.+)$/)?.[1];if(!token)return send(401,{error:'Signed-in Supabase user token required'});
   let db;try{db=await authenticate(token);}catch{return send(401,{error:'Supabase configuration or user authentication failed'});}
   if(p==='/api/teams'&&req.method==='GET')return send(200,checked(await db.from('rhb_teams').select('*')));

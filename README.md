@@ -1,4 +1,14 @@
 
+## Product page at `/`, application at `/app` (v10)
+
+- **`/`** (`public/index.html`) is the public product page: an editorial hero with a screenshot of the working Portfolio Overview, the problem and the Detect / Quantify / Verify platform, a three-step BOR-01 walkthrough built from real application screenshots, and the trust and methodology section. Every "Explore Live Demo" and "Open Application" link goes to `/app` with no sign-up.
+- **`/app`** (`public/app.html`) is the monitoring application, unchanged in function. `vercel.json` rewrites `/app` to `public/app.html`; `server.js` serves the same routes locally.
+- **Old links keep working.** A short script at the top of the product page forwards application hashes (`/#overview`, `/#borrowers`, `/#analysis`, `/#design`, `/#method`, `/#how`, `/#borrower-…`) to `/app#…`. Product-page anchors (`#platform`, `#how-it-works`, `#methodology`) never collide with them.
+- **Figures on the product page come from the engine.** BOR-01's numbers are written into the page and then refreshed from `/api/covenants` on load, so they cannot drift. The screenshots in `public/assets/` were captured from the running application (1× and 2× WebP).
+- **Shared brand:** the same wordmark, palette (midnight navy, ivory, champagne accent) and type. Newsreader (SIL OFL, `public/fonts/LICENSE-Newsreader.txt`) is used for headings on both pages; Inter for everything else.
+- **Inspired by 21st.dev, built without new dependencies.** 21st components are React and Tailwind; this project is plain HTML with no build step and a strict Content-Security-Policy, so three patterns were rebuilt directly: a hero screenshot that settles from a slight tilt as you scroll, a header that condenses with a sliding indicator under the current section, and quarter-trend sparklines on the dashboard's headline figures. All three switch off for reduced motion.
+- The Content-Security-Policy now also allows `img-src 'self'` for the screenshots.
+
 ## Four covenants in the redesigned interface (v9)
 
 Liam's v7 engine work (below) is merged into the v8 institutional redesign. The backend is his, unchanged; the redesigned page now reads every covenant the engine returns instead of only leverage and DSCR.
