@@ -3,3 +3,9 @@ node_modules/
 .env.*
 !.env.example
 coverage/
+opt/.env
+*.lic
+gurobi_generated/
+opt/out/
+__pycache__/
+.venv/
