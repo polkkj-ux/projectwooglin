@@ -10,6 +10,8 @@ const post=(p,b)=>fetch(base+p,{method:'POST',headers:{'content-type':'applicati
 const page=await fetch(base+'/');const html=await page.text();
 ok(page.status===200&&html.includes('<title>Covenant Monitor</title>'),`GET / serves the dashboard (${page.status})`);
 ok((page.headers.get('content-security-policy')||'').includes("default-src 'none'"),'dashboard has the Content-Security-Policy header');
+const font=await fetch(base+'/fonts/inter-500.woff');ok(font.status===200,`bundled Inter font is served (${font.status})`);
+const pol=await (await fetch(base+'/api/policy')).json();ok(typeof pol.text==='string'&&pol.text.includes('DSCR is trailing'),'GET /api/policy returns the policy text for the evidence panel');
 const health=await (await fetch(base+'/api/health')).json();ok(health.ok===true,'GET /api/health ok');
 ok(health.llamaParseConfigured===false,'no LlamaParse key on the public server (PDF uploads cannot spend credits)');
 const live=await (await fetch(base+'/api/covenants')).json();
@@ -21,7 +23,7 @@ ok(live.policy.definitions.dscr?.sha256===local.policy.definitions.dscr.sha256,'
 const csv=(await rd('loan_covenants.csv')).split('\n').slice(0,5).join('\n')+'\n';
 const up=await post('/api/covenants',{csv});const uj=await up.json();ok(up.status===200&&uj.summary.rows===4,`CSV upload accepted (${uj.summary?.rows} rows)`);
 for(const [label,body,re] of [['empty CSV',{csv:''},/empty/],['non-covenant file',{csv:'hello\nworld\n'},/Missing required columns/]]){const r=await post('/api/covenants',body);ok(r.status===400&&re.test((await r.json()).error),`${label} rejected with 400`);}
-const pol=await post('/api/policy/parse',{filename:'policy.txt',base64:Buffer.from(await rd('documents/loan-policy.txt')).toString('base64')});ok(pol.status===200&&(await pol.json()).status==='completed','policy .txt parse works');
+const parsed=await post('/api/policy/parse',{filename:'policy.txt',base64:Buffer.from(await rd('documents/loan-policy.txt')).toString('base64')});ok(parsed.status===200&&(await parsed.json()).status==='completed','policy .txt parse works');
 const pdf=await post('/api/policy/parse',{filename:'p.pdf',base64:Buffer.from('%PDF-1.4 x').toString('base64')});ok(pdf.status===503,'PDF parse clearly disabled (503) without a key');
 const xo=await fetch(base+'/api/covenants',{method:'POST',headers:{'content-type':'application/json',origin:'https://evil.example'},body:'{}'});ok(xo.status===403,'cross-origin POST refused');
 console.log(fails?`\n${fails} check(s) failed`:'\nAll checks passed');process.exit(fails?1:0);

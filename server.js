@@ -26,7 +26,11 @@ export async function handleRequest(req,res){
   const pm=p.match(/^\/api\/policy\/parse\/([A-Za-z0-9-]+)$/);
   if(req.method==='GET'&&pm){const r=await getParse(pm[1]);const st=String(r?.job?.status||r?.status||'unknown').toLowerCase();if(/fail|error|cancel/.test(st))return send(200,{status:'failed',providerResult:r});if(!/complete|success/.test(st))return send(200,{status:'pending'});const text=extractParseText(r);if(!text)return send(200,{status:'failed',error:'Parser finished but no text was found in the response; review providerResult.',providerResult:r});return send(200,{status:'completed',text});}
   if(req.method==='POST'&&p==='/api/runway')return send(200,runway(await body(req)));
-  if(req.method==='GET'&&(p==='/'||p==='/index.html')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'"});return res.end(await fs.readFile(new URL('./public/index.html',import.meta.url)));}
+  // Read-only: the bundled sample policy text, so the UI can show cited sentences in context.
+  if(req.method==='GET'&&p==='/api/policy')return send(200,{source_document:'documents/loan-policy.txt',text:await fs.readFile(new URL('./data/documents/loan-policy.txt',import.meta.url),'utf8')});
+  // Bundled Inter web fonts (SIL OFL); served statically by Vercel from public/fonts.
+  if(req.method==='GET'&&/^\/fonts\/inter-(400|500|600)\.woff$/.test(p)){res.writeHead(200,{'Content-Type':'font/woff','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(await fs.readFile(new URL('./public'+p,import.meta.url)));}
+  if(req.method==='GET'&&(p==='/'||p==='/index.html')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src 'self'; connect-src 'self'"});return res.end(await fs.readFile(new URL('./public/index.html',import.meta.url)));}
   if(!p.startsWith('/api/'))return send(404,{error:'Not found. UI is at /, API under /api/. See README.txt.'});
   const token=req.headers.authorization?.match(/^Bearer (.+)$/)?.[1];if(!token)return send(401,{error:'Signed-in Supabase user token required'});
   let db;try{db=await authenticate(token);}catch{return send(401,{error:'Supabase configuration or user authentication failed'});}

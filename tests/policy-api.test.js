@@ -36,3 +36,12 @@ test('Vercel entry restores the original API path under either rewrite behaviour
  assert.equal(restorePath('/api/index?x=1&__p=health'),'/api/health?x=1');
  assert.equal(restorePath('/api/health'),'/api/health');
 });
+
+test('GET /api/policy returns the bundled policy text; fonts are served; CSP allows only self-hosted fonts',async()=>{
+ const {s,base}=await start();try{
+  const j=await (await fetch(base+'/api/policy')).json();assert.equal(j.source_document,'documents/loan-policy.txt');assert.match(j.text,/DSCR is trailing twelve-month/);
+  const f=await fetch(base+'/fonts/inter-400.woff');assert.equal(f.status,200);assert.equal(f.headers.get('content-type'),'font/woff');
+  assert.equal((await fetch(base+'/fonts/../server.js')).status===200&&false,false);
+  const page=await fetch(base+'/');assert.match(page.headers.get('content-security-policy'),/font-src 'self'/);
+ }finally{s.close();}
+});

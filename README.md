@@ -41,3 +41,11 @@ The repository is Vercel-ready with no build step and no environment variables r
 - After deploying, verify with `npm run smoke -- https://<your-app>.vercel.app`. It checks the live API is byte-for-byte identical to the local engine and exercises CSV upload, bad-file rejection, policy parsing and the dashboard page.
 
 Limits on Vercel: request bodies are capped at 4.5 MB by the platform (the UI limits CSVs to 4 MB and policy files to 3 MB). There is no rate limiting or authentication; this is a public demo on synthetic data, not a production service.
+
+## Institutional redesign (v8)
+
+The frontend in `public/index.html` was rebuilt as an enterprise application shell; the backend calculation engine, API, CSV parsing, uploads and tests are unchanged apart from two read-only additions (`GET /api/policy` for the evidence panel and static serving of the bundled Inter font).
+
+- **Pages:** Portfolio Overview (four borrower-level KPIs and the monitoring table with status filter, search and sorting), Borrower Monitoring (status by borrower and quarter), Covenant Analysis (organised around four questions: who is outside limits, who is deteriorating, how far from compliance, what is driving the change), Methodology, and the borrower investigation view (executive summary, covenant tests, quarterly charts with policy thresholds, and the policy document with the cited sentences highlighted at their exact character positions).
+- **Design system:** midnight-navy sidebar, warm-white canvas, Inter (bundled, SIL OFL; see `public/fonts/LICENSE-Inter.txt`) with tabular figures, a serif for page titles only, status colours reserved for pass/fail meaning and checked for WCAG AA contrast.
+- **Verification:** `npm test` (35 tests), plus browser checks that every displayed ratio, KPI and dollar figure equals the engine output; see the deployment smoke test with `npm run smoke -- <url>`.
