@@ -39,7 +39,7 @@ test('Vercel entry restores the original API path under either rewrite behaviour
 
 test('GET /api/policy returns the bundled policy text; fonts are served; CSP allows only self-hosted fonts',async()=>{
  const {s,base}=await start();try{
-  const j=await (await fetch(base+'/api/policy')).json();assert.equal(j.source_document,'documents/loan-policy.txt');assert.match(j.text,/DSCR is trailing twelve-month/);
+  const j=await (await fetch(base+'/api/policy')).json();assert.equal(j.source_document,'documents/loan-policy.txt');assert.match(j.text,/DSCR is trailing twelve-month/);assert.equal(j.supplements[0].name,'team/covenant-policy-addendum.txt');assert.match(j.supplements[0].text,/Fixed Charge Coverage Ratio/);
   const f=await fetch(base+'/fonts/inter-400.woff');assert.equal(f.status,200);assert.equal(f.headers.get('content-type'),'font/woff');
   assert.equal((await fetch(base+'/fonts/../server.js')).status===200&&false,false);
   const page=await fetch(base+'/');assert.match(page.headers.get('content-security-policy'),/font-src 'self'/);
