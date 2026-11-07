@@ -1,0 +1,181 @@
+{
+ "borrower_id": "BOR-01",
+ "period": "2026-Q3",
+ "case": "live",
+ "gurobi_version": "13.0.3",
+ "params": {
+  "Threads": 1,
+  "Seed": 0,
+  "MIPGap": 0.0
+ },
+ "clauses": {
+  "C1": {
+   "title": "Leverage covenant after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "documents/loan-policy.txt",
+     "quote": "Leverage is gross debt divided by trailing twelve-month EBITDA, maximum 3.00."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Asset sales: net proceeds of a permitted asset sale must repay debt, and the EBITDA and cash flow of the asset sold are removed from the trailing twelve-month figures."
+    }
+   ]
+  },
+  "C2": {
+   "title": "DSCR covenant after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "documents/loan-policy.txt",
+     "quote": "DSCR is trailing twelve-month available cash flow divided by trailing twelve-month debt service, minimum 1.20."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Prepayment: a voluntary prepayment pays the stated premium and reduces trailing twelve-month debt service by the stated amount per dollar repaid."
+    }
+   ]
+  },
+  "C3": {
+   "title": "Equity cure cap",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Equity cure: the sponsor may contribute cash that is added to EBITDA and to available cash flow for the quarter tested, up to the equity cure cap in cure_terms.csv."
+    }
+   ]
+  },
+  "C4": {
+   "title": "Cure frequency",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Cure frequency: an equity cure may be used only while cures remaining in the last four fiscal quarters is at least 1."
+    }
+   ]
+  },
+  "C5": {
+   "title": "Minimum liquidity after prepayment",
+   "waivable": false,
+   "sources": [
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Minimum liquidity: after any voluntary prepayment the borrower must keep cash of at least the minimum liquidity in cure_terms.csv."
+    }
+   ]
+  }
+ },
+ "options": {
+  "cheapest": {
+   "status": "OPTIMAL",
+   "plan": {
+    "E": 12000.0,
+    "P": 0.0,
+    "y": 1,
+    "s": 0,
+    "cost": 12000.0,
+    "pro_forma": {
+     "debt": 1030000.0,
+     "ebitda": 377000.0,
+     "cashflow": 312000.0,
+     "debt_service": 260000.0,
+     "leverage": 2.7320954907161803,
+     "dscr": 1.2
+    },
+    "binding": [
+     "C2",
+     "C4"
+    ]
+   },
+   "infeasibility": null,
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-01_2026-Q3_live.lp",
+    "lp_sha256": "807d8196c50703c10eedc56a0c3d3995fbf45c6edf862cdcc8a988336cd86005",
+    "fixed_lp_file": "BOR-01_2026-Q3_live_fixed.lp",
+    "fixed_lp_sha256": "b574e8a0756ef53de05bada454808596b1401b6acf3cfe66e7b32f0148847261",
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0
+    }
+   }
+  },
+  "no_asset_sale": {
+   "status": "OPTIMAL",
+   "plan": {
+    "E": 12000.0,
+    "P": 0.0,
+    "y": 1,
+    "s": 0,
+    "cost": 12000.0,
+    "pro_forma": {
+     "debt": 1030000.0,
+     "ebitda": 377000.0,
+     "cashflow": 312000.0,
+     "debt_service": 260000.0,
+     "leverage": 2.7320954907161803,
+     "dscr": 1.2
+    },
+    "binding": [
+     "C2",
+     "C4"
+    ]
+   },
+   "infeasibility": null,
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-01_2026-Q3_live_no_asset_sale.lp",
+    "lp_sha256": "8ffae3aa2465ee74be7660982204f879d8e117822b8dcd564594421ef3887171",
+    "fixed_lp_file": "BOR-01_2026-Q3_live_no_asset_sale_fixed.lp",
+    "fixed_lp_sha256": "7471a31b74bc75e0adb595c4cadc92b40d3bd438e0194f307c16dc0bd7bff288",
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0
+    }
+   }
+  },
+  "equity_cure_only": {
+   "status": "OPTIMAL",
+   "plan": {
+    "E": 12000.0,
+    "P": 0.0,
+    "y": 1,
+    "s": 0,
+    "cost": 12000.0,
+    "pro_forma": {
+     "debt": 1030000.0,
+     "ebitda": 377000.0,
+     "cashflow": 312000.0,
+     "debt_service": 260000.0,
+     "leverage": 2.7320954907161803,
+     "dscr": 1.2
+    },
+    "binding": [
+     "C2",
+     "C4"
+    ]
+   },
+   "infeasibility": null,
+   "error": null,
+   "artifacts": {
+    "lp_file": "BOR-01_2026-Q3_live_equity_cure_only.lp",
+    "lp_sha256": "3f9d84b8b13d0b556ef33a3f7e313bdac2a89805974d1a7bb7d50ac55ea407e4",
+    "fixed_lp_file": "BOR-01_2026-Q3_live_equity_cure_only_fixed.lp",
+    "fixed_lp_sha256": "e10e60cc703dd34e70c33acf8c0cd016e9d67e4f6102f348425ab5e40b0ef24a",
+    "gurobi_version": "13.0.3",
+    "params": {
+     "Threads": 1,
+     "Seed": 0,
+     "MIPGap": 0.0
+    }
+   }
+  }
+ }
+}
