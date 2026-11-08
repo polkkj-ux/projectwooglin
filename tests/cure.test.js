@@ -226,3 +226,16 @@ test('GET and POST /api/cure through the server: same-origin check, validation, 
   assert.equal((await fetch(base+'/api/cure',{method:'POST',headers:{'content-type':'application/json'},body:'[1]'})).status,400);
  }finally{s.close();await m.close();if(saved===undefined)delete process.env.OPT_URL;else process.env.OPT_URL=saved;}
 });
+
+test('the committed data/cure_snapshot.json is served without a solver and every stored plan still passes the exact re-check',async()=>{
+ const snap=JSON.parse(await fs.readFile(new URL('../data/cure_snapshot.json',import.meta.url),'utf8'));
+ assert.equal(snap.synthetic,true);assert.match(snap.gurobi_version,/^\d+\.\d+\.\d+$/);assert.equal(snap.params.MIPGap,0);assert.ok(Date.parse(snap.solved_at));
+ for(const key of Object.keys(snap.entries)){
+  const [borrower,period]=key.split('|');const logs=[];
+  const r=await curePlan({borrower,period},{optUrl:undefined,context:ctx,log:x=>logs.push(x)});
+  assert.equal(r.body.source,'snapshot',key);assert.deepEqual(r.body.dropped,[],key);
+  for(const o of r.body.options)assert.ok(o.status==='plan'?o.plan.verified:o.status==='no_cure',`${key} ${o.key} ${o.status}`);
+ }
+ const b9=(await curePlan({borrower:'BOR-09',period:'2026-Q3'},{optUrl:undefined,context:ctx,...quiet})).body;
+ assert.equal(b9.options[0].plan.total_cost_usd,'78333.34');assert.equal(b9.options[0].model.lp_sha256,snap.models['BOR-09|2026-Q3'].cheapest.lp_sha256);
+});
