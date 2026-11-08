@@ -1,3 +1,60 @@
+## Cure planner (v11)
+
+For every borrower-quarter in breach, the borrower page now shows **Cure options**: the cheapest cure the (synthetic) agreement allows, or, when none exists, proof of why not and the smallest waiver that would work. **Gurobi proposes; the exact engine decides.** Every plan is re-checked by `lib/covenants.js` in BigInt cents against every covenant the monitor applies, with the same covenant terms. A plan is shown only if it passes.
+
+**What it does**
+
+- **Three options per quarter:** cheapest (equity cure, early repayment, asset sale), without an asset sale, and equity cure only. Each shows its actions in plain English ("Sell Division A; sponsor contributes $68,333.34"), total cost, every covenant afterwards, a *Verified by exact engine* badge, the cited policy sentence for each binding limit, and *Show model* (Gurobi version, parameters, SHA-256 of the `.lp` file).
+- **No cure:** the panel says *No cure within the agreement*, lists the blocking terms in plain English (from Gurobi's IIS), and gives the smallest waiver, for example *Request a waiver to 3.46x maximum leverage for 2026-Q3*. The waiver is sized by FeasRelax and also verified by the exact engine at the waived limits.
+- **What-if inputs** (cure cap, cures remaining, asset sale) re-solve live when a solver is connected. Without one, the panel serves a stored solution labelled *Solved offline with Gurobi 13.0.3 at …* and hides the inputs.
+- **API:** `GET /api/cure?borrower=BOR-09&period=2026-Q3`. `POST /api/cure` takes `{borrower, period, overrides?, settings?}`; `settings` is the same object `POST /api/covenants` takes. What-if overrides need the live solver; without it the API returns 503.
+
+**The model** (`opt/`, spec in `opt/SPEC.md`). It's a small MIP in exact integer cents, using the same rounding as the engine.
+- **Constraints:** C1 leverage, C2 DSCR, C3 cure cap, C4 cure frequency, C5 minimum liquidity, C6 current ratio and C7 FCCR. C6 and C7 apply only in quarters where the monitor applies those tests.
+- **Waivers:** FeasRelax relaxes only covenants that fail before any cure. Cure cap, cure frequency and liquidity are facts and are never relaxed.
+- **Citations:** each constraint is cited by character offset and SHA-256 from `data/documents/loan-policy.txt`, `data/documents/cure-policy.txt` or the team addendum.
+
+**Run the solver (Windows, licensed)**
+
+```powershell
+py -m pip install -r opt\requirements.txt
+py -m uvicorn opt.app:app --host 127.0.0.1 --port 8000
+$env:OPT_URL="http://127.0.0.1:8000"; npm run dev      # then open /app#borrower-BOR-09
+```
+
+- **Refresh the stored solutions** with `npm run cure:snapshot`, with `OPT_URL` set. This writes `data/cure_snapshot.json` and exits non-zero if any plan fails the exact re-check.
+- **Vercel** has no solver, so it serves that snapshot, re-checked on every request.
+- **Licence:** WLS credentials, if used, go in `opt/.env`, which is git-ignored. Never commit licence files.
+
+**Known answers (BOR-09 2026-Q3, synthetic terms)**
+
+| Case | Result |
+|---|---|
+| All levers | Sell Division A + $68,333.34 equity cure, $78,333.34 |
+| No asset | $98,333.34 equity cure |
+| No cures left | No cure (IIS: leverage, cure cap, cure frequency, current ratio). Waiver: sell Division A, repay $148,514.85, 3.19x max leverage; current ratio exactly 1.25x |
+| No cures, no asset | No cure. Waiver: repay $148,514.85, 3.46x max leverage |
+| BOR-01 2026-Q3 | $12,000 equity cure, equal to the engine's −$12,000.00 cash-flow headroom |
+| BOR-02 2026-Q3 | $16,000. A $12,000 DSCR-only cure would leave FCCR at 1.0846x |
+| BOR-07 2026-Q3 | No cure (the current ratio already fails). Waiver to a 1.21x minimum current ratio |
+
+**Real vs synthetic.** Everything the planner uses is synthetic and labelled as such on screen: `data/cure_terms.csv` (cure cap, cures remaining, cash, minimum liquidity, prepayment premium, debt-service relief, the Division A asset), `data/documents/cure-policy.txt`, and the team addendum and extended columns it builds on. Cure costs are cash outlays only: no tax, no fees beyond the stated premium and sale cost, and no time value. A plan is decision support for a credit reviewer, not a legal determination of default or cure. Every assumption is in the API's `assumptions` list.
+
+**Verification.**
+- **Tests:** `npm test` 63 pass (44 from main plus 19 for the cure planner); `python -m pytest opt/tests` 16 pass.
+- **Snapshot:** all 30 exception rows solved with the licensed Gurobi 13.0.3, and every plan passed the exact re-check.
+- **Gurobi Explainer:** it independently confirmed the IIS and the FeasRelax waiver for the earlier continuous model (`opt/SPEC.md`, Verification).
+- **Smoke test:** checks that BOR-09 2026-Q3 is served from the snapshot.
+
+**Not verified in this build**
+
+- The Explainer has not re-checked the current integer-cents model with C6 and C7.
+- The solver's licence type: the health check reports only the Gurobi version.
+- The panel itself: the build agent checked its API responses and script syntax but did not view it in a browser, and it has not been tried on a live Vercel deployment. The PR lists what to look at.
+- Snapshot answers are for the default covenant terms. With other terms and no live solver, a stored plan can be rejected by the re-check, and the panel then says so.
+
+**In progress (phase 6):** compliance-certificate check (6a), EBITDA cushion and early warning (6b), and a printable credit memo (6c).
+
 
 ## Product page at `/`, application at `/app` (v10)
 

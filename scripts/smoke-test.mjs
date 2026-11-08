@@ -32,4 +32,9 @@ const smp=await (await fetch(base+'/api/recommend/sample')).json();const rec=awa
 const parsed=await post('/api/policy/parse',{filename:'policy.txt',base64:Buffer.from(await rd('documents/loan-policy.txt')).toString('base64')});ok(parsed.status===200&&(await parsed.json()).status==='completed','policy .txt parse works');
 const pdf=await post('/api/policy/parse',{filename:'p.pdf',base64:Buffer.from('%PDF-1.4 x').toString('base64')});ok(pdf.status===503,'PDF parse clearly disabled (503) without a key');
 const xo=await fetch(base+'/api/covenants',{method:'POST',headers:{'content-type':'application/json',origin:'https://evil.example'},body:'{}'});ok(xo.status===403,'cross-origin POST refused');
+// Cure planner (v9): the deployment has no live solver, so BOR-09 2026-Q3 must come from data/cure_snapshot.json, re-checked by the exact engine.
+const cure=await (await fetch(base+'/api/cure?borrower=BOR-09&period=2026-Q3')).json();const cc=cure.options?.find(o=>o.key==='cheapest');
+ok(cure.available===true&&cure.source==='snapshot'&&/^\d+\.\d+\.\d+$/.test(cure.gurobi_version||'')&&cure.solved_at,`BOR-09 Q3 cure served from the offline snapshot (${cure.source||cure.reason}, Gurobi ${cure.gurobi_version})`);
+ok(cc?.status==='plan'&&cc.plan.verified===true&&cc.plan.total_cost_usd==='78333.34'&&cc.plan.actions==='Sell Division A; sponsor contributes $68,333.34'&&/^[0-9a-f]{64}$/.test(cc.model?.lp_sha256||''),'BOR-09 Q3 cheapest cure: sell Division A + $68,333.34, $78,333.34, verified, model SHA-256 present');
+const cov=await post('/api/cure',{borrower:'BOR-09',period:'2026-Q3',overrides:{cures_remaining_4q:0}});ok(cov.status===503,'cure what-if inputs clearly need the live solver (503) on the public deployment');
 console.log(fails?`\n${fails} check(s) failed`:'\nAll checks passed');process.exit(fails?1:0);
