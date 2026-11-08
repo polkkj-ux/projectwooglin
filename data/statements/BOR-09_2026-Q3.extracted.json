@@ -1,0 +1,2425 @@
+{
+ "pdf": "BOR-09_2026-Q3.pdf",
+ "pdf_sha256": "b4f85f594d523c3c25d8d492bf83455c4842ede39caeebb32475ad9b390c3f25",
+ "synthetic": true,
+ "extracted_at": "2026-11-08T03:02:28.204Z",
+ "configuration": {
+  "tier": "agentic",
+  "version": "2.5",
+  "extraction_target": "per_doc",
+  "cite_sources": true,
+  "confidence_scores": true,
+  "system_prompt": "These are quarterly financial statements with one column per quarter. Return one entry in quarters per quarterly column. Copy every amount exactly as printed; never calculate, total or estimate a value."
+ },
+ "version": "2.5",
+ "schema_sha256": "43bd321374b66bbc11a9eadbcbb00736427427f9b6da8008a31e904a3a153fcc",
+ "job_id": "ext-ifro87id88hekqxduvyx8bacatb4",
+ "file_id": "7511b90b-a89d-4258-a650-cfb190af49fa",
+ "status": "COMPLETED",
+ "extract_result": {
+  "quarters": [
+   {
+    "period": "2025-Q4",
+    "revenue": "1,182,416.35",
+    "operating_income": "64,000.00",
+    "depreciation_amortization": "20,000.00",
+    "net_income": "20,000.00",
+    "income_tax_expense": "4,000.00",
+    "interest_expense": "40,000.00",
+    "scheduled_principal": "25,000.00",
+    "current_portion_ltd": "100,000.00",
+    "long_term_debt": "1,170,000.00",
+    "total_debt": "1,270,000.00",
+    "capex": "(9,000.00)",
+    "cash_taxes": "4,000.00",
+    "distributions": "0.00",
+    "current_assets": "930,000.00",
+    "current_liabilities": "600,000.00",
+    "total_assets": "2,538,000.00",
+    "cash": "260,000.00",
+    "operating_expenses": "1,118,416.35",
+    "total_liabilities": "1,770,000.00",
+    "total_equity": "768,000.00",
+    "total_liabilities_and_equity": "2,538,000.00",
+    "term_loan": "1,210,000.00",
+    "finance_lease": "60,000.00",
+    "change_in_working_capital": "10,000.00"
+   },
+   {
+    "period": "2026-Q1",
+    "revenue": "1,175,902.80",
+    "operating_income": "62,500.00",
+    "depreciation_amortization": "20,000.00",
+    "net_income": "18,500.00",
+    "income_tax_expense": "4,000.00",
+    "interest_expense": "40,000.00",
+    "scheduled_principal": "25,000.00",
+    "current_portion_ltd": "100,000.00",
+    "long_term_debt": "1,170,000.00",
+    "total_debt": "1,270,000.00",
+    "capex": "(8,500.00)",
+    "cash_taxes": "4,000.00",
+    "distributions": "0.00",
+    "current_assets": "920,000.00",
+    "current_liabilities": "600,000.00",
+    "total_assets": "2,556,500.00",
+    "cash": "245,000.00",
+    "operating_expenses": "1,113,402.80",
+    "total_liabilities": "1,770,000.00",
+    "total_equity": "786,500.00",
+    "total_liabilities_and_equity": "2,556,500.00",
+    "term_loan": "1,190,000.00",
+    "finance_lease": "80,000.00",
+    "change_in_working_capital": "(5,000.00)"
+   },
+   {
+    "period": "2026-Q2",
+    "revenue": "1,161,337.25",
+    "operating_income": "60,500.00",
+    "depreciation_amortization": "20,000.00",
+    "net_income": "17,000.00",
+    "income_tax_expense": "3,500.00",
+    "interest_expense": "40,000.00",
+    "scheduled_principal": "25,000.00",
+    "current_portion_ltd": "100,000.00",
+    "long_term_debt": "1,170,000.00",
+    "total_debt": "1,270,000.00",
+    "capex": "(9,000.00)",
+    "cash_taxes": "3,500.00",
+    "distributions": "0.00",
+    "current_assets": "910,000.00",
+    "current_liabilities": "600,000.00",
+    "total_assets": "2,573,500.00",
+    "cash": "243,000.00",
+    "operating_expenses": "1,100,837.25",
+    "total_liabilities": "1,770,000.00",
+    "total_equity": "803,500.00",
+    "total_liabilities_and_equity": "2,573,500.00",
+    "term_loan": "1,170,000.00",
+    "finance_lease": "100,000.00",
+    "change_in_working_capital": "8,000.00"
+   },
+   {
+    "period": "2026-Q3",
+    "revenue": "1,148,844.60",
+    "operating_income": "58,000.00",
+    "depreciation_amortization": "20,000.00",
+    "net_income": "14,500.00",
+    "income_tax_expense": "3,500.00",
+    "interest_expense": "40,000.00",
+    "scheduled_principal": "25,000.00",
+    "current_portion_ltd": "100,000.00",
+    "long_term_debt": "1,170,000.00",
+    "total_debt": "1,270,000.00",
+    "capex": "(8,500.00)",
+    "cash_taxes": "3,500.00",
+    "distributions": "0.00",
+    "current_assets": "900,000.00",
+    "current_liabilities": "600,000.00",
+    "total_assets": "2,588,000.00",
+    "cash": "245,000.00",
+    "operating_expenses": "1,090,844.60",
+    "total_liabilities": "1,770,000.00",
+    "total_equity": "818,000.00",
+    "total_liabilities_and_equity": "2,588,000.00",
+    "term_loan": "1,150,000.00",
+    "finance_lease": "120,000.00",
+    "change_in_working_capital": "12,000.00"
+   }
+  ]
+ },
+ "extract_metadata": {
+  "field_metadata": {
+   "document_metadata": {
+    "quarters": [
+     {
+      "period": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.0.period",
+         "bounding_boxes": [
+          {
+           "x": 454.40999999999997,
+           "y": 100.96886372826526,
+           "w": 36.38249999999997,
+           "h": 7.424181156490106
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9365778896649679,
+       "extraction_confidence": 0.9365778896649679
+      },
+      "revenue": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,182,416.35",
+         "bounding_boxes": [
+          {
+           "x": 434.63245725631714,
+           "y": 136.3799198269844,
+           "w": 55.89007651805878,
+           "h": 9.853986918926239
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9829071576390773,
+       "extraction_confidence": 0.9829071576390773
+      },
+      "ebitda": {
+       "confidence": 0.9760251755257028,
+       "extraction_confidence": 0.9760251755257028
+      },
+      "operating_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "64,000.00",
+         "bounding_boxes": [
+          {
+           "x": 447.2549629211426,
+           "y": 216.31360709667206,
+           "w": 43.267606258392334,
+           "h": 10.101463079452515
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9878090371321022,
+       "extraction_confidence": 0.9878090371321022
+      },
+      "depreciation_amortization": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.0.depreciation_amortization",
+         "bounding_boxes": [
+          {
+           "x": 447.00745725631714,
+           "y": 184.63709628582,
+           "w": 43.51511192321777,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9044566128595932,
+       "extraction_confidence": 0.9044566128595932
+      },
+      "net_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.0.net_income",
+         "bounding_boxes": [
+          {
+           "x": 447.2549629211426,
+           "y": 280.40901160240173,
+           "w": 43.267606258392334,
+           "h": 9.854032516479492
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9697865735380342,
+       "extraction_confidence": 0.9697865735380342
+      },
+      "income_tax_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.0.income_tax_expense",
+         "bounding_boxes": [
+          {
+           "x": 452.4524402618408,
+           "y": 264.570774435997,
+           "w": 38.07012891769409,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.92383635681331,
+       "extraction_confidence": 0.92383635681331
+      },
+      "interest_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.0.interest_expense",
+         "bounding_boxes": [
+          {
+           "x": 447.00745725631714,
+           "y": 232.64679658412933,
+           "w": 43.51511192321777,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9567866885747022,
+       "extraction_confidence": 0.9567866885747022
+      },
+      "scheduled_principal": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.0.scheduled_principal",
+         "bounding_boxes": [
+          {
+           "x": 447.00745725631714,
+           "y": 425.1805500984192,
+           "w": 43.51511192321777,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9568341815716014,
+       "extraction_confidence": 0.9568341815716014
+      },
+      "current_portion_ltd": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "100,000.00",
+         "bounding_boxes": [
+          {
+           "x": 622.4849610328674,
+           "y": 439.53396677970886,
+           "w": 47.9700722694397,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9455240852285016,
+       "extraction_confidence": 0.9455240852285016
+      },
+      "short_term_debt": {
+       "confidence": 0.9640611611806249,
+       "extraction_confidence": 0.9640611611806249
+      },
+      "long_term_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.long_term_debt",
+         "bounding_boxes": [
+          {
+           "x": 433.84046745300293,
+           "y": 323.1723303794861,
+           "w": 56.68206042051315,
+           "h": 10.15097290277481
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9518573124207588,
+       "extraction_confidence": 0.9518573124207588
+      },
+      "total_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.total_debt",
+         "bounding_boxes": [
+          {
+           "x": 434.13744592666626,
+           "y": 453.6399164199829,
+           "w": 56.38507604598999,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9522917616910099,
+       "extraction_confidence": 0.9522917616910099
+      },
+      "capex": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.0.capex",
+         "bounding_boxes": [
+          {
+           "x": 446.5124931335449,
+           "y": 221.75800967216492,
+           "w": 44.01004359126091,
+           "h": 10.348932400345802
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9262665957995551,
+       "extraction_confidence": 0.9262665957995551
+      },
+      "cash_taxes": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.0.cash_taxes",
+         "bounding_boxes": [
+          {
+           "x": 452.4524402618408,
+           "y": 410.5796663761139,
+           "w": 38.07012891769409,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9421635621472076,
+       "extraction_confidence": 0.9421635621472076
+      },
+      "distributions": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.0.distributions",
+         "bounding_boxes": [
+          {
+           "x": 471.0149402618408,
+           "y": 309.1158449649811,
+           "w": 19.507628917694092,
+           "h": 8.36919379234314
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9621944123766636,
+       "extraction_confidence": 0.9621944123766636
+      },
+      "current_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "930,000.00",
+         "bounding_boxes": [
+          {
+           "x": 442.75,
+           "y": 193.76,
+           "w": 46.94999999999999,
+           "h": 8.330000000000013
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9794370631341549,
+       "extraction_confidence": 0.9794370631341549
+      },
+      "current_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.current_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 442.2825,
+           "y": 308.5984634047715,
+           "w": 48.014999999999944,
+           "h": 8.90901738778814
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9445774811160246,
+       "extraction_confidence": 0.9445774811160246
+      },
+      "total_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "2,538,000.00",
+         "bounding_boxes": [
+          {
+           "x": 434.13744592666626,
+           "y": 395.48381209373474,
+           "w": 56.38507604598999,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9693522686273902,
+       "extraction_confidence": 0.9693522686273902
+      },
+      "cash": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.cash",
+         "bounding_boxes": [
+          {
+           "x": 442.2825,
+           "y": 149.22604124545086,
+           "w": 48.014999999999944,
+           "h": 8.909017387788124
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9499869726329946,
+       "extraction_confidence": 0.9499869726329946
+      },
+      "revolver_commitment": {
+       "confidence": 0.9760251755257028,
+       "extraction_confidence": 0.9760251755257028
+      },
+      "revolver_drawn": {
+       "confidence": 0.9760251755257028,
+       "extraction_confidence": 0.9760251755257028
+      },
+      "operating_expenses": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,118,416.35",
+         "bounding_boxes": [
+          {
+           "x": 434.3849515914917,
+           "y": 199.98039937019348,
+           "w": 55.89007651805878,
+           "h": 10.348932400345802
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9857784408359448,
+       "extraction_confidence": 0.9857784408359448
+      },
+      "total_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.total_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 441.80993270874023,
+           "y": 337.42674565315247,
+           "w": 48.86110210418701,
+           "h": 10.497432231903076
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9496570976955251,
+       "extraction_confidence": 0.9496570976955251
+      },
+      "total_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "768,000.00",
+         "bounding_boxes": [
+          {
+           "x": 441.80993270874023,
+           "y": 381.3778989315033,
+           "w": 48.71263647079468,
+           "h": 10.101463079452515
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.980632662825454,
+       "extraction_confidence": 0.980632662825454
+      },
+      "total_liabilities_and_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.0.total_liabilities_and_equity",
+         "bounding_boxes": [
+          {
+           "x": 433.8899402618408,
+           "y": 395.4343478679657,
+           "w": 56.880075573921204,
+           "h": 10.15097290277481
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9472826946524724,
+       "extraction_confidence": 0.9472826946524724
+      },
+      "term_loan": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "1,210,000.00",
+         "bounding_boxes": [
+          {
+           "x": 435.5,
+           "y": 425.82,
+           "w": 54.139999999999986,
+           "h": 8.069999999999993
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9799335947370799,
+       "extraction_confidence": 0.9799335947370799
+      },
+      "finance_lease": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "60,000.00",
+         "bounding_boxes": [
+          {
+           "x": 447.2549629211426,
+           "y": 439.53396677970886,
+           "w": 43.267606258392334,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9770079366061974,
+       "extraction_confidence": 0.9770079366061974
+      },
+      "change_in_working_capital": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "10,000.00",
+         "bounding_boxes": [
+          {
+           "x": 448.7,
+           "y": 179.32,
+           "w": 40.94,
+           "h": 8.069999999999993
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9610808247872249,
+       "extraction_confidence": 0.9610808247872249
+      }
+     },
+     {
+      "period": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.1.period",
+         "bounding_boxes": [
+          {
+           "x": 544.2524999999999,
+           "y": 100.96886372826526,
+           "w": 35.887500000000074,
+           "h": 7.424181156490106
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9392167624680785,
+       "extraction_confidence": 0.9392167624680785
+      },
+      "revenue": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,175,902.80",
+         "bounding_boxes": [
+          {
+           "x": 524.4749836921692,
+           "y": 136.62739598751068,
+           "w": 55.89001750946045,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.980963008732556,
+       "extraction_confidence": 0.980963008732556
+      },
+      "ebitda": {
+       "confidence": 0.9736957780031721,
+       "extraction_confidence": 0.9736957780031721
+      },
+      "operating_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "62,500.00",
+         "bounding_boxes": [
+          {
+           "x": 537.0974893569946,
+           "y": 216.31360709667206,
+           "w": 43.51501750946045,
+           "h": 9.853977799415588
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9869844493428761,
+       "extraction_confidence": 0.9869844493428761
+      },
+      "depreciation_amortization": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.1.depreciation_amortization",
+         "bounding_boxes": [
+          {
+           "x": 537.0974893569946,
+           "y": 184.63709628582,
+           "w": 43.26751184463501,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9246184166425169,
+       "extraction_confidence": 0.9246184166425169
+      },
+      "net_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.1.net_income",
+         "bounding_boxes": [
+          {
+           "x": 537.5925006866455,
+           "y": 280.40901160240173,
+           "w": 43.02000617980957,
+           "h": 9.854032516479492
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9628787442450446,
+       "extraction_confidence": 0.9628787442450446
+      },
+      "income_tax_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.1.income_tax_expense",
+         "bounding_boxes": [
+          {
+           "x": 542.2949666976929,
+           "y": 264.570774435997,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9081955807718151,
+       "extraction_confidence": 0.9081955807718151
+      },
+      "interest_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.1.interest_expense",
+         "bounding_boxes": [
+          {
+           "x": 537.0974893569946,
+           "y": 232.64679658412933,
+           "w": 43.26751184463501,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9527377256876318,
+       "extraction_confidence": 0.9527377256876318
+      },
+      "scheduled_principal": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.1.scheduled_principal",
+         "bounding_boxes": [
+          {
+           "x": 537.0974893569946,
+           "y": 425.1805500984192,
+           "w": 43.26751184463501,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9528432046010232,
+       "extraction_confidence": 0.9528432046010232
+      },
+      "current_portion_ltd": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "100,000.00",
+         "bounding_boxes": [
+          {
+           "x": 622.4849610328674,
+           "y": 439.53396677970886,
+           "w": 47.9700722694397,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9433653902121291,
+       "extraction_confidence": 0.9433653902121291
+      },
+      "short_term_debt": {
+       "confidence": 0.9602871446699847,
+       "extraction_confidence": 0.9602871446699847
+      },
+      "long_term_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.long_term_debt",
+         "bounding_boxes": [
+          {
+           "x": 524.4749836921692,
+           "y": 323.7167286872864,
+           "w": 55.89001750946045,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9417216107383526,
+       "extraction_confidence": 0.9417216107383526
+      },
+      "total_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.total_debt",
+         "bounding_boxes": [
+          {
+           "x": 524.4749836921692,
+           "y": 453.6399164199829,
+           "w": 55.89004111289978,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9538134029640141,
+       "extraction_confidence": 0.9538134029640141
+      },
+      "capex": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.1.capex",
+         "bounding_boxes": [
+          {
+           "x": 536.3325000000001,
+           "y": 221.4880711686211,
+           "w": 43.55999999999995,
+           "h": 9.15649009300444
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9233149400349128,
+       "extraction_confidence": 0.9233149400349128
+      },
+      "cash_taxes": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.1.cash_taxes",
+         "bounding_boxes": [
+          {
+           "x": 542.2949666976929,
+           "y": 410.5796663761139,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9313228921988603,
+       "extraction_confidence": 0.9313228921988603
+      },
+      "distributions": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.1.distributions",
+         "bounding_boxes": [
+          {
+           "x": 560.8574666976929,
+           "y": 309.1158449649811,
+           "w": 19.507534503936768,
+           "h": 8.36919379234314
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.918059439349036,
+       "extraction_confidence": 0.918059439349036
+      },
+      "current_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "920,000.00",
+         "bounding_boxes": [
+          {
+           "x": 532.75,
+           "y": 193.76,
+           "w": 46.950000000000045,
+           "h": 8.330000000000013
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9753492038824025,
+       "extraction_confidence": 0.9753492038824025
+      },
+      "current_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.current_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 532.62,
+           "y": 308.5984634047715,
+           "w": 47.76749999999999,
+           "h": 8.90901738778814
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9405293801861213,
+       "extraction_confidence": 0.9405293801861213
+      },
+      "total_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "2,556,500.00",
+         "bounding_boxes": [
+          {
+           "x": 524.2274780273438,
+           "y": 395.48381209373474,
+           "w": 56.385046541690826,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9706556738530107,
+       "extraction_confidence": 0.9706556738530107
+      },
+      "cash": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.cash",
+         "bounding_boxes": [
+          {
+           "x": 532.62,
+           "y": 149.22604124545086,
+           "w": 47.76749999999999,
+           "h": 8.909017387788124
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9458183984636078,
+       "extraction_confidence": 0.9458183984636078
+      },
+      "revolver_commitment": {
+       "confidence": 0.9736957780031721,
+       "extraction_confidence": 0.9736957780031721
+      },
+      "revolver_drawn": {
+       "confidence": 0.9736957780031721,
+       "extraction_confidence": 0.9736957780031721
+      },
+      "operating_expenses": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,113,402.80",
+         "bounding_boxes": [
+          {
+           "x": 524.2274780273438,
+           "y": 199.98039937019348,
+           "w": 56.385046541690826,
+           "h": 10.348932400345802
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9834422606299438,
+       "extraction_confidence": 0.9834422606299438
+      },
+      "total_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.total_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 531.8999648094177,
+           "y": 337.42674565315247,
+           "w": 48.71254205703735,
+           "h": 10.249965190887451
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9456867901724466,
+       "extraction_confidence": 0.9456867901724466
+      },
+      "total_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "786,500.00",
+         "bounding_boxes": [
+          {
+           "x": 531.8999648094177,
+           "y": 381.3778989315033,
+           "w": 48.71254205703735,
+           "h": 9.85399603843689
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9768839511385286,
+       "extraction_confidence": 0.9768839511385286
+      },
+      "total_liabilities_and_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.1.total_liabilities_and_equity",
+         "bounding_boxes": [
+          {
+           "x": 523.7324666976929,
+           "y": 395.3353464603424,
+           "w": 56.88004606962204,
+           "h": 10.249967470765114
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9493708118362766,
+       "extraction_confidence": 0.9493708118362766
+      },
+      "term_loan": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "1,190,000.00",
+         "bounding_boxes": [
+          {
+           "x": 524.4749836921692,
+           "y": 425.1805500984192,
+           "w": 55.89001750946045,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9734571500518822,
+       "extraction_confidence": 0.9734571500518822
+      },
+      "finance_lease": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "80,000.00",
+         "bounding_boxes": [
+          {
+           "x": 537.3449950218201,
+           "y": 439.53396677970886,
+           "w": 43.02000617980957,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9692483537681564,
+       "extraction_confidence": 0.9692483537681564
+      },
+      "change_in_working_capital": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.1.change_in_working_capital",
+         "bounding_boxes": [
+          {
+           "x": 536.6024780273438,
+           "y": 178.20280730724335,
+           "w": 43.5150440633297,
+           "h": 10.74489813297987
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9367179273853766,
+       "extraction_confidence": 0.9367179273853766
+      }
+     },
+     {
+      "period": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.2.period",
+         "bounding_boxes": [
+          {
+           "x": 634.8375,
+           "y": 100.96886372826526,
+           "w": 35.14500000000004,
+           "h": 7.424181156490106
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9451847271575076,
+       "extraction_confidence": 0.9451847271575076
+      },
+      "revenue": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,161,337.25",
+         "bounding_boxes": [
+          {
+           "x": 614.564968585968,
+           "y": 136.3799198269844,
+           "w": 55.89004111289978,
+           "h": 9.853986918926239
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9855403078228683,
+       "extraction_confidence": 0.9855403078228683
+      },
+      "ebitda": {
+       "confidence": 0.972306885281881,
+       "extraction_confidence": 0.972306885281881
+      },
+      "operating_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "60,500.00",
+         "bounding_boxes": [
+          {
+           "x": 627.1874742507935,
+           "y": 216.31360709667206,
+           "w": 43.26755905151367,
+           "h": 10.101463079452515
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9905611729109518,
+       "extraction_confidence": 0.9905611729109518
+      },
+      "depreciation_amortization": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.2.depreciation_amortization",
+         "bounding_boxes": [
+          {
+           "x": 627.1874742507935,
+           "y": 184.63709628582,
+           "w": 43.26755905151367,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9315125647814517,
+       "extraction_confidence": 0.9315125647814517
+      },
+      "net_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.2.net_income",
+         "bounding_boxes": [
+          {
+           "x": 627.4349799156189,
+           "y": 280.40901160240173,
+           "w": 43.02005338668823,
+           "h": 9.854032516479492
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9644964491415218,
+       "extraction_confidence": 0.9644964491415218
+      },
+      "income_tax_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.2.income_tax_expense",
+         "bounding_boxes": [
+          {
+           "x": 632.3849987983704,
+           "y": 264.570774435997,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9100996913719959,
+       "extraction_confidence": 0.9100996913719959
+      },
+      "interest_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.2.interest_expense",
+         "bounding_boxes": [
+          {
+           "x": 627.1874742507935,
+           "y": 232.64679658412933,
+           "w": 43.26755905151367,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9570225464088784,
+       "extraction_confidence": 0.9570225464088784
+      },
+      "scheduled_principal": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.2.scheduled_principal",
+         "bounding_boxes": [
+          {
+           "x": 627.1874742507935,
+           "y": 425.1805500984192,
+           "w": 43.26755905151367,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9549396976581054,
+       "extraction_confidence": 0.9549396976581054
+      },
+      "current_portion_ltd": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.current_portion_ltd",
+         "bounding_boxes": [
+          {
+           "x": 622.3364481925964,
+           "y": 293.62407624721527,
+           "w": 48.51460361480713,
+           "h": 10.348948359489441
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.7984371686501798,
+       "extraction_confidence": 0.7984371686501798
+      },
+      "short_term_debt": {
+       "confidence": 0.9595787441644599,
+       "extraction_confidence": 0.9595787441644599
+      },
+      "long_term_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.long_term_debt",
+         "bounding_boxes": [
+          {
+           "x": 615.0375,
+           "y": 323.4468257177517,
+           "w": 55.6875,
+           "h": 8.661544682571808
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9331032923914404,
+       "extraction_confidence": 0.9331032923914404
+      },
+      "total_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.total_debt",
+         "bounding_boxes": [
+          {
+           "x": 614.3174629211426,
+           "y": 453.6399164199829,
+           "w": 56.385046541690826,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9532905021153301,
+       "extraction_confidence": 0.9532905021153301
+      },
+      "capex": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.2.capex",
+         "bounding_boxes": [
+          {
+           "x": 626.67,
+           "y": 221.4880711686211,
+           "w": 43.55999999999995,
+           "h": 9.15649009300444
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9079184299260243,
+       "extraction_confidence": 0.9079184299260243
+      },
+      "cash_taxes": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.2.cash_taxes",
+         "bounding_boxes": [
+          {
+           "x": 632.3849987983704,
+           "y": 410.5796663761139,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9331172182038423,
+       "extraction_confidence": 0.9331172182038423
+      },
+      "distributions": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.2.distributions",
+         "bounding_boxes": [
+          {
+           "x": 650.9474987983704,
+           "y": 309.1158449649811,
+           "w": 19.507534503936768,
+           "h": 8.36919379234314
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9174761015271249,
+       "extraction_confidence": 0.9174761015271249
+      },
+      "current_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "910,000.00",
+         "bounding_boxes": [
+          {
+           "x": 622.75,
+           "y": 193.76,
+           "w": 46.950000000000045,
+           "h": 8.330000000000013
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.979434338698346,
+       "extraction_confidence": 0.979434338698346
+      },
+      "current_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.current_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 622.4625,
+           "y": 308.5984634047715,
+           "w": 48.262500000000074,
+           "h": 8.90901738778814
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9451996519347378,
+       "extraction_confidence": 0.9451996519347378
+      },
+      "total_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "2,573,500.00",
+         "bounding_boxes": [
+          {
+           "x": 614.0699572563171,
+           "y": 395.48381209373474,
+           "w": 56.385046541690826,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9772081815927133,
+       "extraction_confidence": 0.9772081815927133
+      },
+      "cash": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.cash",
+         "bounding_boxes": [
+          {
+           "x": 622.4625,
+           "y": 149.22604124545086,
+           "w": 48.262500000000074,
+           "h": 8.909017387788124
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9505154181965844,
+       "extraction_confidence": 0.9505154181965844
+      },
+      "revolver_commitment": {
+       "confidence": 0.972306885281881,
+       "extraction_confidence": 0.972306885281881
+      },
+      "revolver_drawn": {
+       "confidence": 0.972306885281881,
+       "extraction_confidence": 0.972306885281881
+      },
+      "operating_expenses": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,100,837.25",
+         "bounding_boxes": [
+          {
+           "x": 614.3174629211426,
+           "y": 199.98039937019348,
+           "w": 56.385046541690826,
+           "h": 10.348932400345802
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9884396813894726,
+       "extraction_confidence": 0.9884396813894726
+      },
+      "total_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.total_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 621.7424912452698,
+           "y": 337.42674565315247,
+           "w": 49.10856056213379,
+           "h": 10.497432231903076
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9468641431737274,
+       "extraction_confidence": 0.9468641431737274
+      },
+      "total_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "803,500.00",
+         "bounding_boxes": [
+          {
+           "x": 621.7424912452698,
+           "y": 381.3778989315033,
+           "w": 48.71254205703735,
+           "h": 10.101463079452515
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9827501530148062,
+       "extraction_confidence": 0.9827501530148062
+      },
+      "total_liabilities_and_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.total_liabilities_and_equity",
+         "bounding_boxes": [
+          {
+           "x": 614.0699572563171,
+           "y": 395.3353464603424,
+           "w": 56.781070947647095,
+           "h": 10.249967470765114
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9591200089401226,
+       "extraction_confidence": 0.9591200089401226
+      },
+      "term_loan": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.term_loan",
+         "bounding_boxes": [
+          {
+           "x": 622.4849610328674,
+           "y": 425.0815486907959,
+           "w": 47.9700722694397,
+           "h": 9.705566883087158
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.93270735412438,
+       "extraction_confidence": 0.93270735412438
+      },
+      "finance_lease": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.2.finance_lease",
+         "bounding_boxes": [
+          {
+           "x": 622.3364481925964,
+           "y": 438.64306354522705,
+           "w": 48.51460361480713,
+           "h": 10.497468709945679
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.8939766761122185,
+       "extraction_confidence": 0.8939766761122185
+      },
+      "change_in_working_capital": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "8,000.00",
+         "bounding_boxes": [
+          {
+           "x": 633.39,
+           "y": 179.32,
+           "w": 36.25,
+           "h": 8.069999999999993
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9616477129366623,
+       "extraction_confidence": 0.9616477129366623
+      }
+     },
+     {
+      "period": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.3.period",
+         "bounding_boxes": [
+          {
+           "x": 724.6800000000001,
+           "y": 100.96886372826526,
+           "w": 35.14499999999995,
+           "h": 7.424181156490106
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9434173519940178,
+       "extraction_confidence": 0.9434173519940178
+      },
+      "revenue": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,148,844.60",
+         "bounding_boxes": [
+          {
+           "x": 704.4074950218201,
+           "y": 136.62739598751068,
+           "w": 56.13752317428589,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9860840610808245,
+       "extraction_confidence": 0.9860840610808245
+      },
+      "ebitda": {
+       "confidence": 0.9692726716927063,
+       "extraction_confidence": 0.9692726716927063
+      },
+      "operating_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "58,000.00",
+         "bounding_boxes": [
+          {
+           "x": 717.0300006866455,
+           "y": 216.31360709667206,
+           "w": 43.51501750946045,
+           "h": 9.853977799415588
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9909469386306762,
+       "extraction_confidence": 0.9909469386306762
+      },
+      "depreciation_amortization": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.3.depreciation_amortization",
+         "bounding_boxes": [
+          {
+           "x": 717.0300006866455,
+           "y": 184.63709628582,
+           "w": 43.51501750946045,
+           "h": 9.606510758399963
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9300065756723854,
+       "extraction_confidence": 0.9300065756723854
+      },
+      "net_income": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.3.net_income",
+         "bounding_boxes": [
+          {
+           "x": 717.5249648094177,
+           "y": 280.40901160240173,
+           "w": 43.02005338668823,
+           "h": 9.854032516479492
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9684362461944948,
+       "extraction_confidence": 0.9684362461944948
+      },
+      "income_tax_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.3.income_tax_expense",
+         "bounding_boxes": [
+          {
+           "x": 722.4749836921692,
+           "y": 264.570774435997,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9128936289292996,
+       "extraction_confidence": 0.9128936289292996
+      },
+      "interest_expense": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "quarters.3.interest_expense",
+         "bounding_boxes": [
+          {
+           "x": 717.0300006866455,
+           "y": 232.64679658412933,
+           "w": 43.51501750946045,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.955066235552499,
+       "extraction_confidence": 0.955066235552499
+      },
+      "scheduled_principal": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.3.scheduled_principal",
+         "bounding_boxes": [
+          {
+           "x": 717.0300006866455,
+           "y": 425.1805500984192,
+           "w": 43.51501750946045,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.94635510439619,
+       "extraction_confidence": 0.94635510439619
+      },
+      "current_portion_ltd": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "100,000.00",
+         "bounding_boxes": [
+          {
+           "x": 622.4849610328674,
+           "y": 439.53396677970886,
+           "w": 47.9700722694397,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9391882658501068,
+       "extraction_confidence": 0.9391882658501068
+      },
+      "short_term_debt": {
+       "confidence": 0.9513115673046376,
+       "extraction_confidence": 0.9513115673046376
+      },
+      "long_term_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.long_term_debt",
+         "bounding_boxes": [
+          {
+           "x": 704.4074950218201,
+           "y": 323.7167286872864,
+           "w": 56.13752317428589,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9470413100406466,
+       "extraction_confidence": 0.9470413100406466
+      },
+      "total_debt": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.total_debt",
+         "bounding_boxes": [
+          {
+           "x": 704.1599893569946,
+           "y": 453.6399164199829,
+           "w": 56.385046541690826,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9570523554132917,
+       "extraction_confidence": 0.9570523554132917
+      },
+      "capex": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.3.capex",
+         "bounding_boxes": [
+          {
+           "x": 716.5124999999999,
+           "y": 221.4880711686211,
+           "w": 43.56000000000004,
+           "h": 9.15649009300444
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.921279045838709,
+       "extraction_confidence": 0.921279045838709
+      },
+      "cash_taxes": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.3.cash_taxes",
+         "bounding_boxes": [
+          {
+           "x": 722.4749836921692,
+           "y": 410.5796663761139,
+           "w": 38.07003450393677,
+           "h": 9.606528997421265
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9437444361783851,
+       "extraction_confidence": 0.9437444361783851
+      },
+      "distributions": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "quarters.3.distributions",
+         "bounding_boxes": [
+          {
+           "x": 741.0374836921692,
+           "y": 309.1158449649811,
+           "w": 19.507534503936768,
+           "h": 8.36919379234314
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9233429714223501,
+       "extraction_confidence": 0.9233429714223501
+      },
+      "current_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "900,000.00",
+         "bounding_boxes": [
+          {
+           "x": 712.75,
+           "y": 193.76,
+           "w": 46.950000000000045,
+           "h": 8.330000000000013
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9752846544249553,
+       "extraction_confidence": 0.9752846544249553
+      },
+      "current_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.current_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 712.3050000000001,
+           "y": 308.5984634047715,
+           "w": 48.509999999999934,
+           "h": 8.90901738778814
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.944512692408535,
+       "extraction_confidence": 0.944512692408535
+      },
+      "total_assets": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "2,588,000.00",
+         "bounding_boxes": [
+          {
+           "x": 704.1599893569946,
+           "y": 395.48381209373474,
+           "w": 56.385046541690826,
+           "h": 10.348963178694248
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9778042939383732,
+       "extraction_confidence": 0.9778042939383732
+      },
+      "cash": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.cash",
+         "bounding_boxes": [
+          {
+           "x": 712.3050000000001,
+           "y": 149.22604124545086,
+           "w": 48.509999999999934,
+           "h": 8.909017387788124
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9457220575421348,
+       "extraction_confidence": 0.9457220575421348
+      },
+      "revolver_commitment": {
+       "confidence": 0.9692726716927063,
+       "extraction_confidence": 0.9692726716927063
+      },
+      "revolver_drawn": {
+       "confidence": 0.9692726716927063,
+       "extraction_confidence": 0.9692726716927063
+      },
+      "operating_expenses": {
+       "citation": [
+        {
+         "page": 1,
+         "matching_text": "1,090,844.60",
+         "bounding_boxes": [
+          {
+           "x": 704.1599893569946,
+           "y": 199.98039937019348,
+           "w": 56.385046541690826,
+           "h": 10.348932400345802
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9872943844815708,
+       "extraction_confidence": 0.9872943844815708
+      },
+      "total_liabilities": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.total_liabilities",
+         "bounding_boxes": [
+          {
+           "x": 711.8324761390686,
+           "y": 337.42674565315247,
+           "w": 49.35606622695923,
+           "h": 10.249965190887451
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.951026691913967,
+       "extraction_confidence": 0.951026691913967
+      },
+      "total_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "818,000.00",
+         "bounding_boxes": [
+          {
+           "x": 711.8324761390686,
+           "y": 381.3778989315033,
+           "w": 48.71254205703735,
+           "h": 9.85399603843689
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9770383863026633,
+       "extraction_confidence": 0.9770383863026633
+      },
+      "total_liabilities_and_equity": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "quarters.3.total_liabilities_and_equity",
+         "bounding_boxes": [
+          {
+           "x": 703.9124836921692,
+           "y": 395.3353464603424,
+           "w": 57.27607047557831,
+           "h": 10.249967470765114
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9594628295441667,
+       "extraction_confidence": 0.9594628295441667
+      },
+      "term_loan": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "1,150,000.00",
+         "bounding_boxes": [
+          {
+           "x": 705.5,
+           "y": 425.82,
+           "w": 54.139999999999986,
+           "h": 8.069999999999993
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9789098998582417,
+       "extraction_confidence": 0.9789098998582417
+      },
+      "finance_lease": {
+       "citation": [
+        {
+         "page": 2,
+         "matching_text": "120,000.00",
+         "bounding_boxes": [
+          {
+           "x": 712.3274874687195,
+           "y": 439.53396677970886,
+           "w": 48.217530727386475,
+           "h": 9.606565475463867
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9735099482593944,
+       "extraction_confidence": 0.9735099482593944
+      },
+      "change_in_working_capital": {
+       "citation": [
+        {
+         "page": 3,
+         "matching_text": "12,000.00",
+         "bounding_boxes": [
+          {
+           "x": 718.7,
+           "y": 179.32,
+           "w": 40.940000000000055,
+           "h": 8.069999999999993
+          }
+         ],
+         "page_dimensions": {
+          "width": 792,
+          "height": 612
+         }
+        }
+       ],
+       "confidence": 0.9572655390675593,
+       "extraction_confidence": 0.9572655390675593
+      }
+     }
+    ]
+   },
+   "page_metadata": null,
+   "row_metadata": null
+  },
+  "parse_job_id": "pjb-wvz7qxiyfie4o0vnoferhn873acc",
+  "parse_tier": "agentic"
+ },
+ "note": "Raw LlamaExtract output. Values are not confirmed; confirm each one on /statements before it is used.",
+ "citation_summary": {
+  "values": 96,
+  "quoted": 36,
+  "location_only": 60,
+  "none": 0,
+  "message": "60 of 96 values have a page location but no quoted text",
+  "known_limitation": "With the pinned configuration (tier agentic, version 2.5), LlamaExtract returns many citations as a page and bounding box with the field path in place of quoted text. Such a value is shown as \"Located on page N (no quoted text)\" and can be confirmed only if it passes a tie-out (balance sheet, operating income, printed total debt or EBITDA, or the CSV match).",
+  "added": "Summary added after the live run by the statements agent; raw fields unchanged."
+ }
+}

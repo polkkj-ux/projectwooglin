@@ -143,3 +143,56 @@ test('definition citations point at exact sentences in definitions.txt',()=>{
  assert.match(d.debt.quote,/^Gross debt means .*period end\.$/);
  for(const v of Object.values(d))assert.ok(verifyCitation(ctx.definitionsText,v));
 });
+
+// Live LlamaExtract output (data/statements/*.extracted.json) often cites a page and bounding box with the
+// field's own path ("quarters.3.capex") instead of quoted text: a location-only citation.
+const locOnly=(m,p,k,page=3)=>{m(p)[k].citation=[{page,matching_text:`quarters.${fixtures.quarters.indexOf(p)}.${k}`,bounding_boxes:[{x:716,y:221,w:43,h:9}]}];};
+const confirmableIds=r=>r.items.filter(i=>i.confirmable).map(i=>i.id);
+const twoStep=(id,job,o={})=>{const norm=normalizeExtraction(job);const base={borrower_id:id,period:'2026-Q3',source_document:`${id}_2026-Q3.pdf`,...ctx,...o};
+ const first=computeStatement(norm,{...base,confirmed:[]});return {first,final:computeStatement(norm,{...base,confirmed:o.confirmed??confirmableIds(first)})};};
+
+test('a location-only value that passes a tie-out can be confirmed, and names the tie-out',()=>{
+ const job=mockJob('BOR-09',{mutate:(j,{m})=>{locOnly(m,'2026-Q3','capex');locOnly(m,'2026-Q2','total_assets',2);}});
+ const {first,final}=twoStep('BOR-09',job);
+ const capex=first.items.find(i=>i.id==='2026-Q3:capex');
+ assert.equal(capex.citation_kind,'location_only');assert.equal(capex.matching_text,null);assert.equal(capex.page,3);assert.deepEqual(capex.bounding_box,{x:716,y:221,w:43,h:9});
+ assert.equal(capex.confirmable,true);assert.ok(capex.tied_by.some(t=>t.id==='csv:ttm_capex_usd'));
+ assert.match(capex.reason,/^Located on page 3 \(no quoted text\); ties to: /);
+ const ta=first.items.find(i=>i.id==='2026-Q2:total_assets');assert.equal(ta.confirmable,true);assert.deepEqual(ta.tied_by.map(t=>t.id),['2026-Q2:balance_sheet']);
+ // Location-only values are listed first, before any quoted value.
+ assert.deepEqual(first.items.slice(0,2).map(i=>i.citation_kind),['location_only','location_only']);
+ assert.equal(first.items[2].citation_kind,'text');
+ assert.deepEqual(first.citation_summary,{values:96,quoted:94,location_only:2,none:0,message:'2 of 96 values have a page location but no quoted text'});
+ // Still nothing is auto-accepted: confirmable is not confirmed.
+ assert.equal(first.blocked,true);assert.equal(final.blocked,false,final.blockers.join(' | '));
+});
+
+test('a location-only value that ties to nothing stays unconfirmable and blocks the row',()=>{
+ // No CSV row for this borrower, so cash taxes (only checked against the CSV) tie to nothing.
+ const job=mockJob('BOR-09',{mutate:(j,{m})=>{locOnly(m,'2026-Q3','cash_taxes');}});
+ const {first,final}=twoStep('BOR-09',job,{csvRows:[]});
+ const it=first.items.find(i=>i.id==='2026-Q3:cash_taxes');
+ assert.equal(it.citation_kind,'location_only');assert.equal(it.confirmable,false);assert.deepEqual(it.tied_by,[]);
+ assert.match(it.reason,/Located on page 3 \(no quoted text\) and it passes no tie-out, so it cannot be confirmed/);
+ // Even if the client claims it was confirmed, the row stays blocked.
+ const forced=computeStatement(normalizeExtraction(job),{borrower_id:'BOR-09',period:'2026-Q3',source_document:'x.pdf',...ctx,csvRows:[],confirmed:[...confirmableIds(first),'2026-Q3:cash_taxes']});
+ for(const r of [final,forced]){assert.equal(r.blocked,true);assert.equal(r.row,null);
+  assert.ok(r.blockers.some(b=>/Cash taxes paid for 2026-Q3 is located on page 3 without quoted text and passes no tie-out/.test(b)),r.blockers.join(' | '));}
+ // The internal TTM-sum checks are not evidence: a location-only D&A value with no CSV row stays unconfirmable.
+ const da=twoStep('BOR-09',mockJob('BOR-09',{mutate:(j,{m})=>{locOnly(m,'2026-Q1','depreciation_amortization');}}),{csvRows:[]}).first.items.find(i=>i.id==='2026-Q1:depreciation_amortization');
+ assert.equal(da.confirmable,false);
+});
+
+test('a location-only value whose tie-out fails cannot be confirmed, and the failed check is named',()=>{
+ const job=mockJob('BOR-09',{mutate:(j,{q,m})=>{locOnly(m,'2026-Q3','capex');q('2026-Q3').capex='(9,500.00)';}});
+ const {first}=twoStep('BOR-09',job);const it=first.items.find(i=>i.id==='2026-Q3:capex');
+ assert.equal(it.confirmable,false);assert.match(it.reason,/passes no tie-out \(fails: ttm_\w+ matches the CSV row COV-09-3\)/);
+ for(const id of ['csv:ttm_capex_usd','csv:ttm_available_cashflow_usd'])assert.equal(first.tieouts.find(t=>t.id===id).status,'fail',id);
+ assert.equal(first.items.find(i=>i.id==='2026-Q2:capex').confirmable,true);
+});
+
+test('a bare printed number is quoted source text; a missing citation still cannot be confirmed',()=>{
+ const items=reviewItems(normalizeExtraction(mockJob('BOR-09',{mutate:(j,{m})=>{m('2026-Q1').revenue.citation=[{page:1,matching_text:'1,175,902.80'}];m('2026-Q2').revenue.citation=[];}})));
+ assert.equal(items.find(i=>i.id==='2026-Q1:revenue').citation_kind,'text');
+ const none=items.find(i=>i.id==='2026-Q2:revenue');assert.equal(none.citation_kind,'none');assert.equal(none.confirmable,false);
+});

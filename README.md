@@ -1,3 +1,17 @@
+## Statements extraction (v10)
+
+Upload a borrower's financial-statements PDF; LlamaExtract (LlamaCloud) reads quarterly line items with page citations and confidence scores, and our code (`lib/statements.js`) computes every covenant input and tie-out. An analyst confirms each value before the covenant engine runs. Full description in progress; see also `data/statements/`.
+
+### Known limitation: location-only citations
+
+With the pinned LlamaExtract configuration (tier `agentic`, version `2.5`), many citations come back as a page and bounding box with the field's path (for example `quarters.3.capex`) in place of quoted text. In the live run on the synthetic PDFs, **60 of 96 BOR-09 values and 64 of 104 BOR-01 values** had a page location but no quoted text; every extracted number still equalled the generator's to the cent.
+
+- The API marks such a value `citation_kind: "location_only"` with its page and bounding box and lists it before quoted values, so it is reviewed first. The review screen (`/statements`, in progress) shows it as **"Located on page N (no quoted text)"** with the bounding box and a distinct icon, under a count such as "60 of 96 values have a page location but no quoted text".
+- It can be confirmed only if it passes at least one tie-out that uses it (balance sheet, liabilities + equity, operating income, printed total debt or EBITDA, or the match against `loan_covenants_extended.csv`); the tie-out is named next to the value. The internal TTM-sum checks do not count, because they compare a figure with the same extracted values. A location-only value that ties to nothing stays unconfirmable (20 for BOR-09 and 22 for BOR-01, none of them used by the covenant row).
+- The analyst still confirms every value; nothing is auto-accepted.
+- The count is recorded in each `data/statements/*.extracted.json` as `citation_summary`.
+- Without a CSV row to match, TTM flow items that are location-only (for example D&A or interest) cannot be confirmed, so statements for a new borrower need quoted citations or another tie-out.
+
 ## Institutional monitoring workflow (v13)
 
 The application now follows one path: **monitor → identify → investigate → verify → review**. All changes are in the interface (`public/app.html`). The calculation engine, API and cure planner are unchanged.

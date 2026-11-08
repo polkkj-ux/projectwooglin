@@ -101,7 +101,7 @@ test('GET /api/statements/saved and confirm from a saved extraction work with no
  try{await withEnv({LLAMA_CLOUD_API_KEY:undefined,STATEMENTS_SAVED_DIR:dir},async()=>{
   const list=await (await realFetch(base+'/api/statements/saved')).json();
   assert.equal(list.llama_configured,false);assert.equal(list.saved.length,1);
-  assert.deepEqual(list.saved[0],{name:'BOR-09_2026-Q3',pdf:'BOR-09_2026-Q3.pdf',pdf_sha256:'ab'.repeat(32),extracted_at:'2026-11-08T12:00:00Z',configuration:{tier:'agentic',version:'2.5',cite_sources:true,confidence_scores:true},synthetic:true,borrower_id:'BOR-09',period:'2026-Q3'});
+  assert.deepEqual(list.saved[0],{name:'BOR-09_2026-Q3',pdf:'BOR-09_2026-Q3.pdf',pdf_sha256:'ab'.repeat(32),extracted_at:'2026-11-08T12:00:00Z',configuration:{tier:'agentic',version:'2.5',cite_sources:true,confidence_scores:true},synthetic:true,citation_summary:null,borrower_id:'BOR-09',period:'2026-Q3'});
   const one=await (await realFetch(base+'/api/statements/saved?name=BOR-09_2026-Q3')).json();
   assert.equal(one.saved.name,'BOR-09_2026-Q3');assert.equal(one.blocked,true);
   const c=await (await post(base,'/api/statements/confirm',{saved:'BOR-09_2026-Q3',confirmed:allIds(one.items)})).json();
