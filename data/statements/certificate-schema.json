@@ -1,0 +1,19 @@
+{
+ "type": "object",
+ "description": "A borrower's quarterly compliance certificate. Copy every value exactly as printed; leave a field empty if it is not printed. Never calculate or estimate.",
+ "properties": {
+  "borrower_id": {"type": "string", "description": "The borrower ID printed on the certificate, for example BOR-09."},
+  "period": {"type": "string", "description": "The fiscal quarter the certificate covers, written as YYYY-QN (for example 2026-Q3)."},
+  "statement_ebitda": {"type": "string", "description": "EBITDA as taken from the financial statements, before any add-backs. Copy the amount exactly as printed, including commas."},
+  "cost_savings_addbacks": {"type": "string", "description": "The amount added back to EBITDA for projected cost savings, operating improvements or synergies. Copy the amount exactly as printed."},
+  "addback_cap": {"type": "string", "description": "The cap applied to cost-savings add-backs, exactly as printed (for example None, or 15% of EBITDA)."},
+  "reported_ebitda": {"type": "string", "description": "The adjusted EBITDA the certificate uses for the leverage ratio, after add-backs. Copy the amount exactly as printed."},
+  "total_debt": {"type": "string", "description": "Total funded debt used for the leverage ratio. Copy the amount exactly as printed."},
+  "reported_leverage": {"type": "string", "description": "The leverage ratio the certificate reports, exactly as printed (for example 2.92x)."},
+  "statement_available_cash_flow": {"type": "string", "description": "Available cash flow as taken from the financial statements, before any add-backs. Copy the amount exactly as printed."},
+  "reported_available_cash_flow": {"type": "string", "description": "The adjusted available cash flow the certificate uses for debt service coverage, after add-backs. Copy the amount exactly as printed."},
+  "debt_service": {"type": "string", "description": "Debt service (interest and scheduled principal) used for debt service coverage. Copy the amount exactly as printed."},
+  "reported_dscr": {"type": "string", "description": "The debt service coverage ratio the certificate reports, exactly as printed (for example 1.58x)."},
+  "certified_compliant": {"type": "string", "description": "The certificate's answer to whether the borrower is in compliance with all financial covenants, exactly as printed (for example Yes or No)."}
+ }
+}

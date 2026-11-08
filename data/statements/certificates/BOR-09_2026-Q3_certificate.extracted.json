@@ -1,0 +1,339 @@
+{
+ "pdf": "BOR-09_2026-Q3_certificate.pdf",
+ "pdf_sha256": "b4f583c1ce580e74d19b190ec9527c97f317321a900ac6bd1ac780904f7c1a46",
+ "synthetic": true,
+ "extracted_at": "2026-11-08T04:52:42.381Z",
+ "kind": "compliance_certificate",
+ "configuration": {
+  "tier": "agentic",
+  "version": "2.5",
+  "extraction_target": "per_doc",
+  "cite_sources": true,
+  "confidence_scores": true,
+  "system_prompt": "This is a borrower compliance certificate. Copy every amount, ratio and answer exactly as printed, as text; never calculate, total or estimate a value. Leave a field empty if it is not printed."
+ },
+ "version": "2.5",
+ "schema_sha256": "b86ec13cd2dd59f5db2c67b620a55283faa8732a8082a5d15a0128a6074cc45e",
+ "job_id": "ext-49vog0bwo4cbhgl9a46zf5gchufm",
+ "file_id": "aa586a50-59f1-4bfb-9fab-c4370daadf21",
+ "status": "COMPLETED",
+ "extract_result": {
+  "borrower_id": "BOR-09",
+  "period": "2026-Q3",
+  "statement_ebitda": "325,000.00",
+  "cost_savings_addbacks": "110,000.00",
+  "addback_cap": "None",
+  "reported_ebitda": "435,000.00",
+  "total_debt": "1,270,000.00",
+  "reported_leverage": "2.92x",
+  "statement_available_cash_flow": "300,000.00",
+  "reported_available_cash_flow": "410,000.00",
+  "debt_service": "260,000.00",
+  "reported_dscr": "1.58x",
+  "certified_compliant": "Yes"
+ },
+ "extract_metadata": {
+  "field_metadata": {
+   "document_metadata": {
+    "borrower_id": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "borrower_id",
+       "bounding_boxes": [
+        {
+         "x": 278.15932066316213,
+         "y": 71.0325,
+         "w": 44.54508693894057,
+         "h": 9.157500000000002
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9505953753150329,
+     "extraction_confidence": 0.9505953753150329
+    },
+    "period": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "2026-Q3",
+       "bounding_boxes": [
+        {
+         "x": 204.72,
+         "y": 87.26,
+         "w": 49.140000000000015,
+         "h": 9.900000000000006
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9125365324322667,
+     "extraction_confidence": 0.9125365324322667
+    },
+    "statement_ebitda": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "325,000.00",
+       "bounding_boxes": [
+        {
+         "x": 498.92740631103516,
+         "y": 152.97746622562408,
+         "w": 53.40918472409248,
+         "h": 10.350074216723442
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9327121691152458,
+     "extraction_confidence": 0.9327121691152458
+    },
+    "cost_savings_addbacks": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "110,000.00",
+       "bounding_boxes": [
+        {
+         "x": 499.422376871109,
+         "y": 171.53996622562408,
+         "w": 52.91423696279526,
+         "h": 10.845074482262135
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9596578170616274,
+     "extraction_confidence": 0.9596578170616274
+    },
+    "addback_cap": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "None",
+       "bounding_boxes": [
+        {
+         "x": 526.6444079875946,
+         "y": 190.5974657535553,
+         "w": 25.692210406064987,
+         "h": 9.360074423253536
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9104672517988259,
+     "extraction_confidence": 0.9104672517988259
+    },
+    "reported_ebitda": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "435,000.00",
+       "bounding_boxes": [
+        {
+         "x": 498.92740631103516,
+         "y": 209.65495347976685,
+         "w": 53.40918472409248,
+         "h": 10.845074482262135
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9354760849702217,
+     "extraction_confidence": 0.9354760849702217
+    },
+    "total_debt": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "1,270,000.00",
+       "bounding_boxes": [
+        {
+         "x": 490.5133810043335,
+         "y": 228.95997047424316,
+         "w": 61.82322371006012,
+         "h": 10.350074216723442
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9193103584294826,
+     "extraction_confidence": 0.9193103584294826
+    },
+    "reported_leverage": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "2.92x",
+       "bounding_boxes": [
+        {
+         "x": 525.1595692634583,
+         "y": 247.76995253562927,
+         "w": 27.42452073097229,
+         "h": 9.112603425979614
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9271771029807231,
+     "extraction_confidence": 0.9271771029807231
+    },
+    "statement_available_cash_flow": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "300,000.00",
+       "bounding_boxes": [
+        {
+         "x": 498.92740631103516,
+         "y": 292.56743931770325,
+         "w": 53.40918472409248,
+         "h": 10.845104724168777
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9465892880747367,
+     "extraction_confidence": 0.9465892880747367
+    },
+    "reported_available_cash_flow": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "410,000.00",
+       "bounding_boxes": [
+        {
+         "x": 498.92740631103516,
+         "y": 330.6824383735657,
+         "w": 53.40918472409248,
+         "h": 10.845104724168777
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9431811108026066,
+     "extraction_confidence": 0.9431811108026066
+    },
+    "debt_service": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "260,000.00",
+       "bounding_boxes": [
+        {
+         "x": 498.92740631103516,
+         "y": 349.4924440383911,
+         "w": 53.40918472409248,
+         "h": 10.845104724168777
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9381406721034552,
+     "extraction_confidence": 0.9381406721034552
+    },
+    "reported_dscr": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "1.58x",
+       "bounding_boxes": [
+        {
+         "x": 525.4070363044739,
+         "y": 368.30244970321655,
+         "w": 27.177046850323677,
+         "h": 9.855104193091393
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9330396858925016,
+     "extraction_confidence": 0.9330396858925016
+    },
+    "certified_compliant": {
+     "citation": [
+      {
+       "page": 1,
+       "matching_text": "Yes",
+       "bounding_boxes": [
+        {
+         "x": 532.831193447113,
+         "y": 457.6499648094177,
+         "w": 19.752864629030228,
+         "h": 9.36010466516018
+        }
+       ],
+       "page_dimensions": {
+        "width": 612,
+        "height": 792
+       }
+      }
+     ],
+     "confidence": 0.9452669206657786,
+     "extraction_confidence": 0.9452669206657786
+    }
+   },
+   "page_metadata": null,
+   "row_metadata": null
+  },
+  "parse_job_id": "pjb-hy3ppgs5hpgompd7uvbqb61q2ffx",
+  "parse_tier": "agentic"
+ },
+ "note": "Raw LlamaExtract output of a borrower compliance certificate. These are the borrower’s claims, not confirmed values.",
+ "citation_summary": {
+  "values": 13,
+  "quoted": 12,
+  "location_only": 1,
+  "none": 0,
+  "message": "1 of 13 values have a page location but no quoted text"
+ }
+}
