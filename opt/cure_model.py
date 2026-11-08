@@ -2,7 +2,7 @@
 
 For one borrower-quarter in breach of its leverage and/or DSCR covenant, find the cheapest cure the
 (synthetic) agreement allows - equity cure, voluntary debt paydown, asset sale - or prove none exists
-(IIS) and size the smallest waiver (FeasRelax on the covenants that fail in the base case only).
+(IIS) and size the smallest waiver (FeasRelax on the covenants that fail before any cure only).
 
 Every money variable is an integer number of cents and every coefficient is an integer, so the model
 uses the same rounding as the Node exact engine:
@@ -47,9 +47,14 @@ CLAUSES = {
         ("team/covenant-policy-addendum.txt", "Current Ratio is current assets divided by current liabilities at quarter end, minimum 1.25."),
         ("documents/cure-policy.txt", "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds."),
     ]},
+    "C7": {"title": "Fixed-charge coverage after cure", "sources": [
+        ("team/covenant-policy-addendum.txt", "Fixed Charge Coverage Ratio is trailing twelve-month EBITDA less unfinanced capital expenditures, cash taxes and distributions, divided by trailing twelve-month fixed charges (scheduled interest and principal), minimum 1.10."),
+        ("documents/cure-policy.txt", "Equity cure: the sponsor may contribute cash that is added to EBITDA and to available cash flow for the quarter tested, up to the equity cure cap in cure_terms.csv."),
+    ]},
 }
 # Only covenant thresholds can be waived, and only those that fail before any cure (see waivable()).
-COVENANT_CONSTRAINTS = ("C1", "C2")
+# C3 (cure cap), C4 (cure frequency) and C5 (liquidity) are facts and are never relaxed.
+COVENANT_CONSTRAINTS = ("C1", "C2", "C6", "C7")
 
 OPTIONS = {
     "cheapest": {"allow_sale": True, "allow_paydown": True, "suffix": ""},
@@ -59,6 +64,7 @@ OPTIONS = {
 MONEY = ["D", "EBITDA", "DS", "CF", "cap", "cash", "min_liquidity"]
 ASSET_MONEY = ["proceeds", "asset_ebitda", "asset_cf", "sale_cost"]
 CR_FIELDS = ["current_assets", "current_liabilities", "min_current_ratio"]
+FCCR_FIELDS = ["capex", "cash_taxes", "distributions", "min_fccr"]
 
 
 class CureInputError(ValueError):
@@ -137,6 +143,16 @@ def validate_inputs(inputs):
         d["min_current_ratio"] = _scaled(inputs["min_current_ratio"], 2, "min_current_ratio")
         if d["current_liabilities"] <= 0 or d["min_current_ratio"] <= 0:
             raise CureInputError("current liabilities and min_current_ratio must be positive")
+    present = [inputs.get(k) not in (None, "") for k in FCCR_FIELDS]
+    if any(present) and not all(present):
+        raise CureInputError("capex, cash_taxes, distributions and min_fccr must be given together")
+    d["has_fccr"] = all(present)
+    if d["has_fccr"]:
+        for k in ("capex", "cash_taxes", "distributions"):
+            d[k] = _scaled(inputs[k], 2, k)
+        d["min_fccr"] = _scaled(inputs["min_fccr"], 2, "min_fccr")
+        if d["min_fccr"] <= 0:
+            raise CureInputError("min_fccr must be positive")
     return d
 
 
@@ -167,11 +183,15 @@ def pro_forma(d, E, P, s):
         ca = d["current_assets"] - P - Q
         out["current_assets_cents"] = ca
         out["current_ratio"] = (ca * 10000 // d["current_liabilities"]) / 10000
+    if d["has_fccr"]:
+        num = ebitda - d["capex"] - d["cash_taxes"] - d["distributions"]
+        out["fccr_numerator_cents"] = num
+        out["fccr"] = (num * 10000 // ds) / 10000 if ds > 0 else None
     return out
 
 
 def check_exact(d, E, P, y, s, skip=()):
-    """Names of C1..C6 violated by an integer solution (exact arithmetic). Empty list = all hold."""
+    """Names of C1..C7 violated by an integer solution (exact arithmetic). Empty list = all hold."""
     pf = pro_forma(d, E, P, s)
     bad = []
     if "C1" not in skip and not (100 * pf["debt_cents"] <= d["Lmax"] * pf["ebitda_cents"]):
@@ -184,8 +204,10 @@ def check_exact(d, E, P, y, s, skip=()):
         bad.append("C4")
     if not (0 <= P <= d["cash"] - d["min_liquidity"]):
         bad.append("C5")
-    if d["has_cr"] and not (100 * pf["current_assets_cents"] >= d["min_current_ratio"] * d["current_liabilities"]):
+    if "C6" not in skip and d["has_cr"] and not (100 * pf["current_assets_cents"] >= d["min_current_ratio"] * d["current_liabilities"]):
         bad.append("C6")
+    if "C7" not in skip and d["has_fccr"] and not (100 * pf["fccr_numerator_cents"] >= d["min_fccr"] * pf["debt_service_cents"]):
+        bad.append("C7")
     return bad
 
 
@@ -210,6 +232,9 @@ def build_model(d, env, name, allow_sale=True, allow_paydown=True):
     m.addConstr(P <= d["cash"] - d["min_liquidity"], name="C5")
     if d["has_cr"]:
         m.addConstr(100 * (d["current_assets"] - P - Q) >= d["min_current_ratio"] * d["current_liabilities"], name="C6")
+    if d["has_fccr"]:
+        m.addConstr(100 * (d["EBITDA"] + E - d["asset_ebitda"] * s - d["capex"] - d["cash_taxes"] - d["distributions"])
+                    >= d["min_fccr"] * (d["DS"] - R), name="C7")
     m.addConstr(10000 * Q >= d["premium_bps"] * P, name="PREMIUM")
     m.addConstr(10000 * R <= d["k"] * (P + d["proceeds"] * s), name="RELIEF")
     for k, v in PARAMS.items():
@@ -286,8 +311,8 @@ def extract_result(m, d, lp_path, fixed_lp_path):
         r = m.copy()
         for k, v in PARAMS.items():
             r.setParam(k, v)
-        # Minimum total violation, relaxing only the covenants that fail in the base case.
-        # C3 (cure cap), C4 (cure frequency), C5 (liquidity) and C6 (current ratio) stay hard.
+        # Minimum total violation, relaxing only the covenants (C1, C2, C6, C7) that fail before any cure.
+        # C3 (cure cap), C4 (cure frequency) and C5 (liquidity) are facts and stay hard.
         r.feasRelax(0, True, [], [], [], [r.getConstrByName(c) for c in relax], [1.0] * len(relax))
         r.optimize()
         if r.Status == GRB.OPTIMAL:
@@ -307,6 +332,15 @@ def extract_result(m, d, lp_path, fixed_lp_path):
                     "leverage_waived": lev_x100 is not None and lev_x100 > d["Lmax"],
                     "dscr_waived": dscr_x100 is not None and dscr_x100 < d["Dmin"],
                 }
+                w = res["infeasibility"]["waiver"]
+                if d["has_cr"]:
+                    cr_x100 = (100 * pf["current_assets_cents"]) // d["current_liabilities"]
+                    w["waiver_min_current_ratio_x100"] = min(d["min_current_ratio"], cr_x100)
+                    w["current_ratio_waived"] = cr_x100 < d["min_current_ratio"]
+                if d["has_fccr"] and pf["debt_service_cents"] > 0:
+                    f_x100 = (100 * pf["fccr_numerator_cents"]) // pf["debt_service_cents"]
+                    w["waiver_min_fccr_x100"] = min(d["min_fccr"], f_x100)
+                    w["fccr_waived"] = f_x100 < d["min_fccr"]
         else:
             res["infeasibility"]["waiver_error"] = "FeasRelax ended with status {}; no waiver sized.".format(_status_name(r.Status))
         r.dispose()
@@ -338,7 +372,7 @@ def solve_cure(inputs, out_dir=None, case="live", env_params=None):
                 options[name] = extract_result(m, d, base + ".lp", base + "_fixed.lp")
             finally:
                 m.dispose()
-    used = [c for c in CLAUSES if c != "C6" or d["has_cr"]]
+    used = [c for c in CLAUSES if (c != "C6" or d["has_cr"]) and (c != "C7" or d["has_fccr"])]
     relax = waivable(d)
     return {"borrower_id": d["borrower_id"], "period": d["period"], "case": case,
             "gurobi_version": gurobi_version(), "params": dict(PARAMS), "units": "integer cents",

@@ -11,14 +11,19 @@ from opt.cure_model import (CLAUSES, CureInputError, check_exact, extract_result
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOL = 0.01
 # BOR-09 2026-Q3 from data/team/loan_covenants_extended.csv and data/cure_terms.csv. The monitor applies
-# the current ratio (maintenance) to this quarter, so C6 is included.
+# the current ratio (maintenance) and FCCR (springing, tested because revolver data is missing) to this
+# quarter, so C6 and C7 are included.
 BOR09 = dict(borrower_id="BOR-09", period="2026-Q3", D="1270000.00", EBITDA="325000.00", DS="260000.00", CF="300000.00",
              Lmax="3.00", Dmin="1.20", cap="100000.00", cures_remaining=1, cash="400000.00", min_liquidity="150000.00",
              k="0.18", premium_bps=100, has_asset=True, proceeds="150000.00", asset_ebitda="20000.00",
              asset_cf="25000.00", sale_cost="10000.00",
-             current_assets="900000.00", current_liabilities="600000.00", min_current_ratio="1.25")
-BOR01 = dict(BOR09, borrower_id="BOR-01", D="1030000.00", EBITDA="365000.00", has_asset=False, proceeds=0,
-             asset_ebitda=0, asset_cf=0, sale_cost=0, current_assets="860000.00", current_liabilities="610000.00")
+             current_assets="900000.00", current_liabilities="600000.00", min_current_ratio="1.25",
+             capex="35000.00", cash_taxes="15000.00", distributions="0.00", min_fccr="1.10")
+FCCR_KEYS = ("capex", "cash_taxes", "distributions", "min_fccr")
+# BOR-01 2026-Q3: FCCR is springing and dormant (revolver 30% drawn), so no C7 inputs are sent.
+BOR01 = {k: v for k, v in dict(BOR09, borrower_id="BOR-01", D="1030000.00", EBITDA="365000.00", has_asset=False, proceeds=0,
+         asset_ebitda=0, asset_cf=0, sale_cost=0, current_assets="860000.00", current_liabilities="610000.00").items()
+         if k not in FCCR_KEYS}
 NO_CR = {k: v for k, v in BOR09.items() if k not in ("current_assets", "current_liabilities", "min_current_ratio")}
 approx = lambda v: pytest.approx(v, abs=TOL)
 plan = lambda r, o="cheapest": r["options"][o]["plan"]
@@ -31,7 +36,7 @@ def test_T1_all_options(tmp_path):
     assert p["E"] == approx(68333.33) and p["P"] == approx(0) and p["cost"] == approx(78333.33)
     assert p["E_cents"] == 6833334  # rounded up to the cent inside the model
     assert p["binding"] == ["C1", "C4"]  # leverage has less than one cent of room; the last cure is used
-    assert "C6" in r["constraints"] and r["waivable"] == ["C1", "C2"]
+    assert {"C6", "C7"} <= set(r["constraints"]) and r["waivable"] == ["C1", "C2", "C7"]  # FCCR 1.0577x fails today
     a = r["options"]["cheapest"]["artifacts"]
     assert a["lp_file"] == "BOR-09_2026-Q3_T1.lp" and a["fixed_lp_file"] == "BOR-09_2026-Q3_T1_fixed.lp"
     assert len(a["lp_sha256"]) == 64 and a["params"]["MIPGap"] == 0.0 and a["params"]["Threads"] == 1
@@ -49,12 +54,13 @@ def test_T3_no_cures_remaining_infeasible_with_current_ratio(tmp_path):
     o = solve_cure(dict(BOR09, cures_remaining=0), out_dir=str(tmp_path), case="T3")["options"]["cheapest"]
     assert o["status"] == "INFEASIBLE" and o["plan"] is None
     assert {"C1", "C3", "C4", "C6"} <= set(o["infeasibility"]["iis"])
-    assert o["infeasibility"]["relaxed"] == ["C1", "C2"]
+    assert o["infeasibility"]["relaxed"] == ["C1", "C2", "C7"]
     w = o["infeasibility"]["waiver"]
     assert w["s"] == 1 and w["E_cents"] == 0 and w["P_cents"] == 14851485
     assert w["waiver_max_leverage_x100"] == 319                      # 971,485.15 / 305,000 = 3.1852
     assert (100 * w["pro_forma"]["debt_cents"]) / w["pro_forma"]["ebitda_cents"] == pytest.approx(318.52, abs=0.01)
     assert w["pro_forma"]["current_ratio"] == 1.25 and w["leverage_waived"] and not w["dscr_waived"]
+    assert not w["fccr_waived"] and not w["current_ratio_waived"]
 
 
 def test_T4_no_cures_no_asset_infeasible_with_current_ratio(tmp_path):
@@ -105,6 +111,31 @@ def test_feasrelax_relaxes_only_covenants_failing_in_base_case(tmp_path):
     assert not w["leverage_waived"] and w["dscr_waived"] and w["waiver_min_dscr_x100"] == 119
 
 
+def test_C7_fccr_bor02_q3_needs_16000_not_12000(tmp_path):
+    # BOR-02 2026-Q3: revolver 45% drawn, so springing FCCR applies. $12,000 fixes DSCR but leaves FCCR at
+    # (290,000 - 90,000 + 12,000) / 260,000 = 1.0846x; FCCR needs (270,000 + E) >= 286,000, so E = 16,000.
+    inp = dict(BOR09, borrower_id="BOR-02", D="1060000.00", EBITDA="360000.00", has_asset=False, proceeds=0, asset_ebitda=0,
+               asset_cf=0, sale_cost=0, current_assets="950000.00", capex="70000.00", cash_taxes="20000.00")
+    r = solve_cure(inp, out_dir=str(tmp_path), case="fccr")
+    p = plan(r)
+    assert r["waivable"] == ["C2", "C7"] and p["E_cents"] == 1600000 and p["cost_cents"] == 1600000
+    assert p["pro_forma"]["fccr"] == 1.1 and "C7" in p["binding"]
+    assert "C7" not in solve_cure({k: v for k, v in inp.items() if k not in FCCR_KEYS}, out_dir=str(tmp_path), case="nofccr")["constraints"]
+
+
+def test_current_ratio_failing_before_cure_is_relaxed_bor07_q3(tmp_path):
+    # BOR-07 2026-Q3: current ratio 780,000 / 640,000 = 1.2187x already fails; no lever raises current assets,
+    # so there is no cure. FeasRelax may relax C6 because it fails before any cure.
+    inp = dict(BOR09, borrower_id="BOR-07", D="1210000.00", EBITDA="335000.00", has_asset=False, proceeds=0, asset_ebitda=0,
+               asset_cf=0, sale_cost=0, current_assets="780000.00", current_liabilities="640000.00", capex="40000.00", cash_taxes="15000.00")
+    o = solve_cure(inp, out_dir=str(tmp_path), case="cr")["options"]["cheapest"]
+    i = o["infeasibility"]
+    assert o["status"] == "INFEASIBLE" and i["iis"] == ["C6"] and i["relaxed"] == ["C1", "C2", "C6", "C7"]
+    w = i["waiver"]
+    assert w["current_ratio_waived"] and w["waiver_min_current_ratio_x100"] == 121 and w["P_cents"] == 0
+    assert not w["leverage_waived"] and not w["dscr_waived"] and not w["fccr_waived"]   # the equity cure fixes those
+
+
 def test_other_status_never_returns_plan(tmp_path):
     """A NODE_LIMIT stop (neither OPTIMAL nor INFEASIBLE) gives an explicit error and no plan."""
     with gp.Env(empty=True) as env:
@@ -133,7 +164,7 @@ def test_bad_inputs_rejected():
 
 
 def test_every_clause_quote_is_verbatim_in_its_policy_file():
-    assert set(CLAUSES) == {"C1", "C2", "C3", "C4", "C5", "C6"}
+    assert set(CLAUSES) == {"C1", "C2", "C3", "C4", "C5", "C6", "C7"}
     for c in CLAUSES.values():
         for doc, quote in c["sources"]:
             with open(os.path.join(ROOT, "data", doc), encoding="utf-8") as f:

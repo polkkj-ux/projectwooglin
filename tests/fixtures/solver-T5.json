@@ -6,9 +6,9 @@
  "params": {
   "Threads": 1,
   "Seed": 0,
-  "MIPGap": 0.0,
-  "IntFeasTol": 1e-09,
-  "FeasibilityTol": 1e-09
+  "MIPGap": 0,
+  "IntFeasTol": 1e-9,
+  "FeasibilityTol": 1e-9
  },
  "units": "integer cents",
  "constraints": [
@@ -100,14 +100,14 @@
   "cheapest": {
    "status": "OPTIMAL",
    "plan": {
-    "E": 12000.0,
-    "P": 0.0,
+    "E": 12000,
+    "P": 0,
     "E_cents": 1200000,
     "P_cents": 0,
     "premium_cents": 0,
     "y": 1,
     "s": 0,
-    "cost": 12000.0,
+    "cost": 12000,
     "cost_cents": 1200000,
     "pro_forma": {
      "debt_cents": 103000000,
@@ -137,23 +137,23 @@
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
   "no_asset_sale": {
    "status": "OPTIMAL",
    "plan": {
-    "E": 12000.0,
-    "P": 0.0,
+    "E": 12000,
+    "P": 0,
     "E_cents": 1200000,
     "P_cents": 0,
     "premium_cents": 0,
     "y": 1,
     "s": 0,
-    "cost": 12000.0,
+    "cost": 12000,
     "cost_cents": 1200000,
     "pro_forma": {
      "debt_cents": 103000000,
@@ -183,23 +183,23 @@
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
   "equity_cure_only": {
    "status": "OPTIMAL",
    "plan": {
-    "E": 12000.0,
-    "P": 0.0,
+    "E": 12000,
+    "P": 0,
     "E_cents": 1200000,
     "P_cents": 0,
     "premium_cents": 0,
     "y": 1,
     "s": 0,
-    "cost": 12000.0,
+    "cost": 12000,
     "cost_cents": 1200000,
     "pro_forma": {
      "debt_cents": 103000000,
@@ -229,9 +229,9 @@
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   }

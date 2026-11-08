@@ -70,6 +70,11 @@ class SolveRequest(BaseModel):
     current_assets: Optional[Num] = None
     current_liabilities: Optional[Num] = None
     min_current_ratio: Optional[Num] = None
+    # FCCR (C7): sent only when the monitor applies the FCCR test this quarter.
+    capex: Optional[Num] = None
+    cash_taxes: Optional[Num] = None
+    distributions: Optional[Num] = None
+    min_fccr: Optional[Num] = None
 
 
 @app.get("/health")

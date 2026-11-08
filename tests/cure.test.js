@@ -11,6 +11,9 @@ async function mockSolver(respond){
  await new Promise(r=>s.listen(0,'127.0.0.1',r));return {url:'http://127.0.0.1:'+s.address().port,calls,close:()=>new Promise(r=>s.close(r))};
 }
 const quiet={log:()=>{}};
+// Picks the fixture the real solver produced for the request it receives (tests/fixtures, generated through curePlan).
+const smart=b=>fx(b.borrower_id==='BOR-01'?'T5':b.borrower_id==='BOR-02'?(b.period==='2026-Q2'?'BOR02Q2':'BOR02Q3'):b.borrower_id==='BOR-07'?'BOR07Q3':
+ b.cures_remaining===0?(b.has_asset?'T3':'T4')+(b.min_current_ratio?'':'-nocr'):'T1');
 const ctx=await loadCureContext();
 const noSnap={snapshotPath:path.join(os.tmpdir(),'does-not-exist-cure.json')};
 
@@ -22,6 +25,8 @@ test('T1 BOR-09 2026-Q3: live plan is rounded up to the cent and verified by the
   assert.equal(m.calls[0].path,'/solve');assert.equal(m.calls[0].body.D,'1270000.00');assert.equal(m.calls[0].body.has_asset,true);assert.equal(m.calls[0].body.k,'0.1800');
   // current ratio is applied to BOR-09 2026-Q3, so the C6 inputs are sent as exact decimal strings
   assert.equal(m.calls[0].body.current_assets,'900000.00');assert.equal(m.calls[0].body.current_liabilities,'600000.00');assert.equal(m.calls[0].body.min_current_ratio,'1.25');
+  // FCCR is springing but tested (no revolver data), so the C7 inputs are sent too
+  assert.equal(m.calls[0].body.capex,'35000.00');assert.equal(m.calls[0].body.cash_taxes,'15000.00');assert.equal(m.calls[0].body.distributions,'0.00');assert.equal(m.calls[0].body.min_fccr,'1.10');
   const c=b.options.find(o=>o.key==='cheapest');assert.equal(c.status,'plan');
   assert.equal(c.plan.equity_cure_usd,'68333.34');assert.equal(c.plan.paydown_usd,'0.00');assert.equal(c.plan.sell_asset,true);
   assert.equal(c.plan.total_cost_usd,'78333.34');assert.equal(c.plan.verified,true);
@@ -30,7 +35,8 @@ test('T1 BOR-09 2026-Q3: live plan is rounded up to the cent and verified by the
   assert.equal(c.plan.leverage,2.9999);
   assert.ok(c.plan.binding.some(x=>x.constraint==='C1'));
   assert.equal(b.clauses.C6.citations.length,2);assert.match(b.clauses.C6.citations[1].quote,/^Cure cash: /);
-  for(const k of ['C1','C2','C3','C4','C5','C6'])for(const ci of b.clauses[k].citations){const text=await fs.readFile(new URL('../data/'+ci.source_document,import.meta.url),'utf8');assert.ok(verifyCitation(text,ci),k);}
+  assert.match(b.clauses.C7.citations[0].quote,/^Fixed Charge Coverage Ratio is/);
+  for(const k of ['C1','C2','C3','C4','C5','C6','C7'])for(const ci of b.clauses[k].citations){const text=await fs.readFile(new URL('../data/'+ci.source_document,import.meta.url),'utf8');assert.ok(verifyCitation(text,ci),k);}
   assert.equal(b.options.find(o=>o.key==='no_asset_sale').plan.equity_cure_usd,'98333.34');
   assert.equal(b.terms.synthetic,true);assert.deepEqual(b.dropped,[]);assert.ok(b.assumptions.length>=5);
   // every applied covenant is re-checked pro forma, not just leverage and DSCR
@@ -60,7 +66,7 @@ test('T5 BOR-01 2026-Q3: equity cure equals the engine\'s -12000.00 cash-flow he
   const r=await curePlan({borrower:'BOR-01',period:'2026-Q3'},{optUrl:m.url,context:ctx,...noSnap,...quiet});
   const p=r.body.options.find(o=>o.key==='cheapest').plan;
   assert.equal(p.equity_cure_usd,ev.dscr.cashflow_headroom_usd.replace('-',''));assert.equal(p.total_cost_usd,'12000.00');assert.equal(p.dscr,1.2);assert.equal(p.verified,true);
-  assert.equal(m.calls[0].body.has_asset,false);
+  assert.equal(m.calls[0].body.has_asset,false);assert.equal(m.calls[0].body.min_fccr,undefined);   // FCCR dormant: revolver 30% drawn
  }finally{await m.close();}
 });
 
@@ -122,7 +128,7 @@ test('T3 (no cures): infeasible with C6; waiver sells Division A, repays $148,51
  }finally{await m.close();}
 });
 
-test('a plan that fixes leverage and DSCR but fails FCCR pro forma is reported and not shown',async()=>{
+test('a solver plan that fails FCCR pro forma (here: capex changed after solving) is reported and not shown',async()=>{
  // Same BOR-09 quarter with heavier capex: the T1 plan leaves FCCR at (373,333.34 - 150,000 - 15,000) / 233,000 = 0.8941x
  const rows=ctx.rows.map(r=>r.borrower_id==='BOR-09'&&r.period==='2026-Q3'?{...r,ttm_capex_usd:'150000.00'}:r);
  const m=await mockSolver(async()=>fx('T1'));
@@ -142,11 +148,38 @@ test('cure uses the monitor\'s data and settings: same rows, same base statuses,
   const mon=await (await fetch(base+'/api/covenants')).json();
   for(const x of mon.results.filter(x=>x.period==='2026-Q3')){const r=await curePlan({borrower:x.borrower_id,period:x.period},{optUrl:undefined,context:ctx,...noSnap,...quiet});assert.equal(r.body.needed,x.status!=='pass',x.borrower_id);}
  }finally{s.close();}
- const fccrOnly=await curePlan({borrower:'BOR-02',period:'2026-Q2',settings:{modes:{fccr:'maintenance'}}},{optUrl:'http://127.0.0.1:9',context:ctx,...noSnap,...quiet});
- assert.equal(fccrOnly.body.available,false);assert.deepEqual(fccrOnly.body.failing,['fccr']);assert.match(fccrOnly.body.reason,/fails FCCR only/);
+ // An FCCR-only breach is planned through C7: BOR-02 2026-Q2 with FCCR on maintenance needs $6,000 (README v7 demo figure)
+ const m2=await mockSolver(async b=>smart(b));
+ try{const fo=await curePlan({borrower:'BOR-02',period:'2026-Q2',settings:{modes:{fccr:'maintenance'}}},{optUrl:m2.url,context:ctx,...noSnap,...quiet});
+  assert.deepEqual(fo.body.breach.failing,['fccr']);assert.equal(m2.calls[0].body.min_fccr,'1.10');
+  const p=fo.body.options[0].plan;assert.equal(p.equity_cure_usd,'6000.00');assert.equal(p.verified,true);assert.equal(p.covenants.fccr.value,1.1);assert.ok(p.binding.some(x=>x.constraint==='C7'));
+ }finally{await m2.close();}
  const levOff=await curePlan({borrower:'BOR-09',period:'2026-Q3',settings:{modes:{leverage:'off'}}},{context:ctx,...noSnap,...quiet});
  assert.equal(levOff.body.available,false);assert.match(levOff.body.reason,/leverage and DSCR are both tested/);
  await assert.rejects(curePlan({borrower:'BOR-09',period:'2026-Q3',settings:{modes:{fccr:'sometimes'}}},{context:ctx}),/maintenance, springing or off/);
+});
+
+test('BOR-02 2026-Q3: C7 makes the cure $16,000 (a $12,000 DSCR cure would fail FCCR), verified',async()=>{
+ const m=await mockSolver(async b=>smart(b));
+ try{
+  const r=await curePlan({borrower:'BOR-02',period:'2026-Q3'},{optUrl:m.url,context:ctx,...noSnap,...quiet});
+  assert.equal(m.calls[0].body.min_fccr,'1.10');assert.deepEqual(r.body.breach.failing.sort(),['dscr','fccr']);
+  const p=r.body.options[0].plan;assert.equal(p.actions,'Sponsor contributes $16,000.00');assert.equal(p.total_cost_usd,'16000.00');assert.equal(p.verified,true);
+  assert.equal(p.covenants.fccr.value,1.1);assert.equal(p.covenants.fccr.status,'pass');assert.deepEqual(r.body.dropped,[]);
+ }finally{await m.close();}
+});
+
+test('BOR-07 2026-Q3: current ratio fails before any cure, so no cure exists; verified waiver to 1.21x minimum current ratio',async()=>{
+ const m=await mockSolver(async b=>smart(b));
+ try{
+  const r=await curePlan({borrower:'BOR-07',period:'2026-Q3'},{optUrl:m.url,context:ctx,...noSnap,...quiet});
+  assert.ok(r.body.breach.failing.includes('current_ratio'));
+  const c=r.body.options.find(o=>o.key==='cheapest');assert.equal(c.status,'no_cure');assert.deepEqual(c.iis.map(x=>x.constraint),['C6']);
+  const w=c.waiver;assert.equal(w.verified,true);assert.equal(w.current_ratio_waived,true);assert.equal(w.min_current_ratio,'1.21');
+  assert.equal(w.leverage_waived,false);assert.equal(w.dscr_waived,false);assert.equal(w.fccr_waived,false);assert.equal(w.paydown_usd,'0.00');
+  assert.equal(w.request,'Request a waiver to 1.21x minimum current ratio for 2026-Q3');assert.match(w.actions,/^Sponsor contributes \$/);
+  assert.ok(Object.values(w.covenants).every(x=>x.status==='pass'));
+ }finally{await m.close();}
 });
 
 test('solver down: GET serves the snapshot; no snapshot gives available:false; overrides need the live solver',async()=>{

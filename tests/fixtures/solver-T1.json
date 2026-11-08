@@ -6,9 +6,9 @@
  "params": {
   "Threads": 1,
   "Seed": 0,
-  "MIPGap": 0.0,
-  "IntFeasTol": 1e-09,
-  "FeasibilityTol": 1e-09
+  "MIPGap": 0,
+  "IntFeasTol": 1e-9,
+  "FeasibilityTol": 1e-9
  },
  "units": "integer cents",
  "constraints": [
@@ -17,11 +17,13 @@
   "C3",
   "C4",
   "C5",
-  "C6"
+  "C6",
+  "C7"
  ],
  "waivable": [
   "C1",
-  "C2"
+  "C2",
+  "C7"
  ],
  "clauses": {
   "C1": {
@@ -95,6 +97,20 @@
      "quote": "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds."
     }
    ]
+  },
+  "C7": {
+   "title": "Fixed-charge coverage after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "team/covenant-policy-addendum.txt",
+     "quote": "Fixed Charge Coverage Ratio is trailing twelve-month EBITDA less unfinanced capital expenditures, cash taxes and distributions, divided by trailing twelve-month fixed charges (scheduled interest and principal), minimum 1.10."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Equity cure: the sponsor may contribute cash that is added to EBITDA and to available cash flow for the quarter tested, up to the equity cure cap in cure_terms.csv."
+    }
+   ]
   }
  },
  "options": {
@@ -102,7 +118,7 @@
    "status": "OPTIMAL",
    "plan": {
     "E": 68333.34,
-    "P": 0.0,
+    "P": 0,
     "E_cents": 6833334,
     "P_cents": 0,
     "premium_cents": 0,
@@ -120,7 +136,9 @@
      "leverage": 2.9999,
      "dscr": 1.4735,
      "current_assets_cents": 90000000,
-     "current_ratio": 1.5
+     "current_ratio": 1.5,
+     "fccr_numerator_cents": 32333334,
+     "fccr": 1.3876
     },
     "binding": [
      "C1",
@@ -131,16 +149,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_live.lp",
-    "lp_sha256": "688a4f3df465dde6f0d6614ea073a1ec7f6e2b925a4122e2d631560a2378a682",
+    "lp_sha256": "dfe3b668fc6f5e307383c03cc65a26280a5b126509f5add53a9386a1cd52ab3c",
     "fixed_lp_file": "BOR-09_2026-Q3_live_fixed.lp",
-    "fixed_lp_sha256": "c35bd58c6072c86f5ff6f71f27f6ba322837b9d522cfd4256717b6bdbdeff88b",
+    "fixed_lp_sha256": "12da45d7214d45da293d6b50f57f9b9454e8104790efbfea88262fc0b01949a3",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
@@ -148,7 +166,7 @@
    "status": "OPTIMAL",
    "plan": {
     "E": 98333.34,
-    "P": 0.0,
+    "P": 0,
     "E_cents": 9833334,
     "P_cents": 0,
     "premium_cents": 0,
@@ -166,7 +184,9 @@
      "leverage": 2.9999,
      "dscr": 1.532,
      "current_assets_cents": 90000000,
-     "current_ratio": 1.5
+     "current_ratio": 1.5,
+     "fccr_numerator_cents": 37333334,
+     "fccr": 1.4358
     },
     "binding": [
      "C1",
@@ -177,16 +197,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_live_no_asset_sale.lp",
-    "lp_sha256": "52828b049f8780a43cb2627a44044caa4f446f5d1b5d1a2495ae61c5935cacf1",
+    "lp_sha256": "1200872d5b60d10301980d4f2ee41488f2eaeddf3b2343d1994ff2cc01125f2f",
     "fixed_lp_file": "BOR-09_2026-Q3_live_no_asset_sale_fixed.lp",
-    "fixed_lp_sha256": "743d8f549bfc70404811d0937078bd867e3081cd1dedab4593f1f983861c19c7",
+    "fixed_lp_sha256": "c81727f6cba36202fd4e8f19e55cd77965b2d30b3f7465e3c4cbf6b278e7a3a8",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
@@ -194,7 +214,7 @@
    "status": "OPTIMAL",
    "plan": {
     "E": 98333.34,
-    "P": 0.0,
+    "P": 0,
     "E_cents": 9833334,
     "P_cents": 0,
     "premium_cents": 0,
@@ -212,7 +232,9 @@
      "leverage": 2.9999,
      "dscr": 1.532,
      "current_assets_cents": 90000000,
-     "current_ratio": 1.5
+     "current_ratio": 1.5,
+     "fccr_numerator_cents": 37333334,
+     "fccr": 1.4358
     },
     "binding": [
      "C1",
@@ -223,16 +245,16 @@
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_live_equity_cure_only.lp",
-    "lp_sha256": "a7710e641aa35c4c72fde77f9bec4fed59ae6c232d55f065c8d6e89b66dce2be",
+    "lp_sha256": "5b25f38a14cc07367ae6480361b49dec84eafbfcb85f66f1d650048d52c9949e",
     "fixed_lp_file": "BOR-09_2026-Q3_live_equity_cure_only_fixed.lp",
-    "fixed_lp_sha256": "0bf5bf0521ce67a574ebcd628bb96815d25060fdc17692291246b206cfa5bbef",
+    "fixed_lp_sha256": "8fe4deff76558f98a5ca8c59ac010d4a2a5158270b9f38bed0ede8dd3748c755",
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   }

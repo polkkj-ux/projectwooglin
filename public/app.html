@@ -1149,9 +1149,9 @@ function cureSection(b,r){
  if(cureCache.has(key))fill(cureCache.get(key));else{const p=period;fetchCure(b,p).then(j=>{cureCache.set(b+'|'+p+'|'+termsKey(),j);if(body.isConnected&&p===period)fill(j);});}
  return sec;
 }
-function covFacts(covenants){
+function covFacts(covenants,waived={}){
  return Object.entries(covenants||{}).filter(([k])=>COV[k]).map(([k,c])=>{
-  const limText=c.limit==null?'':` (${c.direction==='max'?'max':'min'} ${lim(c.limit)})`;
+  const limText=c.limit==null?'':` (${waived[k]?'waived ':''}${c.direction==='max'?'max':'min'} ${lim(c.limit)})`;
   const v=c.status==='dormant'?`${fx(c.value,c.limit)}, not triggered`:fx(c.value,c.limit);
   return [COV[k].name+' after',v+limText,c.status==='pass'||c.status==='dormant'?null:'neg'];});
 }
@@ -1193,7 +1193,7 @@ function noCureCard(o,j){
   w?h('div',{class:'cx-waiver'},h('div',{class:'cx-k'},'Smallest waiver'),h('p',{class:'cx-req'},w.request||'No covenant threshold needs to change.'),
     h('span',{class:'st st-ok'},icon('check',15),'Verified by exact engine at the waived limits'),
     factsDl([['Action with the waiver (synthetic terms)',w.actions],['Debt repaid early',usd(w.paydown_usd)],['Leverage after',`${fx(w.leverage_after,L)} (waived max ${lim(w.max_leverage)})`],
-     ['DSCR after',`${fx(w.dscr_after,D)} (${w.dscr_waived?'waived ':''}min ${lim(w.min_dscr)})`],...covFacts(w.covenants).filter(([k])=>!/^(Leverage|Debt-service|DSCR)/.test(k))]))
+     ['DSCR after',`${fx(w.dscr_after,D)} (${w.dscr_waived?'waived ':''}min ${lim(w.min_dscr)})`],...covFacts(w.covenants,{fccr:w.fccr_waived,current_ratio:w.current_ratio_waived}).filter(([k])=>!/^(Leverage|Debt-service|DSCR)/.test(k))]))
    :h('div',{class:'cx-waiver'},h('div',{class:'cx-k'},'Smallest waiver'),h('p',{class:'cure bad',style:'margin:0'},o.waiver_error||'No waiver could be sized.')),
   modelDetails(o,j));
 }

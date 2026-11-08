@@ -41,10 +41,10 @@ Minimize `E + P + Q + sale_cost · s` (cents).
 | C3 | `E ≤ cap · y` | cure-policy.txt: "Equity cure: …" | no (fact) |
 | C4 | `y ≤ cures_remaining` | cure-policy.txt: "Cure frequency: …" | no (fact) |
 | C5 | `P ≤ cash − min_liquidity` | cure-policy.txt: "Minimum liquidity: …" | no (fact) |
-| C6 | `100·(current_assets − P − Q) ≥ min_current_ratio · current_liabilities` | team/covenant-policy-addendum.txt: "Current Ratio is current assets divided by current liabilities at quarter end, minimum 1.25." and cure-policy.txt: "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds." | no (it passes before any cure) |
+| C6 | `100·(current_assets − P − Q) ≥ min_current_ratio · current_liabilities` | team/covenant-policy-addendum.txt: "Current Ratio is current assets divided by current liabilities at quarter end, minimum 1.25." and cure-policy.txt: "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds." | only if the current ratio fails before any cure |
+| C7 | `100·(EBITDA + E − asset_ebitda·s − capex − cash_taxes − distributions) ≥ min_fccr·(DS − R)` | team/covenant-policy-addendum.txt: "Fixed Charge Coverage Ratio is trailing twelve-month EBITDA less unfinanced capital expenditures, cash taxes and distributions, divided by trailing twelve-month fixed charges (scheduled interest and principal), minimum 1.10." and cure-policy.txt: "Equity cure: …" | only if FCCR fails before any cure |
 
-C6 is included **only when the monitor's engine applies the current-ratio test** to that borrower and quarter under the current settings (not off, not dormant). Node decides this
-and sends `current_assets`, `current_liabilities` and `min_current_ratio` only in that case. FCCR is not a model constraint; the exact re-check rejects and reports any plan that fails it.
+C6 and C7 are included **only when the monitor's engine applies that test** to that borrower and quarter under the current settings: not off, and not dormant (a springing FCCR applies when triggered, or when revolver data is missing). Node decides this and sends the current-ratio fields (`current_assets`, `current_liabilities`, `min_current_ratio`) or the FCCR fields (`capex`, `cash_taxes`, `distributions`, `min_fccr`) only in that case. Capex, cash taxes and distributions don't change with a cure, including after an asset sale.
 The full sentences are listed in `opt/cure_model.py` (`CLAUSES`). The Node app cites them by exact character offset and SHA-256.
 
 ## Inputs
@@ -67,8 +67,8 @@ Each request is solved three times, independently. Any option may be infeasible.
 
 - **OPTIMAL with gap 0 that passes `check_exact`:** returns a plan with `E`, `P` (USD and `*_cents`), the premium, `y`, `s`, cost, exact pro-forma figures and the binding constraints. A constraint is binding when its slack is smaller than one cent's step for any money variable in that row.
 - **INFEASIBLE:** returns the `computeIIS()` row names, which can include the auxiliary `PREMIUM` row; Node shows only C1 to C6. It also returns a waiver. The waiver comes from `feasRelax` with relaxobjtype 0 (minimum total violation) and minrelax true.
-  It relaxes only the covenants that fail with no cure at all: C1 if leverage fails, C2 if DSCR fails. C3 to C6 stay hard. The relaxed solution is re-checked exactly on every constraint that wasn't relaxed.
-  The waiver thresholds are `max(Lmax, ceil(pro-forma leverage))` and `min(Dmin, floor(pro-forma DSCR))` at 0.01x.
+  It relaxes only the covenants (C1, C2, C6, C7) that fail with no cure at all. C3, C4 and C5 (cure cap, cure frequency, minimum liquidity) are facts and stay hard. The relaxed solution is re-checked exactly on every constraint that wasn't relaxed.
+  The waiver thresholds are `max(Lmax, ceil(pro-forma leverage))` for leverage and `min(limit, floor(pro-forma ratio))` for DSCR, FCCR and the current ratio, all at 0.01x. A threshold changes only for a covenant that may be relaxed.
 - **Any other status:** returns an explicit `error` and never a plan.
 - **Artifacts:** each option writes `<borrower>_<period>_<case><suffix>.lp`. The suffix is empty for `cheapest`, or `_no_asset_sale` / `_equity_cure_only`. When a plan exists, a `..._fixed.lp` copy with
   `y` and `s` fixed is also written. Results carry each file's SHA-256, the Gurobi version and the parameters.
@@ -77,7 +77,7 @@ Each request is solved three times, independently. Any option may be infeasible.
 
 BOR-09 2026-Q3 has D 1,270,000, EBITDA 325,000, DS 260,000, CF 300,000, Lmax 3.00 and Dmin 1.20. Current assets are 900,000 and current liabilities 600,000, with a minimum current ratio of 1.25 (applied).
 Its terms are cap 100,000, 1 cure remaining, cash 400,000, minimum liquidity 150,000, k 0.18 and premium 100 bps. Its asset, Division A, has net proceeds 150,000, EBITDA 20,000, cash flow 25,000 and
-sale cost 10,000. Before any cure, BOR-09 fails both leverage (3.9076x) and DSCR (1.1538x), so FeasRelax may relax C1 and C2.
+sale cost 10,000. Its FCCR inputs are capex 35,000, cash taxes 15,000, distributions 0 and a 1.10 minimum; the springing FCCR is tested because revolver data is missing. Before any cure, BOR-09 fails leverage (3.9076x), DSCR (1.1538x) and FCCR (1.0577x), so FeasRelax may relax C1, C2 and C7. Its current ratio (1.50x) passes, so C6 stays hard.
 
 | Test | Case | Expected |
 |---|---|---|
@@ -85,7 +85,9 @@ sale cost 10,000. Before any cure, BOR-09 fails both leverage (3.9076x) and DSCR
 | T2 | No asset | E=98,333.33 (98,333.34), cost 98,333.33 |
 | T3 | cures_remaining = 0 | INFEASIBLE. IIS includes C1, C3, C4, C6. Waiver: sell Division A, pay down 148,514.85 (premium 1,485.15), max leverage 971,485.15 / 305,000 = 3.1852 → **3.19x**, current ratio 750,000 / 600,000 = exactly 1.25x |
 | T4 | cures_remaining = 0, no asset | INFEASIBLE. IIS includes C1, C3, C4, C6. Waiver: pay down 148,514.85, max leverage 1,121,485.15 / 325,000 = 3.4507 → **3.46x**, current ratio exactly 1.25x. DSCR 1.2860 passes, so no DSCR waiver is needed |
-| T5 | BOR-01 2026-Q3 (D 1,030,000, EBITDA 365,000, no asset) | E=12,000, cost 12,000. Binding: C2, C4 |
+| T5 | BOR-01 2026-Q3 (D 1,030,000, EBITDA 365,000, no asset; FCCR dormant, so no C7) | E=12,000, cost 12,000. Binding: C2, C4 |
+| C7 check | BOR-02 2026-Q3 (revolver 45% drawn, so FCCR applies) | E=16,000. A $12,000 DSCR cure would leave FCCR at 1.0846x. Binding: C7 |
+| Relax check | BOR-07 2026-Q3 (current ratio 1.2187x already fails) | INFEASIBLE, IIS {C6}. Waiver: current ratio to 1.21x, with an equity cure fixing leverage, DSCR and FCCR |
 
 The 148,514.85 paydown is the exact limit. Its premium is ceil(14,851,485 × 100 / 10,000) = 148,515 cents, which leaves current assets at exactly 750,000.00. One more cent of paydown gives 749,999.99, which fails.
 Both the Python and the Node exact engines test this. Without current-ratio inputs (current ratio off or dormant), C6 is omitted and the earlier answers return: T3 gives P=205,000 at cost 217,050, and
@@ -108,6 +110,7 @@ T4's waiver gives P=250,000 at 3.14x. These are kept as regression tests. All an
 5. A clause map C1..C6 → exact policy sentences was added. The tests check that each sentence occurs verbatim.
 6. After main brought the four-covenant engine (v7/v9), these changes were made at the credit lead's direction: C6 (current ratio, with the "Cure cash" sentence added to cure-policy.txt); exact integer-cents
    modelling with PREMIUM and RELIEF rows; FeasRelax restricted to the covenants failing before any cure; and the re-check against every applied covenant.
+7. C7 (FCCR) was added after the snapshot dry run found BOR-02 2026-Q3 plans that cured DSCR but failed FCCR. The relax rule was generalised to C6 and C7 after BOR-07 showed a current ratio already failing before any cure.
 
 ## Verification (Gurobi Explainer cross-check)
 

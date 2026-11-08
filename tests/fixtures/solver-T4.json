@@ -6,9 +6,9 @@
  "params": {
   "Threads": 1,
   "Seed": 0,
-  "MIPGap": 0.0,
-  "IntFeasTol": 1e-09,
-  "FeasibilityTol": 1e-09
+  "MIPGap": 0,
+  "IntFeasTol": 1e-9,
+  "FeasibilityTol": 1e-9
  },
  "units": "integer cents",
  "constraints": [
@@ -17,11 +17,13 @@
   "C3",
   "C4",
   "C5",
-  "C6"
+  "C6",
+  "C7"
  ],
  "waivable": [
   "C1",
-  "C2"
+  "C2",
+  "C7"
  ],
  "clauses": {
   "C1": {
@@ -95,6 +97,20 @@
      "quote": "Cure cash: a voluntary prepayment and its premium are paid from cash and reduce current assets, equity cure cash is not added to current assets, and the sale cost of a permitted asset sale is paid from its gross proceeds."
     }
    ]
+  },
+  "C7": {
+   "title": "Fixed-charge coverage after cure",
+   "waivable": true,
+   "sources": [
+    {
+     "source_document": "team/covenant-policy-addendum.txt",
+     "quote": "Fixed Charge Coverage Ratio is trailing twelve-month EBITDA less unfinanced capital expenditures, cash taxes and distributions, divided by trailing twelve-month fixed charges (scheduled interest and principal), minimum 1.10."
+    },
+    {
+     "source_document": "documents/cure-policy.txt",
+     "quote": "Equity cure: the sponsor may contribute cash that is added to EBITDA and to available cash flow for the quarter tested, up to the equity cure cap in cure_terms.csv."
+    }
+   ]
   }
  },
  "options": {
@@ -111,10 +127,11 @@
     ],
     "relaxed": [
      "C1",
-     "C2"
+     "C2",
+     "C7"
     ],
     "waiver": {
-     "E": 0.0,
+     "E": 0,
      "P": 148514.85,
      "E_cents": 0,
      "P_cents": 14851485,
@@ -129,28 +146,34 @@
       "leverage": 3.4507,
       "dscr": 1.286,
       "current_assets_cents": 75000000,
-      "current_ratio": 1.25
+      "current_ratio": 1.25,
+      "fccr_numerator_cents": 27500000,
+      "fccr": 1.1789
      },
      "waiver_max_leverage_x100": 346,
      "waiver_min_dscr_x100": 120,
      "leverage_waived": true,
-     "dscr_waived": false
+     "dscr_waived": false,
+     "waiver_min_current_ratio_x100": 125,
+     "current_ratio_waived": false,
+     "waiver_min_fccr_x100": 110,
+     "fccr_waived": false
     },
     "waiver_error": null
    },
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_whatif.lp",
-    "lp_sha256": "b44a0a1d4a57696640cfa2711cc50e4743ad57692dd5bb36dc5308478cefd19e",
+    "lp_sha256": "0b3c0247c8e6a8a4607d53d0a339773fa3bb70a62eb59026e0e32ceb63a593af",
     "fixed_lp_file": null,
     "fixed_lp_sha256": null,
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
@@ -167,10 +190,11 @@
     ],
     "relaxed": [
      "C1",
-     "C2"
+     "C2",
+     "C7"
     ],
     "waiver": {
-     "E": 0.0,
+     "E": 0,
      "P": 148514.85,
      "E_cents": 0,
      "P_cents": 14851485,
@@ -185,28 +209,34 @@
       "leverage": 3.4507,
       "dscr": 1.286,
       "current_assets_cents": 75000000,
-      "current_ratio": 1.25
+      "current_ratio": 1.25,
+      "fccr_numerator_cents": 27500000,
+      "fccr": 1.1789
      },
      "waiver_max_leverage_x100": 346,
      "waiver_min_dscr_x100": 120,
      "leverage_waived": true,
-     "dscr_waived": false
+     "dscr_waived": false,
+     "waiver_min_current_ratio_x100": 125,
+     "current_ratio_waived": false,
+     "waiver_min_fccr_x100": 110,
+     "fccr_waived": false
     },
     "waiver_error": null
    },
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_whatif_no_asset_sale.lp",
-    "lp_sha256": "119b480415231ee0862ac50ad4d1e08c113126e77fa63149cfa84d17c6b78bf2",
+    "lp_sha256": "e3ffb40db52265f8b891c8cb6ae7164d299c2ccf1fe13c1ab4e060ba7a3c7858",
     "fixed_lp_file": null,
     "fixed_lp_sha256": null,
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   },
@@ -221,11 +251,12 @@
     ],
     "relaxed": [
      "C1",
-     "C2"
+     "C2",
+     "C7"
     ],
     "waiver": {
-     "E": 0.0,
-     "P": 0.0,
+     "E": 0,
+     "P": 0,
      "E_cents": 0,
      "P_cents": 0,
      "s": 0,
@@ -239,28 +270,34 @@
       "leverage": 3.9076,
       "dscr": 1.1538,
       "current_assets_cents": 90000000,
-      "current_ratio": 1.5
+      "current_ratio": 1.5,
+      "fccr_numerator_cents": 27500000,
+      "fccr": 1.0576
      },
      "waiver_max_leverage_x100": 391,
      "waiver_min_dscr_x100": 115,
      "leverage_waived": true,
-     "dscr_waived": true
+     "dscr_waived": true,
+     "waiver_min_current_ratio_x100": 125,
+     "current_ratio_waived": false,
+     "waiver_min_fccr_x100": 105,
+     "fccr_waived": true
     },
     "waiver_error": null
    },
    "error": null,
    "artifacts": {
     "lp_file": "BOR-09_2026-Q3_whatif_equity_cure_only.lp",
-    "lp_sha256": "dd43e89875b0f79e82a7aa1c654fbd60c79d87cfe39a6bc11da378ed04191036",
+    "lp_sha256": "e226d4e239b9ef61f3db68691a4b16a820f4e5c64f9c8244607badf4ef1b404d",
     "fixed_lp_file": null,
     "fixed_lp_sha256": null,
     "gurobi_version": "13.0.3",
     "params": {
      "Threads": 1,
      "Seed": 0,
-     "MIPGap": 0.0,
-     "IntFeasTol": 1e-09,
-     "FeasibilityTol": 1e-09
+     "MIPGap": 0,
+     "IntFeasTol": 1e-9,
+     "FeasibilityTol": 1e-9
     }
    }
   }
