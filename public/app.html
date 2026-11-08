@@ -196,7 +196,8 @@ table.data{width:100%;border-collapse:collapse;font-size:14px}
 .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:10px;font-size:13px;color:var(--ink-3)}
 .meta b{font-weight:500;color:var(--ink-2)}
 .ws{display:grid;grid-template-columns:minmax(0,1fr) 352px;gap:32px;align-items:start}
-.ws-rail{position:sticky;top:84px;display:grid;gap:16px}
+.ws-rail{display:grid;gap:16px}
+.ws-rail .panel{scroll-margin-top:76px}
 .exec{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--rule-2);border-radius:8px;padding:22px 26px}
 .exec.bad{border-left-color:var(--red)}.exec.warn{border-left-color:var(--amber)}.exec.ok{border-left-color:var(--teal)}
 .exec p{margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--ink-2);max-width:74ch}
@@ -467,7 +468,125 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 .rec li+li{margin-top:4px}
 pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;font:15px/1.7 var(--serif);color:var(--ink);white-space:pre-wrap}
 
-@media (max-width:1180px){table.data.wide .trend-h,table.data.wide .td-trend{display:none}}
+/* Borrowers requiring attention (watchlist) */
+.attn{margin:0 0 44px}
+.attn .sh .tools{align-self:flex-end}
+.attn-box{background:#fff;border:1px solid var(--rule);border-radius:8px;box-shadow:var(--sh-1);overflow:hidden}
+.ag+.ag{border-top:1px solid var(--rule)}
+.ag-h{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;padding:11px 20px;background:var(--head);font-size:12.5px;color:var(--ink-3)}
+.ag:has(.wl) .ag-h{border-bottom:1px solid var(--rule)}
+.ag-h b{font-size:13.5px;font-weight:600;color:var(--ink)}
+.ag-n{display:inline-grid;place-items:center;flex:none;width:20px;height:20px;border-radius:50%;background:var(--ink-3);color:#fff;font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.g-bad .ag-n{background:var(--red)}.g-warn .ag-n{background:var(--amber)}
+.ag-d{flex:1 1 260px;min-width:0}
+.ag-c{margin-left:auto;font-weight:500;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ag-c.none{color:var(--faint);font-weight:400}
+.tag-rule{background:#fff;color:var(--ink-3);border:1px solid var(--rule-2);font-weight:500}
+.wl{list-style:none;margin:0;padding:0}
+.wi{display:grid;grid-template-columns:150px minmax(0,1fr) 172px auto;gap:20px;align-items:center;padding:15px 20px;border-top:1px solid var(--rule)}
+.wi:first-child{border-top:0}
+.wi-b{display:grid;gap:5px;justify-items:start;align-content:start}
+.wi-b .rowlink{font-size:15px}
+.wi-b .st{font-size:13px}
+.wi-x p{margin:0;font-size:14px;line-height:1.5;color:var(--ink)}
+.wi-x p+p{margin-top:4px}
+.wi-x p.sub{font-size:12.5px;line-height:1.5;color:var(--ink-3)}
+.wi-v{display:grid;gap:4px;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.wi-v b{font-weight:600;color:var(--ink-2)}
+.wi-v .bad{color:var(--red);font-weight:600}
+.btn-sm{height:30px;padding:0 10px 0 12px;font-size:13px;gap:4px}
+.wl-more{display:block;margin:0;padding:10px 20px 14px;font-size:13px}
+.wl-foot{margin:10px 0 0;font-size:12.5px;color:var(--ink-3);max-width:96ch}
+.wl-ctx{padding:10px 20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-3);background:#FCFCFD}
+.wl-ctx b{color:var(--ink-2);font-weight:600}
+@media (max-width:1240px){.wi{grid-template-columns:140px minmax(0,1fr) auto}.wi-v{display:none}}
+@media (max-width:720px){.wi{grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;padding:14px 16px}.wi-x{grid-column:1/-1;grid-row:2}.wi-b{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0}.ag-h{padding:10px 16px}.ag-d{flex-basis:100%;order:3}}
+.qnew{background:var(--red-wash);color:#8E2F33}
+/* monitoring table */
+table.data.mon tbody td{padding:13px 12px;vertical-align:top}
+table.data.mon thead th>span,table.data.mon thead th>button{padding:11px 12px;white-space:normal;line-height:1.3}
+table.data.mon td:first-child,table.data.mon th:first-child>span,table.data.mon th:first-child>button{padding-left:16px}
+.mon .rail{width:78px}
+.mon .ratio-sub{white-space:nowrap}
+.chips{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 7px;border-radius:4px;border:1px solid var(--rule);background:#fff;font-size:12px;font-weight:500;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.chip.bad{background:var(--red-wash);border-color:#EDD0D1;color:#8E2F33}.chip.bad svg{color:var(--red)}
+.chip.ok svg{color:var(--teal)}
+.chip.dorm{border-style:dashed;color:var(--ink-3)}
+.chip.na{color:var(--faint)}
+.chip.warn{color:var(--amber-ink)}
+.chip-s{display:block;margin-top:2px;font-size:11.5px;color:var(--amber-ink)}
+.chip-w{display:block}
+.td-chg .trend{gap:5px;justify-items:start}
+.td-chg .d{font-size:12.5px;color:var(--ink-3);white-space:normal}.td-chg .d.bad{color:var(--red)}
+.hd{display:grid;gap:4px}
+.hd-v{font-size:14px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.hd-v.bad{color:var(--red)}
+.hd-s{font-size:12.5px;color:var(--ink-3)}
+.hdbar{display:block;overflow:visible}
+.hdbar .hb-t{fill:var(--grid)}
+.hdbar .hb-n{fill:var(--red)}.hdbar .hb-p{fill:var(--teal);opacity:.8}.hdbar .hb-w{fill:var(--amber)}
+.hdbar .hb-z{stroke:var(--ink);stroke-width:1.2}
+.rv-a{font-size:13px;color:var(--ink-2);line-height:1.4}
+.rvc{display:inline-flex;align-items:center;gap:4px;margin-top:6px;height:20px;padding:0 7px;border-radius:999px;font-size:11.5px;font-weight:500;white-space:nowrap;border:1px solid var(--rule);color:var(--ink-3);background:#fff}
+.rvc-under{background:var(--blue-wash);border-color:#D3E0EB;color:var(--blue)}
+.rvc-done{background:var(--soft);color:var(--ink-2)}
+.tq .selwrap select{height:34px}
+@media (max-width:1400px){.mon .rail{display:none}.mon .tag{white-space:normal;height:auto;padding:2px 8px;line-height:1.35}table.data.mon tbody td{padding:12px 7px}table.data.mon thead th>span,table.data.mon thead th>button{padding:11px 7px}table.data.mon td:first-child,table.data.mon th:first-child>button{padding-left:14px}}
+@media (max-width:1180px){table.data.mon .th-chg,table.data.mon .td-chg{display:none}}
+/* covenant status (borrower investigation) */
+table.cst{width:100%;border-collapse:collapse;font-size:14px}
+table.cst>thead>tr>th{padding:0;background:var(--head);border-bottom:1px solid var(--rule);text-align:left;font-size:12.5px;font-weight:500;color:var(--ink-3);white-space:nowrap}
+table.cst>thead>tr>th>span{display:block;padding:11px 14px}
+table.cst>tbody>tr>th,table.cst>tbody>tr>td{padding:13px 14px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left;font-weight:400}
+table.cst>tbody.cb:last-of-type>tr.csum>*{border-bottom:0}
+table.cst>tbody.cb.open:last-of-type>tr.csum>*{border-bottom:1px solid var(--rule)}
+table.cst>tbody.cb.fail>tr.csum>th{box-shadow:inset 3px 0 0 var(--red)}
+.cs-sub.nw{white-space:nowrap}
+.xt{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;font-size:14px;font-weight:600;color:var(--ink);text-align:left}
+.xt .chev{flex:none;color:var(--slate);transition:transform .15s}
+.xt[aria-expanded=true] .chev{transform:rotate(90deg)}
+.xt:hover span{text-decoration:underline;text-underline-offset:3px}
+.cs-sub{margin-top:3px;font-size:12.5px;color:var(--ink-3)}
+th .cs-sub{padding-left:23px}
+.cs-sub.bad{color:var(--red);font-weight:500}.cs-sub.warn{color:var(--amber-ink)}.cs-sub.ok{color:var(--teal)}
+.cs-v{font-size:16px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cs-v.bad{color:var(--red)}.cs-v.dorm{color:var(--ink-3);font-weight:500}
+.cs-if{font-size:12px;font-weight:400;color:var(--ink-3)}
+.cs-m{font-size:14px;color:var(--ink-2);white-space:nowrap}
+tr.cdet>td{padding:0!important;background:#FCFCFD}
+.insp{display:grid;gap:12px;padding:18px 20px 20px 37px;border-bottom:1px solid var(--rule)}
+tbody.cb:last-of-type .insp{border-bottom:0}
+.insp .what{margin:0;font-size:13.5px;color:var(--ink-2);max-width:78ch}
+.insp h4{margin:6px 0 0;font-size:13px;font-weight:600;color:var(--ink)}
+.insp .cure{margin:0}
+.insp .formula{justify-self:start;font-size:15px}
+.wr .axis2{margin-top:2px}
+.agr{display:grid;gap:8px}
+.agr-m{font-size:12.5px;color:var(--ink-3);word-break:break-word}
+.agr .linkbtn{justify-self:start;font-size:13px}
+mark.cite.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%,40%{background:#FFE7A3;box-shadow:inset 0 -2px 0 var(--amber),0 0 0 3px #FFE7A3}100%{}}
+/* analyst review */
+.rvp .rseg{display:flex;width:100%}
+.rvp .rseg label{flex:1}
+.rvp .rseg span{justify-content:center;width:100%;padding:0 6px;font-size:12.5px}
+.rvp textarea{min-height:92px;margin-top:6px;font:13.5px/1.5 var(--sans)}
+.rvp .row2{margin-top:10px}
+.rv-saved{margin:10px 0 0;font-size:12.5px;color:var(--ink-3)}
+.rv-disc{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;line-height:1.5;color:var(--ink-3)}
+/* setup checklist */
+.setup ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.setup li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.setup li>svg{margin-top:1px}
+.setup .s-ok{color:var(--teal)}.setup .s-bad{color:var(--red)}.setup .s-na{color:var(--slate)}
+.setup li b{display:block;color:var(--ink);font-weight:600}
+.setup ul{margin:4px 0 0;padding-left:16px;font-size:12.5px;color:var(--ink-3)}
+.chk{display:flex;align-items:flex-start;gap:9px;margin-top:12px;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.chk input{flex:none;width:16px;height:16px;margin:2px 0 0;accent-color:var(--blue)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.kpis.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+.kpi .ctx b{font-weight:600;color:var(--ink-2)}
+@media (max-width:1240px){.kpis.five{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* Cure options (v11). Status colours only for pass/fail meaning: verified = teal, no cure = red. */
 .tag-syn{background:var(--soft);color:var(--ink-3);border:1px solid var(--rule)}
 .cx-body{display:grid;gap:14px}
@@ -498,7 +617,7 @@ pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-
 .cx-unavail svg{flex:none;color:var(--slate);margin-top:1px}.cx-unavail p{margin:2px 0 0}
 .cx-model dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:13px}.cx-model dt{color:var(--ink-3)}.cx-model dd{margin:0;color:var(--ink);word-break:break-all}
 @media (max-width:720px){.cx-card,.cx-none{padding:16px}.cx-form{padding:12px}.cx-form label,.cx-form input[type=text],.cx-form select{width:100%}}
-@media (max-width:1240px){.ws{grid-template-columns:minmax(0,1fr)}.ws-rail{position:static;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}}
+@media (max-width:1400px){.ws{grid-template-columns:minmax(0,1fr)}.ws-rail{position:static;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi:nth-child(3){border-left:0;padding-left:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--rule)}.two,.defs{grid-template-columns:minmax(0,1fr)}.doc-layout{grid-template-columns:minmax(0,1fr);gap:24px}.toc{position:static;flex-direction:row;flex-wrap:wrap;gap:4px}.toc a{border-left:0;border-bottom:2px solid var(--rule)}}
 @media (max-width:900px){
  .app{grid-template-columns:minmax(0,1fr);background:none}
@@ -525,12 +644,22 @@ pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-
  #tbl tr.row{display:grid;grid-template-columns:1fr 1fr;padding:6px 0;border-bottom:1px solid var(--rule)}
  #tbl tr.row:last-child{border-bottom:0}
  #tbl td{border:0;padding:8px 16px}
- #tbl td[data-label=Borrower],#tbl td[data-label="Overall status"]{grid-column:1/-1}
- #tbl td[data-label=Trend],#tbl td.go-td{display:none}
+ #tbl td[data-label=Borrower],#tbl td[data-label="Overall status"],#tbl td[data-label="Headroom or shortfall"],#tbl td[data-label="Review action"]{grid-column:1/-1}
+ #tbl td.td-chg{display:block}
+ table.cst thead{display:none}
+ table.cst,table.cst tbody{display:block}
+ table.cst tr.csum{display:grid;grid-template-columns:1fr 1fr}
+ table.cst tr.csum th{grid-column:1/-1;border-bottom:0!important}
+ table.cst tr.csum td{border-bottom:0!important;padding-top:6px}
+ table.cst tr.cdet{display:block}table.cst tr.cdet>td{display:block}
+ .insp{padding:14px 16px 16px}
+ table.cst tbody.cb{border-bottom:1px solid var(--rule)}
+ .kpis.five{grid-template-columns:repeat(2,minmax(0,1fr))}
  #tbl td[data-label]::before{content:attr(data-label);display:block;margin-bottom:3px;font-size:11.5px;color:var(--ink-3)}
  #tbl td[data-label=Borrower]::before{display:none}
  #tbl tr.empty-row{display:block}
  .rail{width:72px}
+ .rail.railwide{width:100%}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.side,.top,#tip,.toast{display:none}.app{display:block}}
@@ -567,6 +696,11 @@ pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-
   <button class="icon-btn" type="button" id="closeSources" aria-label="Close data sources"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6.5 6.5l11 11"/><path d="M17.5 6.5l-11 11"/></svg></button>
  </div>
  <div class="drawer-body">
+  <section class="src setup" id="setup" aria-labelledby="setupH">
+   <h3 id="setupH" class="src-t">Monitoring setup</h3>
+   <p class="help" style="margin:4px 0 0">Records, then policy, then definitions and thresholds, then calculations, then investigation.</p>
+   <ol id="setupList"></ol>
+  </section>
   <section class="src" aria-labelledby="srcCsvH">
    <div class="src-h"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M4 10h16"/><path d="M10 10v9"/></svg>
     <div><h3 id="srcCsvH">Borrower financials</h3><p class="cur" id="srcCsv"></p></div></div>
@@ -586,7 +720,8 @@ pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-
    <h3 id="revH" style="margin:0;font-size:14px;color:var(--ink)">Review the extracted policy text</h3>
    <p class="help">Compare this with the signed agreement. Parsers can misread tables and numbers. You can edit the text before running the tests.</p>
    <label class="vh" for="polText">Extracted policy text</label><textarea id="polText"></textarea>
-   <div class="row2"><button class="btn btn-primary" id="usePol" type="button">Run tests with this policy</button><button class="btn" id="cancelPol" type="button">Cancel</button></div>
+   <label class="chk" for="polOk"><input type="checkbox" id="polOk">I compared this text with the signed agreement, including every covenant definition and threshold. Until then it is not used.</label>
+   <div class="row2"><button class="btn btn-primary" id="usePol" type="button" disabled>Run tests with this policy</button><button class="btn" id="cancelPol" type="button">Cancel</button></div>
   </section>
   <div><button class="btn btn-ghost" id="reset" type="button" hidden>Restore sample data and policy</button></div>
  </div>
@@ -615,6 +750,27 @@ pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-
   </section>
   <div class="msg" id="tmsg" role="status" aria-live="polite"></div>
   <div class="row2" style="margin-top:0"><button class="btn btn-primary" type="button" id="applyTerms">Apply terms</button><button class="btn" type="button" id="defaultTerms">Restore defaults</button><button class="btn btn-ghost" type="button" id="cancelTerms">Cancel</button></div>
+ </div>
+</dialog>
+<dialog id="rules" class="drawer" aria-labelledby="rTitle">
+ <div class="drawer-head">
+  <div><h2 id="rTitle">Monitoring rules</h2><p>Internal rules for the attention list. They are settings of this tool, not covenant terms, and they never change a covenant result.</p></div>
+  <button class="icon-btn" type="button" id="closeRules" aria-label="Close monitoring rules"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6.5 6.5l11 11"/><path d="M17.5 6.5l-11 11"/></svg></button>
+ </div>
+ <div class="drawer-body">
+  <section class="src" aria-labelledby="rnH">
+   <h3 id="rnH" class="src-t"><label for="ruleNear">Approaching a limit</label></h3>
+   <p class="help">Flag a passing test when its headroom is below this share of the covenant limit. At 5.0%, a 1.20x minimum is flagged below 1.26x, and a 3.00x maximum above 2.85x.</p>
+   <div class="trig"><input id="ruleNear" class="in" type="text" inputmode="decimal" autocomplete="off"><span>% of the limit</span></div>
+  </section>
+  <section class="src" aria-labelledby="rdH">
+   <h3 id="rdH" class="src-t"><label for="ruleDrop">Material deterioration</label></h3>
+   <p class="help">Flag a test that applies this quarter when its headroom fell by at least this many percentage points of the limit since the previous quarter. Example: from 8.4% to 2.6% is a fall of 5.8 points.</p>
+   <div class="trig"><input id="ruleDrop" class="in" type="text" inputmode="decimal" autocomplete="off"><span>percentage points</span></div>
+  </section>
+  <p class="help" id="rulesStore" style="margin:0"></p>
+  <div class="msg" id="rmsg" role="status" aria-live="polite"></div>
+  <div class="row2" style="margin-top:0"><button class="btn btn-primary" type="button" id="applyRules">Apply rules</button><button class="btn" type="button" id="defaultRules">Restore defaults</button><button class="btn btn-ghost" type="button" id="cancelRules">Cancel</button></div>
  </div>
 </dialog>
 <div id="tip" role="tooltip" aria-hidden="true"></div>
@@ -652,7 +808,15 @@ const IC={
 function icon(name,size=16,cls){const g=sv('svg',{width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':1.7,'stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true',focusable:'false',class:cls||null});for(const d of IC[name]){if(d==='C')g.append(sv('circle',{cx:12,cy:12,r:8.5}));else g.append(sv('path',{d}));}return g;}
 
 /* ---------- formatting (display only; every figure comes from the API) ---------- */
-const WATCH=0.05; // display convention: passing, but within 5% of a limit
+/* ---------- browser-only storage: per-viewer conveniences, never shared, never an audit record ---------- */
+const store={ok:(()=>{try{localStorage.setItem('cm.t','1');localStorage.removeItem('cm.t');return true;}catch(e){return false;}})(),
+ get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
+ set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}};
+/* Internal monitoring rules: conventions of this tool, not covenant terms. Configurable; kept in this browser. */
+const RULE_DEFAULTS={near:5,drop:5};
+const okRule=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=50&&Math.abs(Math.round(v*10)-v*10)<1e-9;
+let rules=(()=>{const s=store.get('cm.rules.v1',null);return s&&okRule(s.near)&&okRule(s.drop)?{near:s.near,drop:s.drop}:{...RULE_DEFAULTS};})();
+const r1=v=>Number(v).toFixed(1);
 const usd=s=>{if(s==null||s==='')return '—';const n=Number(s);if(!Number.isFinite(n))return '—';return (n<0?'−':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});};
 const usdAbs=n=>usd(String(Math.abs(Number(n))));
 const usdK=n=>{const a=Math.abs(n);const s=a>=1e6?(a/1e6).toFixed(1).replace(/\.0$/,'')+'M':a>=1e3?(Math.round(a/100)/10).toString().replace(/\.0$/,'')+'K':String(Math.round(a));return (n<0?'−':'')+'$'+s;};
@@ -665,6 +829,28 @@ const signedUsd=n=>(n>0?'+':n<0?'−':'')+'$'+Math.abs(n).toLocaleString('en-US'
 const pq=p=>{const m=/^(\d{4})-Q([1-4])$/.exec(p||'');return m?{y:+m[1],q:+m[2]}:null;};
 const plabel=p=>{const x=pq(p);return x?`Q${x.q} ${x.y}`:String(p||'unknown');};
 const pend=p=>{const x=pq(p);if(!x)return null;return `${x.y}-${['03-31','06-30','09-30','12-31'][x.q-1]}`;};
+const usdW=n=>{const v=Number(n);if(!Number.isFinite(v))return '—';const a=Math.abs(v),cents=Math.round(a*100)%100!==0;return (v<0?'−':'')+'$'+a.toLocaleString('en-US',{minimumFractionDigits:cents?2:0,maximumFractionDigits:2});};
+
+/* ---------- headroom share and internal monitoring rules (display only) ----------
+   Headroom share = engine dollar headroom ÷ the numerator the limit allows, from exact cents.
+   Positive is room before the limit, negative is past it. Rule tests compare integers, so a value
+   exactly at a rule boundary is classified the same way every time. */
+const hpOf=c=>{if(!c||c.numerator_headroom_usd==null||c.numerator_limit_usd==null)return null;const L=c100(c.numerator_limit_usd);if(!(L>0))return null;return c100(c.numerator_headroom_usd)/L*100;};
+const applicable=c=>!!c&&(c.status==='pass'||c.status==='breach');
+// Approaching a limit: the test passes and headroom is strictly below rules.near % of the limit.
+const nearOf=c=>{if(!c||c.status!=='pass'||c.numerator_headroom_usd==null||c.numerator_limit_usd==null)return false;const L=c100(c.numerator_limit_usd);return L>0&&c100(c.numerator_headroom_usd)*1000<Math.round(rules.near*10)*L;};
+// Material deterioration: the test applies this quarter and headroom share fell by rules.drop points or more.
+const materialDrop=(pc,cc)=>{if(!applicable(cc)||!pc||[pc.numerator_headroom_usd,pc.numerator_limit_usd,cc.numerator_headroom_usd,cc.numerator_limit_usd].some(v=>v==null))return false;
+ const B=x=>BigInt(c100(x)),La=B(pc.numerator_limit_usd),Lb=B(cc.numerator_limit_usd);if(La<=0n||Lb<=0n)return false;
+ return (B(cc.numerator_headroom_usd)*La-B(pc.numerator_headroom_usd)*Lb)*1000n<=-BigInt(Math.round(rules.drop*10))*La*Lb;};
+// One decimal, except where rounding would land on a rule boundary the value is not on: then two decimals, rounded away from it.
+const nearBoundary=(v,ref)=>{const x=Math.round(v*10)/10;return Math.abs(x-ref)<1e-9&&Math.abs(v-ref)>1e-9;};
+const awayFrom=(v,ref)=>(v<ref?Math.floor(v*100):Math.ceil(v*100))/100;
+const hpS=v=>{if(v==null)return 'n/a';if(v!==0&&Math.abs(v)<0.05)return (v<0?'−':'')+'<0.1%';
+ if(nearBoundary(v,rules.near))return (v<0?'−':'')+Math.abs(awayFrom(v,rules.near)).toFixed(2)+'%';
+ const x=Math.round(v*10)/10;return (x<0?'−':'')+Math.abs(x).toFixed(1)+'%';};
+const hpPhrase=v=>v==null?'headroom not available':v<0?`${hpS(-v)} past the limit`:`${hpS(v)} headroom`;
+const ptS=d=>{const a=Math.abs(d);return nearBoundary(a,rules.drop)?awayFrom(a,rules.drop).toFixed(2):(Math.round(a*10)/10).toFixed(1);};
 const dlong=iso=>{if(!iso)return '';const [y,m,d]=iso.split('-').map(Number);return new Date(Date.UTC(y,m-1,d)).toLocaleDateString('en-US',{timeZone:'UTC',year:'numeric',month:'short',day:'numeric'});};
 
 /* ---------- covenant registry (labels only; every number comes from the backend) ---------- */
@@ -704,7 +890,7 @@ const NAV=[['overview','Portfolio Overview','overview'],['borrowers','Borrower M
 /* ---------- status model (derived only from API fields) ---------- */
 const ST={
  ok:{label:'Within limits',tone:'ok',icon:'check',action:'No action needed',rank:0,group:'within'},
- watch:{label:'Thin headroom',tone:'warn',icon:'alert',action:'Monitor next quarter',rank:1,group:'within'},
+ watch:{label:'Approaching limit',tone:'warn',icon:'alert',action:'Monitor next quarter',rank:1,group:'within'},
  untested:{label:'No covenant tested',tone:'na',icon:'minus',action:'Confirm covenant terms',rank:1.5,group:'issues'},
  dormant:{label:'Springing test would fail',tone:'warn',icon:'alert',action:'Watch revolver usage',rank:1.8,group:'within'},
  review:{label:'Cannot calculate',tone:'warn',icon:'help',action:'Confirm inputs, then re-test',rank:2,group:'review'},
@@ -723,7 +909,7 @@ function assess(r){
  const mag=Math.max(0,...fails.map(k=>gapOf(k,r.covenants[k])??0));
  let key;
  if(fails.length)key='breach';else if(unev)key='review';else if(!tested.length)key='untested';else if(dormantFail.length)key='dormant';
- else key=tested.some(([k,c])=>c.value!=null&&-gapOf(k,c)<WATCH)?'watch':'ok';
+ else key=tested.some(([,c])=>nearOf(c))?'watch':'ok';
  return {key,fails,dormantFail,unev,mag,lb:fails.includes('leverage'),db:fails.includes('dscr')};
 }
 const rowFor=(b,p)=>byKey.get(b+'|'+p);
@@ -735,7 +921,7 @@ function reasons(r,a){
  for(const k of a.fails){const c=r.covenants[k];out.push(`${COV[k].name} ${fx(c.value,c.limit)} is ${isMax(k)?'above':'below'} the ${lim(c.limit)} ${lw(k)}.`);}
  for(const [k,c] of covs(r))if(c.status==='unevaluable')out.push(`${COV[k].name}: ${c.reason}.`);
  for(const k of a.dormantFail){const c=r.covenants[k];out.push(`${COV[k].short} would fail at ${fx(c.value,c.limit)}, but it is springing and not triggered (revolver ${pctS(c.springing.utilization)} drawn, trigger ${Number(c.springing.trigger_pct)}%).`);}
- if(!out.length&&a.key==='watch')out.push('All tested covenants pass, but one is within 5% of its limit.');
+ if(!out.length&&a.key==='watch')out.push(`All tested covenants pass, but one has less than ${r1(rules.near)}% headroom (an internal monitoring rule, not a covenant term).`);
  return out;
 }
 function periodSummary(p){
@@ -746,14 +932,95 @@ function periodSummary(p){
   failBy,dormantBy,appliedBy,wouldBy,levFail:failBy.leverage,dscrFail:failBy.dscr,unev:rows.filter(x=>x.a.unev).length,
   asleep:rows.filter(x=>covs(x.r).some(([,cc])=>cc.status==='dormant')).length,wouldFail:rows.filter(x=>x.a.dormantFail.length).length};
 }
-const needCount=S=>S.breach+S.review;
 function isNew(b,p){const i=periods.indexOf(p);if(i<1)return false;const pr=rowFor(b,periods[i-1]),cur=rowFor(b,p);return !!(pr&&cur&&pr.status==='pass'&&cur.status==='exception'&&assess(cur).fails.length);}
-const newTag=(b,p)=>isNew(b,p)?h('span',{class:'tag',title:'Passed every tested covenant in the prior quarter'},'New this quarter'):null;
+const newTag=(b,p)=>isNew(b,p)?h('span',{class:'tag qnew',title:'Passed every applicable covenant in the prior quarter'},'Moved into exception'):null;
 const stEl=(tone,ic,label)=>h('span',{class:'st st-'+tone},icon(ic,15),h('span',null,label));
 const stLabel=a=>{const s=typeof a==='string'?ST[a]:stOf(a);return stEl(s.tone,s.icon,s.label);};
 const prevPeriod=p=>{const i=periods.indexOf(p);return i>0?periods[i-1]:null;};
 function commonLimit(k,rows){const s=new Set(rows.map(x=>cv(x.r,k)?.limit).filter(v=>v!=null));return s.size===1?[...s][0]:null;}
 const modeText=c=>c.mode==='springing'?`Springing at ${Number(c.springing.trigger_pct)}% revolver use: ${c.springing.triggered?'tested this quarter':c.springing.triggered===false?`not triggered (revolver ${pctS(c.springing.utilization)} drawn)`:'trigger unknown, tested anyway'}`:'Maintenance: tested every quarter';
+
+/* ---------- Borrowers requiring attention (deterministic; derived only from engine results) ----------
+   Priority 1: an applicable covenant test failed. 2: a result is missing, invalid, could not be
+   calculated or is not linked to the agreement. 3 and 4 are internal monitoring rules (see rules). */
+const limWord=k=>{const d=data?.policy?.definitions?.[k],w=(data?.policy?.warnings||[]).some(t=>t.includes(`for ${k} `));return d&&!w?'contractual':'stated';};
+function dataIssues(r,p){
+ const P=plabel(p);
+ if(!r)return [`No ${P} report was supplied, so no covenant test was run.`];
+ if(r.status==='invalid')return [`The ${P} row could not be read (${r.error}), so no covenant test was run.`];
+ const out=[],defs=data.policy?.definitions||{},warns=data.policy?.warnings||[];
+ for(const [k,c] of covs(r)){if(!COV[k])continue;
+  if(c.status==='unevaluable')out.push(`${COV[k].short} cannot be calculated: ${c.reason}.`);
+  if(c.springing&&c.springing.triggered===null)out.push(`${COV[k].short}: ${c.springing.note}`);
+  if(applicable(c)||c.status==='unevaluable'){
+   if(!defs[k])out.push(`No ${COV[k].short} definition was found in the policy text, so this result is not linked to agreement language.`);
+   else if(warns.some(w=>w.includes(`for ${k} `)))out.push(`The ${lim(c.limit)} ${lw(k)} used for ${COV[k].short} does not appear in the policy definition. Confirm which value governs.`);}}
+ return out;
+}
+function attention(b,p){
+ const r=rowFor(b,p),a=assess(r),pp=prevPeriod(p),pr=pp?rowFor(b,pp):null,cmp=!!(pr&&pr.status!=='invalid');
+ const items=r&&r.status!=='invalid'?covs(r).filter(([k])=>COV[k]).map(([k,c])=>{const pc=cmp?cv(pr,k):undefined,hp=hpOf(c),php=hpOf(pc);
+  return {k,c,pc,hp,php,d:applicable(c)&&hp!=null&&php!=null?hp-php:null,ch:pp?change(k,pc,c):{kind:'na',text:'First quarter in the data'},near:nearOf(c),drop:materialDrop(pc,c)};}):[];
+ const issues=dataIssues(r,p),fails=items.filter(i=>i.c.status==='breach');
+ const group=fails.length?1:issues.length?2:items.some(i=>i.near)?3:items.some(i=>i.drop)?4:0;
+ const fresh=fails.filter(i=>i.ch.kind==='crossed'||i.ch.kind==='triggered');
+ const appl=items.filter(i=>applicable(i.c)&&i.hp!=null),tight=appl.length?appl.reduce((m,i)=>i.hp<m.hp?i:m):null;
+ const worst=items.filter(i=>i.d!=null).reduce((m,i)=>!m||i.d<m.d?i:m,null);
+ return {b,p,r,a,pp,pr,items,issues,fails,fresh,group,nw:isNew(b,p),tight,worst,dormantFail:items.filter(i=>i.c.status==='dormant'&&i.c.would_status==='breach')};
+}
+function attnSort(x,y){
+ if(x.group!==y.group)return (x.group||9)-(y.group||9);
+ const hp=z=>z.tight?z.tight.hp:Infinity;let d=0;
+ if(x.group===1)d=(y.nw-x.nw)||((y.fresh.length>0)-(x.fresh.length>0))||(y.fails.length-x.fails.length)||(hp(x)-hp(y));
+ else if(x.group===3)d=hp(x)-hp(y);
+ else if(x.group===4)d=(x.worst?x.worst.d:0)-(y.worst?y.worst.d:0);
+ return d||x.b.localeCompare(y.b);
+}
+const moveVerb=(pc,c)=>!pc||pc.value==null||c.value==null?null:c.value>pc.value+5e-5?'rose':c.value<pc.value-5e-5?'declined':'held';
+function failSentence(i){
+ const {k,c,pc,ch}=i,C=COV[k],L=`${limWord(k)} ${lim(c.limit)} ${lw(k)}`,side=isMax(k)?'above':'below',now=fx(c.value,c.limit),v=moveVerb(pc,c),was=pc&&pc.value!=null?fx(pc.value,pc.limit):null;
+ if(ch.kind==='triggered')return `${C.short} springing test now applies${c.springing&&c.springing.utilization!=null?` (revolver ${pctS(c.springing.utilization)} drawn)`:''} and fails at ${now}, ${side} the ${L}.`;
+ if(ch.kind==='crossed'&&v)return v==='held'?`${C.short} held at ${now} but is now ${side} the ${L}.`:`${C.short} ${v} from ${was} to ${now} and is ${side} the ${L}.`;
+ if(ch.kind==='still'&&v)return v==='held'?`${C.short} remains ${side} the ${L} at ${now}.`:`${C.short} remains ${side} the ${L}, ${v==='rose'?'rising':'declining'} from ${was} to ${now}.`;
+ return `${C.short} is ${now}, ${side} the ${L}.`;
+}
+function gapSentence(k,c){
+ const hd=Number(c.numerator_headroom_usd);if(!(hd<0)||c.numerator_usd==null||c.numerator_limit_usd==null)return '';const C=COV[k];
+ return isMax(k)?` ${cap(C.num)} of ${usdW(c.numerator_usd)} is ${usdW(-hd)} above the ${usdW(c.numerator_limit_usd)} the maximum allows.`:` ${cap(C.num)} of ${usdW(c.numerator_usd)} is ${usdW(-hd)} short of the ${usdW(c.numerator_limit_usd)} the minimum requires.`;
+}
+// One plain-language explanation per flagged borrower, built from fixed templates.
+function explain(x){
+ const Q=x.pp?plabel(x.pp):null,lines=[],more=[];let focus=null;
+ const isFresh=i=>i.ch.kind==='crossed'||i.ch.kind==='triggered';
+ if(x.group===1){
+  const fs=[...x.fails].sort((a,b)=>(isFresh(b)-isFresh(a))||((a.hp??0)-(b.hp??0)));focus=fs[0];
+  lines.push(failSentence(fs[0])+gapSentence(fs[0].k,fs[0].c));
+  if(fs.length>1)more.push('Also failing: '+fs.slice(1).map(i=>`${COV[i.k].short} ${fx(i.c.value,i.c.limit)} against the ${lim(i.c.limit)} ${lw(i.k)}${Number(i.c.numerator_headroom_usd)<0?` (${usdW(-Number(i.c.numerator_headroom_usd))} ${isMax(i.k)?'over':'short'})`:''}${isFresh(i)?', newly failing':''}`).join('; ')+'.');
+  const pass=x.items.filter(i=>i.c.status==='pass');
+  if(pass.length)more.push('Still passing: '+pass.map(i=>`${COV[i.k].short} ${fx(i.c.value,i.c.limit)} (${hpPhrase(i.hp)}${i.php!=null&&Q?`, was ${hpS(i.php)} in ${Q}`:''})`).join('; ')+'.');
+  more.push(...x.issues);
+ }else if(x.group===2){lines.push(x.issues[0]);more.push(...x.issues.slice(1));}
+ else if(x.group===3){
+  const ns=x.items.filter(i=>i.near).sort((a,b)=>a.hp-b.hp);focus=ns[0];
+  lines.push(`${COV[focus.k].short} passes at ${fx(focus.c.value,focus.c.limit)} against the ${limWord(focus.k)} ${lim(focus.c.limit)} ${lw(focus.k)}, with ${hpS(focus.hp)} headroom: inside the ${r1(rules.near)}% approaching-limit rule.`);
+  for(const i of ns.slice(1))more.push(`${COV[i.k].short} also has ${hpS(i.hp)} headroom.`);
+  for(const i of x.items.filter(i=>i.drop&&!i.near))more.push(`${COV[i.k].short} headroom fell from ${hpS(i.php)} to ${hpS(i.hp)} since ${Q}.`);
+ }else if(x.group===4){
+  focus=x.items.filter(i=>i.drop).sort((a,b)=>a.d-b.d)[0];
+  lines.push(`${COV[focus.k].short} headroom fell from ${hpS(focus.php)} to ${hpS(focus.hp)} of the ${lim(focus.c.limit)} ${lw(focus.k)} since ${Q}, down ${ptS(focus.d)} points. It still passes at ${fx(focus.c.value,focus.c.limit)}.`);
+ }
+ for(const i of x.dormantFail)more.push(`Not counted: ${COV[i.k].short} would fail at ${fx(i.c.value,i.c.limit)} if its springing test applied (revolver ${pctS(i.c.springing?.utilization)} drawn; trigger ${Number(i.c.springing?.trigger_pct??trigPct())}%).`);
+ return {lines,more,focus};
+}
+/* Analyst review notes: kept only in this browser, keyed by data source, borrower and quarter. */
+const REV=[['none','Not reviewed'],['under','Under review'],['done','Reviewed']];
+let reviews=(()=>{const s=store.get('cm.reviews.v1',{});return s&&typeof s==='object'&&!Array.isArray(s)?s:{};})();
+const dsKey=()=>lastCsv?'upload:'+(csvName||'csv'):'sample';
+const revKey=(b,p)=>`${dsKey()}|${b}|${p}`;
+const getReview=(b,p)=>{const v=reviews[revKey(b,p)];return v&&REV.some(x=>x[0]===v.status)?v:null;};
+function setReview(b,p,rec){if(rec)reviews[revKey(b,p)]=rec;else delete reviews[revKey(b,p)];return store.set('cm.reviews.v1',reviews);}
+const stampLocal=iso=>{const d=new Date(iso||'');return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'an unrecorded time';};
+const revChip=rv=>{const st=rv?.status||'none';return h('span',{class:'rvc rvc-'+st,title:rv?.at?`Saved ${stampLocal(rv.at)}, in this browser only`:null},st==='done'?icon('check',12):null,REV.find(x=>x[0]===st)[1]);};
 
 /* ---------- tooltip (enhances; every value is also on the page or in a table) ---------- */
 function tipShow(lines,src){const t=$('tip');t.replaceChildren(...lines.filter(Boolean).map((l,i)=>h('div',{class:i===0?'th':i===1?'tv':''},l)));t.classList.add('on');tipPlace(src);}
@@ -778,7 +1045,7 @@ function ingest(j){
  periods=[...new Set(j.results.map(r=>r.period).filter(p=>/^\d{4}-Q[1-4]$/.test(p||'')))].sort();
  const a=(j.assumptions||[]).find(t=>/as-of date/i.test(t));const m=a&&/(\d{4}-\d{2}-\d{2})/.exec(a);asOf=m?m[1]:null;
  if(!terms)terms=structuredClone(j.settings||DEFAULT_TERMS);
- if(!['borrower','status',...KEYS()].includes(sort.key))sort={key:'status',dir:-1};
+ if(!['borrower','status','change','headroom',...KEYS()].includes(sort.key))sort={key:'status',dir:-1};
  if(!period||!periods.includes(period)){const hist=periods.filter(p=>!isProj(p));period=(hist.length?hist:periods).at(-1)||null;}
  try{renderAll();}catch(e){console.error('Render error',e);$('page').replaceChildren(h('div',{class:'state',role:'alert'},icon('alert',22),h('div',null,h('h2',null,'This view could not be drawn'),h('p',null,e.message))));}
 }
@@ -808,6 +1075,7 @@ function renderSources(){
  $('srcCsv').textContent=lastCsv?`${csvName||'Uploaded CSV'} (uploaded, not verified)`:'Bundled sample: loan_covenants_extended.csv, the organizer’s figures plus team-made FCCR, current-ratio and revolver columns (synthetic)';
  $('srcPol').textContent=lastPolicy?`${polName} (uploaded, reviewed by you)`:'Bundled sample: loan-policy.txt with the team-written covenant addendum (both fictional)';
  $('reset').hidden=!(lastCsv||lastPolicy);
+ renderSetup();
 }
 function renderPage(){
  const page=$('page');
@@ -828,7 +1096,7 @@ function notices(){
  const w=data?.policy?.warnings||[];
  if(w.length)out.push(note('bad','alert','Policy checks need attention',h('ul',null,w.map(t=>h('li',null,t)))));
  if(S&&(S.error||S.nodata||S.unev))out.push(note('warn','alert','Some borrowers could not be fully tested this quarter.',`${S.error} with a data error, ${S.nodata} without a report, ${S.unev} with a test that could not be calculated. None is treated as passing. Details are under Covenant Analysis.`));
- if(S&&S.wouldFail&&view!=='detail'){const ks=Object.keys(COV).filter(k=>S.wouldBy[k]).map(k=>COV[k].short);
+ if(S&&S.wouldFail&&view!=='detail'&&view!=='overview'){const ks=Object.keys(COV).filter(k=>S.wouldBy[k]).map(k=>COV[k].short);
   out.push(note('','info',`${S.wouldFail} borrower${S.wouldFail>1?'s':''} would fail a springing ${listJoin(ks)} test that is not in effect this quarter.`,`Springing covenants are tested only when the revolver is at least ${trigPct()}% drawn. Dormant tests count as neither passing nor failing. `,h('button',{class:'linkbtn',type:'button',onclick:()=>openTerms()},'Review covenant terms')));}
  return h('div',{class:'notes',id:'banners'},out);
 }
@@ -879,43 +1147,41 @@ function moveRail(k,pc,cc,w=136){
 }
 const gap=i=>{const hd=i.cc&&i.cc.numerator_headroom_usd;return (i.ch.kind==='crossed'||i.ch.kind==='triggered')&&hd!=null&&Number(hd)<0?`, ${usdAbs(hd)} ${isMax(i.k)?'over':'short'}`:'';};
 const chgCls=kind=>kind==='crossed'||kind==='triggered'?'bad':kind==='weaker'||kind==='still'?'warn':kind==='recovered'?'ok':'';
-function movedPanel(){
- const pp=prevPeriod(period);if(!pp)return null;
- const P=plabel(period),Q=plabel(pp),scen=isProj(period)?' (synthetic scenario)':'';
- const ms=borrowers.map(b=>({b,m:movement(b,period)})).filter(x=>x.m);
- const entered=ms.filter(x=>x.m.entered),already=ms.filter(x=>!x.m.entered&&x.m.ca&&x.m.pa&&x.m.pa.fails.length);
- const rows=entered.map(({b,m})=>{const key=m.items.filter(i=>i.ch.kind==='crossed'||i.ch.kind==='triggered'),dorm=m.items.filter(i=>i.ch.kind==='dormant'&&i.cc&&i.cc.would_status==='breach');
-  return h('li',{class:'mv'},
-   h('div',{class:'mv-b'},h('a',{class:'rowlink',href:'#borrower-'+encodeURIComponent(b)},b),h('div',{class:'mv-st'},h('span',{class:'mv-q'},Q),stLabel(m.pa)),h('div',{class:'mv-st'},h('span',{class:'mv-q'},P),stLabel(m.ca))),
-   h('ul',{class:'mv-k'},key.map(i=>h('li',null,h('span',{class:'mv-n'},COV[i.k].short),h('span',{class:'mv-v num'},fx(i.pc.value,i.pc.limit),h('span',{class:'mv-to','aria-label':'to'},' → '),h('b',null,fx(i.cc.value,i.cc.limit))),moveRail(i.k,i.pc,i.cc),h('span',{class:'mv-t bad'},i.ch.text+gap(i)))),
-    dorm.map(i=>h('li',{class:'mv-dorm'},h('span',{class:'mv-n'},COV[i.k].short),h('span',{class:'mv-v num'},fx(i.cc.value,i.cc.limit)),moveRail(i.k,i.pc,i.cc),h('span',{class:'mv-t'},'Springing and not triggered: would fail, not counted')))));});
- const groups=[];
- for(const k of KEYS()){const cr=already.filter(x=>x.m.items.some(i=>i.k===k&&i.ch.kind==='crossed')).map(x=>x.b),tr=already.filter(x=>x.m.items.some(i=>i.k===k&&i.ch.kind==='triggered')).map(x=>x.b);
-  if(cr.length)groups.push(h('li',null,h('b',null,`Newly failing ${COV[k].name.toLowerCase()}: `),cr.join(', ')));
-  if(tr.length)groups.push(h('li',null,h('b',null,`${COV[k].short} springing test now applies and fails: `),tr.join(', ')));}
- return h('section',{class:'moved','aria-labelledby':'mvH'},
-  h('div',{class:'sh'},h('div',null,h('h2',{id:'mvH'},`Moved into exception in ${P}${scen}`),h('p',null,`Borrowers that passed every applicable covenant in ${Q} and failed at least one in ${P}. A springing test that is not triggered is shown for context but is not counted as a failure.`))),
-  entered.length?h('ol',{class:'mvlist'},rows):h('p',{class:'mv-none'},`No borrower moved from compliance into exception in ${P}.`),
-  groups.length?h('div',{class:'mv-more'},h('p',null,`Already in exception in ${Q}, with a newly failed test in ${P}:`),h('ul',null,groups)):null);
+let wlAll=false;
+const GDEF=g=>({1:['Applicable covenant failures','At least one covenant test that applies this quarter failed.','g-bad'],
+ 2:['Missing, invalid or unverified data','A result could not be produced, or is not linked to the agreement. Never treated as passing.','g-warn'],
+ 3:['Approaching a covenant limit',`Every applicable test passes, but one has less than ${r1(rules.near)}% headroom.`,'g-rule'],
+ 4:['Material headroom deterioration',`Every applicable test passes, but headroom on one fell ${r1(rules.drop)} points or more since the previous quarter.`,'g-rule']})[g];
+function focusViz(x,f){
+ if(!f||f.c.value==null)return h('div',{class:'wi-v','aria-hidden':'true'});
+ const {k,c,pc}=f,P=plabel(period),Q=x.pp?plabel(x.pp):null,has=pc&&pc.value!=null;
+ return h('div',{class:'wi-v'},h('div',null,h('b',null,COV[k].short),` · ${isMax(k)?'max':'min'} ${lim(c.limit)}`),has?moveRail(k,pc,c,172):rail(c,k,railDomain(k,[c]),172),
+  h('div',null,has?[`${Q} ${fx(pc.value,pc.limit)} → `,h('span',{class:c.status==='breach'?'bad':null},`${P} ${fx(c.value,c.limit)}`)]:`${P} ${fx(c.value,c.limit)}`));
 }
-function changeSection(b){
- const m=movement(b,period);if(!m)return null;
- const P=plabel(period),Q=plabel(m.pp);
- if(!m.items.length)return h('section',{class:'sec','aria-labelledby':'chgH'},h('div',{class:'sh'},h('h2',{id:'chgH'},`Change since ${Q}`)),h('p',{class:'muted',style:'margin:0'},`The ${Q} and ${P} rows cannot both be tested, so no comparison is shown.`));
- const lead=m.entered?[h('b',null,'Moved from compliance into exception. '),`${Q}: ${stOf(m.pa).label}. ${P}: ${stOf(m.ca).label}.`]:`${Q}: ${stOf(m.pa).label}. ${P}: ${stOf(m.ca).label}.`;
- const order={crossed:0,triggered:0,still:1,weaker:2,recovered:3,ok:4,dormant:5,na:6};
- const items=[...m.items].sort((a,b2)=>order[a.ch.kind]-order[b2.ch.kind]);
- const val=c=>!c?h('span',{class:'muted'},'Not applied'):c.value==null?'n/a':h('span',{class:c.status==='breach'?'bad':c.status==='dormant'?'dorm':null},fx(c.value,c.limit),c.status==='dormant'?h('span',{class:'sub'},'not triggered'):null);
- return h('section',{class:'sec','aria-labelledby':'chgH'},
-  h('div',{class:'sh'},h('div',null,h('h2',{id:'chgH'},`Change since ${Q}`),h('p',null,lead))),
-  h('div',{class:'tbl'},h('table',{class:'data chg'},h('caption',{class:'vh'},`Covenant movement from ${Q} to ${P} for ${b}`),
-   h('thead',null,h('tr',null,['Covenant',Q,P,'Limit','Movement','What changed'].map(t=>h('th',{scope:'col'},h('span',null,t))))),
-   h('tbody',null,items.map(i=>h('tr',{class:i.ch.kind==='crossed'||i.ch.kind==='triggered'?'hit':null},
-    h('td',{class:'nw',title:COV[i.k].name},COV[i.k].short),h('td',{class:'num'},val(i.pc)),h('td',{class:'num'},val(i.cc)),
-    h('td',{class:'num nw'},i.cc?`${isMax(i.k)?'Max':'Min'} ${lim(i.cc.limit)}`:'—'),
-    h('td',null,i.pc&&i.cc&&i.pc.value!=null&&i.cc.value!=null?moveRail(i.k,i.pc,i.cc):null),
-    h('td',null,h('span',{class:'chg-t '+chgCls(i.ch.kind)},i.ch.text+gap(i)))))))),
-  h('p',{class:'foot'},'Hollow dot: previous quarter. Filled dot: this quarter. A springing test that is not triggered does not count as passing or failing.'));
+function wItem(x){
+ const e=explain(x),href='#borrower-'+encodeURIComponent(x.b);
+ return h('li',{class:'wi','data-b':x.b},
+  h('div',{class:'wi-b'},h('a',{class:'rowlink',href},x.b),stLabel(x.a),x.nw?h('span',{class:'tag qnew',title:'Passed every applicable covenant in the prior quarter'},'Moved into exception'):null),
+  h('div',{class:'wi-x'},e.lines.map(t=>h('p',null,t)),e.more.map(t=>h('p',{class:'sub'},t))),
+  focusViz(x,e.focus),
+  h('a',{class:'btn btn-sm',href,'aria-label':`Investigate ${x.b}`},'Investigate',icon('chevR',14)));
+}
+function watchlist(){
+ const P=plabel(period),scen=isProj(period)?' (synthetic scenario)':'',all=borrowers.map(b=>attention(b,period)),flagged=all.filter(x=>x.group).sort(attnSort);
+ const by=g=>flagged.filter(x=>x.group===g),nRev=by(1).length+by(2).length,nWatch=by(3).length+by(4).length,nNew=flagged.filter(x=>x.nw).length,LIMIT=5;
+ const groupEl=g=>{const list=by(g),[t,d,cls]=GDEF(g),show=g===1&&!wlAll&&list.length>LIMIT+1?list.slice(0,LIMIT):list;
+  return h('div',{class:'ag '+cls},
+   h('div',{class:'ag-h'},h('span',{class:'ag-n','aria-hidden':'true'},String(g)),h('b',null,t),g>2?h('span',{class:'tag tag-rule'},'Internal rule'):null,h('span',{class:'ag-d'},d),h('span',{class:'ag-c'+(list.length?'':' none')},list.length?`${list.length} borrower${list.length>1?'s':''}`:'None this quarter')),
+   list.length?h('ol',{class:'wl','aria-label':t},show.map(wItem)):null,
+   show.length<list.length?h('button',{class:'wl-more linkbtn',type:'button',onclick:()=>{wlAll=true;const first=list[LIMIT].b;$('attn').replaceWith(watchlist());const n=document.querySelector(`#attn .wi[data-b="${CSS.escape(first)}"] a.rowlink`);if(n)n.focus();}},`Show ${list.length-show.length} more`):null);};
+ const ctx=all.filter(x=>!x.group&&x.dormantFail.length);
+ const lede=flagged.length?`${nRev} borrower${nRev===1?' requires':'s require'} review and ${nWatch} ${nWatch===1?'is':'are'} on watch${nNew?`; ${nNew} moved into exception this quarter`:''}. Ordered by priority, most urgent first.`:`No borrower is flagged in ${P}.`;
+ return h('section',{class:'attn',id:'attn','aria-labelledby':'attnH'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'attnH'},`Borrowers requiring attention, ${P}${scen}`),h('p',null,lede)),
+   h('div',{class:'tools'},h('button',{class:'btn',type:'button',onclick:()=>openRules()},icon('sliders',15),'Monitoring rules'),h('button',{class:'btn',type:'button',id:'exportBtn',onclick:()=>exportFindings()},icon('doc',15),'Export findings'))),
+  h('div',{class:'attn-box'},[1,2,3,4].map(groupEl),
+   ctx.length?h('div',{class:'wl-ctx'},h('b',null,'Shown for context, not counted: '),ctx.map(x=>x.dormantFail.map(i=>`${x.b} ${COV[i.k].short} would fail at ${fx(i.c.value,i.c.limit)} if its springing test applied`).join('; ')).join('; ')+'.'):null),
+  h('p',{class:'wl-foot'},`Priorities 1 and 2 come from covenant results and data checks. Priorities 3 and 4 are internal monitoring rules of this tool (approaching: less than ${r1(rules.near)}% headroom; deterioration: a fall of ${r1(rules.drop)} points or more). They are not covenant terms and are not equivalent to a covenant failure. A failed test is a potential covenant exception for analyst review, not a determination that an event of default has occurred.`));
 }
 
 /* ---------- limit rail: the ratio as a dot against its covenant line ---------- */
@@ -947,26 +1213,35 @@ function spark(vals,max,label){
  const txt=vals.map(x=>`${plabel(x.p)}${isProj(x.p)?' (synthetic scenario)':''} ${x.v}`).join(', ');
  return h('div',{class:'spark-w',title:`${label} by quarter: ${txt}`},g,h('span',{class:'vh'},`${label} by quarter: ${txt}.`));
 }
+// Test-level counts: each covenant tested for each borrower is one test. Springing tests that are not triggered are not counted.
+function testCounts(p){const o={fail:0,appl:0,unev:0,dorm:0,by:{}};for(const b of borrowers){for(const [k,c] of covs(rowFor(b,p))){if(!COV[k])continue;const s=o.by[k]||(o.by[k]={f:0,a:0});
+ if(applicable(c)){o.appl++;s.a++;if(c.status==='breach'){o.fail++;s.f++;}}else if(c.status==='unevaluable')o.unev++;else if(c.status==='dormant')o.dorm++;}}return o;}
+// Borrower-level counts for the attention list.
+function attnSummary(p){const xs=borrowers.map(b=>attention(b,p));return {xs,review:xs.filter(x=>x.group===1||x.group===2).length,data:xs.filter(x=>x.issues.length).length,drop:xs.filter(x=>x.items.some(i=>i.drop)).length,nw:xs.filter(x=>x.nw).length,
+ err:xs.filter(x=>x.a.key==='error').length,nodata:xs.filter(x=>x.a.key==='nodata').length,unev:xs.filter(x=>x.a.unev).length,
+ trig:xs.filter(x=>x.items.some(i=>i.c.springing&&i.c.springing.triggered===null)).length,
+ link:xs.filter(x=>x.items.some(i=>(applicable(i.c)||i.c.status==='unevaluable')&&(!data.policy?.definitions?.[i.k]||(data.policy?.warnings||[]).some(w=>w.includes(`for ${i.k} `))))).length};}
 function renderOverview(page){
  if(guard(page,TITLES.overview,'Monitor financial covenant compliance across your credit portfolio.'))return;
- const S=periodSummary(period),pp=prevPeriod(period),P=pp?periodSummary(pp):null,need=needCount(S),nNew=S.rows.filter(x=>isNew(x.b,period)).length;
- const lmax=commonLimit('leverage',S.rows),dmin=commonLimit('dscr',S.rows),reported=S.monitored-S.nodata;
- const delta=(cur,prev)=>{if(prev==null)return h('div',{class:'delta'},'First reported quarter');const d=cur-prev;if(!d)return h('div',{class:'delta'},`No change from ${plabel(pp)}`);
-  return h('div',{class:'delta '+(d>0?'worse':'better')},icon(d>0?'upArrow':'downArrow',13),`${d>0?'+':'−'}${Math.abs(d)} from ${plabel(pp)}`);};
- const all=periods.map(p=>({p,S:p===period?S:periodSummary(p)}));
- const kpi=(label,val,unit,ctx,dl,alert,f)=>h('div',{class:'kpi'+(alert?' alert':'')},h('div',{class:'lab'},alert?icon('x',14):null,label),h('div',{class:'val'},h('span',null,String(val)),unit?h('small',null,unit):null,f?spark(all.map(x=>({p:x.p,v:f(x.S)})),S.monitored,label):null),h('div',{class:'ctx'},ctx),dl);
+ const S=periodSummary(period),pp=prevPeriod(period),A=attnSummary(period),Ap=pp?attnSummary(pp):null,T=testCounts(period),Tp=pp?testCounts(pp):null,reported=S.monitored-S.nodata;
+ const all=periods.map(p=>({p,A:p===period?A:attnSummary(p),T:p===period?T:testCounts(p)}));
+ const delta=(cur,prev,unit)=>{if(prev==null)return h('div',{class:'delta'},'First quarter in the data');const d=cur-prev;if(!d)return h('div',{class:'delta'},`No change from ${plabel(pp)}`);
+  return h('div',{class:'delta '+(d>0?'worse':'better')},icon(d>0?'upArrow':'downArrow',13),`${d>0?'+':'−'}${Math.abs(d)} ${unit} from ${plabel(pp)}`);};
+ const kpi=(label,val,unit,ctx,dl,alert,series,max)=>h('div',{class:'kpi'+(alert?' alert':'')},h('div',{class:'lab'},alert?icon('x',14):null,label),h('div',{class:'val'},h('span',null,String(val)),unit?h('small',null,unit):null,series?spark(series,max,label):null),h('div',{class:'ctx'},ctx),dl);
+ const obs=data.results.length,synth=data.results.filter(r=>isProj(r.period)).length,ks=KEYS().filter(k=>T.by[k]&&T.by[k].a),bw=n=>n===1?'borrower':'borrowers';
  page.replaceChildren(
   pageHead(TITLES.overview,'Monitor financial covenant compliance across your credit portfolio.',asofBlock()),
   notices(),
-  h('section',{class:'kpis','aria-label':`Key figures for ${plabel(period)}`},
-   kpi('Borrowers monitored',S.monitored,null,reported===S.monitored?`All reported for ${plabel(period)}`:`${reported} reported for ${plabel(period)}`,h('div',{class:'delta'},S.error||S.nodata?`${S.error+S.nodata} with a data issue`:'No data issues')),
-   kpi('Requiring review',need,`of ${S.monitored}`,nNew?`${nNew} newly flagged this quarter`:'At least one tested covenant failed or could not be calculated',delta(need,P?needCount(P):null),need>0,needCount),
-   kpi('Leverage breaches',S.levFail,`of ${S.monitored}`,lmax?`Above the ${lim(lmax)} maximum`:'Above their policy maximum',delta(S.levFail,P?P.levFail:null),S.levFail>0,x=>x.levFail),
-   kpi('DSCR breaches',S.dscrFail,`of ${S.monitored}`,dmin?`Below the ${lim(dmin)} minimum`:'Below their policy minimum',delta(S.dscrFail,P?P.dscrFail:null),S.dscrFail>0,x=>x.dscrFail)),
-  movedPanel(),
-  covStrip(S),
+  h('section',{class:'kpis'+(A.data?' five':''),'aria-label':`Key figures for ${plabel(period)}`},
+   kpi('Borrowers monitored',S.monitored,bw(S.monitored),reported===S.monitored?`All reported for ${plabel(period)}`:`${reported} reported for ${plabel(period)}`,h('div',{class:'delta'},`${obs} borrower-quarter observations on file${synth?`, ${synth} synthetic`:''}`)),
+   kpi('Requiring review',A.review,`of ${S.monitored} ${bw(S.monitored)}`,A.nw?`${A.nw} moved into exception this quarter`:'Failed an applicable test, or no result could be produced',delta(A.review,Ap?Ap.review:null,bw(2)),A.review>0,all.map(x=>({p:x.p,v:x.A.review})),S.monitored),
+   kpi('Applicable test failures',T.fail,`of ${T.appl} tests`,ks.length?ks.map((k,i)=>[i?' · ':'',`${COV[k].short} `,h('b',null,String(T.by[k].f))]):'No test applied',[delta(T.fail,Tp?Tp.fail:null,'tests'),T.dorm||T.unev?h('div',{class:'delta'},[T.dorm?`${T.dorm} springing ${T.dorm===1?'test':'tests'} not triggered`:null,T.unev?`${T.unev} not calculable`:null].filter(Boolean).join(', ')+', not counted'):null],T.fail>0,all.map(x=>({p:x.p,v:x.T.fail})),Math.max(1,...all.map(x=>x.T.appl))),
+   kpi('Deteriorating headroom',pp?A.drop:'—',pp?`of ${S.monitored} ${bw(S.monitored)}`:null,pp?`Headroom on an applicable test fell ${r1(rules.drop)} points or more since ${plabel(pp)}`:'Needs a previous quarter to compare',pp?[delta(A.drop,prevPeriod(pp)?Ap.drop:null,bw(2)),h('div',{class:'delta'},'Internal monitoring rule, not a covenant term')]:null,false,null),
+   A.data?kpi('Data issues',A.data,`of ${S.monitored} ${bw(S.monitored)}`,[A.err?`${A.err} unreadable`:null,A.nodata?`${A.nodata} without a report`:null,A.unev?`${A.unev} with a test that cannot be calculated`:null,A.trig?`${A.trig} missing revolver data for a springing test`:null,A.link?`${A.link} with a result not linked to a policy definition`:null].filter(Boolean).join('; '),h('div',{class:'delta'},'Never treated as passing'),true,null):null),
+  watchlist(),
   borrowerTable(),
-  h('p',{class:'foot'},'Status, ratios and dollar figures come from the backend calculation engine. A failed test is a result for analyst review, not a legal determination of default. Thin headroom means a passing ratio within 5% of its limit, a display convention of this tool. A springing covenant that is not triggered is shown but counts as neither passing nor failing.'));
+  covStrip(S),
+  h('p',{class:'foot'},'Status, ratios and dollar figures come from the backend calculation engine. Counts of borrowers, of covenant tests (one per covenant per borrower) and of borrower-quarter observations are labelled separately. A failed test is a potential covenant exception for analyst review, not a legal determination of default. Approaching-limit and deterioration flags are internal monitoring rules of this tool, set under Monitoring rules. A springing covenant that is not triggered is shown but counts as neither passing nor failing.'));
  renderRows();
 }
 function covStrip(S){
@@ -979,39 +1254,46 @@ function covStrip(S){
     h('div',{class:'ci-f'},COV[k].formula),
     h('div',{class:'ci-c'},!ap?h('span',{class:'muted'},'Not tested this quarter'):[h('b',{class:f?'bad':null},`${f} of ${ap}`),` ${f===1?'borrower fails':'borrowers fail'}`,d?h('span',{class:'muted'},`; ${d} not triggered`):null]));})));
 }
+const TF=[['all','All'],['review','Requires review'],['watch','On watch'],['clear','No flags']];
+const tfOf=x=>x.group===1||x.group===2?'review':x.group?'watch':'clear';
+const SORT_DIR={borrower:1,status:-1,leverage:1,dscr:1,change:1,headroom:1};
 function borrowerTable(){
- const groups=[['all','All'],['review','Requires review'],['within','Within limits'],['issues','Not tested']],ks=KEYS();
- const th=(key,label,cls)=>key?h('th',{scope:'col','data-key':key,class:cls||null},h('button',{type:'button',onclick:()=>{sort=sort.key===key?{key,dir:-sort.dir}:{key,dir:key==='borrower'?1:-1};renderRows();}},label,icon('sort',13,'so'))):h('th',{scope:'col',class:cls||null},h('span',null,label));
- return h('section',{'aria-labelledby':'tblH'},
-  h('div',{class:'sh'},h('div',null,h('h2',{id:'tblH'},'Borrowers'),h('p',null,`Covenant results for ${plabel(period)}. Select a borrower to see the calculation, trend and source evidence.`)),
-   h('div',{class:'tools'},h('div',{class:'seg',id:'seg',role:'group','aria-label':'Filter by status'},groups.map(([k,l])=>h('button',{type:'button','data-f':k,'aria-pressed':String(filter===k),onclick:()=>{filter=k;renderRows();}},l,h('span',{class:'ct'})))),
-    h('div',{class:'search'},icon('search',15),h('input',{id:'q',type:'search',placeholder:'Search borrowers','aria-label':'Search borrowers',value:search,oninput:e=>{search=e.target.value;renderRows();}})))),
-  h('div',{class:'tbl'},h('table',{class:'data'+(ks.length>2?' wide':''),id:'tbl'},h('caption',{class:'vh'},`Borrower covenant status for ${plabel(period)}`),
-   h('thead',null,h('tr',null,th('borrower','Borrower'),th('status','Overall status'),ks.map(k=>th(k,COV[k].short)),th(null,'Quarter-over-quarter trend','trend-h'),h('th',{scope:'col',class:'go-h'},h('span',{class:'vh'},'Open')))),h('tbody',{id:'tbody'}))),
-  h('div',{class:'count',id:'count',role:'status',style:'margin-top:10px'}));
+ const ks=KEYS(),others=ks.filter(k=>k!=='leverage'&&k!=='dscr'),pp=prevPeriod(period);
+ if(!TF.some(([k])=>k===filter))filter='all';
+ const th=(key,label,cls,title)=>key?h('th',{scope:'col','data-key':key,class:cls||null,title:title||null},h('button',{type:'button',onclick:()=>{sort=sort.key===key?{key,dir:-sort.dir}:{key,dir:SORT_DIR[key]||1};renderRows();}},label,icon('sort',13,'so'))):h('th',{scope:'col',class:cls||null,title:title||null},h('span',null,label));
+ const qs=h('label',{class:'tq qsel',for:'tq'},h('span',null,'Quarter'),h('span',{class:'selwrap'},h('select',{id:'tq',onchange:e=>{period=e.target.value;renderAll();}},periods.map(p=>h('option',{value:p,selected:p===period},`${plabel(p)}${isProj(p)?' (synthetic scenario)':''}`))),icon('chevD',14)));
+ return h('section',{'aria-labelledby':'tblH',style:'margin-bottom:44px'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'tblH'},'Borrowers'),h('p',null,`Covenant results for ${plabel(period)}${isProj(period)?' (synthetic scenario)':''}. Sort by headroom to see who is furthest past, or closest to, a limit. Select a borrower to investigate.`)),
+   h('div',{class:'tools'},h('div',{class:'seg',id:'seg',role:'group','aria-label':'Filter by attention'},TF.map(([k,l])=>h('button',{type:'button','data-f':k,'aria-pressed':String(filter===k),onclick:()=>{filter=k;renderRows();}},l,h('span',{class:'ct'})))),
+    qs,h('div',{class:'search'},icon('search',15),h('input',{id:'q',type:'search',placeholder:'Search borrowers','aria-label':'Search borrowers',value:search,oninput:e=>{search=e.target.value;renderRows();}})))),
+  h('div',{class:'tbl'},h('table',{class:'data mon',id:'tbl'},h('caption',{class:'vh'},`Borrower covenant status for ${plabel(period)}`),
+   h('thead',null,h('tr',null,th('borrower','Borrower'),th('status','Overall status'),ks.includes('leverage')?th('leverage','Leverage',null,'Sorted by headroom'):null,ks.includes('dscr')?th('dscr','Debt-service coverage',null,'Sorted by headroom'):null,
+    th(null,'Other applicable tests'),th('change',pp?`Change from ${plabel(pp)}`:'Change from prior quarter','th-chg','Sorted by the largest fall in headroom'),th('headroom','Headroom or shortfall',null,'Tightest applicable test, as a share of its limit'),th(null,'Review action'))),h('tbody',{id:'tbody'}))),
+  h('div',{class:'count',id:'count',role:'status',style:'margin-top:10px'}),
+  h('p',{class:'foot',style:'margin-top:6px'},`Headroom or shortfall shows the tightest applicable test: its dollar headroom, and that headroom as a share of the limit. Points are percentage points of the limit. Review status is kept only in this browser.`));
 }
 function renderRows(){
  const tb=$('tbody');if(!tb)return;
- const all=periodSummary(period).rows,ks=KEYS(),doms=Object.fromEntries(ks.map(k=>[k,railDomain(k,all.map(x=>cv(x.r,k)))]));
- const counts={all:all.length};for(const x of all){const g=stOf(x.a).group;counts[g]=(counts[g]||0)+1;}
+ const all=borrowers.map(b=>attention(b,period)),ks=KEYS(),others=ks.filter(k=>k!=='leverage'&&k!=='dscr'),doms=Object.fromEntries(ks.map(k=>[k,railDomain(k,all.map(x=>cv(x.r,k)))]));
+ const counts={all:all.length};for(const x of all){const g=tfOf(x);counts[g]=(counts[g]||0)+1;}
  document.querySelectorAll('#seg button').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.f===filter));b.querySelector('.ct').textContent=counts[b.dataset.f]||0;});
- let rows=filter==='all'?all:all.filter(x=>stOf(x.a).group===filter);
+ let rows=filter==='all'?all:all.filter(x=>tfOf(x)===filter);
  const t=search.trim().toLowerCase();if(t)rows=rows.filter(x=>x.b.toLowerCase().includes(t)||stOf(x.a).label.toLowerCase().includes(t));
- const val=sort.key==='borrower'?x=>x.b:sort.key==='status'?x=>stOf(x.a).rank*1000+x.a.mag*100:x=>cv(x.r,sort.key)?.value??-1;
- rows=[...rows].sort((a,b)=>{const va=val(a),vb=val(b);const c=typeof va==='string'?va.localeCompare(vb):va-vb;return c*sort.dir||a.b.localeCompare(b.b);});
- tb.replaceChildren(...rows.map(x=>rowEl(x,doms,ks)));
- if(!rows.length)tb.replaceChildren(h('tr',{class:'empty-row'},h('td',{colspan:String(ks.length+4)},h('div',null,'No borrowers match these filters.'),h('button',{class:'btn',type:'button',style:'margin-top:10px',onclick:()=>{search='';filter='all';const q=$('q');if(q)q.value='';renderRows();}},'Clear filters'))));
+ const val={borrower:x=>x.b,status:x=>stOf(x.a).rank*1000+x.a.mag*100,leverage:x=>hpOf(cv(x.r,'leverage')),dscr:x=>hpOf(cv(x.r,'dscr')),change:x=>x.worst?x.worst.d:null,headroom:x=>x.tight?x.tight.hp:null}[sort.key]||(x=>x.b);
+ // Missing values always sort last, whichever direction is chosen.
+ rows=[...rows].sort((a,b)=>{const va=val(a),vb=val(b);if(va==null||vb==null)return va==null&&vb==null?a.b.localeCompare(b.b):va==null?1:-1;const c=typeof va==='string'?va.localeCompare(vb):va<vb?-1:va>vb?1:0;return c*sort.dir||a.b.localeCompare(b.b);});
+ tb.replaceChildren(...rows.map(x=>rowEl(x,doms,ks,others)));
+ if(!rows.length)tb.replaceChildren(h('tr',{class:'empty-row'},h('td',{colspan:'8'},h('div',null,'No borrowers match these filters.'),h('button',{class:'btn',type:'button',style:'margin-top:10px',onclick:()=>{search='';filter='all';const q=$('q');if(q)q.value='';renderRows();}},'Clear filters'))));
  $('count').textContent=`Showing ${rows.length} of ${all.length} borrowers`;
  document.querySelectorAll('#tbl thead th[data-key]').forEach(th=>th.setAttribute('aria-sort',th.dataset.key===sort.key?(sort.dir>0?'ascending':'descending'):'none'));
 }
-function rowEl(x,doms,ks){
- const s=stOf(x.a),r=x.r,ok=r&&r.status!=='invalid';
+function rowEl(x,doms,ks,others){
+ const r=x.r,ok=!!(r&&r.status!=='invalid');
  return h('tr',{class:'row',onclick:e=>{if(!e.target.closest('a,button'))openDetail(x.b);}},
-  h('td',{'data-label':'Borrower'},h('div',{class:'bcell'},h('a',{class:'rowlink',href:'#borrower-'+encodeURIComponent(x.b)},x.b),newTag(x.b,period))),
-  h('td',{'data-label':'Overall status'},stLabel(x.a),h('div',{class:'st-act'},s.action)),
-  ks.map(k=>ratioCell(r,k,doms[k],ok,x.a,ks.length>2)),
-  trendCell(x.b,ks),
-  h('td',{class:'go-td','aria-hidden':'true'},icon('chevR',16,'go')));
+  h('td',{'data-label':'Borrower'},h('a',{class:'rowlink',href:'#borrower-'+encodeURIComponent(x.b)},x.b)),
+  h('td',{'data-label':'Overall status'},stLabel(x.a)),
+  ['leverage','dscr'].filter(k=>ks.includes(k)).map(k=>ratioCell(r,k,doms[k],ok,x.a,true)),
+  otherCell(r,others,ok,x.a),changeCell(x),headroomCell(x),reviewCell(x));
 }
 function ratioCell(r,k,dom,ok,a,stack){
  const label=COV[k].short,td=(...kids)=>h('td',{'data-label':label},...kids);
@@ -1023,15 +1305,47 @@ function ratioCell(r,k,dom,ok,a,stack){
  const txt=dorm?(c.would_status==='breach'?'Not triggered; would fail':'Not triggered'):isMax(k)?(fail?`Above ${lim(limit)} max`:`Within ${lim(limit)} max`):(fail?`Below ${lim(limit)} min`:`Meets ${lim(limit)} min`);
  return td(h('div',{class:'ratio'+(stack?' stack':'')},h('span',{class:'n'+(dorm?' dorm':'')},fx(c.value,limit)),rail(c,k,dom,stack?84:96)),h('div',{class:'ratio-sub'+(fail?' bad':dorm&&c.would_status==='breach'?' warn':'')},txt));
 }
-function trendCell(b,ks){
- const pp=prevPeriod(period),cur=rowFor(b,period),pr=pp?rowFor(b,pp):null;
- if(!pp)return h('td',{'data-label':'Trend',class:'td-trend'},h('span',{class:'muted'},'First quarter'));
- if(!okRow(cur)||!okRow(pr))return h('td',{'data-label':'Trend',class:'td-trend'},h('span',{class:'muted'},`Not comparable with ${plabel(pp)}`));
- let worse=false,better=false;
- for(const k of ks){const a=cv(cur,k),b0=cv(pr,k);if(!a||!b0||a.value==null||b0.value==null)continue;const d=a.value-b0.value;if(isMax(k)?d>0.0049:d<-0.0049)worse=true;if(isMax(k)?d<-0.0049:d>0.0049)better=true;}
- const dl=cur.leverage.value-pr.leverage.value,dd=cur.dscr.value-pr.dscr.value;
+function chip(k,c){
+ const n=COV[k].short;
+ if(!c)return h('span',{class:'chip na'},`${n}: not applied`);
+ if(c.status==='unevaluable'||c.value==null)return h('span',{class:'chip warn'},icon('help',13),`${n}: cannot calculate`);
+ if(c.status==='dormant')return h('span',{class:'chip-w'},h('span',{class:'chip dorm',title:`Springing, not triggered this quarter: would ${c.would_status==='breach'?'fail':'pass'} at ${fx(c.value,c.limit)}`},`${n} not triggered`,null),c.would_status==='breach'?h('span',{class:'chip-s'},'Would fail if triggered'):null);
+ const f=c.status==='breach';
+ return h('span',{class:'chip '+(f?'bad':'ok'),title:`${COV[k].name} ${fx(c.value,c.limit)} against the ${lim(c.limit)} ${lw(k)}`},icon(f?'x':'check',13),`${n} ${fx(c.value,c.limit)}`,h('span',{class:'vh'},f?', fails':', passes'));
+}
+function otherCell(r,others,ok,a){
+ const td=(...k)=>h('td',{'data-label':'Other applicable tests'},...k);
+ if(!others.length)return td(h('span',{class:'muted'},'None in the data'));
+ if(!ok)return td(h('span',{class:'muted'},a.key==='error'?'Not calculated':'No report'));
+ return td(h('div',{class:'chips'},others.map(k=>chip(k,cv(r,k)))));
+}
+function changeCell(x){
+ const td=(...k)=>h('td',{'data-label':'Change',class:'td-chg'},...k);
+ if(!x.pp)return td(h('span',{class:'muted'},'First quarter in the data'));
+ const ds=x.items.filter(i=>i.d!=null);
+ if(!ds.length)return td(h('span',{class:'muted'},`Not comparable with ${plabel(x.pp)}`));
+ const worse=ds.some(i=>i.d<=-0.05),better=ds.some(i=>i.d>=0.05),w=x.worst;
  const [label,ic,cls]=worse&&better?['Mixed','flat','flat']:worse?['Deteriorating','down','worse']:better?['Improving','up','better']:['Unchanged','flat','flat'];
- return h('td',{'data-label':'Trend',class:'td-trend'},h('div',{class:'trend'},h('span',{class:'t'},icon(ic,15,cls),label),h('span',{class:'d'},h('span',null,'Lev ',sgn(dl)),h('span',null,'DSCR ',sgn(dd)))));
+ const fresh=x.nw?[]:x.fresh.map(i=>COV[i.k].short);
+ return td(h('div',{class:'trend'},h('span',{class:'t'},icon(ic,15,cls),label),
+  w&&Math.abs(w.d)>=0.05?h('span',{class:'d'+(w.drop?' bad':''),title:`Largest change: ${COV[w.k].name} headroom ${w.d<0?'fell':'rose'} ${ptS(w.d)} percentage points of the limit`},`${COV[w.k].short} ${w.d<0?'−':'+'}${ptS(w.d)} pts headroom`):null,
+  x.nw?h('span',{class:'tag qnew'},'Moved into exception'):fresh.length?h('span',{class:'d bad'},`Newly failing: ${listJoin(fresh)}`):null));
+}
+function hdBar(v,near){
+ const W=104,c=W/2,M=20,x=Math.max(-M,Math.min(M,v)),len=Math.max(1.5,Math.abs(x)/M*(c-2));
+ const g=sv('svg',{class:'hdbar',width:W,height:8,viewBox:`0 0 ${W} 8`,'aria-hidden':'true',focusable:'false'});
+ g.append(sv('rect',{class:'hb-t',x:0,y:2.5,width:W,height:3,rx:1.5}),sv('rect',{class:v<0?'hb-n':near?'hb-w':'hb-p',x:v<0?c-len:c,y:1,width:len,height:6,rx:1.5}),sv('line',{class:'hb-z',x1:c,x2:c,y1:0,y2:8}));
+ return g;
+}
+function headroomCell(x){
+ const td=(...k)=>h('td',{'data-label':'Headroom or shortfall'},...k),t=x.tight;
+ if(!t)return td(h('span',{class:'muted'},x.r&&x.r.status!=='invalid'?'No applicable test':'Not calculated'));
+ const hd=Number(t.c.numerator_headroom_usd),neg=t.hp<0;
+ return td(h('div',{class:'hd'},hdBar(t.hp,t.near),h('div',{class:'hd-v'+(neg?' bad':'')},neg?`${usdW(-hd)} ${isMax(t.k)?'over':'short'}`:`${usdW(hd)} headroom`),h('div',{class:'hd-s'},`${COV[t.k].short}: ${hpPhrase(t.hp)}`)));
+}
+function reviewCell(x){
+ const act=x.group===4&&x.a.key==='ok'?'Review the headroom trend':stOf(x.a).action;
+ return h('td',{'data-label':'Review action'},h('div',{class:'rv-a'},act),revChip(getReview(x.b,period)));
 }
 function openDetail(b){location.hash='borrower-'+encodeURIComponent(b);}
 
@@ -1052,7 +1366,7 @@ function renderRegister(page){
  page.replaceChildren(
   pageHead(TITLES.borrowers,'Every borrower’s covenant results across all reported quarters. Select a cell to open that quarter.',asofBlock()),
   notices(),
-  h('div',{class:'sh'},h('div',null,h('h2',null,'Covenant history'),h('p',null,`The highlighted column is the selected reporting quarter, ${plabel(period)}. The status covers every tested covenant.`)),
+  h('div',{class:'sh'},h('div',null,h('h2',null,'Covenant history'),h('p',null,`${data.results.length} borrower-quarter observations: ${data.results.filter(r=>!isProj(r.period)).length} reported${data.results.some(r=>isProj(r.period))?` and ${data.results.filter(r=>isProj(r.period)).length} synthetic scenario`:''}. The highlighted column is the selected reporting quarter, ${plabel(period)}. Each status covers every applicable covenant test for that borrower and quarter.`)),
    h('div',{class:'tools'},h('div',{class:'legend-inline'},stLabel('ok'),stLabel('watch'),stLabel('dormant'),stEl('bad','x','One or more tests failed')),h('div',{class:'search'},icon('search',15),h('input',{id:'rq',type:'search',placeholder:'Search borrowers','aria-label':'Search borrowers',value:rsearch,oninput:e=>{rsearch=e.target.value;fill();}})))),
   h('div',{class:'tbl'},h('table',{class:'data matrix'},h('caption',{class:'vh'},'Covenant status by borrower and quarter'),
    h('thead',null,h('tr',null,h('th',{scope:'col'},h('span',null,'Borrower')),...periods.map(p=>h('th',{scope:'col',class:p===period?'sel':null},h('span',{style:'display:block'},plabel(p),isProj(p)?h('span',{class:'pr'},'Synthetic scenario'):null))),h('th',{scope:'col'},h('span',null,'First flagged')),h('th',{scope:'col'},h('span',null,`Action for ${plabel(period)}`)))),body)),
@@ -1084,7 +1398,9 @@ function summaryBlock(b,r,a,pr,pp){
  else lead=`${b} met ${tested.length===1?'its tested covenant':`all ${tested.length} tested covenants`} in ${P}.`+(a.key==='watch'?' Headroom is thin on at least one.':a.key==='dormant'?' A springing covenant that is not in effect would fail if it applied.':'');
  if(isProj(period))lead='Synthetic scenario, not reported results: '+lead;
  const order=c=>c.status==='breach'?0:c.status==='unevaluable'?1:c.status==='pass'?2:3;
- const out=[p('lead',lead),...cs.sort((x,y)=>order(x[1])-order(y[1])).map(([k,c])=>p(null,covSentence(k,c,r.inputs)))];
+ // With a failure, the summary keeps to what needs review; every covenant is in the status table below.
+ const shown=a.fails.length||a.unev?cs.filter(([,c])=>c.status==='breach'||c.status==='unevaluable'||(c.status==='dormant'&&c.would_status==='breach')):cs;
+ const out=[p('lead',lead),...shown.sort((x,y)=>order(x[1])-order(y[1])).map(([k,c])=>p(null,covSentence(k,c,r.inputs)))];
  if(r.not_applied?.length)out.push(p(null,`Not applied by the lender: ${listJoin(r.not_applied.map(k=>COV[k].name.toLowerCase()))}.`));
  if(okRow(pr)&&okRow(r)&&pp){
   const L=r.leverage,D=r.dscr,i=r.inputs;
@@ -1101,26 +1417,105 @@ function summaryBlock(b,r,a,pr,pp){
  else if(first&&first<period)out.push(p('fine',`${b} first failed a test in ${plabel(first)}.`));
  return out;
 }
-function testPanel(r,k){
- const c=r.covenants[k],C=COV[k],L=c.limit,fail=c.status==='breach',un=c.status==='unevaluable',dorm=c.status==='dormant',i=r.inputs;
- const status=un?stEl('warn','help','Cannot calculate'):dorm?stEl('na','minus','Springing, not tested'):fail?stEl('bad','x',isMax(k)?'Above maximum':'Below minimum'):stEl('ok','check','Within limit');
- const head=[h('div',{class:'test-h'},h('h3',null,C.name),status),h('p',{class:'what'},C.what),h('p',{class:'modeline'},modeText(c))];
- if(un)return h('div',{class:'test'},...head,h('p',{class:'cure'},c.reason+'.'));
- const dom=railDomain(k,periods.map(p=>cv(rowFor(r.borrower_id,p),k)));
- const w=300,X=t=>8+Math.max(0,Math.min(1,(t-dom[0])/(dom[1]-dom[0])))*(w-16),xl=X(Number(L));
- const big=sv('svg',{class:'rail railwide',viewBox:`0 0 ${w} 40`,width:'100%',height:40,role:'img','aria-label':`${C.name} ${fx(c.value,L)} against a ${lw(k)} of ${lim(L)}`});
- big.append(sv('line',{class:'rt',x1:8,x2:w-8,y1:14,y2:14}),isMax(k)?sv('line',{class:'rz',x1:xl,x2:w-8,y1:14,y2:14}):sv('line',{class:'rz',x1:8,x2:xl,y1:14,y2:14}),sv('line',{class:'rl',x1:xl,x2:xl,y1:6,y2:22}),
-  sv('text',{class:'axisl',x:xl,y:36,'text-anchor':'middle'},`${isMax(k)?'Max':'Min'} ${lim(L)}`),sv('circle',{class:'rv '+(dorm?'rv-dorm':fail?'rv-bad':'rv-ok'),cx:X(c.value),cy:14,r:6}));
- const src=k==='fccr'&&c.components?{ttm_ebitda_usd:c.components.ttm_ebitda_usd,ttm_capex_usd:c.components.ttm_capex_usd,ttm_cash_taxes_usd:c.components.ttm_cash_taxes_usd,ttm_distributions_usd:c.components.ttm_distributions_usd,ttm_debt_service_usd:c.components.fixed_charges_usd}:i;
- const nh=Number(c.numerator_headroom_usd);
- const facts=[...C.numIn,...C.denIn].map(([l,f])=>[l,usd(src[f])]).concat([[C.headroom,usd(c.numerator_headroom_usd),nh<0?'neg':'pos']]);
- const dl=c.denominator_limit_usd==null?'a level the engine could not determine':usd(c.denominator_limit_usd);
- let cure=isMax(k)?(fail||dorm&&c.would_status==='breach'?`To comply: reduce ${C.num} by ${usdAbs(c.numerator_headroom_usd)} to ${usd(c.numerator_limit_usd)}, or raise ${C.den} by ${usdAbs(c.denominator_headroom_usd)} to ${dl}.`:`${cap(C.num)} could rise by ${usd(c.numerator_headroom_usd)}, or ${C.den} fall by ${usd(c.denominator_headroom_usd)}, before the limit is reached.`)
+/* ---------- covenant status: one row per covenant, expandable to the calculation and the agreement text ---------- */
+const xopen=new Map();
+function cureText(k,c){
+ const C=COV[k],fail=c.status==='breach',dorm=c.status==='dormant',dl=c.denominator_limit_usd==null?'a level the engine could not determine':usd(c.denominator_limit_usd);
+ let t=isMax(k)?(fail||dorm&&c.would_status==='breach'?`To comply: reduce ${C.num} by ${usdAbs(c.numerator_headroom_usd)} to ${usd(c.numerator_limit_usd)}, or raise ${C.den} by ${usdAbs(c.denominator_headroom_usd)} to ${dl}.`:`${cap(C.num)} could rise by ${usd(c.numerator_headroom_usd)}, or ${C.den} fall by ${usd(c.denominator_headroom_usd)}, before the limit is reached.`)
   :(fail||dorm&&c.would_status==='breach'?`To comply: raise ${C.num} by ${usdAbs(c.numerator_headroom_usd)} to ${usd(c.numerator_limit_usd)}, or bring ${C.den} down to ${dl}.`:`${cap(C.num)} could fall by ${usd(c.numerator_headroom_usd)}, or ${C.den} rise to ${dl}, before the limit is reached.`);
- if(dorm)cure='Not in effect this quarter. If it applied, '+(fail||c.would_status==='breach'?'the borrower would need to '+cure.replace(/^To comply: /,''):cure.charAt(0).toLowerCase()+cure.slice(1));
- return h('div',{class:'test'+(fail?' fail':dorm?' dorm':'')},...head,
-  h('div',{class:'bigrow'},h('span',{class:'big'},fx(c.value,L)),h('span',{class:'limit'},`Policy ${lw(k)} ${lim(L)}`)),big,
-  h('dl',{class:'facts'},facts.flatMap(([kk,v,cls])=>[h('dt',null,kk),h('dd',{class:cls||null},v)])),h('p',{class:'cure'+(fail?' bad':'')},cure));
+ if(dorm)t='Not in effect this quarter. If it applied, '+(c.would_status==='breach'?'the borrower would need to '+t.replace(/^To comply: /,''):t.charAt(0).toLowerCase()+t.slice(1));
+ return t;
+}
+// The ratio against its limit: previous quarter as a hollow dot, this quarter filled.
+function wideRail(b,k,c,pc,Q){
+ const dom=railDomain(k,periods.map(p=>cv(rowFor(b,p),k))),w=560,X=t=>12+Math.max(0,Math.min(1,(t-dom[0])/(dom[1]-dom[0])))*(w-24),xl=X(Number(c.limit)),dorm=c.status==='dormant',fail=c.status==='breach',has=pc&&pc.value!=null;
+ const g=sv('svg',{class:'rail railwide',viewBox:`0 0 ${w} 44`,width:'100%',height:44,role:'img','aria-label':`${COV[k].name} ${fx(c.value,c.limit)} in ${plabel(period)}${has?`, ${fx(pc.value,pc.limit)} in ${Q}`:''}, against a ${lw(k)} of ${lim(c.limit)}`});
+ g.append(sv('line',{class:'rt',x1:12,x2:w-12,y1:15,y2:15}),isMax(k)?sv('line',{class:'rz',x1:xl,x2:w-12,y1:15,y2:15}):sv('line',{class:'rz',x1:12,x2:xl,y1:15,y2:15}),sv('line',{class:'rl',x1:xl,x2:xl,y1:4,y2:26}),
+  sv('text',{class:'axisl',x:xl,y:40,'text-anchor':'middle'},`${isMax(k)?'Maximum':'Minimum'} ${lim(c.limit)}`));
+ if(has){const x0=X(pc.value),x1=X(c.value);if(Math.abs(x1-x0)>18){const d=x1>x0?1:-1;g.append(sv('path',{class:'ma'+(fail?' bad':''),d:`M${x0+d*7},15H${x1-d*9}M${x1-d*14},10.5L${x1-d*9},15L${x1-d*14},19.5`}));}g.append(sv('circle',{class:'rv rv-prev',cx:x0,cy:15,r:5}));}
+ g.append(sv('circle',{class:'rv '+(dorm?'rv-dorm':fail?'rv-bad':'rv-ok'),cx:X(c.value),cy:15,r:7}));
+ return h('div',{class:'wr'},g,h('div',{class:'axis2'},h('span',null,has?`Hollow dot: ${Q}, ${fx(pc.value,pc.limit)}`:''),h('span',null,`Filled dot: ${plabel(period)}, ${fx(c.value,c.limit)}`)));
+}
+function calcTable(r,k,c){
+ const C=COV[k],i=r.inputs,src=k==='fccr'&&c.components?{ttm_ebitda_usd:c.components.ttm_ebitda_usd,ttm_capex_usd:c.components.ttm_capex_usd,ttm_cash_taxes_usd:c.components.ttm_cash_taxes_usd,ttm_distributions_usd:c.components.ttm_distributions_usd,ttm_debt_service_usd:c.components.fixed_charges_usd}:i;
+ const stat=c.status==='pass'?'Pass':c.status==='breach'?'Fail':c.status==='dormant'?`Not tested (springing); would ${c.would_status==='breach'?'fail':'pass'}`:'Cannot calculate';
+ const rows=[...[...C.numIn,...C.denIn].map(([l,f])=>[l,usd(src[f]),`Input: ${f}`]),
+  [C.short,c.value==null?'n/a':`${fx(c.value,c.limit)} (engine ${c.value})`,'Engine, rounded down to 4 decimals for display only',true],
+  [`Covenant ${lw(k)}`,lim(c.limit),'Threshold in the borrower row'],
+  c.numerator_limit_usd!=null?[`${cap(C.num)} ${isMax(k)?'allowed':'needed'} at the limit`,usd(c.numerator_limit_usd),`Engine: ${isMax(k)?'maximum × '+C.den+', rounded down':'minimum × '+C.den+', rounded up'}`]:null,
+  c.numerator_headroom_usd!=null?[C.headroom,usd(c.numerator_headroom_usd),'Engine: positive is room before the limit, negative is past it']:null,
+  c.numerator_headroom_usd!=null&&hpOf(c)!=null?['Headroom as a share of the limit',hpS(hpOf(c)),'This page: headroom ÷ amount at the limit, from exact cents']:null,
+  c.denominator_limit_usd!=null?[`${cap(C.den)} at the limit`,usd(c.denominator_limit_usd),`Engine: ${isMax(k)?C.num+' ÷ maximum, rounded up':C.num+' ÷ minimum, rounded down'}`]:null,
+  ['Mode',modeText(c),'Lender terms'],
+  ['Result',stat,`${isMax(k)?'Pass if '+C.num+' ≤ maximum × '+C.den:'Pass if '+C.num+' ≥ minimum × '+C.den}, compared exactly; a ratio at the limit passes`,true]].filter(Boolean);
+ return h('div',{class:'minibox'},h('table',{class:'mini'},h('caption',{class:'vh'},`${C.name} calculation`),h('thead',null,h('tr',null,h('th',{scope:'col'},'Item'),h('th',{scope:'col',class:'r'},'Value'),h('th',{scope:'col'},'Source'))),
+  h('tbody',null,rows.map(([a,b2,s,strong])=>h('tr',{class:strong?'strong':null},h('td',null,a),h('td',{class:'r'},b2),h('td',{class:'src'},s))))));
+}
+function showEvidence(k){
+ const m=document.querySelector(`.doctext mark[data-k="${CSS.escape(k)}"]`);if(!m)return;
+ const pre=m.closest('.doctext'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ pre.closest('.panel')?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+ pre.scrollTop=Math.max(0,m.offsetTop-pre.offsetTop-28);
+ m.classList.remove('flash');void m.getBoundingClientRect();m.classList.add('flash');
+ setTimeout(()=>pre.focus({preventScroll:true}),reduce?0:450);
+}
+function agreement(k,c){
+ const d=data.policy?.definitions?.[k],mism=(data.policy?.warnings||[]).some(w=>w.includes(`for ${k} `)),sp=c.mode==='springing'?data.policy?.definitions?.springing:null;
+ if(!d)return h('div',{class:'agr'},h('h4',null,'Agreement text'),h('div',{class:'check bad'},icon('alert',14),'No definition was found in the policy text. This result is not linked to agreement language.'));
+ const inDoc=policyDocs().some(doc=>doc.name===d.source_document);
+ return h('div',{class:'agr'},h('h4',null,'Agreement text'),h('blockquote',{class:'bq'},d.quote),
+  h('div',{class:'agr-m'},`${d.source_document}, characters ${d.start}–${d.end} · SHA-256 ${d.sha256.slice(0,16)}…`),
+  h('div',{class:'check'+(mism?' bad':'')},icon(mism?'alert':'check',14),mism?`The ${lw(k)} used here (${lim(c.limit)}) does not appear in this sentence. Confirm which value governs.`:`The ${lw(k)} used here (${lim(c.limit)}) appears in this sentence, and the backend verified the quotation against the document.`),
+  sp?[h('blockquote',{class:'bq'},sp.quote),h('div',{class:'agr-m'},`Springing provision: ${sp.source_document}, characters ${sp.start}–${sp.end}`)]:null,
+  inDoc?h('button',{class:'linkbtn',type:'button',onclick:()=>showEvidence(k)},'Show it in the full document'):null);
+}
+function inspect(r,k,c,pc,Q){
+ const C=COV[k],box=h('div',{class:'insp'},h('p',{class:'what'},`${C.what} ${modeText(c)}.`));
+ if(c.status==='unevaluable')box.append(h('p',{class:'cure bad'},c.reason+'. The test is not counted as passing.'));
+ else box.append(wideRail(r.borrower_id,k,c,pc,Q),h('p',{class:'cure'+(c.status==='breach'?' bad':'')},cureText(k,c)));
+ box.append(h('h4',null,'Calculation'),h('p',{class:'formula'},`${C.short} = ${C.formula}`),calcTable(r,k,c),agreement(k,c));
+ return box;
+}
+function covBody(b,r,k,c,pc,Q){
+ const C=COV[k],id='cx-'+k,key=`${b}|${period}|${k}`,fail=c.status==='breach',dorm=c.status==='dormant',un=c.status==='unevaluable';
+ const open=xopen.has(key)?xopen.get(key):fail||un,hp=hpOf(c),hd=Number(c.numerator_headroom_usd),ch=Q?change(k,pc,c):null;
+ const cell=h('td',{colspan:'5'},open?inspect(r,k,c,pc,Q):null),det=h('tr',{class:'cdet',id,hidden:!open},cell);
+ const body=h('tbody',{class:'cb'+(fail?' fail':dorm?' dorm':'')+(open?' open':''),'data-k':k});
+ const btn=h('button',{class:'xt',type:'button','aria-expanded':String(open),'aria-controls':id,onclick:()=>{const o=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(o));xopen.set(key,o);det.hidden=!o;body.classList.toggle('open',o);if(o&&!cell.firstChild)cell.append(inspect(r,k,c,pc,Q));}},icon('chevR',15,'chev'),h('span',null,C.name));
+ const res=un?stEl('warn','help','Cannot calculate'):dorm?stEl('na','minus','Not triggered'):fail?stEl('bad','x','Fail'):stEl('ok','check','Pass');
+ const resSub=un?'Not counted as passing':dorm?`Springing; would ${c.would_status==='breach'?'fail':'pass'}`:fail?(isMax(k)?'Above the maximum':'Below the minimum'):(isMax(k)?'Within the maximum':'Meets the minimum');
+ body.append(h('tr',{class:'csum'},
+  h('th',{scope:'row'},btn,h('div',{class:'cs-sub'},c.mode==='springing'?`Springing at ${Number(c.springing.trigger_pct)}%`:'Maintenance')),
+  h('td',{'data-label':'Result'},res,h('div',{class:'cs-sub'},resSub)),
+  h('td',{'data-label':'Actual vs limit'},h('div',{class:'cs-v'+(fail?' bad':dorm?' dorm':'')},c.value==null?'n/a':fx(c.value,c.limit)),h('div',{class:'cs-sub nw'},`${isMax(k)?'Maximum':'Minimum'} ${lim(c.limit)}`)),
+  h('td',{'data-label':'Headroom or shortfall'},un||c.numerator_headroom_usd==null?h('span',{class:'muted'},'n/a'):[h('div',{class:'cs-v'+(hd<0&&!dorm?' bad':dorm?' dorm':'')},hd<0?`${usdW(-hd)} ${isMax(k)?'over':'short'}`:usdW(hd),dorm?h('span',{class:'cs-if'},' if tested'):null),h('div',{class:'cs-sub'},hpPhrase(hp))]),
+  h('td',{'data-label':Q?'Since '+Q:'Prior quarter'},!Q?h('span',{class:'muted'},'First quarter in the data'):[h('div',{class:'cs-m'},pc&&pc.value!=null?fx(pc.value,pc.limit):'—',h('span',{class:'mv-to'},' → '),c.value!=null?fx(c.value,c.limit):'—'),h('div',{class:'cs-sub '+chgCls(ch.kind)},ch.text)])),det);
+ return body;
+}
+function statusTable(b,r,pr,pp){
+ const P=plabel(period),Q=pp?plabel(pp):null,cmp=!!(pr&&pr.status!=='invalid');
+ const order=c=>c.status==='breach'?0:c.status==='unevaluable'?1:c.status==='pass'?2:3;
+ const list=covs(r).filter(([k])=>COV[k]).sort((x,y)=>order(x[1])-order(y[1]));
+ return h('section',{class:'sec','aria-labelledby':'cstH'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'cstH'},'Covenant status'),h('p',null,`Every covenant test for ${P}${isProj(period)?' (synthetic scenario)':''} against its limit${Q?`, compared with ${Q}`:''}. Failing tests open automatically; expand any covenant to inspect the calculation and the agreement text.`))),
+  h('div',{class:'tbl'},h('table',{class:'cst',id:'cst'},h('caption',{class:'vh'},`Covenant status for ${b}, ${P}`),
+   h('thead',null,h('tr',null,['Covenant','Result','Actual vs limit','Headroom or shortfall',Q?`Since ${Q}`:'Prior quarter'].map(t=>h('th',{scope:'col'},h('span',null,t))))),
+   list.map(([k,c])=>covBody(b,r,k,c,cmp?cv(pr,k):undefined,Q)))),
+  r.not_applied?.length?h('p',{class:'foot'},`Not applied by the lender this quarter: ${listJoin(r.not_applied.map(k=>COV[k].name))}.`):null,
+  h('p',{class:'foot'},'Calculated by the backend in exact whole cents; this page only displays the results. TTM (trailing 12 months) is the last four quarters added together. EBITDA is earnings before interest, taxes, depreciation and amortization. A springing covenant that is not triggered is shown for reference and is not counted.'));
+}
+function reviewPanel(b){
+ const rv=getReview(b,period)||{status:'none',note:'',at:null},P=plabel(period);
+ const msg=h('p',{class:'rv-saved',role:'status','aria-live':'polite'},rv.at?`Saved ${stampLocal(rv.at)}.`:'Not saved yet.');
+ const ta=h('textarea',{id:'rvNote',maxlength:'2000',placeholder:'For your own follow-up, for example what to request from the borrower.'});ta.value=rv.note||'';
+ const seg=h('div',{class:'rseg',role:'radiogroup','aria-label':`Review status for ${b}, ${P}`},REV.map(([v,l])=>h('label',null,h('input',{type:'radio',name:'rvst',value:v,checked:rv.status===v,onchange:()=>save('Status')}),h('span',null,l))));
+ function save(what){const st=seg.querySelector('input:checked')?.value||'none',note=ta.value.trim().slice(0,2000);
+  if(st==='none'&&!note){setReview(b,period,null);msg.textContent='Cleared.';}
+  else{const at=new Date().toISOString(),ok=setReview(b,period,{status:st,note,at});msg.textContent=ok?`${what} saved ${stampLocal(at)}.`:`${what} kept until you leave this page: browser storage is unavailable.`;}}
+ return h('section',{class:'panel rvp','aria-labelledby':'rvH'},h('div',{class:'panel-h'},icon('check',17),h('h3',{id:'rvH'},'Analyst review'),h('span',{class:'muted',style:'margin-left:auto;font-size:12.5px'},P)),
+  h('div',{class:'panel-b'},seg,h('label',{class:'fl',for:'rvNote',style:'margin:12px 0 0'},'Review note'),ta,
+   h('div',{class:'row2'},h('button',{class:'btn',type:'button',onclick:()=>save('Note')},'Save note'),h('button',{class:'btn btn-ghost',type:'button',onclick:()=>{ta.value='';seg.querySelector('input[value=none]').checked=true;save('Review');}},'Clear')),
+   msg,h('p',{class:'rv-disc'},store.ok?'Kept only in this browser. It is not shared with colleagues, is not an audit record, and does not change any covenant result.':'Browser storage is unavailable here, so this review lasts only until the page is closed. It does not change any covenant result.')));
 }
 function niceTicks(lo,hi,n=4){const raw=(hi-lo)/n;const steps=[0.01,0.02,0.025,0.05,0.1,0.2,0.25,0.5,1,2,5];const step=steps.find(s=>s>=raw)||raw;const out=[];for(let t=Math.ceil(lo/step-1e-9)*step;t<=hi+1e-9;t+=step)out.push(+t.toFixed(4));return out;}
 function ratioChart(b,k){
@@ -1174,24 +1569,6 @@ function historyTable(b){
    ...(r&&r.status!=='invalid'?[...ks.map(k=>{const c=cv(r,k);return h('td',{class:'r',style:c?.status==='breach'?'color:var(--red)':c?.status==='dormant'?'color:var(--ink-3)':null},c?(c.value==null?'n/a':fx(c.value,c.limit)+(c.status==='dormant'?'*':'')):r[k]?.status==='off'?'Not applied':'—');}),
     h('td',{class:'r',style:Number(r.dscr?.cashflow_headroom_usd)<0?'color:var(--red)':null},r.dscr?.cashflow_headroom_usd==null?'n/a':usd(r.dscr.cashflow_headroom_usd))]:[h('td',{class:'r muted',colspan:String(ks.length+1)},a.key==='nodata'?'No row supplied':'Not calculated')]));}))),
   periods.some(p=>covs(rowFor(b,p)).some(([,c])=>c.status==='dormant'))?h('p',{class:'muted',style:'margin:0;padding:8px 10px;font-size:12px;border-top:1px solid var(--rule)'},'* Springing covenant not triggered that quarter; shown for reference, not tested.'):null);
-}
-function calcSection(r){
- const i=r.inputs,stat=c=>c.status==='pass'?'Pass':c.status==='breach'?'Fail':c.status==='dormant'?`Not tested (springing); would ${c.would_status==='breach'?'fail':'pass'}`:'Cannot calculate';
- const tbl=rows=>h('div',{class:'minibox'},h('table',{class:'mini'},h('thead',null,h('tr',null,h('th',{scope:'col'},'Item'),h('th',{scope:'col',class:'r'},'Value'),h('th',{scope:'col'},'Source'))),
-  h('tbody',null,rows.map(([a,b,c,s])=>h('tr',{class:s?'strong':null},h('td',null,a),h('td',{class:'r'},b),h('td',{class:'src'},c))))));
- const out=[h('p',{class:'muted',style:'margin:0;font-size:13px'},'Calculated by the backend in exact whole cents. This page only displays the results.'),
-  h('p',{style:'margin:0;font-size:13.5px;color:var(--ink-2)'},'Trailing-12-month (TTM) means the last four quarters added together. EBITDA is earnings before interest, taxes, depreciation and amortization, a common measure of operating profit. Debt service (fixed charges) is the scheduled interest and principal due on the loans.')];
- for(const [k,c] of covs(r)){const C=COV[k];if(!C)continue;
-  const inputs=[...C.numIn,...C.denIn].map(([l,f])=>[l,usd(k==='fccr'&&c.components?{ttm_ebitda_usd:c.components.ttm_ebitda_usd,ttm_capex_usd:c.components.ttm_capex_usd,ttm_cash_taxes_usd:c.components.ttm_cash_taxes_usd,ttm_distributions_usd:c.components.ttm_distributions_usd,ttm_debt_service_usd:c.components.fixed_charges_usd}[f]:i[f]),`Input: ${f}`]);
-  out.push(h('h4',null,C.name),h('p',{class:'formula'},`${C.short} = ${C.formula}`),
-   tbl([...inputs,[C.short,c.value==null?'n/a':`${fx(c.value,c.limit)} (engine ${c.value})`,'Engine, rounded down to 4 decimals for display only',true],
-    [`Policy ${lw(k)}`,lim(c.limit),'Input row threshold'],
-    c.numerator_limit_usd!=null?[`${cap(C.num)} ${isMax(k)?'allowed':'needed'} at the limit`,usd(c.numerator_limit_usd),`Engine: ${isMax(k)?'maximum × '+C.den+', rounded down':'minimum × '+C.den+', rounded up'}`]:null,
-    c.numerator_headroom_usd!=null?[C.headroom,usd(c.numerator_headroom_usd),'Engine: positive is room before the limit, negative is past it']:null,
-    c.denominator_limit_usd!=null?[`${cap(C.den)} at the limit`,usd(c.denominator_limit_usd),`Engine: ${isMax(k)?C.num+' ÷ maximum, rounded up':C.num+' ÷ minimum, rounded down'}`]:null,
-    ['Mode',modeText(c),'Lender terms'],
-    ['Result',stat(c),`${isMax(k)?'Pass if '+C.num+' ≤ maximum × '+C.den:'Pass if '+C.num+' ≥ minimum × '+C.den}, compared exactly; a ratio at the limit passes`,true]].filter(Boolean)));}
- return out;
 }
 function docPanel(doc,defs,failing){
  const marks=Object.entries(defs).filter(([,d])=>d&&d.source_document===doc.name).sort((a,b)=>a[1].start-b[1].start);
@@ -1347,21 +1724,16 @@ function renderDetail(page){
   h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))));
  const tone=s.tone==='na'?'':s.tone;
  const legal=h('div',{class:'legal'},icon('scale',16),h('div',null,h('b',null,a.fails.length?'Potential financial covenant breach, not a legal default determination. ':'Covenant test result, not a legal determination. '),'Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers and the lender’s decisions. This tool evaluates none of those.'));
- const order=c=>c.status==='breach'?0:c.status==='unevaluable'?1:c.status==='pass'?2:3;
- const tests=r&&r.status!=='invalid'?covs(r).filter(([k])=>COV[k]).sort((x,y)=>order(x[1])-order(y[1])).map(([k])=>testPanel(r,k)):[];
  const main=h('div',null,
   h('section',{class:'sec','aria-labelledby':'sumH'},h('div',{class:'sh'},h('h2',{id:'sumH'},'Executive summary')),h('div',{class:'exec '+tone},...summaryBlock(b,r,a,pr,pp),legal)),
-  changeSection(b),
-  tests.length?h('section',{class:'sec','aria-labelledby':'testsH'},h('div',{class:'sh'},h('div',null,h('h2',{id:'testsH'},'Covenant tests'),h('p',null,'Each ratio against its policy limit, with the dollar headroom the engine calculated.'))),
-   h('div',{class:'tests'},tests),r.not_applied?.length?h('p',{class:'foot'},`Not applied by the lender this quarter: ${listJoin(r.not_applied.map(k=>COV[k].name))}.`):null,
-   h('details',{class:'xp',style:'margin-top:16px'},h('summary',null,icon('chevR',16,'chev'),'Show calculation',h('span',{class:'hint'},'Formulas and inputs')),h('div',{class:'xb'},...calcSection(r)))):null,
-  cureSection(b,r),
+  r&&r.status!=='invalid'&&covs(r).some(([k])=>COV[k])?statusTable(b,r,pr,pp):null,
   h('section',{class:'sec','aria-labelledby':'trendH'},h('div',{class:'sh'},h('div',null,h('h2',{id:'trendH'},'Quarterly trend'),h('p',null,'Choose a covenant. Hover or focus a quarter for exact values, or select it to open that quarter.'))),
-   chartSection(b,r,a),h('div',{style:'margin-top:16px'},historyTable(b))));
+   chartSection(b,r,a),h('div',{style:'margin-top:16px'},historyTable(b))),
+  cureSection(b,r));
  const rs=r?reasons(r,a):[];
  const railEl=h('aside',{class:'ws-rail','aria-label':'Review action, terms and evidence'},
-  h('section',{class:'action','aria-labelledby':'actH'},h('div',{class:'k',id:'actH'},'Suggested review action'),h('p',{class:'v'},s.action),rs.length?h('ul',null,rs.map(t=>h('li',null,t))):null),
-  termsPanel(b,r),evidencePanel(r&&r.status!=='invalid'?r:null),r?sourceRow(r):null);
+  h('section',{class:'action','aria-labelledby':'actH'},h('div',{class:'k',id:'actH'},'Suggested review step'),h('p',{class:'v'},s.action),rs.length?h('ul',null,rs.map(t=>h('li',null,t))):null),
+  reviewPanel(b),evidencePanel(r&&r.status!=='invalid'?r:null),termsPanel(b,r),r?sourceRow(r):null);
  page.replaceChildren(head,notices(),h('div',{class:'ws'},main,railEl));
  requestAnimationFrame(()=>{for(const pre of page.querySelectorAll('.doctext')){const m=pre.querySelector('mark.fail')||pre.querySelector('mark');if(m)pre.scrollTop=Math.max(0,m.offsetTop-pre.offsetTop-28);}});
 }
@@ -1529,7 +1901,8 @@ function recView(j){
 function renderMethod(page){
  const sec=(id,title,...k)=>h('section',{id:'m-'+id,'aria-labelledby':'mh-'+id},h('h2',{id:'mh-'+id},title),...k);
  const p=t=>h('p',null,t);
- const toc=[['covenant','What a covenant is'],['leverage','Leverage'],['dscr','Debt-service coverage'],['fccr','Fixed-charge coverage'],['current','Current ratio'],['springing','Springing covenants'],['headroom','Headroom'],['status','Status labels'],['designer','Covenant Designer'],['scenario','Quarters after the reporting date'],['limits','What this tool does not decide'],['numbers','Where the numbers come from'],['assumptions','Assumptions']];
+ const toc=[['covenant','What a covenant is'],['leverage','Leverage'],['dscr','Debt-service coverage'],['fccr','Fixed-charge coverage'],['current','Current ratio'],['springing','Springing covenants'],['headroom','Headroom'],['results','Test results'],['status','Borrower statuses'],['attention','Borrowers requiring attention'],['rules','Monitoring rules'],['review','Review notes and export'],['designer','Covenant Designer'],['scenario','Quarters after the reporting date'],['limits','What this tool does not decide'],['numbers','Where the numbers come from'],['assumptions','Assumptions']];
+ const dd=(t,d)=>[h('dt',null,t),h('dd',null,d)];
  page.replaceChildren(pageHead(TITLES.method,'How Covenant Monitor tests borrowers, and how to read the results.'),
   h('div',{class:'doc-layout'},h('nav',{class:'toc','aria-label':'On this page'},toc.map(([id,t])=>h('a',{href:'#m-'+id,onclick:e=>{e.preventDefault();$('m-'+id).scrollIntoView({behavior:'smooth',block:'start'});}},t))),
    h('div',{class:'article'},
@@ -1539,17 +1912,96 @@ function renderMethod(page){
     sec('fccr','Fixed-charge coverage',h('p',{class:'formula'},'FCCR = (TTM EBITDA − unfinanced capex − cash taxes − distributions) ÷ TTM fixed charges'),p('A stricter coverage test: what is left after capital spending, taxes and payments to owners must still cover the loan payments. Fixed charges here are the scheduled interest and principal. The agreement sets a minimum.')),
     sec('current','Current ratio',h('p',{class:'formula'},'Current ratio = current assets ÷ current liabilities'),p('Short-term liquidity: whether assets that turn into cash within a year cover the bills due within a year, measured at quarter end. The agreement sets a minimum.')),
     sec('springing','Springing covenants',p(`A springing covenant only applies when a trigger is hit, usually when the borrower draws heavily on its revolving credit line. Here the trigger is revolver drawn divided by commitment at quarter end, ${trigPct()}% by default. Below the trigger the test is dormant: it is shown with what it would be, but counts as neither passing nor failing. If revolver figures are missing, the test is run anyway. The lender can set each covenant to maintenance (tested every quarter), springing or not applied, for the whole portfolio under Covenant terms or for one borrower on that borrower’s page.`)),
-    sec('headroom','Headroom',p('Headroom is the cushion before a limit is reached, in dollars. Positive debt headroom is how much more the borrower could borrow at current EBITDA and still pass. Negative cash-flow headroom is the shortfall against the cash flow the minimum requires. Every covenant is reported the same way, so positive always means room and negative always means past the limit.')),
-    sec('status','Status labels',h('dl',null,h('dt',null,stLabel('ok')),h('dd',null,'Every tested covenant passes.'),h('dt',null,stLabel('watch')),h('dd',null,`Every tested covenant passes, but one is within ${WATCH*100}% of its limit. This band is a display convention of this tool, not a term of the agreement.`),
+    sec('headroom','Headroom',p('Headroom is the cushion before a limit is reached, in dollars. Positive debt headroom is how much more the borrower could borrow at current EBITDA and still pass. Negative cash-flow headroom is the shortfall against the cash flow the minimum requires. Every covenant is reported the same way, so positive always means room and negative always means past the limit.'),
+     p('Headroom is also shown as a share of the limit: the dollar headroom divided by the amount the limit allows (for BOR-01 in Q3 2026, −$12,000 ÷ $312,000 = −3.8%). This makes covenants with different units comparable, so the borrower table can sort by headroom. The share is computed on this page from the engine’s exact cent figures; it is never used to decide a pass or a fail.')),
+    sec('results','Test results',p('Each covenant tested for each borrower in a quarter is one test. Counts on the overview say whether they count borrowers, tests or borrower-quarter observations.'),h('dl',null,
+     dd(stEl('ok','check','Pass'),'The ratio is within the covenant limit. A ratio exactly at the limit passes.'),
+     dd(stEl('bad','x','Fail'),'The ratio is past the covenant limit: a potential covenant exception for analyst review, not a determination that an event of default has occurred.'),
+     dd(stEl('warn','help','Cannot calculate'),'An input makes the ratio meaningless, for example zero or negative EBITDA. Not counted as passing.'),
+     dd(stEl('na','minus','Not triggered'),'A springing covenant whose trigger was not met this quarter. Shown with what it would be, counted as neither passing nor failing.'),
+     dd(stEl('na','minus','Not applied'),'The lender has switched the covenant off under Covenant terms.'),
+     dd(stEl('na','minus','No report or data error'),'No row was supplied for the quarter, or the row could not be read. No test is run and the borrower is never treated as passing.'),
+     dd(stEl('bad','alert','No definition found'),'The policy text has no definition for the covenant, or its threshold does not match the data. The result is flagged as not linked to agreement language; the tool does not invent a definition.'))),
+    sec('status','Borrower statuses',h('dl',null,h('dt',null,stLabel('ok')),h('dd',null,'Every tested covenant passes.'),h('dt',null,stLabel('watch')),h('dd',null,`Every tested covenant passes, but one has less than ${r1(rules.near)}% headroom. This is an internal monitoring rule of this tool, not a term of the agreement.`),
      h('dt',null,stLabel('dormant')),h('dd',null,'Every tested covenant passes, but a springing covenant that is not in effect would fail if it applied.'),
      h('dt',null,stLabel({key:'breach',fails:['x']})),h('dd',null,'At least one tested covenant failed; the label counts how many.'),h('dt',null,stLabel('review')),h('dd',null,'A ratio could not be calculated, for example because EBITDA is zero or negative.'),
      h('dt',null,stLabel('untested')),h('dd',null,'Every covenant is switched off, or springing and not triggered.'),
      h('dt',null,stLabel('error')),h('dd',null,'The row could not be read.'),h('dt',null,stLabel('nodata')),h('dd',null,'No row was supplied for the quarter. Neither is ever counted as passing.'))),
+    sec('attention','Borrowers requiring attention',p('The overview lists flagged borrowers in a fixed priority order, using only calculated results and data checks:'),
+     h('ol',{style:'margin:0 0 10px;padding-left:20px;font-size:14.5px;line-height:1.65;max-width:78ch'},
+      h('li',null,'Applicable covenant failures: at least one test that applies this quarter failed. Borrowers that moved into exception this quarter come first, then those with a newly failed test, then by number of failed tests and the size of the shortfall.'),
+      h('li',null,'Missing, invalid or unverified data: no report, an unreadable row, a test that cannot be calculated, missing springing trigger data, or a result not linked to a policy definition.'),
+      h('li',null,'Approaching a covenant limit (internal rule).'),
+      h('li',null,'Material headroom deterioration (internal rule).')),
+     p('Each flagged borrower appears once, under its highest priority, with an explanation built from fixed templates, for example “DSCR declined from 1.23x to 1.15x and is below the contractual 1.20x minimum.” “Contractual” is used only when the policy text defines the covenant and contains the threshold; otherwise the limit is called “stated”. Springing tests that are not triggered are mentioned for context and never counted.')),
+    sec('rules','Monitoring rules',p(`Two internal rules drive priorities 3 and 4. They are settings of this tool, not covenant terms, are not legally equivalent to a covenant failure, and never change a covenant result. Current values: approaching a limit when a passing test has less than ${r1(rules.near)}% headroom (default ${r1(RULE_DEFAULTS.near)}%); material deterioration when headroom on a test that applies this quarter fell by ${r1(rules.drop)} percentage points or more since the previous quarter (default ${r1(RULE_DEFAULTS.drop)}).`),
+     p('Both comparisons use the engine’s exact cent figures: a test exactly at the approaching threshold is not flagged, and a fall exactly equal to the deterioration rule is flagged. Change the values under Monitoring rules on the overview. They are kept in this browser only.')),
+    sec('review','Review notes and export',p('On each borrower’s page you can set a review status (not reviewed, under review, reviewed) and a note for a quarter. These are kept only in this browser’s local storage: they are not shared with colleagues, not backed up, not an audit record, and they never change a covenant result.'),
+     p('Export findings on the overview downloads a CSV for the selected quarter: one row per borrower and covenant with the result, ratio, limit, dollar and percentage headroom, prior-quarter value, policy citation, attention priority and explanation, plus any review status and note from this browser. Synthetic scenario quarters are labelled in the file.')),
     sec('designer','Covenant Designer',p('The Covenant Designer reads a company’s statements as a CSV of line items, computes the four ratios, and recommends which covenants to include, at what level and whether each should be springing, using a cushion you choose. It shows the source line for every figure and drafts term-sheet language. It uses fixed, stated rules, not a language model, and is a starting point for a credit analyst, not credit approval.')),
     sec('scenario','Quarters after the reporting date',p(`The sample data runs to ${asOf?dlong(asOf):'its reporting date'}. Rows for later quarters, such as Q4 2026, are synthetic scenarios included with the fictional data. They are not reported results and not forecasts: no forecasting method was used to produce them. They are labelled “Synthetic scenario” wherever they appear, are never selected by default, and should be read only as an illustration of how the tests behave.`)),
     sec('limits','What this tool does not decide',p('A failed test is a calculation, not a legal determination of default. Whether an event of default has occurred depends on the full agreement, notice and cure periods, waivers and the lender’s judgment. Figures are taken as supplied and are not checked against borrower statements.')),
     sec('numbers','Where the numbers come from',p('Every ratio, status and dollar figure is calculated by the application’s backend from the borrower CSV, using exact whole-cent arithmetic. The interface formats and explains those results; it never recalculates a covenant. Each definition is quoted from the policy, or from the team’s synthetic addendum for FCCR, current ratio and springing terms, with its character position and a SHA-256 hash verified by the backend before it is shown.')),
     sec('assumptions','Assumptions',h('ul',{id:'assump'},(data?.assumptions||[]).map(t=>h('li',null,t)))))));
+}
+
+/* ---------- export findings (CSV): engine results plus browser-only review notes; not an audit record ---------- */
+const csvCell=v=>{let s=v==null?'':String(v);if(/^[=+\-@\t\r]/.test(s)&&!/^-?\d+(\.\d+)?$/.test(s))s="'"+s;return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+function findingsCsv(P){
+ const pp=prevPeriod(P),xs=borrowers.map(b=>attention(b,P)).sort(attnSort),defs=data.policy?.definitions||{};
+ const head=['period','period_basis','borrower_id','source_record_id','overall_status','attention_priority','attention_group','explanation','covenant','test_mode','result','actual_ratio','limit_type','limit','headroom_usd','headroom_pct_of_limit','prior_period','prior_ratio','change_since_prior','policy_citation','review_status','review_note','review_saved_at_utc'];
+ const lines=[head.join(',')];
+ for(const x of xs){
+  const e=explain(x),rv=getReview(x.b,P);
+  const base=[P,isProj(P)?'Synthetic scenario, not reported results':'Reported',x.b,x.r?.record_id||'',stOf(x.a).label,x.group||'',x.group?GDEF(x.group)[0]:'No flags',[...e.lines,...e.more].join(' ')];
+  const tail=[rv?REV.find(y=>y[0]===rv.status)[1]:'Not reviewed',rv?.note||'',rv?.at||''];
+  const blank=res=>[...base,'','',res,'','','','','',pp||'','','','',...tail];
+  if(!x.r||x.r.status==='invalid'){lines.push(blank(x.r?'Data error':'No report').map(csvCell).join(','));continue;}
+  for(const i of x.items){const c=i.c,d=defs[i.k];
+   const res=c.status==='pass'?'Pass':c.status==='breach'?'Fail':c.status==='dormant'?`Not triggered (springing); would ${c.would_status==='breach'?'fail':'pass'}`:'Cannot calculate';
+   lines.push([...base,COV[i.k].name,c.mode||'',res,c.value??'',lw(i.k),c.limit??'',c.numerator_headroom_usd??'',i.hp==null?'':(Math.round(i.hp*100)/100).toFixed(2),pp||'',i.pc?.value??'',pp?i.ch.text:'',d?`${d.source_document} characters ${d.start}-${d.end}`:'No definition found',...tail].map(csvCell).join(','));}
+  for(const k of x.r.not_applied||[])if(COV[k])lines.push([...base,COV[k].name,'off','Not applied by the lender','','','','','',pp||'','','','',...tail].map(csvCell).join(','));
+  if(!x.items.length&&!(x.r.not_applied||[]).length)lines.push(blank('No covenant tested').map(csvCell).join(','));
+ }
+ return lines.join('\r\n')+'\r\n';
+}
+function exportFindings(){
+ if(!data||!period)return;
+ const name=`covenant-findings-${period}${isProj(period)?'-synthetic-scenario':''}.csv`;
+ const url=URL.createObjectURL(new Blob(['﻿'+findingsCsv(period)],{type:'text/csv;charset=utf-8'}));
+ const a=h('a',{href:url,download:name,hidden:true});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);
+ toast(`Downloaded ${name}: engine results for ${plabel(period)} with any review notes from this browser. Not an audit record.`);
+}
+
+/* ---------- monitoring rules ---------- */
+function openRules(){
+ $('ruleNear').value=r1(rules.near);$('ruleDrop').value=r1(rules.drop);
+ $('rulesStore').textContent=store.ok?'Kept in this browser only; anyone else using the tool keeps their own rules.':'Browser storage is unavailable, so these rules last until the page is closed.';
+ const m=$('rmsg');m.className='msg';m.textContent='';if(!$('rules').open)$('rules').showModal();
+}
+$('closeRules').onclick=$('cancelRules').onclick=()=>$('rules').close();
+$('rules').addEventListener('click',e=>{if(e.target===$('rules'))$('rules').close();});
+$('defaultRules').onclick=()=>{$('ruleNear').value=r1(RULE_DEFAULTS.near);$('ruleDrop').value=r1(RULE_DEFAULTS.drop);const m=$('rmsg');m.className='msg';m.textContent='Defaults restored in this panel. Select Apply rules to use them.';};
+$('applyRules').onclick=()=>{
+ const pn=s=>/^\d{1,2}(\.\d)?$/.test(s.trim())?Number(s.trim()):NaN,n=pn($('ruleNear').value),d=pn($('ruleDrop').value),m=$('rmsg');
+ if(!okRule(n)||!okRule(d)){m.className='msg err';m.textContent='Enter each rule as a number from 0 to 50, with at most one decimal place.';return;}
+ rules={near:n,drop:d};const ok=store.set('cm.rules.v1',rules);$('rules').close();renderAll();
+ toast(`Monitoring rules applied: approaching below ${r1(n)}% headroom; deterioration of ${r1(d)} points or more.${ok?'':' Browser storage is unavailable, so they last until the page is closed.'}`);
+};
+
+/* ---------- setup checklist (Data sources) ---------- */
+function renderSetup(){
+ const L=$('setupList');if(!L)return;
+ const step=(st,title,...body)=>h('li',null,icon(st==='ok'?'check':st==='bad'?'alert':'chevR',16,'s-'+st),h('div',null,h('b',null,title),...body));
+ if(!data){L.replaceChildren(step('na','Waiting for results','Covenant results have not loaded yet.'));return;}
+ const n=data.results.length,bad=data.results.filter(r=>r.status==='invalid').length,defs=data.policy?.definitions||{},warns=data.policy?.warnings||[];
+ const di=KEYS().map(k=>({k,d:defs[k],m:warns.some(w=>w.includes(`for ${k} `))})),T=period?testCounts(period):null;
+ L.replaceChildren(
+  step(bad?'bad':'ok','1. Review borrower records',`${n} rows for ${borrowers.length} borrowers across ${periods.length} quarters; ${bad?`${bad} could not be read and ${bad===1?'is':'are'} never treated as passing`:'every row was read'}. ${lastCsv?'Uploaded, taken as supplied.':'Bundled synthetic sample, taken as supplied.'}`),
+  step('ok','2. Review the loan policy',lastPolicy?`“${polName}”, uploaded and confirmed by you against the signed agreement.`:'Bundled fictional loan policy and the team’s synthetic addendum.'),
+  step(di.some(x=>!x.d||x.m)?'bad':'ok','3. Confirm definitions and thresholds',h('ul',null,di.map(x=>h('li',null,`${COV[x.k].short}: `,!x.d?'no definition found; results are flagged as not linked to agreement language':x.m?'the threshold in the data does not appear in the definition':`characters ${x.d.start}–${x.d.end} of ${x.d.source_document}; quotation verified, threshold matches`)))),
+  step('ok','4. Run calculations',T?`${T.appl} applicable tests for ${plabel(period)}, calculated by the backend in exact cents${T.unev?`; ${T.unev} could not be calculated`:''}.`:'Calculated by the backend engine.'),
+  step('na','5. Investigate',h('button',{class:'linkbtn',type:'button',onclick:()=>{$('sources').close();const go=()=>{const t=$('attnH');if(t){t.setAttribute('tabindex','-1');t.scrollIntoView({block:'start'});t.focus({preventScroll:true});}};if(view!=='overview'){location.hash='overview';setTimeout(go,60);}else go();}},'Open Borrowers requiring attention')));
 }
 
 /* ---------- covenant terms ---------- */
@@ -1604,10 +2056,11 @@ $('upPol').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)
   const jobId=j.job_id;
   for(let i=0;j.status==='pending';i++){if(i>60)throw Error('The parser is taking too long. Try again later.');m.textContent='Parsing… ('+(i+1)+')';await new Promise(r=>setTimeout(r,2000));res=await fetch('/api/policy/parse/'+encodeURIComponent(jobId));j=await res.json();if(!res.ok)throw Error(j.error||res.statusText);}
   if(j.status!=='completed')throw Error(j.error||'Parsing failed.');
-  $('polText').value=j.text;$('review').hidden=false;$('review').dataset.name=f.name;m.textContent='';$('polText').focus();
+  $('polText').value=j.text;$('polOk').checked=false;$('usePol').disabled=true;$('review').hidden=false;$('review').dataset.name=f.name;m.textContent='';$('polText').focus();
  }catch(x){err('Could not read policy: '+x.message);}};
 $('cancelPol').onclick=()=>{$('review').hidden=true;};
-$('usePol').onclick=async()=>{const text=$('polText').value;if(!text.trim())return err('The policy text is empty. Nothing was changed.');
+$('polOk').onchange=e=>{$('usePol').disabled=!e.target.checked;};
+$('usePol').onclick=async()=>{const text=$('polText').value;if(!$('polOk').checked)return err('Confirm that you compared the text with the signed agreement first. Nothing was changed.');if(!text.trim())return err('The policy text is empty. Nothing was changed.');
  const prev=[lastPolicy,polName];lastPolicy=text;polName=$('review').dataset.name||'uploaded-policy';
  if(await run()){$('review').hidden=true;$('sources').close();}else [lastPolicy,polName]=prev;};
 $('reset').onclick=async()=>{const prev=[lastCsv,csvName,lastPolicy,polName];lastCsv=null;csvName=null;lastPolicy=null;polName=null;$('review').hidden=true;if(await run())okMsg('Back to the bundled sample data and policy.');else [lastCsv,csvName,lastPolicy,polName]=prev;};
