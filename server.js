@@ -54,6 +54,7 @@ export async function handleRequest(req,res){
   if(req.method==='GET'&&p==='/favicon.svg'){res.writeHead(200,{'Content-Type':'image/svg+xml','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(await fs.readFile(new URL('./public/favicon.svg',import.meta.url)));}
   const asset=req.method==='GET'&&p.match(/^\/assets\/[a-z0-9-]+(?:@2x)?\.(webp|png|jpg)$/);
   if(asset){try{const b=await fs.readFile(new URL('./public'+p,import.meta.url));res.writeHead(200,{'Content-Type':{webp:'image/webp',png:'image/png',jpg:'image/jpeg'}[asset[1]],'Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});return res.end(b);}catch{return send(404,{error:'Not found'});}}
+  if(p.startsWith('/api/statements/')||['/statements','/statements/','/statements.html'].includes(p))return await (await import('./lib/statements-routes.js')).handleStatements(req,res,{url,send,body,CSP}); // Borrower statements: LlamaExtract reads, lib/statements.js calculates
   // Public product page at /, the monitoring application at /app (vercel.json maps /app to public/app.html).
   const page=req.method==='GET'&&({'/':'index.html','/index.html':'index.html','/app':'app.html','/app/':'app.html','/app.html':'app.html'})[p];
   if(page){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':CSP});return res.end(await fs.readFile(new URL('./public/'+page,import.meta.url)));}

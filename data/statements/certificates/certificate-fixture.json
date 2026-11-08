@@ -1,0 +1,23 @@
+{
+ "generator": "scripts/make-certificate-fixture.py",
+ "page": 1,
+ "pdf": "BOR-09_2026-Q3_certificate.pdf",
+ "record_id": "COV-09-3",
+ "synthetic": true,
+ "units": "cents for money, text for ratios and answers",
+ "values": {
+  "addback_cap": "None",
+  "borrower_id": "BOR-09",
+  "certified_compliant": "Yes",
+  "cost_savings_addbacks": "11000000",
+  "debt_service": "26000000",
+  "period": "2026-Q3",
+  "reported_available_cash_flow": "41000000",
+  "reported_dscr": "1.58",
+  "reported_ebitda": "43500000",
+  "reported_leverage": "2.92",
+  "statement_available_cash_flow": "30000000",
+  "statement_ebitda": "32500000",
+  "total_debt": "127000000"
+ }
+}

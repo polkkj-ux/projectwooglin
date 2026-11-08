@@ -71,6 +71,84 @@ The original demos (BOR-01's $12,000.00 DSCR shortfall, the Covenant Designer, a
 - The smoke test checks the new routes.
 - In Chromium at 1440 and 390 px: no console errors and no horizontal overflow; each one-pager tried fits one US-letter page; and the print rendering of Methodology and Covenant Designer is pixel-identical to 171a3e3.
 
+## Statements extraction (v10)
+
+Covenant Monitor can now read a borrower's financial-statements PDF. **LlamaExtract (LlamaCloud) only reads**: it returns each quarterly line item as printed, with its page citation and a confidence score. **Our code does every calculation** (`lib/statements.js`, BigInt cents), and **an analyst confirms each value** before the covenant engine runs. Nothing is auto-accepted, and the browser never computes a covenant number.
+
+### What it does
+
+- **Review screen at `/statements`** (`public/statements.html`, same design system and Content-Security-Policy as `/app`, linked from the sidebar).
+  - **Upload:** enabled only when the server has a LlamaCloud key. Without one, the page lists saved extractions, labelled "Extracted offline with LlamaExtract on <date>".
+  - **Review table:** line item, quarter, value, page, matched text, confidence and a Confirm box. It shows location-only values first, then the lowest confidence. A value with no citation, or a location-only value that ties to nothing, cannot be confirmed.
+  - **Covenant inputs:** EBITDA, gross debt, debt service and available cash flow, each computed on the server and quoted from its sentence in `data/statements/definitions.txt` with character offsets.
+  - **Tie-outs**, per quarter:
+    - the balance sheet balances, within $1
+    - liabilities plus equity equals the printed total
+    - operating income equals revenue less operating expenses
+    - the printed total debt and EBITDA match their components
+    - the computed row matches `data/team/loan_covenants_extended.csv` (financial and covenant columns only)
+  - **Run covenant tests:** the server rebuilds the row from the confirmed values and runs the existing engine. The page shows the result and links to `/app#borrower-<ID>`. If a used value is unconfirmed or unconfirmable, the row is blocked and every reason is listed.
+- **Covenant Designer accepts a PDF.** The upload goes through the same review. Once the row builds, "Use these line items in the Covenant Designer" fills the Designer with the confirmed line items, as the sample statements do. CSV upload is unchanged.
+- **API** (`lib/statements-routes.js`, one line in `server.js`). The browser sends which item ids the analyst confirmed, never numbers; the server reloads the extraction itself.
+  - `POST /api/statements/extract`
+  - `GET /api/statements/job?id=`
+  - `POST /api/statements/confirm`
+  - `GET /api/statements/saved`
+- **Compliance certificates** (`lib/certificates.js`). They are extracted the same way, then checked:
+  - the certificate's own arithmetic
+  - its unadjusted figures against the CSV row
+  - cost-savings add-backs, which the fictional policy's definitions do not include
+  - the certified "in compliance" answer against the engine
+  
+  The output is `data/statements/certificates.extracted.csv`, with exactly the columns `record_id, reported_ebitda_usd, cost_savings_addbacks_usd, reported_leverage, reported_dscr, certified_compliant, synthetic`. A value with no citation is left blank. These are the borrower's claims, not confirmed values.
+
+### How to run it
+
+- **Offline (no key):** `npm run dev`, then open http://localhost:4180/statements and choose a saved extraction. The repository includes live results for BOR-09 and BOR-01, 2026-Q3.
+- **Live in the app:** put `LLAMA_CLOUD_API_KEY` (and optionally `LLAMA_CLOUD_PROJECT_ID`) in `.env`, run `npm run dev`, and upload a PDF named like `BOR-09_2026-Q3.pdf`, or use the Covenant Designer's upload button.
+- **Live from the command line** (one extraction, saved for offline review; the key is never printed or saved):
+  ```
+  node --env-file=.env scripts/extract-statement.mjs data/statements/BOR-09_2026-Q3.pdf
+  node --env-file=.env scripts/extract-certificate.mjs data/statements/certificates/BOR-09_2026-Q3_certificate.pdf
+  ```
+- **Offline checks:**
+  - `node scripts/compare-extraction.mjs` compares saved statement extractions with the generator's numbers.
+  - `node scripts/extract-certificate.mjs --csv` rebuilds the certificate CSV and prints its checks.
+- **Regenerate the fixtures** (Python with reportlab; byte-identical output): `python3 scripts/make-statement-fixtures.py` and `python3 scripts/make-certificate-fixture.py`.
+- **Pinned configuration:** tier `agentic`, version `2.5`, `cite_sources` and `confidence_scores` on. The schema is `data/statements/schema.json` (the Designer's line items plus tie-out fields, all copied as printed text), and `data/statements/certificate-schema.json` for certificates.
+- **Tests:** `npm test` (108 tests). Every LlamaCloud call in the tests is mocked.
+
+### Real vs synthetic
+
+- **Synthetic:** every PDF in `data/statements/`, its numbers (`fixtures.json`, `certificates/certificate-fixture.json`) and `definitions.txt`. These were made by the team, carry a SYNTHETIC banner on every page, and describe fictional borrowers. The figures are built to tie, to the cent, to the synthetic 2026-Q3 rows of `loan_covenants_extended.csv`. The certificate's $110,000 add-back is an invented example of an uncapped adjustment.
+- **Real:** the LlamaExtract output. The `*.extracted.json` files are unedited responses from live runs on 8 November 2026, with the PDF's SHA-256, the configuration, the version and the timestamp. The only addition is a `citation_summary` field.
+
+### Accuracy of the live runs
+
+| Document | Values exactly equal to the PDF | Location-only (no quoted text) | Row built from confirmable values |
+|---|---|---|---|
+| BOR-09 statements | 96 of 96 | 60 (40 tie out, 20 cannot be confirmed) | ties to COV-09-3, no CSV mismatches |
+| BOR-01 statements | 104 of 104 | 64 (42 tie out, 22 cannot be confirmed) | ties to COV-01-3, no CSV mismatches |
+| BOR-09 certificate | 13 of 13 | 1 (`borrower_id`) | CSV row COV-09-3; 8 checks pass, 2 fail as designed (add-backs; certified compliant while leverage, DSCR and FCCR fail) |
+
+### Known limitation: location-only citations
+
+With the pinned configuration, many citations come back as a page and bounding box, with the field's own path (for example `quarters.3.capex`) in place of quoted text.
+
+- **How such a value is shown:** the API marks it `citation_kind: "location_only"`, and it is reviewed first. The review screen shows "Located on page N (no quoted text)" with the bounding box and a pin icon (quoted values get a quote icon). A count at the top reads, for example, "60 of 96 values have a page location but no quoted text". The count is also saved in each `*.extracted.json` as `citation_summary`.
+- **When it can be confirmed:** only if it passes at least one tie-out that uses it, and that tie-out is named next to the value. The internal trailing-twelve-month sum checks do not count, because they compare a figure with the same extracted values. A location-only value that ties to nothing stays unconfirmable. In these runs, none of the unconfirmable values are used by the covenant row.
+- **Effect on new borrowers:** without a CSV row to match, location-only flow items such as D&A or interest cannot be confirmed. Statements for a new borrower need quoted citations or another tie-out.
+
+### What is unverified
+
+- **Only clean, machine-generated synthetic PDFs have been extracted.** Scanned pages, real borrower statements, other layouts, multi-entity statements and non-USD statements are untested.
+- **A value cited from the wrong line goes undetected if the numbers agree.** In the BOR-01 run, cash taxes for two quarters were cited from the income-tax-expense line on page 1. The amounts are equal in this synthetic data, so the values are right but the citation is not, and no tie-out can catch it. The analyst has to read the cited text.
+- **The live upload path through the server** (`/api/statements/extract` and job polling with a real key) has only been tested with mocked responses; the live runs used the scripts. It has not been tried on Vercel, where function time limits and the request body size limit could apply.
+- **The review screen was checked in headless Chromium**, including a full BOR-09 confirm-and-run that matched `/api/covenants` and phone width, not yet by a person.
+- **Confidence scores are LlamaExtract's own and are not calibrated.** They only order the review list.
+- **The citation format may change.** A newer LlamaExtract version, or LlamaCloud changing its responses, could alter it. Version `2.5` is pinned because the live API accepted it, although the documentation shows a date-style version.
+- **Compliance certificates have no review screen.** There is one synthetic fixture. The add-back finding relies on the fictional policy having no add-back clause; a real agreement's definition of EBITDA and any cap would have to be read.
+
 ## Institutional monitoring workflow (v13)
 
 The application now follows one path: **monitor → identify → investigate → verify → review**. All changes are in the interface (`public/app.html`). The calculation engine, API and cure planner are unchanged.
