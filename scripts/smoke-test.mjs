@@ -38,4 +38,7 @@ const cure=await (await fetch(base+'/api/cure?borrower=BOR-09&period=2026-Q3')).
 ok(cure.available===true&&cure.source==='snapshot'&&/^\d+\.\d+\.\d+$/.test(cure.gurobi_version||'')&&cure.solved_at,`BOR-09 Q3 cure served from the offline snapshot (${cure.source||cure.reason}, Gurobi ${cure.gurobi_version})`);
 ok(cc?.status==='plan'&&cc.plan.verified===true&&cc.plan.total_cost_usd==='78333.34'&&cc.plan.actions==='Sell Division A; sponsor contributes $68,333.34'&&/^[0-9a-f]{64}$/.test(cc.model?.lp_sha256||''),'BOR-09 Q3 cheapest cure: sell Division A + $68,333.34, $78,333.34, verified, model SHA-256 present');
 const cov=await post('/api/cure',{borrower:'BOR-09',period:'2026-Q3',overrides:{cures_remaining_4q:0}});ok(cov.status===503,'cure what-if inputs clearly need the live solver (503) on the public deployment');
+// Reporting compliance tracker (lower-middle-market): its own route; synthetic received dates, document review date 2026-12-01.
+const rep=await (await fetch(base+'/api/reporting')).json();const rq=p=>rep.summary?.find(s=>s.period===p)?.late_or_missing;
+ok(rep.supplied===true&&rep.document_review_date==='2026-12-01'&&rq('2026-Q2')?.count===1&&rq('2026-Q2').borrowers[0].borrower_id==='BOR-03'&&rq('2026-Q3')?.count===2,'Reporting tracker: Q2 2026 1 of 9 late (BOR-03), Q3 2026 2 of 9 (document review date 2026-12-01)');
 console.log(fails?`\n${fails} check(s) failed`:'\nAll checks passed');process.exit(fails?1:0);

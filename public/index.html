@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <script>
 /* Links shared before the product page existed (/#overview, /#borrower-BOR-01, ...) open the application. */
-(function(){function go(){var h=location.hash.slice(1);if(/^(overview|borrowers|analysis|design|method|how|borrower-.+)$/.test(h))location.replace('/app#'+h);}go();addEventListener('hashchange',go);})();
+(function(){function go(){var h=location.hash.slice(1);if(/^(overview|borrowers|analysis|design|method|how|borrower-.+|reporting)$/.test(h))location.replace('/app#'+h);}go();addEventListener('hashchange',go);})();
 document.documentElement.className='js';
 </script>
 <meta name="color-scheme" content="light">

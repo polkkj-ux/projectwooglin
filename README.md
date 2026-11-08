@@ -1,3 +1,35 @@
+## Built for the lower middle market (v14)
+
+Covenant Monitor now has features for lower-middle-market (LMM) lending: owner-operated borrowers with roughly $10M–$100M of revenue, lent to by community banks, SBA lenders and smaller private credit funds. In this market borrowers often send financials late or incomplete, and one banker covers dozens of relationships with little analyst support. The new features sit beside the covenant engine and never change it: `/api/covenants`, `/api/cure`, `/api/recommend` and `/api/policy` return byte-identical responses (`tests/invariance.test.js`).
+
+**Reporting compliance tracker.** Late or missing reporting is often a default in its own right, and often the first sign of trouble. The **Reporting** view shows, for the selected quarter, whether each borrower's quarterly financials, compliance certificate and annual statements arrived on time, late (with days late), are missing (with days overdue) or are not yet due. Borrowers are sorted most overdue first. Overview shows "N of M borrowers have late or missing reports this quarter", and each borrower page has a one-line Reporting summary. This is a separate signal: it never changes a covenant result, a KPI or the "Borrowers requiring attention" list. Two dates are kept apart. The covenant results use the **data date** of 30 September 2026. Reporting is checked on the **document review date**, a reporting setting that defaults to **1 December 2026 (synthetic)**. With 30 September every Q3 document (due 14 November) would be "not yet due" and the default quarter would show nothing. **Annual statements are read on Q1 rows only** and refer to the fiscal year that ended just before (calendar fiscal years assumed): the 2026-Q1 row covers FY2025, due 31 December 2025 + 120 days = 30 April 2026. The data runs only from 2026-Q1 to 2026-Q4, so FY2026 statements (due 30 April 2027) could not be shown. If those columns are filled on other rows they are ignored and listed as a data-quality note.
+
+**New optional CSV columns** (blank means "not received"; a CSV without them gives exactly the same covenant results, and `/api/reporting` says no reporting data was supplied):
+
+| Column | Meaning |
+|---|---|
+| `financials_received_date` | Date (YYYY-MM-DD) the quarterly financial statements arrived |
+| `compliance_cert_received_date` | Date the signed compliance certificate arrived |
+| `annual_statements_received_date` | Q1 rows only: date the prior fiscal year's annual statements arrived |
+| `statement_quality` | Q1 rows only: `audited`, `reviewed`, `compiled` or `internal` |
+
+**Reporting settings** (`reporting_settings`, separate from the covenant `settings`; tool defaults the lender can change, not market data): quarterly financials and compliance certificate due **45 days** after quarter end, annual statements **120 days** after fiscal year end, minimum annual statement quality **reviewed** (audited > reviewed > compiled > internal), and the document review date **2026-12-01**. Allowances and minimum quality can be overridden per borrower. Edit them in the *Reporting deadlines* section of **Covenant terms** or in a borrower's terms panel. Applying them re-runs only `/api/reporting`.
+
+**Status rules** (`lib/reporting.js`, pure functions, calendar dates without time zones): due date = period end + allowance. *On time*: received on or before the due date. *Late*: received after it. *Missing*: not received and the due date has passed by the document review date. *Not yet due*: not received, due date not yet passed (all 2026-Q4 documents). *Invalid*: unreadable, or after the document review date; the reason is reported. A borrower's reporting status is its worst document status (missing > late > invalid > not yet due > on time). The tracker also counts consecutive quarters with a late or missing item and flags statement quality below the minimum.
+
+**API.** `GET /api/reporting` (bundled sample, default settings) and `POST /api/reporting {csv?, settings?, reporting_settings?}`, with the same validation and same-origin check as `POST /api/covenants`. Example: `POST /api/reporting {"reporting_settings":{"review_date":"2026-11-20","borrowers":{"BOR-03":{"due_days":{"financials":60}}}}}`. The response has a `reporting` object per borrower-quarter (each document's due date, received date, status and days, the overall status and any quality flag), a per-quarter summary, the settings used and the assumptions.
+
+**Synthetic sample** (added through `scripts/make-extended-fixture.js`; every existing column and value is byte-identical). Every borrower sends financials and the certificate on 8 May, 7 Aug and 6 Nov 2026 (Q4 blank), and FY2025 annual statements on 15 April 2026 (reviewed; audited for BOR-01 and BOR-09). Exceptions: **BOR-03** is late every quarter (29 May, 26 Aug, 28 Nov: 14, 12 and 14 days late). **BOR-07**'s Q3 compliance certificate is missing (17 days overdue on 1 December). **BOR-05**'s FY2025 statements are internally prepared (received 20 April).
+
+| Quarter | Borrowers with late or missing items |
+|---|---|
+| 2026-Q1 | 1 of 9: BOR-03 (14 days late) |
+| 2026-Q2 | 1 of 9: BOR-03 (12 days late; 2 quarters running) |
+| 2026-Q3 | 2 of 9: BOR-03 (14 days late; 3 quarters running), BOR-07 (certificate missing, 17 days overdue) |
+| 2026-Q4 | 0 of 9: every document not yet due |
+
+**Demo add-on (reporting, 30 seconds).** Select **Q2 2026**. Overview shows "1 of 9 borrowers have late or missing reports". Open **Reporting**: **BOR-03** passes every covenant (its covenant column reads *Approaching limit*), but sent its financials and certificate 12 days late, two quarters running. Optionally switch to Q3 2026 to show BOR-07's missing compliance certificate.
+
 ## Institutional monitoring workflow (v13)
 
 The application now follows one path: **monitor → identify → investigate → verify → review**. All changes are in the interface (`public/app.html`). The calculation engine, API and cure planner are unchanged.
