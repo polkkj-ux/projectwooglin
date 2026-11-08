@@ -17,11 +17,22 @@ const P={
  'BOR-08':{c:[50,15,0],d:[400,400,400,400],ca:[900,900,900,900],cl:[600,600,600,600]},
  'BOR-09':{c:[35,15,0],d:[null,null,null,null],ca:[920,910,900,890],cl:[600,600,600,600]}}; // revolver not reported: trigger unknown, tested
 const k=n=>(n*1000).toFixed(2);
+// SYNTHETIC reporting dates (lib/reporting.js). Q1-Q3 financials and certificate received; Q4 not yet due.
+// Annual statements and statement_quality are on Q1 rows only and refer to the prior fiscal year (FY2025).
+const RECEIVED={default:['2026-05-08','2026-08-07','2026-11-06',''],'BOR-03':['2026-05-29','2026-08-26','2026-11-28','']}; // BOR-03: 14, 12, 14 days late
+function reporting(b,q){
+ const f=(RECEIVED[b]||RECEIVED.default)[q];
+ const cert=b==='BOR-07'&&q===2?'':f; // BOR-07: Q3 compliance certificate missing
+ const q1=q===0;
+ return {financials_received_date:f,compliance_cert_received_date:cert,
+  annual_statements_received_date:q1?(b==='BOR-05'?'2026-04-20':'2026-04-15'):'',
+  statement_quality:q1?(b==='BOR-05'?'internal':b==='BOR-01'||b==='BOR-09'?'audited':'reviewed'):''};
+}
 const out=rows.map(r=>{const p=P[r.borrower_id],q=Number(r.period.slice(-1))-1;
  return {...r,source_document:'documents/loan-policy.txt; team/covenant-policy-addendum.txt',
   ttm_capex_usd:k(p.c[0]),ttm_cash_taxes_usd:k(p.c[1]),ttm_distributions_usd:k(p.c[2]),
   current_assets_usd:k(p.ca[q]),current_liabilities_usd:k(p.cl[q]),
   revolver_commitment_usd:p.d[q]==null?'':k(500),revolver_drawn_usd:p.d[q]==null?'':k(p.d[q]),
-  min_fccr:'1.10',min_current_ratio:'1.25'};});
+  min_fccr:'1.10',min_current_ratio:'1.25',...reporting(r.borrower_id,q)};});
 await fs.writeFile(new URL('../data/team/loan_covenants_extended.csv',import.meta.url),toCSV(out));
 console.log(`Wrote ${out.length} rows`);
