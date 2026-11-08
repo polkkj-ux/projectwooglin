@@ -704,6 +704,82 @@ mark.cite.flash{animation:flash 1.6s ease-out}
  #rtbl td[data-label]::before{content:attr(data-label);display:block;margin-bottom:3px;font-size:11.5px;font-weight:500;color:var(--ink-3)}
  #rtbl td[data-label=Borrower]::before{display:none}
 }
+/* call prep one-pager (relationship manager) */
+.flip{transform:scaleX(-1)}
+.ph-act{display:flex;gap:10px;align-items:center}
+.cp-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 20px}
+.cp-bar p{flex:1 1 280px;margin:0;font-size:13px;color:var(--ink-3)}
+.cp{max-width:1120px;padding:28px 32px;background:#fff;border:1px solid var(--rule);border-radius:8px;box-shadow:var(--sh-1);font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.cp-head{padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:16px}
+.cp-tr{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cp h1{margin:0;font:400 28px/1.15 var(--serif);color:var(--ink)}
+.cp h1 span{color:var(--ink-3)}
+.cp-cols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:24px}
+.cp-sec{margin:0 0 16px}
+.cp-sec h2{margin:0 0 8px;font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+.cp-tbl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.cp-tbl th,.cp-tbl td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.cp-tbl thead th{font-size:12px;font-weight:500;color:var(--ink-3);background:var(--head)}
+.cp-tbl tbody th{font-weight:600;color:var(--ink)}
+.cp-tbl th small{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}
+.cp-tbl .r{text-align:right;white-space:nowrap}
+.cp-tbl .st{font-size:12.5px;gap:5px}
+.cp-tbl .neg,.cp-dist .neg{color:var(--red)}
+.cp-tbl .cur{background:var(--soft)}
+.cp-tbl td svg{vertical-align:-1px;margin-right:2px}
+.cp-chg{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--ink-3)}
+.cp-weaker{color:var(--red)}.cp-stronger{color:var(--teal)}
+.cp-fine{margin:6px 0 0;font-size:12px;color:var(--ink-3)}
+.cp-key svg{vertical-align:-1px}
+.cp-dist td small{display:block;font-size:11.5px;color:var(--ink-3)}
+.cp-dist td span{white-space:nowrap}
+.cp-dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 14px;margin:4px 0 0;font-size:12.5px;font-variant-numeric:tabular-nums}
+.cp-dl dt{color:var(--ink-3)}.cp-dl dd{margin:0;text-align:right;color:var(--ink)}
+.cp-cure{padding:10px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--soft)}
+.cp-cure p{margin:6px 0 0}.cp-cure small{display:block;margin-top:4px;font-size:11.5px;color:var(--ink-3)}
+.cp-cure .st{font-size:12.5px;white-space:normal}
+.cp-q{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--ink)}
+.cp-rep{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.cp-rep li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px;align-items:start}
+.cp-rep .st{font-size:12.5px}
+.cp-sec>p{margin:6px 0 0}
+.cp-flag{color:var(--amber-ink);font-weight:500}.cp-flag svg{vertical-align:-1px;margin-right:4px}
+.cp-foot{margin-top:8px;padding-top:12px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-3)}
+.cp-foot p{margin:0 0 4px}.cp-foot b{color:var(--ink-2);font-weight:600}
+.cp-cites{margin:4px 0 6px;padding-left:16px;display:grid;gap:3px}
+.cp-cites span{color:var(--ink-3)}
+.cp-legal{display:flex;gap:6px;align-items:flex-start;font-weight:500;color:var(--ink-2)}
+@media (max-width:900px){.cp-cols{grid-template-columns:minmax(0,1fr)}.cp{padding:20px 18px}}
+@media (max-width:720px){.cp-tbl{font-size:12px}.cp-tbl th,.cp-tbl td{padding:5px 4px}.cp-scroll,.cp-sec{overflow-x:auto}.cp h1{font-size:23px}.cp-rep li{grid-template-columns:minmax(0,1fr)}}
+/* Printing: only while the call prep view is showing (body.cp-print); every other view prints as before. */
+@page callprep{size:letter;margin:.4in}
+@media print{
+ body.cp-print{background:#fff}
+ body.cp-print .main{display:block}
+ body.cp-print .page{max-width:none;padding:0}
+ body.cp-print .cp-bar{display:none}
+ body.cp-print .cp{page:callprep;max-width:none;padding:0;border:0;box-shadow:none;font-size:8.6pt;line-height:1.3;color:#000}
+ body.cp-print .cp *{color:#000!important;background:transparent!important;box-shadow:none!important}
+ body.cp-print .cp h1{font-size:15pt}
+ body.cp-print .cp-head{padding-bottom:5pt;margin-bottom:7pt;border-color:#000}
+ body.cp-print .cp .meta{margin-top:3pt;font-size:8pt}
+ body.cp-print .cp .tag{border:1px solid #000;height:auto;padding:0 4pt}
+ body.cp-print .cp-cols{grid-template-columns:1.45fr 1fr;gap:12pt}
+ body.cp-print .cp-sec{margin:0 0 7pt;break-inside:avoid}
+ body.cp-print .cp-sec h2{font-size:8.4pt;margin:0 0 3pt}
+ body.cp-print .cp-tbl{font-size:7.8pt}
+ body.cp-print .cp-tbl th,body.cp-print .cp-tbl td{padding:1.5pt 3pt;border-color:#999}
+ body.cp-print .cp-tbl .cur{font-weight:700}
+ body.cp-print .cp-fine,body.cp-print .cp-cure small,body.cp-print .cp-tbl th small{font-size:7pt}
+ body.cp-print .cp-dist td small{font-size:6.8pt}
+ body.cp-print .cp-cure{padding:4pt 6pt;border-color:#999}
+ body.cp-print .cp-q{gap:3pt}
+ body.cp-print .cp-rep{gap:2pt}
+ body.cp-print .cp-rep li{grid-template-columns:62pt 1fr}
+ body.cp-print .cp-foot{font-size:6.8pt;padding-top:4pt;border-color:#000}
+ body.cp-print .cp-cites{gap:1pt;margin:2pt 0}
+ body.cp-print .st,body.cp-print .tag{font-size:7.6pt}
+}
 @media print{.side,.top,#tip,.toast{display:none}.app{display:block}}
 </style>
 </head>
@@ -1117,12 +1193,13 @@ function policyDocs(){
 /* ---------- shell ---------- */
 function renderAll(){renderNav();renderTop();renderSources();renderPage();}
 function renderNav(){
- const cur=view==='detail'?returnView:view;
+ const cur=view==='detail'||view==='callprep'?returnView:view;
  $('nav').replaceChildren(...NAV.map(([k,label,ic])=>h('a',{href:'#'+k,'aria-current':k===cur?'page':null},icon(ic,18),h('span',null,label))));
 }
 function renderTop(){
  const c=$('crumbs');
  if(view==='detail')c.replaceChildren(h('a',{href:'#'+returnView},TITLES[returnView]||TITLES.overview),icon('chevR',14,'sep'),h('span',{class:'here'},detailFor||''));
+ else if(view==='callprep')c.replaceChildren(h('a',{href:'#'+returnView},TITLES[returnView]||TITLES.overview),icon('chevR',14,'sep'),h('a',{href:'#borrower-'+encodeURIComponent(detailFor||'')},detailFor||''),icon('chevR',14,'sep'),h('span',{class:'here'},'Call prep'));
  else c.replaceChildren(h('span',{class:'here'},TITLES[view]));
  const sel=$('period');sel.replaceChildren(...periods.map(p=>h('option',{value:p,selected:p===period},`${plabel(p)}${isProj(p)?' (synthetic scenario)':''}`)));sel.disabled=!periods.length;
  $('qsel').hidden=view==='design'||view==='method';$('openTerms').hidden=view==='design'||!data;
@@ -1139,6 +1216,7 @@ function renderSources(){
 function renderPage(){
  const page=$('page');
  if(view==='detail')return renderDetail(page);
+ if(view==='callprep')return renderCallPrep(page);
  ({overview:renderOverview,borrowers:renderRegister,reporting:renderReporting,analysis:renderAnalysis,design:renderDesign,method:renderMethod})[view](page);
 }
 function pageHead(title,lede,right,id){return h('div',{class:'ph'},h('div',null,h('h1',{id:id||'pageTitle',tabindex:'-1'},title),lede?h('p',{class:'lede'},lede):null),right||null);}
@@ -1782,7 +1860,7 @@ function renderDetail(page){
  if(!period)return noPeriodView(page,b);
  const r=rowFor(b,period),a=assess(r),s=stOf(a),pp=prevPeriod(period),pr=pp?rowFor(b,pp):null;
  const head=h('div',{class:'ph'},h('div',null,h('div',{class:'title-row'},h('h1',{id:'dTitle',tabindex:'-1'},b),stLabel(a),newTag(b,period),isProj(period)?h('span',{class:'tag tag-proj'},'Synthetic scenario'):null),
-  h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))));
+  h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))),h('div',{class:'ph-act'},h('a',{class:'btn',href:'#callprep-'+encodeURIComponent(b),title:`One-page call preparation for ${b}, ${plabel(period)}`},icon('doc',15),'Call prep')));
  const tone=s.tone==='na'?'':s.tone;
  const legal=h('div',{class:'legal'},icon('scale',16),h('div',null,h('b',null,a.fails.length?'Potential financial covenant breach, not a legal default determination. ':'Covenant test result, not a legal determination. '),'Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers and the lender’s decisions. This tool evaluates none of those.'));
  const main=h('div',null,
@@ -2250,6 +2328,89 @@ function setRover(b,kind,k,v){
  applyRterms(T,kind==null?`${b} now uses the portfolio reporting deadlines.`:`${b}: reporting deadlines updated. Covenant results are unchanged.`).then(r=>{if(!r.ok)renderPage();});
 }
 
+/* ---------- Call prep one-pager (relationship manager): display only; every figure comes from /api/callprep ----------
+   /api/callprep assembles the page from the monitor, reporting and cure results; questions come from a fixed mapping. */
+const cpCache=new Map();
+function cpRequest(b,p){
+ const body={borrower:b,period:p};let custom=false;
+ if(lastCsv){body.csv=lastCsv;custom=true;}if(lastPolicy){body.policy=lastPolicy;body.policy_name=polName;custom=true;}
+ if(terms&&!sameTerms(terms,DEFAULT_TERMS)){body.settings=terms;custom=true;}if(rtermsCustom()){body.reporting_settings=rterms;custom=true;}
+ return {body,custom,key:JSON.stringify([b,p,lastCsv?`${csvName}:${lastCsv.length}`:'',lastPolicy?`${polName}:${lastPolicy.length}`:'',termsKey(),JSON.stringify(rterms)])};
+}
+async function fetchCallPrep(req){
+ try{const res=await fetch(req.custom?'/api/callprep':`/api/callprep?borrower=${encodeURIComponent(req.body.borrower)}&period=${encodeURIComponent(req.body.period)}`,req.custom?post(req.body):undefined);
+  const j=await res.json();return res.ok?j:{error:j.error||res.statusText};}
+ catch(e){return {error:`The server could not be reached (${e.message}).`};}
+}
+function renderCallPrep(page){
+ const b=detailFor;
+ if(guard(page,`${b||'Borrower'} call prep`))return;
+ if(!borrowers.includes(b))return page.replaceChildren(pageHead('Borrower not found'),h('div',{class:'state'},icon('alert',22),h('div',null,h('h2',null,`No borrower “${b}” exists in the current data`),h('a',{class:'btn',href:'#'+returnView},'Back to '+(TITLES[returnView]||TITLES.overview)))));
+ const req=cpRequest(b,period),holder=h('div',{class:'cp-hold','aria-live':'polite'});
+ const bar=h('div',{class:'cp-bar'},h('a',{class:'btn',href:'#borrower-'+encodeURIComponent(b)},icon('chevR',14,'flip'),`Back to ${b}`),
+  h('p',null,'One page for a client call, built from the covenant, reporting and cure results. Print it or save it as a PDF on one US-letter page.'),
+  h('button',{class:'btn btn-primary',type:'button',onclick:()=>window.print()},icon('doc',15),'Print / save as PDF'));
+ page.replaceChildren(bar,holder);
+ const fill=j=>{if(!holder.isConnected)return;holder.replaceChildren(j.error?h('div',{class:'state',role:'alert'},icon('alert',22),h('div',null,h('h2',null,'The call prep page could not be built'),h('p',null,j.error))):cpSheet(j,b));};
+ if(cpCache.has(req.key))return fill(cpCache.get(req.key));
+ holder.replaceChildren(h('div',{class:'state',role:'status'},icon('doc',22),h('div',null,h('h2',null,'Preparing the call sheet…'),h('p',null,'Loading /api/callprep.'))));
+ const p=period;fetchCallPrep(req).then(j=>{if(!j.error)cpCache.set(req.key,j);if(view==='callprep'&&detailFor===b&&period===p)fill(j);});
+}
+const CP_ST={breach:'x',ok:'check',watch:'alert',dormant:'alert',review:'help',untested:'minus',error:'alert'};
+const CP_RES={pass:['ok','check'],breach:['bad','x'],dormant:['na','minus'],unevaluable:['warn','help']};
+const cpSec=(title,...kids)=>h('section',{class:'cp-sec'},h('h2',null,title),...kids);
+const cpNeg=s=>s!=null&&Number(s)<0;
+function cpSheet(j,b){
+ const H=j.header,P=plabel(j.period),pp=j.scorecard.find(s=>s.prior_period)?.prior_period;
+ const head=h('header',{class:'cp-head'},
+  h('div',{class:'cp-tr'},h('h1',{id:'pageTitle',tabindex:'-1'},b,h('span',null,` · ${P} call prep`)),stEl(H.status.tone,CP_ST[H.status.key]||'minus',H.status.label),
+   H.newly_flagged?h('span',{class:'tag qnew'},'Newly flagged this quarter'):null,H.synthetic_scenario?h('span',{class:'tag tag-proj'},H.synthetic_scenario):null),
+  h('div',{class:'meta'},h('span',null,'Quarter ended ',h('b',null,dlong(H.period_end))),H.debt_usd!=null?h('span',null,'Debt outstanding ',h('b',null,usd(H.debt_usd))):null,
+   H.record_id?h('span',null,'Source row ',h('b',null,H.record_id)):null,H.error?h('span',{class:'st st-warn'},icon('alert',14),`Row could not be read: ${H.error}`):null),
+  H.status.note?h('p',{class:'cp-fine'},H.status.note):null);
+ const left=[],right=[];
+ if(j.scorecard.length)left.push(cpSec('Covenant scorecard',h('table',{class:'cp-tbl'},
+  h('thead',null,h('tr',null,['Covenant','Actual','Limit','Result','Dollar headroom',pp?`vs ${plabel(pp)}`:'vs prior quarter'].map((t,i)=>h('th',{scope:'col',class:i&&i!==3?'r':null},t)))),
+  h('tbody',null,j.scorecard.map(s=>{const [tone,ic]=CP_RES[s.status]||['na','minus'];const sp=s.springing;
+   return h('tr',null,h('th',{scope:'row',title:s.name},COV[s.key]?.short||s.name,sp?h('small',null,`Springing at ${Number(sp.trigger_pct)}%: revolver ${sp.utilization==null?'figures missing, tested anyway':pctS(sp.utilization)+' drawn'}${sp.triggered===false?', not triggered':sp.triggered?', triggered':''}`):null),
+    h('td',{class:'r'},fx(s.value,s.limit)),h('td',{class:'r'},`${s.direction==='max'?'max':'min'} ${lim(s.limit)}`),
+    h('td',null,stEl(tone,ic,s.status_word+(s.would_status?`; would ${s.would_status==='breach'?'fail':'pass'}`:''))),
+    h('td',{class:'r'+(cpNeg(s.headroom_usd)?' neg':'')},s.headroom_usd==null?'—':usd(s.headroom_usd)),
+    h('td',{class:'r'},s.prior_value==null?'—':[`${fx(s.prior_value,s.limit)} `,h('span',{class:'cp-chg cp-'+s.change},icon(s.change==='weaker'?'down':s.change==='stronger'?'up':'flat',12),s.change)]));}))),
+  h('p',{class:'cp-fine'},'Dollar headroom is room before the limit in the measure the covenant tests (debt for leverage, cash flow or current assets for the minimums); negative means past it. Stronger or weaker compares the ratio with the prior quarter.')));
+ if(j.trend){const T=j.trend;
+  left.push(cpSec('Trend',h('table',{class:'cp-tbl cp-trend'},h('thead',null,h('tr',null,h('th',{scope:'col'},'Covenant'),T.periods.map(p=>h('th',{scope:'col',class:'r'+(p.period===j.period?' cur':'')},p.label+(p.synthetic?'*':''))))),
+   h('tbody',null,Object.entries(T.covenants).map(([k,vals])=>h('tr',null,h('th',{scope:'row'},COV[k]?.short||k),vals.map(v=>h('td',{class:'r'+(v.period===j.period?' cur':'')+(v.status==='breach'?' neg':'')},v.status==='breach'?icon('x',11):null,v.value==null?'—':fx(v.value,j.scorecard.find(s=>s.key===k)?.limit),v.status==='dormant'?' (d)':'')))))),
+   h('p',{class:'cp-fine'},h('span',{class:'cp-key'},icon('x',11),' failed that quarter'),' · (d) springing test not triggered',T.periods.some(p=>p.synthetic)?' · * synthetic scenario':'','. First quarter in exception: ',h('b',null,T.first_exception_period?plabel(T.first_exception_period):'none in the data'),'.')));}
+ const W=j.what_it_would_take;
+ if(W){const c=W.cure,kids=[];
+  if(W.distance.length)kids.push(h('table',{class:'cp-tbl cp-dist'},h('caption',{class:'vh'},'Distance to compliance for each failing covenant'),h('tbody',null,W.distance.map(d=>h('tr',null,h('th',{scope:'row'},COV[d.key]?.short||d.name),
+   d.options.map(o=>h('td',null,h('small',null,o.label),h('span',null,usd(o.value)),o.gap!=null?h('span',{class:cpNeg(o.gap)?'neg':null},` (${cpNeg(o.gap)?'gap ':'room '}${usd(String(o.gap).replace(/^-/,''))})`):null)))))),h('p',{class:'cp-fine'},'Each row shows two ways back to the limit, holding the other side constant: the amount at the limit and, in brackets, the gap from today.'));
+  if(c){const src=c.source==='snapshot'?`Solved offline with Gurobi ${c.gurobi_version||''}${c.solved_at?' at '+stamp(c.solved_at):''}`:c.source==='live'?`Solved live with Gurobi ${c.gurobi_version||''}`:null;
+   if(c.state==='plan')kids.push(h('div',{class:'cp-cure'},h('b',null,'Cheapest verified cure: '),`${c.actions}. Total cost ${usd(c.total_cost_usd)}.`,' ',c.verified?stEl('ok','check','Verified by exact engine'):null,h('small',null,[src,'Synthetic cure terms (cure_terms.csv)'].filter(Boolean).join(' · '))));
+   else if(c.state==='no_cure')kids.push(h('div',{class:'cp-cure'},stEl('bad','x','No cure within the agreement'),c.blocked_by?.length?h('p',null,`Blocked by: ${listJoin(c.blocked_by.map(t=>t.toLowerCase()))}.`):null,
+    c.waiver?h('p',null,h('b',null,'Smallest waiver: '),c.waiver.request||'no threshold needs to change',c.waiver.request?' (verified by exact engine at the waived limits).':'.'):h('p',null,c.waiver_error||'No waiver could be sized.'),h('small',null,[src,'Synthetic cure terms (cure_terms.csv)'].filter(Boolean).join(' · '))));
+   else kids.push(h('p',{class:'cp-fine'},`Cure planner not available: ${c.reason}`));}
+  left.push(cpSec('What it would take',...kids));}
+ if(j.financials)left.push(cpSec('Financial snapshot',h('dl',{class:'cp-dl'},j.financials.map(f=>[h('dt',null,f.line_item),h('dd',null,usd(f.value))]))));
+ right.push(cpSec('Questions to ask the owner',j.questions.length?h('ol',{class:'cp-q'},j.questions.map(q=>h('li',null,q.text))):h('p',{class:'cp-fine'},'No question is triggered by the fixed rules for this quarter.'),
+  j.questions_omitted?h('p',{class:'cp-fine'},`${j.questions_omitted} lower-priority question${j.questions_omitted>1?'s':''} not shown (six at most).`):null));
+ const R=j.reporting;
+ if(R)right.push(cpSec('Reporting',h('ul',{class:'cp-rep'},R.documents.map(d=>h('li',null,rstEl(d.status),h('span',null,h('b',null,cap(d.label)+(d.fiscal_year?` (FY${d.fiscal_year})`:'')),`: ${d.received_date?'received '+dlong(d.received_date):'not received'}, ${docPhrase(d)}; due ${dlong(d.due_date)}.`)))),
+  R.quality?h('p',{class:R.quality.below_minimum?'cp-flag':null},R.quality.below_minimum?icon('alert',13):null,`FY${R.quality.fiscal_year} annual statements: ${R.quality.value?`${R.quality.value}${R.quality.below_minimum?`, below the ${R.quality.minimum} minimum`:`, meets the ${R.quality.minimum} minimum`}`:R.quality.reason}${R.quality.from_period!==j.period?` (from the ${plabel(R.quality.from_period)} row)`:''}.`):null,
+  h('p',null,R.consecutive_late_or_missing?`Late or missing ${R.consecutive_late_or_missing} quarter${R.consecutive_late_or_missing>1?'s':''} running.`:'No late or missing item this quarter.'),
+  h('p',{class:'cp-fine'},`Checked as of ${dday(R.document_review_date)} (document review date${R.document_review_date===DEFAULT_RTERMS.review_date?', synthetic':''}). A separate signal from covenant results.`)));
+ const rv=getReview(b,j.period);
+ if(rv&&(rv.note||rv.status!=='none'))right.push(cpSec('Analyst note (this browser only)',h('p',null,h('b',null,REV.find(x=>x[0]===rv.status)?.[1]||'Not reviewed'),rv.note?`: ${rv.note}`:''),h('p',{class:'cp-fine'},`Saved ${stampLocal(rv.at)} in this browser only; not shared and not an audit record.`)));
+ const F=j.footer;
+ const foot=h('footer',{class:'cp-foot'},
+  h('p',null,h('b',null,'Data: '),F.data_source||'—',' · ',h('b',null,'Policy: '),F.policy_source||'—'),
+  h('p',null,h('b',null,'Data as of '),F.data_date?dlong(F.data_date):'unknown',F.document_review_date?[' · ',h('b',null,'Document review date '),dday(F.document_review_date)]:null),
+  F.citations.length?h('ul',{class:'cp-cites'},F.citations.map(c=>h('li',null,h('b',null,c.name+': '),c.quote?[`“${c.quote}” `,h('span',null,`${c.source_document}, characters ${c.start}–${c.end}`)]:c.note))):null,
+  h('p',{class:'cp-legal'},icon('scale',13),F.note));
+ return h('article',{class:'cp'},head,h('div',{class:'cp-cols'},h('div',null,...left),h('div',null,...right)),foot);
+}
+
 /* ---------- uploads (all-or-nothing) ---------- */
 const post=b=>({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
 async function run(){if(!lastCsv&&!lastPolicy&&(!terms||sameTerms(terms,DEFAULT_TERMS)))return load('/api/covenants');const b={};if(terms)b.settings=terms;if(lastCsv)b.csv=lastCsv;if(lastPolicy){b.policy=lastPolicy;b.policy_name=polName;}return load('/api/covenants',post(b));}
@@ -2285,8 +2446,10 @@ $('sources').addEventListener('click',e=>{if(e.target===$('sources'))$('sources'
 /* ---------- routing ---------- */
 function route(first){
  let hsh=location.hash.slice(1);if(hsh==='how')hsh='method';
- if(hsh.startsWith('borrower-')){if(view!=='detail'){returnView=LISTS.includes(view)?view:'borrowers';chartKey=null;}let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}if(id!==detailFor)chartKey=null;detailFor=id;view='detail';}
+ if(hsh.startsWith('callprep-')){if(view!=='detail'&&view!=='callprep')returnView=LISTS.includes(view)?view:'borrowers';let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}detailFor=id;view='callprep';}
+ else if(hsh.startsWith('borrower-')){if(view!=='detail'&&view!=='callprep'){returnView=LISTS.includes(view)?view:'borrowers';chartKey=null;}let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}if(id!==detailFor)chartKey=null;detailFor=id;view='detail';}
  else{detailFor=null;view=VIEWS.includes(hsh)?hsh:'overview';}
+ document.body.classList.toggle('cp-print',view==='callprep');
  tipHide();renderAll();
  if(!first){window.scrollTo(0,0);const t=$(view==='detail'?'dTitle':'pageTitle');(t||$('main')).focus({preventScroll:true});}
 }

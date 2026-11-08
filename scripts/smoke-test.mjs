@@ -41,4 +41,7 @@ const cov=await post('/api/cure',{borrower:'BOR-09',period:'2026-Q3',overrides:{
 // Reporting compliance tracker (lower-middle-market): its own route; synthetic received dates, document review date 2026-12-01.
 const rep=await (await fetch(base+'/api/reporting')).json();const rq=p=>rep.summary?.find(s=>s.period===p)?.late_or_missing;
 ok(rep.supplied===true&&rep.document_review_date==='2026-12-01'&&rq('2026-Q2')?.count===1&&rq('2026-Q2').borrowers[0].borrower_id==='BOR-03'&&rq('2026-Q3')?.count===2,'Reporting tracker: Q2 2026 1 of 9 late (BOR-03), Q3 2026 2 of 9 (document review date 2026-12-01)');
+const cpj=await (await fetch(base+'/api/callprep?borrower=BOR-03&period=2026-Q2')).json();
+ok(cpj.header?.status?.label==='Approaching limit'&&cpj.questions?.length===1&&cpj.questions[0].rule===8&&cpj.reporting?.consecutive_late_or_missing===2,'Call prep: BOR-03 Q2 2026 passes every covenant, late 2 quarters running, one reporting question');
+const cp9=await (await fetch(base+'/api/callprep?borrower=BOR-09&period=2026-Q3')).json();ok(cp9.what_it_would_take?.cure?.total_cost_usd==='78333.34'&&cp9.what_it_would_take.cure.solved_offline===true&&cp9.footer?.note?.includes('not a legal determination'),'Call prep: BOR-09 Q3 2026 shows the $78,333.34 cheapest cure (solved offline) and the legal note');
 console.log(fails?`\n${fails} check(s) failed`:'\nAll checks passed');process.exit(fails?1:0);

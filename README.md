@@ -1,6 +1,6 @@
 ## Built for the lower middle market (v14)
 
-Covenant Monitor now has features for lower-middle-market (LMM) lending: owner-operated borrowers with roughly $10M–$100M of revenue, lent to by community banks, SBA lenders and smaller private credit funds. In this market borrowers often send financials late or incomplete, and one banker covers dozens of relationships with little analyst support. The new features sit beside the covenant engine and never change it: `/api/covenants`, `/api/cure`, `/api/recommend` and `/api/policy` return byte-identical responses (`tests/invariance.test.js`).
+Covenant Monitor now has features for lower-middle-market (LMM) lending: owner-operated borrowers with roughly $10M–$100M of revenue, lent to by community banks, SBA lenders and smaller private credit funds. In this market borrowers often send financials late or incomplete, and one banker covers dozens of relationships with little analyst support. Two features sit beside the covenant engine and never change it: `/api/covenants`, `/api/cure`, `/api/recommend` and `/api/policy` return byte-identical responses (`tests/invariance.test.js`).
 
 **Reporting compliance tracker.** Late or missing reporting is often a default in its own right, and often the first sign of trouble. The **Reporting** view shows, for the selected quarter, whether each borrower's quarterly financials, compliance certificate and annual statements arrived on time, late (with days late), are missing (with days overdue) or are not yet due. Borrowers are sorted most overdue first. Overview shows "N of M borrowers have late or missing reports this quarter", and each borrower page has a one-line Reporting summary. This is a separate signal: it never changes a covenant result, a KPI or the "Borrowers requiring attention" list. Two dates are kept apart. The covenant results use the **data date** of 30 September 2026. Reporting is checked on the **document review date**, a reporting setting that defaults to **1 December 2026 (synthetic)**. With 30 September every Q3 document (due 14 November) would be "not yet due" and the default quarter would show nothing. **Annual statements are read on Q1 rows only** and refer to the fiscal year that ended just before (calendar fiscal years assumed): the 2026-Q1 row covers FY2025, due 31 December 2025 + 120 days = 30 April 2026. The data runs only from 2026-Q1 to 2026-Q4, so FY2026 statements (due 30 April 2027) could not be shown. If those columns are filled on other rows they are ignored and listed as a data-quality note.
 
@@ -28,7 +28,48 @@ Covenant Monitor now has features for lower-middle-market (LMM) lending: owner-o
 | 2026-Q3 | 2 of 9: BOR-03 (14 days late; 3 quarters running), BOR-07 (certificate missing, 17 days overdue) |
 | 2026-Q4 | 0 of 9: every document not yet due |
 
-**Demo add-on (reporting, 30 seconds).** Select **Q2 2026**. Overview shows "1 of 9 borrowers have late or missing reports". Open **Reporting**: **BOR-03** passes every covenant (its covenant column reads *Approaching limit*), but sent its financials and certificate 12 days late, two quarters running. Optionally switch to Q3 2026 to show BOR-07's missing compliance certificate.
+**Relationship manager one-pager ("Call prep").** A banker covering 40–80 relationships needs to prepare for a client call in minutes. Each borrower page has a **Call prep** button in its header. It opens `#callprep-<ID>`: one page for the selected quarter, with a **Print / save as PDF** button and a back link. The page is assembled by `lib/callprep.js` only from what `/api/covenants`, `/api/reporting` and `/api/cure` already return, and a section appears only when its data exists:
+- **Header:** status, "newly flagged this quarter" (the same rule as the app's *Moved into exception*; `tests/callprep.test.js` checks both rules agree on all 36 borrower-quarters), debt outstanding, and Q4's *Synthetic scenario* label.
+- **Covenant scorecard:** value against limit, pass / fail / dormant / cannot calculate, dollar headroom, and change against the prior quarter (stronger or weaker), with revolver use against the springing trigger.
+- **Trend:** every quarter's ratios and the first quarter in exception.
+- **What it would take:** the monitor's distance-to-compliance figures, plus the cure planner's cheapest verified plan, or *No cure within the agreement* with the smallest waiver. These depend on the synthetic `cure_terms.csv` and are labelled *Solved offline* when served from the snapshot.
+- **Reporting:** each document's status, the annual-statement quality flag, and quarters running late.
+- **Questions to ask the owner:** up to six, most serious first, from a fixed mapping in code. Every number in them comes from the API response.
+- **Footer:** the data source, the data date, the document review date, the cited policy sentence for each failing covenant, and the note *"Covenant test results are calculations for review, not a legal determination of default."*
+
+The browser's analyst note for that borrower and quarter is shown, labelled *analyst note (this browser only)*. The financial-snapshot section is skipped until the monitor returns statement figures; statement extraction is on another branch. The print stylesheet applies only while the one-pager is showing (`body.cp-print` and a named `@page`): it gives one US-letter page with black text, status in words and icons, and no navigation. Every other view prints exactly as before.
+
+**Question mapping** (most serious first):
+1. No cure within the agreement → waiver size
+2. Leverage failing → debt above what EBITDA supports
+3. DSCR or FCCR failing → cash-flow shortfall
+4. Current ratio failing
+5. Cheapest cure needs an equity cure
+6. Cheapest cure includes an asset sale
+7. Financials or certificate missing
+8. Late or missing two or more quarters running
+9. Late this quarter only
+10. Headroom on a passing test narrowed two quarters running
+11. Springing test dormant but would fail
+12. Statement quality below the minimum
+13. Every tested covenant passes with at least 5.0% headroom (the app's default internal rule)
+
+**API.** `GET /api/callprep?borrower=BOR-03&period=2026-Q2`, or `POST /api/callprep {borrower, period, csv?, settings?, reporting_settings?, policy?, policy_name?}`, with the same validation and same-origin check as `POST /api/covenants`. For an uploaded CSV or policy the cure planner is skipped, and only the distance-to-compliance figures are shown. Each response includes `figures`: every number on the page with the API, quarter and field it came from. The reconciliation test checks each one against the three APIs for BOR-01 2026-Q3.
+
+**60-second demo add-on (synthetic sample).**
+1. Select **Q2 2026**. Overview shows "1 of 9 borrowers have late or missing reports".
+2. Open **Reporting**. **BOR-03** passes every covenant but sent its financials 12 days late, two quarters running.
+3. Open BOR-03 → **Call prep**. Status *Approaching limit*, every test passing, reporting late 2 quarters running, and one question: *"Reporting has been late 2 quarters in a row. Do you need help from your accountant or a different schedule?"*
+4. **Print / save as PDF** → print preview shows one page.
+5. Optionally switch to **Q3 2026**: Reporting shows BOR-07's missing compliance certificate (17 days overdue), and BOR-07's call prep opens with the waiver question (*1.21x minimum current ratio*).
+
+The original demos (BOR-01's $12,000.00 DSCR shortfall, the Covenant Designer, and the cure planner's BOR-09 answer of $78,333.34) are unchanged.
+
+**Verification (v14).**
+- `npm test`: 79 pass (64 from main, 15 new).
+- `tests/invariance.test.js` proves `GET /api/covenants` and `GET /api/cure` for BOR-09 and BOR-01 2026-Q3 are byte-identical to main at 171a3e3, with a baseline for both LF and CRLF checkouts.
+- The smoke test checks the new routes.
+- In Chromium at 1440 and 390 px: no console errors and no horizontal overflow; each one-pager tried fits one US-letter page; and the print rendering of Methodology and Covenant Designer is pixel-identical to 171a3e3.
 
 ## Institutional monitoring workflow (v13)
 
