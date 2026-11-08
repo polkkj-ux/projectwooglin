@@ -34,7 +34,7 @@ export async function handleRequest(req,res){
   // Covenant Designer: statements CSV in, recommended covenant package out. Stateless; nothing is stored.
   if(req.method==='GET'&&p==='/api/recommend/sample')return send(200,{name:'sample-statements.csv',csv:await rdData(SAMPLE_STATEMENTS)});
   if(req.method==='POST'&&p==='/api/recommend'){const b=await body(req);if(typeof b.csv!=='string')throw Error('csv (the statements file as text) is required');return send(200,recommendCovenants(b.csv,{cushion_pct:b.cushion_pct??undefined,company:b.company??null}));}
-  // Cure planner (v9): Gurobi proposes via OPT_URL, the exact engine re-checks; snapshot fallback for GET.
+  // Cure planner (v11): Gurobi proposes via OPT_URL, the exact engine re-checks; snapshot fallback for GET.
   if(req.method==='GET'&&p==='/api/cure'){const r=await curePlan({borrower:url.searchParams.get('borrower'),period:url.searchParams.get('period')});return send(r.code,r.body);}
   if(req.method==='POST'&&p==='/api/cure'){const b=await body(req);if(b===null||typeof b!=='object'||Array.isArray(b))throw Error('JSON object body required');const r=await curePlan({borrower:b.borrower,period:b.period,overrides:b.overrides,settings:b.settings});return send(r.code,r.body);}
   // Stateless policy parsing (no database). PDF goes to LlamaParse and may incur account usage; TXT is returned as-is.

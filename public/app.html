@@ -432,7 +432,7 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 pre.sheet{margin:0 0 12px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;background:#fff;font:15px/1.7 var(--serif);color:var(--ink);white-space:pre-wrap}
 
 @media (max-width:1180px){table.data.wide .trend-h,table.data.wide .td-trend{display:none}}
-/* Cure options (v9). Status colours only for pass/fail meaning: verified = teal, no cure = red. */
+/* Cure options (v11). Status colours only for pass/fail meaning: verified = teal, no cure = red. */
 .tag-syn{background:var(--soft);color:var(--ink-3);border:1px solid var(--rule)}
 .cx-body{display:grid;gap:14px}
 .cx-note{margin:0;font-size:13.5px}
@@ -1127,7 +1127,7 @@ function sourceRow(r){
  const note=h('p',{class:'muted',style:'margin:0;font-size:12.5px'},lastCsv?'From the uploaded CSV, taken as supplied.':'From the bundled synthetic loan_covenants_extended.csv, taken as supplied: organizer figures plus team-made FCCR, current-ratio and revolver columns. Not verified against borrower statements.');
  return h('details',{class:'xp'},h('summary',null,icon('chevR',16,'chev'),'Source data row',h('span',{class:'hint'},r.record_id||'')),h('div',{class:'xb'},table,note));
 }
-/* ---------- Cure options (v9): display only; every figure comes from /api/cure ---------- */
+/* ---------- Cure options (v11): display only; every figure comes from /api/cure ---------- */
 const cureCache=new Map(),cureAssets=new Map();
 const termsKey=()=>terms&&!sameTerms(terms,DEFAULT_TERMS)?JSON.stringify(terms):'';
 const stamp=iso=>{const d=new Date(iso||'');if(!Number.isFinite(d.getTime()))return 'an unrecorded time';return d.toLocaleString('en-US',{timeZone:'UTC',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false})+' UTC';};
