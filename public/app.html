@@ -198,6 +198,10 @@ table.data{width:100%;border-collapse:collapse;font-size:14px}
 .ws{display:grid;grid-template-columns:minmax(0,1fr) 352px;gap:32px;align-items:start}
 .ws-rail{display:grid;gap:16px}
 .ws-rail .panel{scroll-margin-top:76px}
+/* Jump links under the borrower header (v17): the .seg control as in-page navigation; headings clear the sticky top bar. */
+.ws .sec{scroll-margin-top:76px}
+.jump{display:flex;flex-wrap:wrap;width:fit-content;max-width:100%;margin:-10px 0 24px}
+.cx-hint .cx-hs{color:var(--ink-3)}
 .exec{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--rule-2);border-radius:8px;padding:22px 26px}
 .exec.bad{border-left-color:var(--red)}.exec.warn{border-left-color:var(--amber)}.exec.ok{border-left-color:var(--teal)}
 .exec p{margin:0 0 12px;font-size:15px;line-height:1.62;color:var(--ink-2);max-width:74ch}
@@ -273,6 +277,8 @@ table.mini{width:100%;border-collapse:collapse;font-size:13.5px}
 .action .v{margin:4px 0 0;font-size:17px;font-weight:600;color:#fff;letter-spacing:-.005em}
 .action ul{margin:12px 0 0;padding:12px 0 0 18px;border-top:1px solid #2A3A54;font-size:13px;line-height:1.55}
 .action li+li{margin-top:4px}
+.action .cx-hint{margin:12px 0 0;padding-top:12px;border-top:1px solid #2A3A54;font-size:13px;line-height:1.55;color:#DDE3EC}
+.action .cx-hint .cx-hs{color:#A9B4C3}.action .linkbtn{color:#fff}.action .linkbtn:hover{color:#DDE3EC}
 .doc{display:flex;gap:11px;align-items:flex-start}
 .doc>svg{flex:none;color:var(--slate);margin-top:2px}
 .doc-name{font-size:13.5px;font-weight:600;color:var(--ink);word-break:break-all}
@@ -1324,7 +1330,7 @@ function wItem(x){
  const e=explain(x),href='#borrower-'+encodeURIComponent(x.b);
  return h('li',{class:'wi','data-b':x.b},
   h('div',{class:'wi-b'},h('a',{class:'rowlink',href},x.b),stLabel(x.a),x.nw?h('span',{class:'tag qnew',title:'Passed every applicable covenant in the prior quarter'},'Moved into exception'):null),
-  h('div',{class:'wi-x'},e.lines.map(t=>h('p',null,t)),e.more.map(t=>h('p',{class:'sub'},t))),
+  h('div',{class:'wi-x'},e.lines.map(t=>h('p',null,t)),e.more.map(t=>h('p',{class:'sub'},t)),x.group===1?h('p',{class:'sub cx-ov','data-cure':x.b,hidden:true}):null),
   focusViz(x,e.focus),
   h('a',{class:'btn btn-sm',href,'aria-label':`Investigate ${x.b}`},'Investigate',icon('chevR',14)));
 }
@@ -1338,6 +1344,7 @@ function watchlist(){
    show.length<list.length?h('button',{class:'wl-more linkbtn',type:'button',onclick:()=>{wlAll=true;const first=list[LIMIT].b;$('attn').replaceWith(watchlist());const n=document.querySelector(`#attn .wi[data-b="${CSS.escape(first)}"] a.rowlink`);if(n)n.focus();}},`Show ${list.length-show.length} more`):null);};
  const ctx=all.filter(x=>!x.group&&x.dormantFail.length);
  const lede=flagged.length?`${nRev} borrower${nRev===1?' requires':'s require'} review and ${nWatch} ${nWatch===1?'is':'are'} on watch${nNew?`; ${nNew} moved into exception this quarter`:''}. Ordered by priority, most urgent first.`:`No borrower is flagged in ${P}.`;
+ setTimeout(()=>fillCureSlots(),0);
  return h('section',{class:'attn',id:'attn','aria-labelledby':'attnH'},
   h('div',{class:'sh'},h('div',null,h('h2',{id:'attnH'},`Borrowers requiring attention, ${P}${scen}`),h('p',null,lede)),
    h('div',{class:'tools'},h('button',{class:'btn',type:'button',onclick:()=>openRules()},icon('sliders',15),'Monitoring rules'),h('button',{class:'btn',type:'button',id:'exportBtn',onclick:()=>exportFindings()},icon('doc',15),'Export findings'))),
@@ -1640,9 +1647,9 @@ function inspect(r,k,c,pc,Q){
  box.append(h('h4',null,'Calculation'),h('p',{class:'formula'},`${C.short} = ${C.formula}`),calcTable(r,k,c),agreement(k,c));
  return box;
 }
-function covBody(b,r,k,c,pc,Q){
+function covBody(b,r,k,c,pc,Q,worst){
  const C=COV[k],id='cx-'+k,key=`${b}|${period}|${k}`,fail=c.status==='breach',dorm=c.status==='dormant',un=c.status==='unevaluable';
- const open=xopen.has(key)?xopen.get(key):fail||un,hp=hpOf(c),hd=Number(c.numerator_headroom_usd),ch=Q?change(k,pc,c):null;
+ const open=xopen.has(key)?xopen.get(key):k===worst||un,hp=hpOf(c),hd=Number(c.numerator_headroom_usd),ch=Q?change(k,pc,c):null;
  const cell=h('td',{colspan:'5'},open?inspect(r,k,c,pc,Q):null),det=h('tr',{class:'cdet',id,hidden:!open},cell);
  const body=h('tbody',{class:'cb'+(fail?' fail':dorm?' dorm':'')+(open?' open':''),'data-k':k});
  const btn=h('button',{class:'xt',type:'button','aria-expanded':String(open),'aria-controls':id,onclick:()=>{const o=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(o));xopen.set(key,o);det.hidden=!o;body.classList.toggle('open',o);if(o&&!cell.firstChild)cell.append(inspect(r,k,c,pc,Q));}},icon('chevR',15,'chev'),h('span',null,C.name));
@@ -1660,11 +1667,15 @@ function statusTable(b,r,pr,pp){
  const P=plabel(period),Q=pp?plabel(pp):null,cmp=!!(pr&&pr.status!=='invalid');
  const order=c=>c.status==='breach'?0:c.status==='unevaluable'?1:c.status==='pass'?2:3;
  const list=covs(r).filter(([k])=>COV[k]).sort((x,y)=>order(x[1])-order(y[1]));
+ // Only the most severe failure (largest dollar shortfall) opens by itself; ties keep the order above.
+ const sf=c=>c.numerator_headroom_usd==null?-Infinity:-Number(c.numerator_headroom_usd),fl=list.filter(([,c])=>c.status==='breach');
+ const worst=fl.reduce((m,x)=>!m||sf(x[1])>sf(m[1])?x:m,null)?.[0];
+ const how=fl.length>1?'The failing test with the largest dollar shortfall opens automatically; expand any other covenant to inspect the calculation and the agreement text.':fl.length?'The failing test opens automatically; expand any other covenant to inspect the calculation and the agreement text.':'Expand any covenant to inspect the calculation and the agreement text.';
  return h('section',{class:'sec','aria-labelledby':'cstH'},
-  h('div',{class:'sh'},h('div',null,h('h2',{id:'cstH'},'Covenant status'),h('p',null,`Every covenant test for ${P}${isProj(period)?' (synthetic scenario)':''} against its limit${Q?`, compared with ${Q}`:''}. Failing tests open automatically; expand any covenant to inspect the calculation and the agreement text.`))),
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'cstH'},'Covenant status'),h('p',null,`Every covenant test for ${P}${isProj(period)?' (synthetic scenario)':''} against its limit${Q?`, compared with ${Q}`:''}. ${how}`))),
   h('div',{class:'tbl'},h('table',{class:'cst',id:'cst'},h('caption',{class:'vh'},`Covenant status for ${b}, ${P}`),
    h('thead',null,h('tr',null,['Covenant','Result','Actual vs limit','Headroom or shortfall',Q?`Since ${Q}`:'Prior quarter'].map(t=>h('th',{scope:'col'},h('span',null,t))))),
-   list.map(([k,c])=>covBody(b,r,k,c,cmp?cv(pr,k):undefined,Q)))),
+   list.map(([k,c])=>covBody(b,r,k,c,cmp?cv(pr,k):undefined,Q,worst)))),
   r.not_applied?.length?h('p',{class:'foot'},`Not applied by the lender this quarter: ${listJoin(r.not_applied.map(k=>COV[k].name))}.`):null,
   h('p',{class:'foot'},'Calculated by the backend in exact whole cents; this page only displays the results. TTM (trailing 12 months) is the last four quarters added together. EBITDA is earnings before interest, taxes, depreciation and amortization. A springing covenant that is not triggered is shown for reference and is not counted.'));
 }
@@ -1790,15 +1801,47 @@ async function fetchCure(b,p,overrides){
   if(!res.ok&&!j.reason)return {needed:true,available:false,reason:j.error||res.statusText};return j;}
  catch(e){return {needed:true,available:false,reason:`The server could not be reached (${e.message}).`};}
 }
+// One request per borrower, quarter and terms: the summary line, the rail card, this section and the Overview share it.
+const curePending=new Map();let pendingJump=null;
+const cureKey=(b,p)=>b+'|'+p+'|'+termsKey();
+function getCure(b,p){
+ if(lastCsv||lastPolicy)return Promise.resolve(null);
+ const key=cureKey(b,p);if(cureCache.has(key))return Promise.resolve(cureCache.get(key));
+ if(!curePending.has(key))curePending.set(key,fetchCure(b,p).then(j=>{curePending.delete(key);cureCache.set(key,j);return j;}));
+ return curePending.get(key);
+}
+// Runs fn at once when the result is cached, so nothing above the cure section moves after a jump.
+function withCure(b,p,fn){const key=cureKey(b,p);if(!lastCsv&&!lastPolicy&&cureCache.has(key))return fn(cureCache.get(key));getCure(b,p).then(fn);}
+// The cheapest option in one line; null when no cure is needed or none is available (nothing is shown then).
+function cureHint(j){
+ if(!j||j.needed===false||j.available===false||!Array.isArray(j.options))return null;
+ const o=j.options.find(x=>x.key==='cheapest');let t;
+ if(o?.status==='plan'&&o.plan)t=`Cheapest verified cure: ${o.plan.actions}, ${usd(o.plan.total_cost_usd)} total cost (synthetic terms)`;
+ else if(o?.status==='no_cure')t=o.waiver?.request?`No cure within the agreement; smallest waiver: ${o.waiver.request} (synthetic terms)`:'No cure within the agreement (synthetic terms)';
+ else return null;
+ return {t,o,src:j.source==='snapshot'?'Solved offline':null};
+}
+const hintLine=x=>h('p',{class:'cx-hint'},x.t,x.src?h('span',{class:'cx-hs'},' · '+x.src):null,'. ',h('button',{class:'linkbtn',type:'button',onclick:()=>jumpTo('cureH')},'See cure options'));
+// In-page jump without touching the #borrower-… route; instant, like showEvidence.
+function jumpTo(id){const t=$(id);if(!t)return;(t.closest('section')||t).scrollIntoView({block:'start'});t.setAttribute('tabindex','-1');t.focus({preventScroll:true});}
+// Overview: a cure line under each priority-1 borrower, one request at a time, after the list renders; silent on failure.
+async function fillCureSlots(){
+ const p=period;
+ for(const el of document.querySelectorAll('#attn p.cx-ov')){
+  if(p!==period||view!=='overview')return;
+  const b=el.dataset.cure;let x=null;try{x=cureHint(await getCure(b,p));}catch(e){}
+  if(!x||!el.isConnected||p!==period)continue;
+  const txt=x.o.status==='plan'?`Cheapest verified cure ${usd(x.o.plan.total_cost_usd)}`:'No cure; waiver needed';
+  el.replaceChildren(h('a',{class:'linkbtn',href:'#borrower-'+encodeURIComponent(b),title:`Cure options for ${b} (synthetic cure terms)`,onclick:e=>{if(!(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button))pendingJump='cure';}},txt));el.hidden=false;}
+}
 function cureSection(b,r){
  if(!r||r.status!=='exception')return null;
  const body=h('div',{class:'cx-body','aria-live':'polite','aria-busy':'true'},h('p',{class:'muted cx-note'},'Loading cure options…'));
  const sec=h('section',{class:'sec','aria-labelledby':'cureH'},
   h('div',{class:'sh'},h('div',null,h('h2',{id:'cureH'},'Cure options'),h('p',null,'The cheapest ways the agreement allows to restore compliance. An optimisation model proposes each plan; the exact covenant engine re-checks every applied covenant before a plan is shown.')),h('span',{class:'tag tag-syn'},'Synthetic cure terms')),body);
  if(lastCsv||lastPolicy){body.removeAttribute('aria-busy');body.replaceChildren(h('p',{class:'muted cx-note'},'Cure planning uses the bundled sample data, policy and synthetic cure terms, so it is not available while an uploaded CSV or policy is in use.'));return sec;}
- const key=b+'|'+period+'|'+termsKey();
  const fill=j=>{body.removeAttribute('aria-busy');if(j.terms&&!j.terms.overridden?.length)cureAssets.set(b,j.terms.asset_name||null);body.replaceChildren(...cureBody(j,b,body));};
- if(cureCache.has(key))fill(cureCache.get(key));else{const p=period;fetchCure(b,p).then(j=>{cureCache.set(b+'|'+p+'|'+termsKey(),j);if(body.isConnected&&p===period)fill(j);});}
+ const p=period;let sync=true;withCure(b,p,j=>{if(j&&p===period&&(sync||body.isConnected))fill(j);});sync=false;
  return sec;
 }
 function covFacts(covenants,waived={}){
@@ -1861,7 +1904,7 @@ function cureForm(j,b,body){
    const ov={equity_cure_cap_usd:v,cures_remaining_4q:Number(cr.value)};if(sale)ov.asset_sale_allowed=sale.checked;go(ov);}},
   h('label',{for:'cxCap'},'Equity cure cap, USD (synthetic)',cap),h('label',{for:'cxCr'},'Cures remaining, last four quarters (synthetic)',cr),
   sale?h('label',{class:'chk',for:'cxSale'},sale,`Allow sale of ${asset}`):null,
-  h('button',{class:'btn btn-primary',type:'submit'},'Re-solve'),t.overridden?.length?h('button',{class:'btn',type:'button',onclick:()=>{const k=b+'|'+period+'|'+termsKey();cureCache.delete(k);go(undefined);}},'Use file terms'):null,
+  h('button',{class:'btn btn-primary',type:'submit'},'Re-solve'),t.overridden?.length?h('button',{class:'btn',type:'button',onclick:()=>{cureCache.delete(cureKey(b,period));go(undefined);}},'Use file terms'):null,
   h('p',{class:'cx-help',id:'cxHelp'},'Re-solves live with Gurobi; the exact engine re-checks every result. Changes are not saved.'),errEl);
 }
 function cureBody(j,b,body){
@@ -1888,17 +1931,20 @@ function renderDetail(page){
   h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))),h('div',{class:'ph-act'},h('a',{class:'btn',href:'#callprep-'+encodeURIComponent(b),title:`One-page call preparation for ${b}, ${plabel(period)}`},icon('doc',15),'Call prep')));
  const tone=s.tone==='na'?'':s.tone;
  const legal=h('div',{class:'legal'},icon('scale',16),h('div',null,h('b',null,a.fails.length?'Potential financial covenant breach, not a legal default determination. ':'Covenant test result, not a legal determination. '),'Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers and the lender’s decisions. This tool evaluates none of those.'));
+ const sum=summaryBlock(b,r,a,pr,pp),hasCst=!!(r&&r.status!=='invalid'&&covs(r).some(([k])=>COV[k])),cureEl=cureSection(b,r);
  const main=h('div',null,
-  h('section',{class:'sec','aria-labelledby':'sumH'},h('div',{class:'sh'},h('h2',{id:'sumH'},'Executive summary')),h('div',{class:'exec '+tone},...summaryBlock(b,r,a,pr,pp),legal)),
-  r&&r.status!=='invalid'&&covs(r).some(([k])=>COV[k])?statusTable(b,r,pr,pp):null,
+  h('section',{class:'sec','aria-labelledby':'sumH'},h('div',{class:'sh'},h('h2',{id:'sumH'},'Executive summary')),h('div',{class:'exec '+tone},...sum,legal)),
+  hasCst?statusTable(b,r,pr,pp):null,
+  cureEl,
   h('section',{class:'sec','aria-labelledby':'trendH'},h('div',{class:'sh'},h('div',null,h('h2',{id:'trendH'},'Quarterly trend'),h('p',null,'Choose a covenant. Hover or focus a quarter for exact values, or select it to open that quarter.'))),
-   chartSection(b,r,a),h('div',{style:'margin-top:16px'},historyTable(b))),
-  cureSection(b,r));
+   chartSection(b,r,a),h('div',{style:'margin-top:16px'},historyTable(b))));
  const rs=r?reasons(r,a):[];
+ const actEl=h('section',{class:'action','aria-labelledby':'actH'},h('div',{class:'k',id:'actH'},'Suggested review step'),h('p',{class:'v'},s.action),rs.length?h('ul',null,rs.map(t=>h('li',null,t))):null);
  const railEl=h('aside',{class:'ws-rail','aria-label':'Review action, terms and evidence'},
-  h('section',{class:'action','aria-labelledby':'actH'},h('div',{class:'k',id:'actH'},'Suggested review step'),h('p',{class:'v'},s.action),rs.length?h('ul',null,rs.map(t=>h('li',null,t))):null),
-  reviewPanel(b),evidencePanel(r&&r.status!=='invalid'?r:null),termsPanel(b,r),r?sourceRow(r):null);
- page.replaceChildren(head,notices(),repDetail(b),h('div',{class:'ws'},main,railEl));
+  actEl,reviewPanel(b),evidencePanel(r&&r.status!=='invalid'?r:null),termsPanel(b,r),r?sourceRow(r):null);
+ const jump=h('nav',{class:'seg jump','aria-label':'On this page'},[['sumH','Executive summary'],hasCst&&['cstH','Covenant status'],cureEl&&['cureH','Cure options'],['trendH','Quarterly trend'],['evH','Evidence']].filter(Boolean).map(([id,t])=>h('button',{type:'button',onclick:()=>jumpTo(id)},t)));
+ page.replaceChildren(head,jump,notices(),repDetail(b),h('div',{class:'ws'},main,railEl));
+ if(cureEl){const p=period;withCure(b,p,j=>{const x=cureHint(j);if(!x||p!==period||!actEl.isConnected)return;sum[0].after(hintLine(x));actEl.append(hintLine(x));});}
  requestAnimationFrame(()=>{for(const pre of page.querySelectorAll('.doctext')){const m=pre.querySelector('mark.fail')||pre.querySelector('mark');if(m)pre.scrollTop=Math.max(0,m.offsetTop-pre.offsetTop-28);}});
 }
 
@@ -2487,7 +2533,8 @@ function route(first){
  else{detailFor=null;view=VIEWS.includes(hsh)?hsh:'overview';}
  document.body.classList.toggle('cp-print',view==='callprep');
  tipHide();renderAll();
- if(!first){window.scrollTo(0,0);const t=$(view==='detail'?'dTitle':'pageTitle');(t||$('main')).focus({preventScroll:true});}
+ if(!first){window.scrollTo(0,0);const t=$(view==='detail'?'dTitle':'pageTitle');(t||$('main')).focus({preventScroll:true});if(pendingJump&&view==='detail')jumpTo('cureH');}
+ pendingJump=null;
 }
 window.addEventListener('hashchange',()=>route(false));
 $('period').onchange=e=>{period=e.target.value;renderAll();};
