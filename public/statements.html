@@ -210,6 +210,7 @@ const IC={
  method:['M12 6.6C10.5 5.4 8.4 4.8 5 4.8v13.5c3.4 0 5.5.6 7 1.8 1.5-1.2 3.6-1.8 7-1.8V4.8c-3.4 0-5.5.6-7 1.8z','M12 6.6v13.5'],
  design:['M5 19l3.5-1 9.5-9.5a1.8 1.8 0 0 0-2.5-2.5L6 15.5z','M13.5 7.5l3 3','M4 21h16'],
  doc:['M7 3.5h7l4.5 4.5v12.5H7z','M14 3.5V8h4.5','M9.8 12.5h5.6','M9.8 16h5.6'],
+ cal:['M4.5 6h15v14h-15z','M4.5 10h15','M8.5 3.5v4','M15.5 3.5v4','M9 15l2 2 4-4'],
  check:['C','M8 12.3l2.8 2.7L16 9.5'],x:['C','M9.2 9.2l5.6 5.6','M14.8 9.2l-5.6 5.6'],
  alert:['C','M12 7.5v5.5','M12 16.3v.2'],info:['C','M12 11v5.5','M12 7.8v.2'],minus:['C','M8.5 12h7'],
  upload:['M12 16V4.5','M7 9l5-5 5 5','M5 19.5h14'],
@@ -219,7 +220,7 @@ const IC={
  play:['C','M10.3 8.8l5 3.2-5 3.2z'],
 };
 function icon(name,size=16,cls){const g=sv('svg',{width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':1.7,'stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true',focusable:'false',class:cls||null});for(const d of IC[name]){if(d==='C')g.append(sv('circle',{cx:12,cy:12,r:8.5}));else g.append(sv('path',{d}));}return g;}
-const NAV=[['/app#overview','Portfolio Overview','overview'],['/app#borrowers','Borrower Monitoring','register'],['/app#analysis','Covenant Analysis','analysis'],['/app#design','Covenant Designer','design'],['/statements','Statements','doc'],['/app#method','Methodology','method']];
+const NAV=[['/app#overview','Portfolio Overview','overview'],['/app#borrowers','Borrower Monitoring','register'],['/app#reporting','Reporting','cal'],['/app#analysis','Covenant Analysis','analysis'],['/app#design','Covenant Designer','design'],['/statements','Statements','doc'],['/app#method','Methodology','method']];
 $('nav').replaceChildren(...NAV.map(([href,label,ic])=>h('a',{href,'aria-current':href==='/statements'?'page':null},icon(ic,18),h('span',null,label))));
 
 // Display formatting only: the server returns every amount as a cents-exact decimal string.
