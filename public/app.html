@@ -663,6 +663,124 @@ mark.cite.flash{animation:flash 1.6s ease-out}
  .rail.railwide{width:100%}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* reporting compliance (lower-middle-market): a separate signal from covenant results */
+.repline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:-24px 0 36px;padding:12px 16px;border:1px solid var(--rule);border-radius:8px;background:#fff;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.repline>svg{flex:none;color:var(--blue)}
+.repline>div{flex:1 1 320px;min-width:0}
+.repline b{color:var(--ink);font-weight:600}
+.repline.bad{border-color:#EADBBF;background:#FCF8F1}.repline.bad>svg{color:var(--amber-ink)}
+.repline.muted,.repline.muted b{color:var(--ink-3)}
+.repline.det{margin:0 0 24px}
+.repasof{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;font-size:13.5px;color:var(--ink-2)}
+.repasof>svg{flex:none;color:var(--slate)}.repasof>span{flex:0 1 auto;min-width:min(200px,70vw)}.repasof b{color:var(--ink);font-weight:600}
+.repsum{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;margin:0 0 14px;font-size:14px;color:var(--ink)}
+.repsum b{font-weight:600}
+.chips.row{flex-direction:row;flex-wrap:wrap}
+.rd{display:flex;gap:8px;align-items:flex-start;min-width:150px}
+.rd>svg{flex:none;margin-top:2px;color:var(--slate)}
+.rd b{display:block;font-weight:500;color:var(--ink)}
+.rd span{display:block;font-size:13px}
+.rd small{display:block;font-size:12px;color:var(--ink-3)}
+.rd small.qbad{color:var(--amber-ink);font-weight:500}
+.rd-on_time>svg,.rd-on_time span{color:var(--teal)}
+.rd-late>svg,.rd-late span,.rd-invalid>svg,.rd-invalid span{color:var(--amber-ink)}
+.rd-missing>svg,.rd-missing span{color:var(--red)}
+.rd-not_yet_due>svg,.rd-not_yet_due span{color:var(--ink-3)}
+.rd-ref span{font-size:12.5px;color:var(--ink-3)}
+.rdl .rgrid{display:grid;gap:14px}
+.rdl .rgrid>div{display:grid;gap:6px}
+.rdl .rgrid label{font-size:13.5px;font-weight:600;color:var(--ink)}
+.rdl .trig .in{width:90px}
+.rdl input[type=date].in{width:auto}
+.rtb{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+.rtb-h{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink)}
+.rtb .trig .in{width:64px;height:32px}
+@media (max-width:720px){
+ .repline{margin-top:-20px}
+ #rtbl thead{display:none}
+ #rtbl,#rtbl tbody,#rtbl tr,#rtbl td{display:block;width:100%}
+ #rtbl tr{padding:12px 14px;border-bottom:1px solid var(--rule)}
+ #rtbl tr:last-child{border-bottom:0}
+ #rtbl tbody td{border:0;padding:6px 0}
+ #rtbl td[data-label]::before{content:attr(data-label);display:block;margin-bottom:3px;font-size:11.5px;font-weight:500;color:var(--ink-3)}
+ #rtbl td[data-label=Borrower]::before{display:none}
+}
+/* call prep one-pager (relationship manager) */
+.flip{transform:scaleX(-1)}
+.ph-act{display:flex;gap:10px;align-items:center}
+.cp-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 20px}
+.cp-bar p{flex:1 1 280px;margin:0;font-size:13px;color:var(--ink-3)}
+.cp{max-width:1120px;padding:28px 32px;background:#fff;border:1px solid var(--rule);border-radius:8px;box-shadow:var(--sh-1);font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.cp-head{padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:16px}
+.cp-tr{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cp h1{margin:0;font:400 28px/1.15 var(--serif);color:var(--ink)}
+.cp h1 span{color:var(--ink-3)}
+.cp-cols{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:24px}
+.cp-sec{margin:0 0 16px}
+.cp-sec h2{margin:0 0 8px;font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+.cp-tbl{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.cp-tbl th,.cp-tbl td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.cp-tbl thead th{font-size:12px;font-weight:500;color:var(--ink-3);background:var(--head)}
+.cp-tbl tbody th{font-weight:600;color:var(--ink)}
+.cp-tbl th small{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}
+.cp-tbl .r{text-align:right;white-space:nowrap}
+.cp-tbl .st{font-size:12.5px;gap:5px}
+.cp-tbl .neg,.cp-dist .neg{color:var(--red)}
+.cp-tbl .cur{background:var(--soft)}
+.cp-tbl td svg{vertical-align:-1px;margin-right:2px}
+.cp-chg{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--ink-3)}
+.cp-weaker{color:var(--red)}.cp-stronger{color:var(--teal)}
+.cp-fine{margin:6px 0 0;font-size:12px;color:var(--ink-3)}
+.cp-key svg{vertical-align:-1px}
+.cp-dist td small{display:block;font-size:11.5px;color:var(--ink-3)}
+.cp-dist td span{white-space:nowrap}
+.cp-dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 14px;margin:4px 0 0;font-size:12.5px;font-variant-numeric:tabular-nums}
+.cp-dl dt{color:var(--ink-3)}.cp-dl dd{margin:0;text-align:right;color:var(--ink)}
+.cp-cure{padding:10px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--soft)}
+.cp-cure p{margin:6px 0 0}.cp-cure small{display:block;margin-top:4px;font-size:11.5px;color:var(--ink-3)}
+.cp-cure .st{font-size:12.5px;white-space:normal}
+.cp-q{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--ink)}
+.cp-rep{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.cp-rep li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px;align-items:start}
+.cp-rep .st{font-size:12.5px}
+.cp-sec>p{margin:6px 0 0}
+.cp-flag{color:var(--amber-ink);font-weight:500}.cp-flag svg{vertical-align:-1px;margin-right:4px}
+.cp-foot{margin-top:8px;padding-top:12px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-3)}
+.cp-foot p{margin:0 0 4px}.cp-foot b{color:var(--ink-2);font-weight:600}
+.cp-cites{margin:4px 0 6px;padding-left:16px;display:grid;gap:3px}
+.cp-cites span{color:var(--ink-3)}
+.cp-legal{display:flex;gap:6px;align-items:flex-start;font-weight:500;color:var(--ink-2)}
+@media (max-width:900px){.cp-cols{grid-template-columns:minmax(0,1fr)}.cp{padding:20px 18px}}
+@media (max-width:720px){.cp-tbl{font-size:12px}.cp-tbl th,.cp-tbl td{padding:5px 4px}.cp-scroll,.cp-sec{overflow-x:auto}.cp h1{font-size:23px}.cp-rep li{grid-template-columns:minmax(0,1fr)}}
+/* Printing: only while the call prep view is showing (body.cp-print); every other view prints as before. */
+@page callprep{size:letter;margin:.4in}
+@media print{
+ body.cp-print{background:#fff}
+ body.cp-print .main{display:block}
+ body.cp-print .page{max-width:none;padding:0}
+ body.cp-print .cp-bar{display:none}
+ body.cp-print .cp{page:callprep;max-width:none;padding:0;border:0;box-shadow:none;font-size:8.6pt;line-height:1.3;color:#000}
+ body.cp-print .cp *{color:#000!important;background:transparent!important;box-shadow:none!important}
+ body.cp-print .cp h1{font-size:15pt}
+ body.cp-print .cp-head{padding-bottom:5pt;margin-bottom:7pt;border-color:#000}
+ body.cp-print .cp .meta{margin-top:3pt;font-size:8pt}
+ body.cp-print .cp .tag{border:1px solid #000;height:auto;padding:0 4pt}
+ body.cp-print .cp-cols{grid-template-columns:1.45fr 1fr;gap:12pt}
+ body.cp-print .cp-sec{margin:0 0 7pt;break-inside:avoid}
+ body.cp-print .cp-sec h2{font-size:8.4pt;margin:0 0 3pt}
+ body.cp-print .cp-tbl{font-size:7.8pt}
+ body.cp-print .cp-tbl th,body.cp-print .cp-tbl td{padding:1.5pt 3pt;border-color:#999}
+ body.cp-print .cp-tbl .cur{font-weight:700}
+ body.cp-print .cp-fine,body.cp-print .cp-cure small,body.cp-print .cp-tbl th small{font-size:7pt}
+ body.cp-print .cp-dist td small{font-size:6.8pt}
+ body.cp-print .cp-cure{padding:4pt 6pt;border-color:#999}
+ body.cp-print .cp-q{gap:3pt}
+ body.cp-print .cp-rep{gap:2pt}
+ body.cp-print .cp-rep li{grid-template-columns:62pt 1fr}
+ body.cp-print .cp-foot{font-size:6.8pt;padding-top:4pt;border-color:#000}
+ body.cp-print .cp-cites{gap:1pt;margin:2pt 0}
+ body.cp-print .st,body.cp-print .tag{font-size:7.6pt}
+}
 @media print{.side,.top,#tip,.toast{display:none}.app{display:block}}
 </style>
 </head>
@@ -705,7 +823,7 @@ mark.cite.flash{animation:flash 1.6s ease-out}
   <section class="src" aria-labelledby="srcCsvH">
    <div class="src-h"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M4 10h16"/><path d="M10 10v9"/></svg>
     <div><h3 id="srcCsvH">Borrower financials</h3><p class="cur" id="srcCsv"></p></div></div>
-   <p class="help">A CSV with one row per borrower and quarter. Required columns: record_id, borrower_id, period (for example 2026-Q3), currency (USD), debt_usd, ttm_ebitda_usd, ttm_debt_service_usd, ttm_available_cashflow_usd, max_leverage, min_dscr. Optional: ttm_capex_usd, ttm_cash_taxes_usd, ttm_distributions_usd and min_fccr for fixed-charge coverage; current_assets_usd, current_liabilities_usd and min_current_ratio for the current ratio; revolver_commitment_usd and revolver_drawn_usd for springing tests. Maximum 4 MB.</p>
+   <p class="help">A CSV with one row per borrower and quarter. Required columns: record_id, borrower_id, period (for example 2026-Q3), currency (USD), debt_usd, ttm_ebitda_usd, ttm_debt_service_usd, ttm_available_cashflow_usd, max_leverage, min_dscr. Optional: ttm_capex_usd, ttm_cash_taxes_usd, ttm_distributions_usd and min_fccr for fixed-charge coverage; current_assets_usd, current_liabilities_usd and min_current_ratio for the current ratio; revolver_commitment_usd and revolver_drawn_usd for springing tests. Optional reporting columns (tracked separately from covenants): financials_received_date, compliance_cert_received_date, and on Q1 rows annual_statements_received_date and statement_quality for the prior fiscal year. Maximum 4 MB.</p>
    <button class="btn" type="button" id="pickCsv">Upload CSV</button>
    <input id="up" type="file" accept=".csv,text/csv" hidden>
   </section>
@@ -751,6 +869,22 @@ mark.cite.flash{animation:flash 1.6s ease-out}
   </section>
   <div class="msg" id="tmsg" role="status" aria-live="polite"></div>
   <div class="row2" style="margin-top:0"><button class="btn btn-primary" type="button" id="applyTerms">Apply terms</button><button class="btn" type="button" id="defaultTerms">Restore defaults</button><button class="btn btn-ghost" type="button" id="cancelTerms">Cancel</button></div>
+  <section class="src rdl" aria-labelledby="rdlH">
+   <h3 id="rdlH" class="src-t">Reporting deadlines</h3>
+   <p class="help">When borrowers must send their documents, and the date on which arrivals are checked. These are defaults of this tool the lender can change, not market data. Applying them re-checks reporting only; covenant results do not change.</p>
+   <div class="rgrid">
+    <div><label for="rdFin">Quarterly financial statements</label><div class="trig"><input id="rdFin" class="in" type="text" inputmode="numeric" autocomplete="off"><span>days after quarter end (default 45)</span></div></div>
+    <div><label for="rdCert">Compliance certificate</label><div class="trig"><input id="rdCert" class="in" type="text" inputmode="numeric" autocomplete="off"><span>days after quarter end (default 45)</span></div></div>
+    <div><label for="rdAnn">Annual financial statements</label><div class="trig"><input id="rdAnn" class="in" type="text" inputmode="numeric" autocomplete="off"><span>days after fiscal year end (default 120)</span></div>
+     <p class="help" style="margin:0">Read on Q1 rows only, for the fiscal year that ended just before (calendar fiscal years assumed): the 2026-Q1 row covers FY2025, due 30 April 2026 at 120 days.</p></div>
+    <div><label for="rdQ">Minimum annual statement quality</label><span class="selwrap" style="justify-self:start"><select id="rdQ"><option value="audited">Audited</option><option value="reviewed">Reviewed</option><option value="compiled">Compiled</option><option value="internal">Internal</option></select><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></span></div>
+    <div><label for="rdDate">Document review date</label><div class="trig"><input id="rdDate" class="in" type="date" aria-describedby="rdDateH"></div>
+     <p class="help" id="rdDateH" style="margin:0">The day on which received documents are checked. Default 1 December 2026, a synthetic date. It is separate from the data date of the covenant results (30 September 2026).</p></div>
+   </div>
+   <div id="rdOv" hidden style="margin-top:14px"><p class="help" style="margin:0 0 6px">Borrowers with their own reporting deadlines (set on each borrower’s page):</p><ul id="rdOvList" class="ovlist"></ul></div>
+   <div class="msg" id="rdmsg" role="status" aria-live="polite"></div>
+   <div class="row2"><button class="btn btn-primary" type="button" id="applyR">Apply reporting deadlines</button><button class="btn" type="button" id="defaultR">Restore defaults</button></div>
+  </section>
  </div>
 </dialog>
 <dialog id="rules" class="drawer" aria-labelledby="rTitle">
@@ -805,6 +939,7 @@ const IC={
  upArrow:['M12 19V5','M6.5 10.5L12 5l5.5 5.5'],downArrow:['M12 5v14','M6.5 13.5L12 19l5.5-5.5'],
  sliders:['M4 7h9','M17 7h3','M4 17h3','M11 17h9','M15 5v4','M9 15v4','M4 12h13','M20 12h0'],
  design:['M5 19l3.5-1 9.5-9.5a1.8 1.8 0 0 0-2.5-2.5L6 15.5z','M13.5 7.5l3 3','M4 21h16'],
+ cal:['M4.5 6h15v14h-15z','M4.5 10h15','M8.5 3.5v4','M15.5 3.5v4','M9 15l2 2 4-4'],
 };
 function icon(name,size=16,cls){const g=sv('svg',{width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':1.7,'stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true',focusable:'false',class:cls||null});for(const d of IC[name]){if(d==='C')g.append(sv('circle',{cx:12,cy:12,r:8.5}));else g.append(sv('path',{d}));}return g;}
 
@@ -883,10 +1018,10 @@ let sort={key:'status',dir:-1},search='',filter='all',rsearch='',chartKey=null,t
 let lastCsv=null,csvName=null,lastPolicy=null,polName=null,byKey=new Map(),borrowers=[],policyDoc=null;
 let loadState='loading',loadError='',rec=null;
 const isProj=p=>!!(asOf&&pend(p)&&pend(p)>asOf);
-const VIEWS=['overview','borrowers','analysis','design','method'];
-const LISTS=['overview','borrowers','analysis'];
-const TITLES={overview:'Portfolio Overview',borrowers:'Borrower Monitoring',analysis:'Covenant Analysis',design:'Covenant Designer',method:'Methodology'};
-const NAV=[['overview','Portfolio Overview','overview'],['borrowers','Borrower Monitoring','register'],['analysis','Covenant Analysis','analysis'],['design','Covenant Designer','design'],['method','Methodology','method']];
+const VIEWS=['overview','borrowers','reporting','analysis','design','method'];
+const LISTS=['overview','borrowers','reporting','analysis'];
+const TITLES={overview:'Portfolio Overview',borrowers:'Borrower Monitoring',reporting:'Reporting Compliance',analysis:'Covenant Analysis',design:'Covenant Designer',method:'Methodology'};
+const NAV=[['overview','Portfolio Overview','overview'],['borrowers','Borrower Monitoring','register'],['reporting','Reporting','cal'],['analysis','Covenant Analysis','analysis'],['design','Covenant Designer','design'],['method','Methodology','method']];
 
 /* ---------- status model (derived only from API fields) ---------- */
 const ST={
@@ -1059,12 +1194,13 @@ function policyDocs(){
 /* ---------- shell ---------- */
 function renderAll(){renderNav();renderTop();renderSources();renderPage();}
 function renderNav(){
- const cur=view==='detail'?returnView:view;
+ const cur=view==='detail'||view==='callprep'?returnView:view;
  $('nav').replaceChildren(...NAV.map(([k,label,ic])=>h('a',{href:'#'+k,'aria-current':k===cur?'page':null},icon(ic,18),h('span',null,label))));
 }
 function renderTop(){
  const c=$('crumbs');
  if(view==='detail')c.replaceChildren(h('a',{href:'#'+returnView},TITLES[returnView]||TITLES.overview),icon('chevR',14,'sep'),h('span',{class:'here'},detailFor||''));
+ else if(view==='callprep')c.replaceChildren(h('a',{href:'#'+returnView},TITLES[returnView]||TITLES.overview),icon('chevR',14,'sep'),h('a',{href:'#borrower-'+encodeURIComponent(detailFor||'')},detailFor||''),icon('chevR',14,'sep'),h('span',{class:'here'},'Call prep'));
  else c.replaceChildren(h('span',{class:'here'},TITLES[view]));
  const sel=$('period');sel.replaceChildren(...periods.map(p=>h('option',{value:p,selected:p===period},`${plabel(p)}${isProj(p)?' (synthetic scenario)':''}`)));sel.disabled=!periods.length;
  $('qsel').hidden=view==='design'||view==='method';$('openTerms').hidden=view==='design'||!data;
@@ -1081,7 +1217,8 @@ function renderSources(){
 function renderPage(){
  const page=$('page');
  if(view==='detail')return renderDetail(page);
- ({overview:renderOverview,borrowers:renderRegister,analysis:renderAnalysis,design:renderDesign,method:renderMethod})[view](page);
+ if(view==='callprep')return renderCallPrep(page);
+ ({overview:renderOverview,borrowers:renderRegister,reporting:renderReporting,analysis:renderAnalysis,design:renderDesign,method:renderMethod})[view](page);
 }
 function pageHead(title,lede,right,id){return h('div',{class:'ph'},h('div',null,h('h1',{id:id||'pageTitle',tabindex:'-1'},title),lede?h('p',{class:'lede'},lede):null),right||null);}
 function asofBlock(){
@@ -1239,6 +1376,7 @@ function renderOverview(page){
    kpi('Applicable test failures',T.fail,`of ${T.appl} tests`,ks.length?ks.map((k,i)=>[i?' · ':'',`${COV[k].short} `,h('b',null,String(T.by[k].f))]):'No test applied',[delta(T.fail,Tp?Tp.fail:null,'tests'),T.dorm||T.unev?h('div',{class:'delta'},[T.dorm?`${T.dorm} springing ${T.dorm===1?'test':'tests'} not triggered`:null,T.unev?`${T.unev} not calculable`:null].filter(Boolean).join(', ')+', not counted'):null],T.fail>0,all.map(x=>({p:x.p,v:x.T.fail})),Math.max(1,...all.map(x=>x.T.appl))),
    kpi('Deteriorating headroom',pp?A.drop:'—',pp?`of ${S.monitored} ${bw(S.monitored)}`:null,pp?`Headroom on an applicable test fell ${r1(rules.drop)} points or more since ${plabel(pp)}`:'Needs a previous quarter to compare',pp?[delta(A.drop,prevPeriod(pp)?Ap.drop:null,bw(2)),h('div',{class:'delta'},'Internal monitoring rule, not a covenant term')]:null,false,null),
    A.data?kpi('Data issues',A.data,`of ${S.monitored} ${bw(S.monitored)}`,[A.err?`${A.err} unreadable`:null,A.nodata?`${A.nodata} without a report`:null,A.unev?`${A.unev} with a test that cannot be calculated`:null,A.trig?`${A.trig} missing revolver data for a springing test`:null,A.link?`${A.link} with a result not linked to a policy definition`:null].filter(Boolean).join('; '),h('div',{class:'delta'},'Never treated as passing'),true,null):null),
+  repOverview(),
   watchlist(),
   borrowerTable(),
   covStrip(S),
@@ -1607,7 +1745,7 @@ function termsPanel(b,r){
   h('div',{class:'panel-b'},h('p',{class:'muted',style:'margin:0 0 6px;font-size:12.5px'},util),
    ks.map(k=>{const id='tb-'+k,cur=own[k]??data.settings.modes[k];
     return h('div',{class:'trow'},h('label',{for:id},h('b',null,COV[k].name),h('span',null,own[k]?'Set for this borrower':'Portfolio default')),
-     h('span',{class:'selwrap'},h('select',{id,onchange:e=>setOverride(b,k,e.target.value)},Object.entries(MODE).map(([v,l])=>h('option',{value:v,selected:v===cur},l))),icon('chevD',14)));})));
+     h('span',{class:'selwrap'},h('select',{id,onchange:e=>setOverride(b,k,e.target.value)},Object.entries(MODE).map(([v,l])=>h('option',{value:v,selected:v===cur},l))),icon('chevD',14)));}),rtermsBlock(b)));
 }
 function sourceRow(r){
  const i=r.inputs||{};
@@ -1723,7 +1861,7 @@ function renderDetail(page){
  if(!period)return noPeriodView(page,b);
  const r=rowFor(b,period),a=assess(r),s=stOf(a),pp=prevPeriod(period),pr=pp?rowFor(b,pp):null;
  const head=h('div',{class:'ph'},h('div',null,h('div',{class:'title-row'},h('h1',{id:'dTitle',tabindex:'-1'},b),stLabel(a),newTag(b,period),isProj(period)?h('span',{class:'tag tag-proj'},'Synthetic scenario'):null),
-  h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))));
+  h('div',{class:'meta'},h('span',null,'Reporting quarter ',h('b',null,plabel(period))),h('span',null,'Quarter ended ',h('b',null,dlong(pend(period)))),r?.record_id?h('span',null,'Source row ',h('b',null,r.record_id)):null,h('span',null,'Borrower name ',h('b',null,'not provided in the data')))),h('div',{class:'ph-act'},h('a',{class:'btn',href:'#callprep-'+encodeURIComponent(b),title:`One-page call preparation for ${b}, ${plabel(period)}`},icon('doc',15),'Call prep')));
  const tone=s.tone==='na'?'':s.tone;
  const legal=h('div',{class:'legal'},icon('scale',16),h('div',null,h('b',null,a.fails.length?'Potential financial covenant breach, not a legal default determination. ':'Covenant test result, not a legal determination. '),'Whether an event of default has occurred depends on the full credit agreement, notice and cure periods, any waivers and the lender’s decisions. This tool evaluates none of those.'));
  const main=h('div',null,
@@ -1736,7 +1874,7 @@ function renderDetail(page){
  const railEl=h('aside',{class:'ws-rail','aria-label':'Review action, terms and evidence'},
   h('section',{class:'action','aria-labelledby':'actH'},h('div',{class:'k',id:'actH'},'Suggested review step'),h('p',{class:'v'},s.action),rs.length?h('ul',null,rs.map(t=>h('li',null,t))):null),
   reviewPanel(b),evidencePanel(r&&r.status!=='invalid'?r:null),termsPanel(b,r),r?sourceRow(r):null);
- page.replaceChildren(head,notices(),h('div',{class:'ws'},main,railEl));
+ page.replaceChildren(head,notices(),repDetail(b),h('div',{class:'ws'},main,railEl));
  requestAnimationFrame(()=>{for(const pre of page.querySelectorAll('.doctext')){const m=pre.querySelector('mark.fail')||pre.querySelector('mark');if(m)pre.scrollTop=Math.max(0,m.offsetTop-pre.offsetTop-28);}});
 }
 
@@ -2025,7 +2163,7 @@ function openTerms(draft){
  $('trigEv').replaceChildren(...(d?[h('blockquote',{class:'bq'},d.quote),h('div',{class:'muted',style:'font-size:12.5px'},`${d.source_document}, characters ${d.start}–${d.end}`)]:[h('p',{class:'muted',style:'font-size:12.5px;margin:0'},'No springing provision was found in the policy text, so the trigger is a setting chosen here.')]));
  const ov=Object.entries(terms.borrowers||{});$('ovCard').hidden=!ov.length;
  $('ovList').replaceChildren(...ov.map(([b,o])=>h('li',null,h('b',null,b),': ',Object.entries(o.modes).map(([k,v])=>`${COV[k].short} ${MODE[v].toLowerCase()}`).join(', '),' ',h('button',{class:'linkbtn',type:'button',onclick:async()=>{const T=structuredClone(terms);delete T.borrowers[b];if(await applyTerms(T,`${b} now uses the portfolio terms.`))openTerms();}},'Clear'))));
- $('tmsg').textContent='';$('tmsg').className='msg';if(!$('terms').open)$('terms').showModal();
+ $('tmsg').textContent='';$('tmsg').className='msg';fillRterms();if(!$('terms').open)$('terms').showModal();
 }
 $('openTerms').onclick=()=>openTerms();$('closeTerms').onclick=$('cancelTerms').onclick=()=>$('terms').close();
 $('defaultTerms').onclick=()=>{openTerms(DEFAULT_TERMS);const m=$('tmsg');m.className='msg';m.textContent='Default terms restored in this panel. Select Apply terms to use them.';};
@@ -2037,6 +2175,242 @@ $('applyTerms').onclick=async()=>{
  if(await applyTerms({trigger_pct:t,modes,borrowers:terms.borrowers||{}},'Covenant terms applied.'))$('terms').close();else{m.className='msg err';m.textContent='Not applied. The previous terms are still in force.';}
 };
 $('terms').addEventListener('click',e=>{if(e.target===$('terms'))$('terms').close();});
+
+/* ---------- Reporting compliance (lower-middle-market): display only; every date, status and day count comes from /api/reporting ----------
+   A separate signal from covenant results: it never changes a covenant status, the KPIs or the attention list.
+   Reporting deadlines are their own settings (rterms), sent only to /api/reporting. */
+const DEFAULT_RTERMS={review_date:'2026-12-01',due_days:{financials:45,compliance_cert:45,annual_statements:120},min_statement_quality:'reviewed',borrowers:{}};
+const RDOC={financials:'Quarterly financials',compliance_cert:'Compliance certificate',annual_statements:'Annual statements'};
+const RDOC_L={financials:'quarterly financials',compliance_cert:'compliance certificate',annual_statements:'annual statements'};
+const QUAL=['audited','reviewed','compiled','internal'];
+const RST={missing:{tone:'bad',icon:'x',label:'Missing',rank:5},late:{tone:'warn',icon:'alert',label:'Late',rank:4},invalid:{tone:'warn',icon:'help',label:'Date unreadable',rank:3},not_yet_due:{tone:'na',icon:'minus',label:'Not yet due',rank:2},on_time:{tone:'ok',icon:'check',label:'On time',rank:1}};
+let rterms=structuredClone(DEFAULT_RTERMS),rep=null,repFor=null,repLoading=null,repWaiters=[];
+const rtermsCustom=T=>JSON.stringify(T||rterms)!==JSON.stringify(DEFAULT_RTERMS);
+const repReady=()=>!!(rep&&repFor&&repFor.csv===lastCsv&&repFor.rt===JSON.stringify(rterms));
+async function requestRep(csv,T){
+ const custom=rtermsCustom(T),body={};if(csv)body.csv=csv;if(custom)body.reporting_settings=T;
+ const res=await fetch('/api/reporting',csv||custom?post(body):undefined);const j=await res.json();if(!res.ok)throw Error(j.error||res.statusText);return j;
+}
+function flushRep(){const w=repWaiters;repWaiters=[];for(const f of w){try{f();}catch(e){console.error('Reporting render error',e);}}}
+function startRep(){
+ const csv=lastCsv,rt=JSON.stringify(rterms);if(repLoading&&repLoading.csv===csv&&repLoading.rt===rt)return;
+ const me={csv,rt};repLoading=me;
+ requestRep(csv,JSON.parse(rt)).catch(e=>({error:e.message})).then(j=>{if(repLoading!==me)return;repLoading=null;rep=j;repFor=me;flushRep();});
+}
+// fn(rep) now if reporting results for the current data and deadlines are loaded; otherwise a placeholder filled when they arrive.
+function withRep(fn,ph){
+ if(repReady())return fn(rep)||h('div',{hidden:true});
+ const slot=ph||h('div',{hidden:true});
+ repWaiters.push(()=>{if(slot.isConnected&&repReady())slot.replaceWith(fn(rep)||'');});
+ startRep();return slot;
+}
+async function applyRterms(T,msg){
+ try{const j=await requestRep(lastCsv,T);rterms=T;rep=j;repFor={csv:lastCsv,rt:JSON.stringify(T)};repLoading=null;renderPage();flushRep();if(msg)toast(msg);return {ok:true};}
+ catch(e){toast('Not applied: '+e.message+' The previous reporting deadlines are still in force.',true);return {ok:false,error:e.message};}
+}
+const dday=iso=>{if(!iso)return '';const [y,m,d]=iso.split('-').map(Number);return new Date(Date.UTC(y,m-1,d)).toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'long',year:'numeric'});};
+const reviewNote=R=>R.document_review_date===DEFAULT_RTERMS.review_date?'document review date, synthetic':'document review date, set in Reporting deadlines';
+const nd=(n,w)=>`${n} ${w}${n===1?'':'s'}`;
+function docPhrase(d){return d.status==='on_time'?'on time':d.status==='late'?`${nd(d.days_late,'day')} late`:d.status==='missing'?`missing, ${nd(d.days_overdue,'day')} overdue`:d.status==='not_yet_due'?'not yet due':(d.reason||'the received date could not be read');}
+const rstEl=s=>{const x=RST[s]||{tone:'na',icon:'minus',label:'Not tracked'};return stEl(x.tone,x.icon,x.label);};
+const qualText=q=>!q?null:q.value&&QUAL.includes(q.value)?`${cap(q.value)}${q.below_minimum?`, below the ${q.minimum} minimum`:''}`:q.reason;
+function docBox(d,...extra){
+ const x=RST[d.status]||RST.invalid;
+ return h('div',{class:'rd rd-'+d.status},icon(x.icon,15),h('div',null,h('b',null,d.received_date?dlong(d.received_date):'Not received'),h('span',null,docPhrase(d)),h('small',null,`Due ${dlong(d.due_date)}`),...extra));
+}
+function annualBox(rp){
+ const a=rp.documents?.annual_statements;
+ if(a)return docBox(a,rp.quality?h('small',{class:rp.quality.below_minimum?'qbad':null},`FY${a.fiscal_year}: ${qualText(rp.quality)}`):null);
+ const ref=rp.annual_reference;
+ if(!ref)return h('span',{class:'muted'},'Checked on Q1 rows only');
+ const d=ref.document,q=ref.quality;
+ return h('div',{class:'rd rd-ref'},icon('info',15),h('div',null,h('span',null,`FY${d?.fiscal_year??q?.fiscal_year}, from the ${plabel(ref.from_period)} row`),d?h('small',null,`${d.received_date?dlong(d.received_date)+', ':''}${docPhrase(d)}`):null,q?h('small',{class:q.below_minimum?'qbad':null},qualText(q)):null));
+}
+function repNotices(){
+ if(!(period&&isProj(period)))return null;
+ return h('div',{class:'notes'},h('div',{class:'note warn'},icon('alert',17),h('div',null,h('b',null,`${plabel(period)} is a synthetic scenario, not reported results.`),`The quarter ends ${dlong(pend(period))}, after the ${dlong(asOf)} reporting date. Its figures are fictional illustrations included in the sample data. No forecasting method was used, so they are not a projection.`)));
+}
+function repOverview(){
+ return withRep(R=>{
+  if(R.error)return h('div',{class:'repline muted',role:'status'},icon('alert',16),h('div',null,`Reporting compliance could not be checked: ${R.error}`));
+  if(!R.supplied)return h('div',{class:'repline muted'},icon('cal',16),h('div',null,h('b',null,'Reporting compliance not checked. '),'This data has no received-date or statement-quality columns.'));
+  const S=R.summary.find(s=>s.period===period);if(!S)return null;
+  const n=S.late_or_missing.count,m=S.borrowers;
+  return h('div',{class:'repline'+(n?' bad':'')},icon('cal',16),h('div',null,h('b',null,`${n} of ${m} borrowers have late or missing reports this quarter.`),' ',h('span',{class:'muted'},`Reporting compliance for ${plabel(period)}, a separate signal from covenant results. Documents checked as of ${dday(R.document_review_date)} (${reviewNote(R)}).`)),h('a',{class:'btn btn-sm',href:'#reporting'},'Open Reporting',icon('chevR',14)));
+ },h('div',{class:'repline muted',role:'status'},icon('cal',16),h('div',null,'Checking reporting compliance…')));
+}
+function repDetail(b){
+ return withRep(R=>{
+  if(R.error)return null;
+  if(!R.supplied)return h('div',{class:'repline det muted'},icon('cal',16),h('div',null,h('b',null,'Reporting: '),'not tracked; this data has no received-date columns.'));
+  const x=R.results.find(r=>r.borrower_id===b&&r.period===period),rp=x?.reporting;
+  if(!rp)return h('div',{class:'repline det muted'},icon('cal',16),h('div',null,h('b',null,'Reporting: '),`no ${plabel(period)} row for this borrower.`));
+  const lm=rp.late_or_missing||[],q=rp.quality||rp.annual_reference?.quality;
+  const items=lm.map(i=>`${RDOC_L[i.document]} ${i.status==='late'?`${nd(i.days_late,'day')} late`:`missing, ${nd(i.days_overdue,'day')} overdue`} (due ${dlong(i.due_date)})`);
+  const text=items.length?cap(listJoin(items))+'.':rp.status==='on_time'?'every document received on time.':rp.status==='not_yet_due'?'documents for this quarter are not yet due.':rp.status==='invalid'?(rp.reason||'a received date could not be read.'):'no documents tracked.';
+  return h('div',{class:'repline det'+(lm.length?' bad':'')},icon('cal',16),h('div',null,h('b',null,'Reporting: '),text,
+   rp.consecutive_late_or_missing>=2?` Late or missing ${rp.consecutive_late_or_missing} quarters running.`:'',
+   q?.below_minimum?` FY${q.fiscal_year} annual statements: ${q.value}, below the ${q.minimum} minimum.`:'',' ',
+   h('span',{class:'muted'},`Checked as of ${dday(R.document_review_date)} (${reviewNote(R)}); separate from covenant results.`)),h('a',{class:'btn btn-sm',href:'#reporting'},'Reporting view',icon('chevR',14)));
+ });
+}
+function renderReporting(page){
+ const T=TITLES.reporting,L='Which borrowers sent their quarterly financials, compliance certificates and annual statements on time. A separate signal from covenant results.';
+ if(guard(page,T,L))return;
+ page.replaceChildren(pageHead(T,L,asofBlock()),repNotices()||'',withRep(R=>reportingBody(R),h('div',{class:'state',role:'status','aria-busy':'true'},icon('cal',22),h('div',null,h('h2',null,'Checking reporting compliance…'),h('p',null,'Loading /api/reporting.')))));
+}
+function reportingBody(R){
+ if(R.error)return h('div',{class:'state',role:'alert'},icon('alert',22),h('div',null,h('h2',null,'Reporting compliance could not be loaded'),h('p',null,R.error),h('button',{class:'btn btn-primary',type:'button',onclick:()=>{repFor=null;renderPage();}},'Try again')));
+ if(!R.supplied)return h('div',{class:'state'},icon('info',22),h('div',null,h('h2',null,'No reporting data in this file'),h('p',null,R.message),h('p',null,'Add any of the optional columns financials_received_date, compliance_cert_received_date, annual_statements_received_date or statement_quality to track reporting. Covenant results are unaffected.')));
+ const S=R.summary.find(s=>s.period===period),docs=R.tracked_documents,qd=docs.filter(k=>k!=='annual_statements');
+ const rows=borrowers.map(b=>({b,x:R.results.find(r=>r.borrower_id===b&&r.period===period)})).map(o=>({...o,rp:o.x?.reporting||null}));
+ const rk=o=>o.rp?(RST[o.rp.status]?.rank??0):-1;
+ rows.sort((a,b)=>(rk(b)-rk(a))||((b.rp?.days_past_due||0)-(a.rp?.days_past_due||0))||a.b.localeCompare(b.b));
+ const n=S?S.late_or_missing.count:0,m=S?S.borrowers:borrowers.length;
+ const head=h('p',{class:'repasof'},icon('cal',16),h('span',null,'Documents checked as of ',h('b',null,dday(R.document_review_date)),` (${reviewNote(R)}).`),h('button',{class:'linkbtn',type:'button',onclick:()=>openRterms()},'Reporting deadlines'));
+ const counts=S?h('div',{class:'repsum'},h('b',null,`${n} of ${m} borrowers have late or missing reports in ${plabel(period)}.`),
+  h('span',{class:'chips row'},Object.keys(RST).filter(k=>S.counts[k]).map(k=>h('span',{class:'chip '+({missing:'bad',late:'warn',invalid:'warn',not_yet_due:'na',on_time:'ok'})[k]},icon(RST[k].icon,13),`${RST[k].label} ${S.counts[k]}`)))):null;
+ const cell=(label,...kids)=>h('td',{'data-label':label},...kids);
+ const table=h('div',{class:'tbl'},h('table',{class:'data wide',id:'rtbl'},h('caption',{class:'vh'},`Reporting status for ${plabel(period)}, most overdue first`),
+  h('thead',null,h('tr',null,h('th',{scope:'col'},h('span',null,'Borrower')),qd.map(k=>h('th',{scope:'col'},h('span',null,RDOC[k]))),docs.includes('annual_statements')?h('th',{scope:'col'},h('span',null,'Annual statements (prior fiscal year)')):null,h('th',{scope:'col'},h('span',null,'Reporting status')),h('th',{scope:'col'},h('span',null,'Covenant results (separate)')))),
+  h('tbody',null,rows.map(o=>{const rp=o.rp;
+   if(!rp)return h('tr',null,cell('Borrower',h('a',{class:'rowlink',href:'#borrower-'+encodeURIComponent(o.b)},o.b)),h('td',{colspan:String(qd.length+(docs.includes('annual_statements')?1:0)+1)},h('span',{class:'muted'},`No ${plabel(period)} row for this borrower.`)),cell('Covenant results (separate)',stLabel(assess(rowFor(o.b,period)))));
+   const docsMissing=!rp.documents||!Object.keys(rp.documents).length&&rp.status==='invalid';
+   return h('tr',null,cell('Borrower',h('a',{class:'rowlink',href:'#borrower-'+encodeURIComponent(o.b)},o.b)),
+    docsMissing?h('td',{colspan:String(qd.length+(docs.includes('annual_statements')?1:0))},h('span',{class:'st st-warn'},icon('help',15),rp.reason||'Reporting could not be checked.')):[
+     qd.map(k=>cell(RDOC[k],rp.documents[k]?docBox(rp.documents[k]):h('span',{class:'muted'},'Not tracked'))),
+     docs.includes('annual_statements')?cell('Annual statements (prior fiscal year)',annualBox(rp)):null],
+    cell('Reporting status',h('div',{class:'chips'},rp.status?rstEl(rp.status):h('span',{class:'muted'},'Not tracked'),rp.consecutive_late_or_missing>=2?h('span',{class:'chip warn'},`${rp.consecutive_late_or_missing} quarters running`):null,rp.quality?.below_minimum?h('span',{class:'chip warn'},'Quality below minimum'):null)),
+    cell('Covenant results (separate)',stLabel(assess(rowFor(o.b,period)))));}))));
+ const qf=S?.quality_flags||[];
+ const extra=[];
+ if(qf.length)extra.push(h('div',{class:'note warn'},icon('alert',17),h('div',null,h('b',null,'Annual statement quality below the minimum'),h('ul',null,qf.map(f=>h('li',null,`${f.borrower_id}: FY${f.fiscal_year} statements are ${f.value}; the minimum is ${f.minimum}.`))))));
+ if(R.data_quality?.length)extra.push(h('div',{class:'note warn'},icon('alert',17),h('div',null,h('b',null,'Reporting data notes'),h('ul',null,R.data_quality.map(t=>h('li',null,t))))));
+ return h('div',null,head,counts,table,
+  h('div',{class:'count',style:'margin-top:10px'},`Showing ${rows.length} borrowers, most overdue first. Select a borrower to open its covenant review.`),
+  extra.length?h('div',{class:'notes',style:'margin-top:20px'},extra):null,
+  h('details',{class:'xp',style:'margin-top:20px'},h('summary',null,icon('chevR',16,'chev'),'Reporting assumptions',h('span',{class:'hint'},String(R.assumptions?.length||0))),h('div',{class:'xb'},h('ul',{style:'margin:0;padding-left:18px;display:grid;gap:6px;font-size:13px;color:var(--ink-2)'},(R.assumptions||[]).map(a=>h('li',null,a))))),
+  h('p',{class:'foot'},`Due dates, statuses and day counts come from /api/reporting. Annual statements are read on Q1 rows and refer to the fiscal year that ended just before (calendar fiscal years assumed). ${R.data_source||''}. Late or missing reporting may itself be a default under the agreement; that is for the credit reviewer to decide, not this tool.`));
+}
+/* Reporting deadlines: a separate section of the Covenant terms dialog and of each borrower's terms panel. */
+function fillRterms(T){
+ T=T||rterms;$('rdFin').value=String(T.due_days.financials);$('rdCert').value=String(T.due_days.compliance_cert);$('rdAnn').value=String(T.due_days.annual_statements);$('rdQ').value=T.min_statement_quality;$('rdDate').value=T.review_date;
+ const ov=Object.entries(rterms.borrowers||{});$('rdOv').hidden=!ov.length;
+ $('rdOvList').replaceChildren(...ov.map(([b,o])=>h('li',null,h('b',null,b),': ',[...Object.entries(o.due_days||{}).map(([k,v])=>`${RDOC_L[k]} ${v} days`),o.min_statement_quality?`minimum quality ${o.min_statement_quality}`:null].filter(Boolean).join(', '),' ',h('button',{class:'linkbtn',type:'button',onclick:async()=>{const T2=structuredClone(rterms);delete T2.borrowers[b];if((await applyRterms(T2,`${b} now uses the portfolio reporting deadlines.`)).ok)fillRterms();}},'Clear'))));
+ $('rdmsg').textContent='';$('rdmsg').className='msg';
+}
+function openRterms(){if(!data||!terms)return;openTerms();requestAnimationFrame(()=>{const s=$('rdlH');if(s){s.scrollIntoView({block:'start'});$('rdFin').focus({preventScroll:true});}});}
+$('defaultR').onclick=()=>{fillRterms({...DEFAULT_RTERMS,borrowers:rterms.borrowers});const m=$('rdmsg');m.className='msg';m.textContent='Default reporting deadlines restored in this panel. Select Apply reporting deadlines to use them.';};
+$('applyR').onclick=async()=>{
+ const m=$('rdmsg'),fail=(t,id)=>{m.className='msg err';m.textContent=t+' Nothing was changed.';if(id)$(id).focus();};
+ const due={};for(const [k,id] of [['financials','rdFin'],['compliance_cert','rdCert'],['annual_statements','rdAnn']]){const v=$(id).value.trim();if(!/^\d{1,3}$/.test(v)||Number(v)>365)return fail(`${RDOC[k]}: enter a whole number of days from 0 to 365.`,id);due[k]=Number(v);}
+ const d=$('rdDate').value.trim();if(!/^\d{4}-\d{2}-\d{2}$/.test(d))return fail('Enter the document review date as YYYY-MM-DD.','rdDate');
+ m.className='msg';m.textContent='Applying…';
+ const r=await applyRterms({review_date:d,due_days:due,min_statement_quality:$('rdQ').value,borrowers:structuredClone(rterms.borrowers||{})},'Reporting deadlines applied. Covenant results are unchanged.');
+ if(r.ok)$('terms').close();else fail('Not applied: '+r.error);
+};
+function rtermsBlock(b){
+ const own=rterms.borrowers?.[b]||{},od=own.due_days||{},has=Object.keys(own).length>0;
+ const num=k=>{const id='rb-'+k;return h('div',{class:'trow'},h('label',{for:id},h('b',null,RDOC[k]),h('span',null,od[k]!=null?'Set for this borrower':'Portfolio default')),h('span',{class:'trig'},h('input',{id,class:'in',type:'text',inputmode:'numeric',autocomplete:'off',value:String(od[k]??rterms.due_days[k]),onchange:e=>setRover(b,'due_days',k,e.target.value)}),h('span',null,'days')));};
+ return h('div',{class:'rtb'},h('div',{class:'rtb-h'},h('b',null,'Reporting deadlines'),has?h('button',{class:'linkbtn',type:'button',style:'margin-left:auto;font-size:13px',onclick:()=>setRover(b,null)},'Use portfolio deadlines'):h('span',{class:'muted',style:'margin-left:auto;font-size:12.5px'},'Portfolio deadlines')),
+  h('p',{class:'muted',style:'margin:4px 0 2px;font-size:12.5px'},'Days after quarter end; annual statements after fiscal year end. Changing them re-checks reporting only, never a covenant result.'),
+  ['financials','compliance_cert','annual_statements'].map(num),
+  h('div',{class:'trow'},h('label',{for:'rb-q'},h('b',null,'Minimum annual statement quality'),h('span',null,own.min_statement_quality?'Set for this borrower':'Portfolio default')),
+   h('span',{class:'selwrap'},h('select',{id:'rb-q',onchange:e=>setRover(b,'quality',null,e.target.value)},QUAL.map(v=>h('option',{value:v,selected:v===(own.min_statement_quality??rterms.min_statement_quality)},cap(v)))),icon('chevD',14))));
+}
+function setRover(b,kind,k,v){
+ const T=structuredClone(rterms);T.borrowers=T.borrowers||{};
+ if(kind==null)delete T.borrowers[b];
+ else{const o=structuredClone(T.borrowers[b]||{});
+  if(kind==='due_days'){const s=String(v).trim();if(!/^\d{1,3}$/.test(s)||Number(s)>365){toast(`${RDOC[k]}: enter a whole number of days from 0 to 365. Nothing was changed.`,true);renderPage();return;}
+   const n=Number(s);o.due_days={...(o.due_days||{})};if(n===T.due_days[k])delete o.due_days[k];else o.due_days[k]=n;if(!Object.keys(o.due_days).length)delete o.due_days;}
+  else{if(v===T.min_statement_quality)delete o.min_statement_quality;else o.min_statement_quality=v;}
+  if(Object.keys(o).length)T.borrowers[b]=o;else delete T.borrowers[b];}
+ applyRterms(T,kind==null?`${b} now uses the portfolio reporting deadlines.`:`${b}: reporting deadlines updated. Covenant results are unchanged.`).then(r=>{if(!r.ok)renderPage();});
+}
+
+/* ---------- Call prep one-pager (relationship manager): display only; every figure comes from /api/callprep ----------
+   /api/callprep assembles the page from the monitor, reporting and cure results; questions come from a fixed mapping. */
+const cpCache=new Map();
+function cpRequest(b,p){
+ const body={borrower:b,period:p};let custom=false;
+ if(lastCsv){body.csv=lastCsv;custom=true;}if(lastPolicy){body.policy=lastPolicy;body.policy_name=polName;custom=true;}
+ if(terms&&!sameTerms(terms,DEFAULT_TERMS)){body.settings=terms;custom=true;}if(rtermsCustom()){body.reporting_settings=rterms;custom=true;}
+ return {body,custom,key:JSON.stringify([b,p,lastCsv?`${csvName}:${lastCsv.length}`:'',lastPolicy?`${polName}:${lastPolicy.length}`:'',termsKey(),JSON.stringify(rterms)])};
+}
+async function fetchCallPrep(req){
+ try{const res=await fetch(req.custom?'/api/callprep':`/api/callprep?borrower=${encodeURIComponent(req.body.borrower)}&period=${encodeURIComponent(req.body.period)}`,req.custom?post(req.body):undefined);
+  const j=await res.json();return res.ok?j:{error:j.error||res.statusText};}
+ catch(e){return {error:`The server could not be reached (${e.message}).`};}
+}
+function renderCallPrep(page){
+ const b=detailFor;
+ if(guard(page,`${b||'Borrower'} call prep`))return;
+ if(!borrowers.includes(b))return page.replaceChildren(pageHead('Borrower not found'),h('div',{class:'state'},icon('alert',22),h('div',null,h('h2',null,`No borrower “${b}” exists in the current data`),h('a',{class:'btn',href:'#'+returnView},'Back to '+(TITLES[returnView]||TITLES.overview)))));
+ const req=cpRequest(b,period),holder=h('div',{class:'cp-hold','aria-live':'polite'});
+ const bar=h('div',{class:'cp-bar'},h('a',{class:'btn',href:'#borrower-'+encodeURIComponent(b)},icon('chevR',14,'flip'),`Back to ${b}`),
+  h('p',null,'One page for a client call, built from the covenant, reporting and cure results. Print it or save it as a PDF on one US-letter page.'),
+  h('button',{class:'btn btn-primary',type:'button',onclick:()=>window.print()},icon('doc',15),'Print / save as PDF'));
+ page.replaceChildren(bar,holder);
+ const fill=j=>{if(!holder.isConnected)return;holder.replaceChildren(j.error?h('div',{class:'state',role:'alert'},icon('alert',22),h('div',null,h('h2',null,'The call prep page could not be built'),h('p',null,j.error))):cpSheet(j,b));};
+ if(cpCache.has(req.key))return fill(cpCache.get(req.key));
+ holder.replaceChildren(h('div',{class:'state',role:'status'},icon('doc',22),h('div',null,h('h2',null,'Preparing the call sheet…'),h('p',null,'Loading /api/callprep.'))));
+ const p=period;fetchCallPrep(req).then(j=>{if(!j.error)cpCache.set(req.key,j);if(view==='callprep'&&detailFor===b&&period===p)fill(j);});
+}
+const CP_ST={breach:'x',ok:'check',watch:'alert',dormant:'alert',review:'help',untested:'minus',error:'alert'};
+const CP_RES={pass:['ok','check'],breach:['bad','x'],dormant:['na','minus'],unevaluable:['warn','help']};
+const cpSec=(title,...kids)=>h('section',{class:'cp-sec'},h('h2',null,title),...kids);
+const cpNeg=s=>s!=null&&Number(s)<0;
+function cpSheet(j,b){
+ const H=j.header,P=plabel(j.period),pp=j.scorecard.find(s=>s.prior_period)?.prior_period;
+ const head=h('header',{class:'cp-head'},
+  h('div',{class:'cp-tr'},h('h1',{id:'pageTitle',tabindex:'-1'},b,h('span',null,` · ${P} call prep`)),stEl(H.status.tone,CP_ST[H.status.key]||'minus',H.status.label),
+   H.newly_flagged?h('span',{class:'tag qnew'},'Newly flagged this quarter'):null,H.synthetic_scenario?h('span',{class:'tag tag-proj'},H.synthetic_scenario):null),
+  h('div',{class:'meta'},h('span',null,'Quarter ended ',h('b',null,dlong(H.period_end))),H.debt_usd!=null?h('span',null,'Debt outstanding ',h('b',null,usd(H.debt_usd))):null,
+   H.record_id?h('span',null,'Source row ',h('b',null,H.record_id)):null,H.error?h('span',{class:'st st-warn'},icon('alert',14),`Row could not be read: ${H.error}`):null),
+  H.status.note?h('p',{class:'cp-fine'},H.status.note):null);
+ const left=[],right=[];
+ if(j.scorecard.length)left.push(cpSec('Covenant scorecard',h('table',{class:'cp-tbl'},
+  h('thead',null,h('tr',null,['Covenant','Actual','Limit','Result','Dollar headroom',pp?`vs ${plabel(pp)}`:'vs prior quarter'].map((t,i)=>h('th',{scope:'col',class:i&&i!==3?'r':null},t)))),
+  h('tbody',null,j.scorecard.map(s=>{const [tone,ic]=CP_RES[s.status]||['na','minus'];const sp=s.springing;
+   return h('tr',null,h('th',{scope:'row',title:s.name},COV[s.key]?.short||s.name,sp?h('small',null,`Springing at ${Number(sp.trigger_pct)}%: revolver ${sp.utilization==null?'figures missing, tested anyway':pctS(sp.utilization)+' drawn'}${sp.triggered===false?', not triggered':sp.triggered?', triggered':''}`):null),
+    h('td',{class:'r'},fx(s.value,s.limit)),h('td',{class:'r'},`${s.direction==='max'?'max':'min'} ${lim(s.limit)}`),
+    h('td',null,stEl(tone,ic,s.status_word+(s.would_status?`; would ${s.would_status==='breach'?'fail':'pass'}`:''))),
+    h('td',{class:'r'+(cpNeg(s.headroom_usd)?' neg':'')},s.headroom_usd==null?'—':usd(s.headroom_usd)),
+    h('td',{class:'r'},s.prior_value==null?'—':[`${fx(s.prior_value,s.limit)} `,h('span',{class:'cp-chg cp-'+s.change},icon(s.change==='weaker'?'down':s.change==='stronger'?'up':'flat',12),s.change)]));}))),
+  h('p',{class:'cp-fine'},'Dollar headroom is room before the limit in the measure the covenant tests (debt for leverage, cash flow or current assets for the minimums); negative means past it. Stronger or weaker compares the ratio with the prior quarter.')));
+ if(j.trend){const T=j.trend;
+  left.push(cpSec('Trend',h('table',{class:'cp-tbl cp-trend'},h('thead',null,h('tr',null,h('th',{scope:'col'},'Covenant'),T.periods.map(p=>h('th',{scope:'col',class:'r'+(p.period===j.period?' cur':'')},p.label+(p.synthetic?'*':''))))),
+   h('tbody',null,Object.entries(T.covenants).map(([k,vals])=>h('tr',null,h('th',{scope:'row'},COV[k]?.short||k),vals.map(v=>h('td',{class:'r'+(v.period===j.period?' cur':'')+(v.status==='breach'?' neg':'')},v.status==='breach'?icon('x',11):null,v.value==null?'—':fx(v.value,j.scorecard.find(s=>s.key===k)?.limit),v.status==='dormant'?' (d)':'')))))),
+   h('p',{class:'cp-fine'},h('span',{class:'cp-key'},icon('x',11),' failed that quarter'),' · (d) springing test not triggered',T.periods.some(p=>p.synthetic)?' · * synthetic scenario':'','. First quarter in exception: ',h('b',null,T.first_exception_period?plabel(T.first_exception_period):'none in the data'),'.')));}
+ const W=j.what_it_would_take;
+ if(W){const c=W.cure,kids=[];
+  if(W.distance.length)kids.push(h('table',{class:'cp-tbl cp-dist'},h('caption',{class:'vh'},'Distance to compliance for each failing covenant'),h('tbody',null,W.distance.map(d=>h('tr',null,h('th',{scope:'row'},COV[d.key]?.short||d.name),
+   d.options.map(o=>h('td',null,h('small',null,o.label),h('span',null,usd(o.value)),o.gap!=null?h('span',{class:cpNeg(o.gap)?'neg':null},` (${cpNeg(o.gap)?'gap ':'room '}${usd(String(o.gap).replace(/^-/,''))})`):null)))))),h('p',{class:'cp-fine'},'Each row shows two ways back to the limit, holding the other side constant: the amount at the limit and, in brackets, the gap from today.'));
+  if(c){const src=c.source==='snapshot'?`Solved offline with Gurobi ${c.gurobi_version||''}${c.solved_at?' at '+stamp(c.solved_at):''}`:c.source==='live'?`Solved live with Gurobi ${c.gurobi_version||''}`:null;
+   if(c.state==='plan')kids.push(h('div',{class:'cp-cure'},h('b',null,'Cheapest verified cure: '),`${c.actions}. Total cost ${usd(c.total_cost_usd)}.`,' ',c.verified?stEl('ok','check','Verified by exact engine'):null,h('small',null,[src,'Synthetic cure terms (cure_terms.csv)'].filter(Boolean).join(' · '))));
+   else if(c.state==='no_cure')kids.push(h('div',{class:'cp-cure'},stEl('bad','x','No cure within the agreement'),c.blocked_by?.length?h('p',null,`Blocked by: ${listJoin(c.blocked_by.map(t=>t.toLowerCase()))}.`):null,
+    c.waiver?h('p',null,h('b',null,'Smallest waiver: '),c.waiver.request||'no threshold needs to change',c.waiver.request?' (verified by exact engine at the waived limits).':'.'):h('p',null,c.waiver_error||'No waiver could be sized.'),h('small',null,[src,'Synthetic cure terms (cure_terms.csv)'].filter(Boolean).join(' · '))));
+   else kids.push(h('p',{class:'cp-fine'},`Cure planner not available: ${c.reason}`));}
+  left.push(cpSec('What it would take',...kids));}
+ if(j.financials)left.push(cpSec('Financial snapshot',h('dl',{class:'cp-dl'},j.financials.map(f=>[h('dt',null,f.line_item),h('dd',null,usd(f.value))]))));
+ right.push(cpSec('Questions to ask the owner',j.questions.length?h('ol',{class:'cp-q'},j.questions.map(q=>h('li',null,q.text))):h('p',{class:'cp-fine'},'No question is triggered by the fixed rules for this quarter.'),
+  j.questions_omitted?h('p',{class:'cp-fine'},`${j.questions_omitted} lower-priority question${j.questions_omitted>1?'s':''} not shown (six at most).`):null));
+ const R=j.reporting;
+ if(R)right.push(cpSec('Reporting',h('ul',{class:'cp-rep'},R.documents.map(d=>h('li',null,rstEl(d.status),h('span',null,h('b',null,cap(d.label)+(d.fiscal_year?` (FY${d.fiscal_year})`:'')),`: ${d.received_date?'received '+dlong(d.received_date):'not received'}, ${docPhrase(d)}; due ${dlong(d.due_date)}.`)))),
+  R.quality?h('p',{class:R.quality.below_minimum?'cp-flag':null},R.quality.below_minimum?icon('alert',13):null,`FY${R.quality.fiscal_year} annual statements: ${R.quality.value?`${R.quality.value}${R.quality.below_minimum?`, below the ${R.quality.minimum} minimum`:`, meets the ${R.quality.minimum} minimum`}`:R.quality.reason}${R.quality.from_period!==j.period?` (from the ${plabel(R.quality.from_period)} row)`:''}.`):null,
+  h('p',null,R.consecutive_late_or_missing?`Late or missing ${R.consecutive_late_or_missing} quarter${R.consecutive_late_or_missing>1?'s':''} running.`:'No late or missing item this quarter.'),
+  h('p',{class:'cp-fine'},`Checked as of ${dday(R.document_review_date)} (document review date${R.document_review_date===DEFAULT_RTERMS.review_date?', synthetic':''}). A separate signal from covenant results.`)));
+ const rv=getReview(b,j.period);
+ if(rv&&(rv.note||rv.status!=='none'))right.push(cpSec('Analyst note (this browser only)',h('p',null,h('b',null,REV.find(x=>x[0]===rv.status)?.[1]||'Not reviewed'),rv.note?`: ${rv.note}`:''),h('p',{class:'cp-fine'},`Saved ${stampLocal(rv.at)} in this browser only; not shared and not an audit record.`)));
+ const F=j.footer;
+ const foot=h('footer',{class:'cp-foot'},
+  h('p',null,h('b',null,'Data: '),F.data_source||'—',' · ',h('b',null,'Policy: '),F.policy_source||'—'),
+  h('p',null,h('b',null,'Data as of '),F.data_date?dlong(F.data_date):'unknown',F.document_review_date?[' · ',h('b',null,'Document review date '),dday(F.document_review_date)]:null),
+  F.citations.length?h('ul',{class:'cp-cites'},F.citations.map(c=>h('li',null,h('b',null,c.name+': '),c.quote?[`“${c.quote}” `,h('span',null,`${c.source_document}, characters ${c.start}–${c.end}`)]:c.note))):null,
+  h('p',{class:'cp-legal'},icon('scale',13),F.note));
+ return h('article',{class:'cp'},head,h('div',{class:'cp-cols'},h('div',null,...left),h('div',null,...right)),foot);
+}
 
 /* ---------- uploads (all-or-nothing) ---------- */
 const post=b=>({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
@@ -2073,8 +2447,10 @@ $('sources').addEventListener('click',e=>{if(e.target===$('sources'))$('sources'
 /* ---------- routing ---------- */
 function route(first){
  let hsh=location.hash.slice(1);if(hsh==='how')hsh='method';
- if(hsh.startsWith('borrower-')){if(view!=='detail'){returnView=LISTS.includes(view)?view:'borrowers';chartKey=null;}let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}if(id!==detailFor)chartKey=null;detailFor=id;view='detail';}
+ if(hsh.startsWith('callprep-')){if(view!=='detail'&&view!=='callprep')returnView=LISTS.includes(view)?view:'borrowers';let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}detailFor=id;view='callprep';}
+ else if(hsh.startsWith('borrower-')){if(view!=='detail'&&view!=='callprep'){returnView=LISTS.includes(view)?view:'borrowers';chartKey=null;}let id;try{id=decodeURIComponent(hsh.slice(9));}catch(e){id='';}if(id!==detailFor)chartKey=null;detailFor=id;view='detail';}
  else{detailFor=null;view=VIEWS.includes(hsh)?hsh:'overview';}
+ document.body.classList.toggle('cp-print',view==='callprep');
  tipHide();renderAll();
  if(!first){window.scrollTo(0,0);const t=$(view==='detail'?'dTitle':'pageTitle');(t||$('main')).focus({preventScroll:true});}
 }
