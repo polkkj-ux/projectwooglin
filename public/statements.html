@@ -1,17 +1,412 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Statements · Covenant Monitor</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<style>body{margin:0;background:#f7f5f0;color:#14213d;font:15px/1.5 system-ui,sans-serif}main{max-width:720px;margin:48px auto;padding:0 16px}</style>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/inter-400.woff) format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/inter-500.woff) format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-600.woff) format('woff')}
+@font-face{font-family:'Newsreader Text';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/newsreader-text-400.woff) format('woff')}
+/* v8 design system: same tokens as public/app.html */
+:root{
+ --nav:#101A2B;--nav-hover:#16233A;--nav-active:#1C2C46;--nav-rule:#22324A;--nav-ink:#AEB9C8;--nav-ink-2:#8A97A8;--nav-mark:#C4AE87;
+ --bg:#FAFAF8;--panel:#FFFFFF;--soft:#F3F5F7;--head:#F7F8FA;--hover:#F5F7FA;
+ --ink:#142238;--ink-2:#2D3A4D;--ink-3:#5E6A7C;--slate:#667386;--faint:#98A2B0;
+ --rule:#E4E7EB;--rule-2:#D2D8DF;--grid:#ECEFF2;
+ --blue:#345675;--blue-2:#2A4762;--blue-wash:#EBF1F6;--cite:#E2EBF3;
+ --teal:#18736D;--teal-wash:#E8F2F1;
+ --red:#B64549;--red-wash:#F8ECEC;
+ --amber:#A97729;--amber-ink:#8C6420;--amber-wash:#F7F0E4;
+ --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+ --serif:'Newsreader Text',Charter,'Iowan Old Style',Georgia,serif;
+ --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+ --sh-1:0 1px 2px rgba(16,26,43,.04);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{color-scheme:light;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink-2);font:14.5px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
+[tabindex="-1"]:focus{outline:none}
+.num,.data td{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-3)}
+.vh{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;border:0!important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;z-index:60;background:var(--ink);color:#fff;padding:8px 12px;border-radius:6px}.skip:focus{left:8px}
+/* shell */
+.app{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh;background:linear-gradient(90deg,var(--nav) 0,var(--nav) 236px,transparent 236px)}
+.side{position:sticky;top:0;height:100vh;background:var(--nav);color:var(--nav-ink);display:flex;flex-direction:column}
+.brand{display:flex;gap:11px;align-items:center;padding:22px 20px 20px;color:#fff;text-decoration:none}
+.brand svg{flex:none}
+.brand b{display:block;font-weight:600;font-size:15px;line-height:1.2}
+.brand small{display:block;font-size:12px;color:var(--nav-ink-2);margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:2px;padding:6px 12px}
+.nav a{position:relative;display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:6px;color:var(--nav-ink);text-decoration:none;font-size:14px;font-weight:500;transition:background-color .12s,color .12s}
+.nav a svg{color:var(--nav-ink-2)}
+.nav a:hover{background:var(--nav-hover);color:#fff}.nav a:hover svg{color:#fff}
+.nav a[aria-current=page]{background:var(--nav-active);color:#fff}
+.nav a[aria-current=page] svg{color:var(--nav-mark)}
+.nav a[aria-current=page]::before{content:"";position:absolute;left:-12px;top:9px;bottom:9px;width:3px;border-radius:0 2px 2px 0;background:var(--nav-mark)}
+.nav a:focus-visible{outline-color:var(--nav-mark)}
+.side-foot{margin-top:auto;padding:16px 20px 22px;border-top:1px solid var(--nav-rule);font-size:12px;line-height:1.55;color:var(--nav-ink-2)}
+.side-foot b{display:block;color:var(--nav-ink);font-weight:500;margin-bottom:2px}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:16px;min-height:60px;padding:10px 40px;background:#fff;border-bottom:1px solid var(--rule)}
+.crumbs{display:flex;align-items:center;gap:8px;min-width:0;font-size:14px;color:var(--ink-3)}
+.crumbs a{color:var(--ink-3);text-decoration:none}.crumbs a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.crumbs .here{color:var(--ink);font-weight:600;white-space:nowrap}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:var(--soft);border:1px solid var(--rule);font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.badge svg{color:var(--slate)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 13px;border-radius:6px;border:1px solid var(--rule-2);background:#fff;color:var(--ink);font-size:13.5px;font-weight:500;white-space:nowrap;text-decoration:none;transition:background-color .12s,border-color .12s}
+.btn:hover{background:var(--hover);border-color:var(--slate)}
+.btn svg{color:var(--slate)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn-primary svg{color:#fff}
+.btn-primary:hover{background:var(--blue-2);border-color:var(--blue-2)}
+.page{width:100%;max-width:1380px;padding:32px 40px 80px}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.ph h1{margin:0;font:400 32px/1.15 var(--serif);color:var(--ink);letter-spacing:-.012em}
+.ph .lede{margin:8px 0 0;font-size:15px;color:var(--ink-3);max-width:70ch}
+.tag{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap;background:var(--blue-wash);color:var(--blue)}
+.tag-syn{background:var(--amber-wash);color:var(--amber-ink)}
+.note{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:8px;border:1px solid var(--rule);background:#fff;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.note>svg{flex:none;margin-top:1px;color:var(--blue)}
+.note b{display:block;color:var(--ink);font-weight:600}
+.note ul{margin:4px 0 0;padding-left:18px}
+.note.warn{background:#FCF8F1;border-color:#EADBBF}.note.warn>svg{color:var(--amber-ink)}
+.note.bad{background:#FCF5F5;border-color:#EDD0D1}.note.bad>svg{color:var(--red)}
+.note.ok{background:var(--teal-wash);border-color:#C9DFDC}.note.ok>svg{color:var(--teal)}
+.notes{display:grid;gap:10px;margin:0 0 24px}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:8px}
+.panel-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--rule)}
+.panel-h h2,.panel-h h3{margin:0;font-size:14px;font-weight:600;color:var(--ink)}
+.panel-h svg{color:var(--slate)}
+.panel-b{padding:16px 18px}
+.dz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px;margin-bottom:40px}
+.sec{margin-top:40px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 14px}
+.sh h2{margin:0;font-size:17px;font-weight:600;color:var(--ink)}
+.sh p{margin:4px 0 0;font-size:13.5px;color:var(--ink-3);max-width:75ch}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:8px;background:var(--soft);border:1px solid var(--rule)}
+.seg button{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border:0;border-radius:6px;background:transparent;font-size:13px;font-weight:500;color:var(--ink-3)}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--rule),0 1px 2px rgba(16,26,43,.08)}
+.seg .ct{font-size:12px;color:var(--faint)}
+.count{font-size:12.5px;color:var(--ink-3)}
+.tbl{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:8px;box-shadow:var(--sh-1);overflow-x:auto}
+table.data{width:100%;border-collapse:collapse;font-size:13.5px}
+.data caption{text-align:left}
+.data thead th{padding:11px 14px;background:var(--head);border-bottom:1px solid var(--rule);text-align:left;font-size:12.5px;font-weight:500;color:var(--ink-3);white-space:nowrap}
+.data tbody td{padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.data tbody tr:last-child td{border-bottom:0}
+.data td.r,.data th.r{text-align:right}
+.data td.q{white-space:nowrap}
+.data tr.loc td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+.data tr.done{background:#FBFDFC}
+.li b{display:block;color:var(--ink);font-weight:500}
+.li small{color:var(--ink-3);font-size:12px}
+.src{display:flex;gap:8px;align-items:flex-start;max-width:420px}
+.src svg{flex:none;margin-top:2px}
+.src .q{color:var(--blue)}.src .p{color:var(--amber-ink)}.src .n{color:var(--red)}
+.src .t{display:block}
+.src .box{display:block;font-size:12px;color:var(--ink-3);font-family:var(--mono)}
+.why{display:block;margin-top:3px;font-size:12.5px}
+.why.ok{color:var(--teal)}.why.bad{color:var(--red)}.why.na{color:var(--ink-3)}
+.quote{font-family:var(--mono);font-size:12.5px;background:var(--cite);padding:1px 5px;border-radius:3px;color:var(--ink)}
+.cf{display:flex;align-items:center;gap:7px;font-size:13px;white-space:nowrap}
+.cf input{width:16px;height:16px;margin:0;accent-color:var(--blue)}
+.cf input:disabled+span{color:var(--faint)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;white-space:nowrap}
+.st-ok{color:var(--teal)}.st-bad{color:var(--red)}.st-warn{color:var(--amber-ink)}.st-na{color:var(--ink-3)}
+.inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.inp .v{margin:4px 0 6px;font-size:26px;font-weight:500;letter-spacing:-.02em;color:var(--ink)}
+.inp .f{font-size:13px;color:var(--ink-3)}
+.inp blockquote{margin:10px 0 0;padding:8px 12px;border-left:3px solid var(--cite);background:#FAFBFC;font:13.5px/1.5 var(--serif);color:var(--ink-2)}
+.inp .cite{margin-top:6px;font-size:12px;color:var(--ink-3)}
+.saved{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.saved li{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--rule);border-radius:8px}
+.saved li.cur{border-color:var(--blue);box-shadow:inset 3px 0 0 var(--blue)}
+.saved b{color:var(--ink);font-weight:600}
+.saved small{display:block;color:var(--ink-3);font-size:12.5px}
+.msg{min-height:20px;font-size:13.5px;line-height:1.5}
+.msg.err{color:var(--red)}.msg.okmsg{color:var(--teal);font-weight:500}
+.row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:-12px 0 20px;font-size:13px;color:var(--ink-3)}
+.meta b{font-weight:500;color:var(--ink-2)}
+.covs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.cov{padding:14px 16px;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.cov .n{font-size:13px;color:var(--ink-3)}
+.cov .v{margin:6px 0;font-size:22px;font-weight:500;color:var(--ink)}
+.run{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px;padding:14px 18px;background:#fff;border:1px solid var(--rule);border-radius:8px;box-shadow:0 -4px 16px rgba(16,26,43,.06)}
+.run .count{margin-right:auto}
+.foot{margin-top:14px;font-size:12.5px;color:var(--ink-3);max-width:90ch}
+@media (max-width:1100px){.dz,.inputs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){
+ .app{grid-template-columns:minmax(0,1fr);background:none}
+ .side{position:static;height:auto;flex-direction:row;align-items:center;flex-wrap:wrap}
+ .brand{padding:12px 16px}
+ .nav{flex-direction:row;overflow-x:auto;padding:0 8px 8px;width:100%}
+ .nav a{white-space:nowrap;padding:8px 10px}.nav a[aria-current=page]::before{display:none}
+ .side-foot{display:none}
+ .top{position:static;padding:12px 16px;flex-wrap:wrap}
+ .top-r{margin-left:0}
+ .page{padding:24px 16px 64px}
+ .run{position:static}
+}
+@media (max-width:720px){.ph h1{font-size:27px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-<main>
-<h1>Statements</h1>
-<p>Borrower statement review. The review screen is under construction; the API is at <code>/api/statements/</code>.</p>
-<p><a href="/app">Back to the application</a></p>
-</main>
-</body>
-</html>
+<a class="skip" href="#main">Skip to content</a>
+<div class="app">
+ <aside class="side" aria-label="Primary">
+  <a class="brand" href="/app#overview" aria-label="Covenant Monitor application, Portfolio Overview">
+   <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="6" fill="#18263D" stroke="#2B3D59"/><path d="M6 11.5h18" stroke="#C4AE87" stroke-width="1.6" stroke-dasharray="3 2.2"/><path d="M6 21.5l5.2-3.4 4.4 1.6L24 13" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="13" r="2.2" fill="#FFFFFF"/></svg>
+   <span><b>Covenant Monitor</b><small>Private credit</small></span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Sections"></nav>
+  <div class="side-foot"><b>Redhawk Builds 2026</b>Fictional, synthetic data. Not investment, credit or legal advice.</div>
+ </aside>
+ <div class="main">
+  <header class="top">
+   <div class="crumbs"><a href="/app#overview">Covenant Monitor</a><span aria-hidden="true">/</span><span class="here">Statements</span></div>
+   <div class="top-r"><span class="badge" id="keyBadge"></span></div>
+  </header>
+  <main id="main" tabindex="-1"><div class="page" id="page">
+   <div class="ph"><div><h1>Statements</h1>
+    <p class="lede">Read a borrower’s financial statements PDF with LlamaExtract, confirm every value against its page citation, and run the covenant tests. LlamaExtract only reads the document; every covenant figure, tie-out and test result is calculated by the server.</p></div></div>
+   <div class="dz">
+    <section class="panel" aria-labelledby="upH"><div class="panel-h" id="upHead"><h2 id="upH">Upload a statements PDF</h2></div>
+     <div class="panel-b">
+      <p class="muted" style="margin:0;font-size:13px">Income statement, balance sheet and cash flow statement with four quarterly columns. Name the file like <code>BOR-09_2026-Q3.pdf</code> so it is matched to the borrower and quarter. PDF, up to 5 MB.</p>
+      <div class="row2"><button class="btn btn-primary" type="button" id="pick" disabled>Choose PDF</button><input id="file" type="file" accept=".pdf,application/pdf" hidden></div>
+      <p class="msg" id="upMsg" role="status" aria-live="polite"></p>
+     </div>
+    </section>
+    <section class="panel" aria-labelledby="svH"><div class="panel-h" id="svHead"><h2 id="svH">Saved extractions</h2></div>
+     <div class="panel-b"><ul class="saved" id="saved"><li class="muted">Loading…</li></ul></div>
+    </section>
+   </div>
+   <div id="work"></div>
+  </div></main>
+ </div>
+</div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+function build(n,attrs,kids){if(attrs)for(const[k,v]of Object.entries(attrs)){if(v==null||v===false)continue;if(k==='class')n.setAttribute('class',v);else if(k.startsWith('on'))n[k]=v;else n.setAttribute(k,v===true?'':v);}for(const c of kids.flat(Infinity)){if(c==null||c===false)continue;n.append(c instanceof Node?c:document.createTextNode(String(c)));}return n;}
+const h=(tag,attrs,...kids)=>build(document.createElement(tag),attrs,kids);
+const sv=(tag,attrs,...kids)=>build(document.createElementNS(NS,tag),attrs,kids);
+const IC={
+ overview:['M4 4h6.5v6.5H4z','M13.5 4H20v6.5h-6.5z','M4 13.5h6.5V20H4z','M13.5 13.5H20V20h-6.5z'],
+ register:['M9 6.5h11','M9 12h11','M9 17.5h11','M4.6 6.5h.01','M4.6 12h.01','M4.6 17.5h.01'],
+ analysis:['M4 4v16h16','M8 15l3.5-4 3 2.5L20 7'],
+ method:['M12 6.6C10.5 5.4 8.4 4.8 5 4.8v13.5c3.4 0 5.5.6 7 1.8 1.5-1.2 3.6-1.8 7-1.8V4.8c-3.4 0-5.5.6-7 1.8z','M12 6.6v13.5'],
+ design:['M5 19l3.5-1 9.5-9.5a1.8 1.8 0 0 0-2.5-2.5L6 15.5z','M13.5 7.5l3 3','M4 21h16'],
+ doc:['M7 3.5h7l4.5 4.5v12.5H7z','M14 3.5V8h4.5','M9.8 12.5h5.6','M9.8 16h5.6'],
+ check:['C','M8 12.3l2.8 2.7L16 9.5'],x:['C','M9.2 9.2l5.6 5.6','M14.8 9.2l-5.6 5.6'],
+ alert:['C','M12 7.5v5.5','M12 16.3v.2'],info:['C','M12 11v5.5','M12 7.8v.2'],minus:['C','M8.5 12h7'],
+ upload:['M12 16V4.5','M7 9l5-5 5 5','M5 19.5h14'],
+ // Quoted citation (speech marks) vs location-only citation (map pin): deliberately different shapes.
+ quote:['M5 11.5h4.5V17H5z','M5 11.5c0-3 1.2-4.6 3.5-5.5','M14.5 11.5H19V17h-4.5z','M14.5 11.5c0-3 1.2-4.6 3.5-5.5'],
+ pin:['M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z','M12 12.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8z'],
+ play:['C','M10.3 8.8l5 3.2-5 3.2z'],
+};
+function icon(name,size=16,cls){const g=sv('svg',{width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':1.7,'stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true',focusable:'false',class:cls||null});for(const d of IC[name]){if(d==='C')g.append(sv('circle',{cx:12,cy:12,r:8.5}));else g.append(sv('path',{d}));}return g;}
+const NAV=[['/app#overview','Portfolio Overview','overview'],['/app#borrowers','Borrower Monitoring','register'],['/app#analysis','Covenant Analysis','analysis'],['/app#design','Covenant Designer','design'],['/statements','Statements','doc'],['/app#method','Methodology','method']];
+$('nav').replaceChildren(...NAV.map(([href,label,ic])=>h('a',{href,'aria-current':href==='/statements'?'page':null},icon(ic,18),h('span',null,label))));
+
+// Display formatting only: the server returns every amount as a cents-exact decimal string.
+const usd=s=>{if(s==null||s==='')return '—';const neg=String(s).startsWith('-');const [w,f='00']=String(s).replace('-','').split('.');return (neg?'−':'')+'$'+w.replace(/\B(?=(\d{3})+(?!\d))/g,',')+'.'+f;};
+const pct=c=>c==null?'—':Math.round(c*100)+'%';
+const fmtDate=s=>{const d=new Date(s);return isNaN(d)?s:d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});};
+const qs=new URLSearchParams(location.search);
+const forDesign=qs.get('for')==='design';
+const post=(url,b)=>fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)});
+async function getJSON(url,init){const r=await fetch(url,init);let j=null;try{j=await r.json();}catch{}if(!r.ok)throw Error(j?.error||`HTTP ${r.status}`);return j;}
+
+let S={key:false,saved:[],src:null,review:null,confirmed:new Set(),filter:'used',result:null,busy:false};
+
+/* ---------- sources: upload (only with a key) and saved extractions ---------- */
+async function loadSources(){
+ let j;try{j=await getJSON('/api/statements/saved');}catch(e){$('saved').replaceChildren(h('li',{class:'msg err'},'Could not list saved extractions: '+e.message));return;}
+ S.key=j.llama_configured===true;S.saved=j.saved||[];
+ $('keyBadge').replaceChildren(icon('info',14),S.key?'LlamaExtract enabled':'Saved extractions only');
+ $('keyBadge').title=S.key?'This server has a LlamaCloud key: uploads are extracted live and may use account credits.':'No LlamaCloud key on this server: upload is switched off; saved extractions can still be reviewed.';
+ $('pick').disabled=!S.key;
+ if(!S.key)$('upMsg').textContent='Upload is switched off on this server (no LlamaCloud key is configured). Review a saved extraction instead.';
+ renderSaved();
+}
+function renderSaved(){
+ const ul=$('saved');
+ if(!S.saved.length){ul.replaceChildren(h('li',{class:'muted'},'No saved extractions yet.'));return;}
+ ul.replaceChildren(...S.saved.map(s=>h('li',{class:S.src?.saved===s.name?'cur':null},
+  h('div',null,h('b',null,`${s.borrower_id||s.name} · ${s.period||''}`),' ',s.synthetic?h('span',{class:'tag tag-syn'},'Synthetic'):null,
+   h('small',null,`Extracted offline with LlamaExtract on ${fmtDate(s.extracted_at)}`),
+   h('small',null,`${s.pdf||s.name}${s.configuration?` · tier ${s.configuration.tier}, version ${s.configuration.version}`:''}`)),
+  h('button',{class:'btn',type:'button','aria-label':`Review ${s.pdf||s.name}`,onclick:()=>openSaved(s.name)},S.src?.saved===s.name?'Reviewing':'Review'))));
+}
+$('pick').onclick=()=>$('file').click();
+$('file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(f)await uploadPdf(f);};
+async function uploadPdf(f){
+ const say=(t,c)=>{$('upMsg').className='msg'+(c?' '+c:'');$('upMsg').textContent=t;};
+ if(!/\.pdf$/i.test(f.name))return say('Choose a PDF file.','err');
+ if(f.size>5*1024*1024)return say('The PDF is larger than 5 MB.','err');
+ say(`Uploading “${f.name}” to LlamaExtract…`);
+ const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=()=>rej(r.error);r.readAsDataURL(f);});
+ try{const j=await getJSON('/api/statements/extract',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({filename:f.name,base64})});
+  say('Extraction started. This usually takes under a minute.');openJob(j.job_id,f.name);}
+ catch(e){say('Could not start the extraction: '+e.message,'err');}
+}
+
+/* ---------- loading a statement for review ---------- */
+function setUrl(p){const u=new URL(location.href);u.search='';for(const[k,v]of Object.entries(p))if(v)u.searchParams.set(k,v);if(forDesign)u.searchParams.set('for','design');history.replaceState(null,'',u);}
+async function openSaved(name){
+ S.src={saved:name};S.result=null;S.confirmed=new Set();setUrl({saved:name});renderSaved();
+ $('work').replaceChildren(h('p',{class:'msg'},'Loading the saved extraction…'));
+ try{const j=await getJSON('/api/statements/saved?name='+encodeURIComponent(name));S.review=j;S.meta=j.saved;renderWork();}
+ catch(e){$('work').replaceChildren(h('div',{class:'note bad'},icon('x',18),h('div',null,h('b',null,'Could not load this extraction'),e.message)));}
+}
+async function openJob(id,name){
+ S.src={job_id:id,name};S.result=null;S.confirmed=new Set();setUrl({job:id,name});renderSaved();
+ const status=h('p',{class:'msg',role:'status','aria-live':'polite'},'Waiting for LlamaExtract…');$('work').replaceChildren(status);
+ for(let i=0;i<200;i++){
+  let j;try{j=await getJSON(`/api/statements/job?id=${encodeURIComponent(id)}&name=${encodeURIComponent(name||'')}`);}
+  catch(e){status.className='msg err';status.textContent='Could not read the extraction job: '+e.message;return;}
+  if(j.status==='completed'){S.review=j;S.meta={pdf:name,extracted_at:new Date().toISOString(),live:true};renderWork();return;}
+  if(j.status==='failed'){status.className='msg err';status.textContent='LlamaExtract could not read this PDF: '+(j.error||'unknown error');return;}
+  status.textContent=`Waiting for LlamaExtract… (${(i+1)*3} s)`;await new Promise(r=>setTimeout(r,3000));
+ }
+ status.className='msg err';status.textContent='The extraction is taking longer than 10 minutes. Reload the page to check again.';
+}
+
+/* ---------- review ---------- */
+function sourceCell(it){
+ if(it.citation_kind==='text')return h('div',{class:'src'},icon('quote',16,'q'),h('span',null,h('span',{class:'vh'},'Quoted citation: '),h('span',{class:'quote'},`“${it.matching_text}”`)));
+ if(it.citation_kind==='location_only'){
+  const b=it.bounding_box;
+  const why=it.confirmable?h('span',{class:'why ok'},`Ties to: ${it.tied_by[0]?.label||''}${it.tied_by.length>1?` (+${it.tied_by.length-1} more)`:''}`):h('span',{class:'why bad'},it.reason);
+  return h('div',{class:'src'},icon('pin',16,'p'),h('span',null,h('span',{class:'t'},`Located on page ${it.page} (no quoted text)`),
+   b?h('span',{class:'box',title:'Bounding box on the page, in PDF points from the top-left corner'},`box x ${Math.round(b.x)}, y ${Math.round(b.y)}, ${Math.round(b.w)} × ${Math.round(b.h)} pt`):null,why));
+ }
+ return h('div',{class:'src'},icon('x',16,'n'),h('span',null,h('span',{class:'t'},'No citation'),h('span',{class:'why bad'},it.reason||'')));
+}
+function reviewTable(){
+ const r=S.review,used=new Set(r.used);
+ const rows=r.items.filter(it=>S.filter==='all'||used.has(it.id));
+ const nUsed=r.items.filter(it=>used.has(it.id)).length;
+ const usedConfirmed=r.items.filter(it=>used.has(it.id)&&S.confirmed.has(it.id)).length;
+ const seg=h('div',{class:'seg',role:'group','aria-label':'Which values to show'},
+  [['used','Used by the covenant row',nUsed],['all','All values',r.items.length]].map(([k,l,n])=>h('button',{type:'button','aria-pressed':String(S.filter===k),onclick:()=>{S.filter=k;renderWork();}},l,h('span',{class:'ct'},n))));
+ const tb=h('tbody',null,rows.length?rows.map(it=>{
+  const on=S.confirmed.has(it.id);
+  const cb=h('input',{type:'checkbox',id:'cf-'+it.id,checked:on,disabled:!it.confirmable,'aria-describedby':it.confirmable?null:'why-'+it.id,
+   onchange:e=>{if(e.target.checked)S.confirmed.add(it.id);else S.confirmed.delete(it.id);S.result=null;renderWork(it.id);}});
+  return h('tr',{class:[it.citation_kind==='location_only'?'loc':'',on?'done':''].join(' ').trim()||null},
+   h('td',{class:'li'},h('b',null,it.label),h('small',null,it.key)),
+   h('td',{class:'num q'},it.period),
+   h('td',{class:'num r'},h('span',{title:`Printed as ${it.raw}`},usd(it.value))),
+   h('td',{class:'num'},it.page??'—'),
+   h('td',null,sourceCell(it)),
+   h('td',{class:'num r'},pct(it.confidence)),
+   h('td',null,h('label',{class:'cf',for:'cf-'+it.id},cb,h('span',null,it.confirmable?(on?'Confirmed':'Confirm'):'Cannot confirm')),
+    it.confirmable?null:h('span',{class:'vh',id:'why-'+it.id},it.reason||'')));
+ }):h('tr',null,h('td',{colspan:'7',class:'muted'},'No values to show.')));
+ return h('section',{class:'sec','aria-labelledby':'rvH'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'rvH'},'Review the extracted values'),
+   h('p',null,'Check each value against the page it cites and confirm it. Location-only values are listed first; within each group, the lowest confidence comes first. Confidence only orders this list: nothing is accepted without your confirmation.')),
+   h('div',{class:'row2',style:'margin:0'},h('span',{class:'count'},`${usedConfirmed} of ${nUsed} values used by the row confirmed`),seg)),
+  h('div',{class:'tbl'},h('table',{class:'data'},h('caption',{class:'vh'},'Extracted line items with citations and confirmation'),
+   h('thead',null,h('tr',null,['Line item','Quarter',['Value','r'],'Page','Source (citation)',['Confidence','r'],'Confirm'].map(c=>Array.isArray(c)?h('th',{scope:'col',class:c[1]},c[0]):h('th',{scope:'col'},c)))),tb)));
+}
+function inputsPanel(){
+ const r=S.review,N={ttm_ebitda_usd:'TTM EBITDA',debt_usd:'Gross debt',ttm_debt_service_usd:'TTM debt service',ttm_available_cashflow_usd:'TTM available cash flow'};
+ return h('section',{class:'sec','aria-labelledby':'inH'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'inH'},'Covenant inputs, calculated by the server'),h('p',null,'From the extracted values under the cited definitions. They become the covenant row only once every value they use is confirmed.'))),
+  h('div',{class:'inputs'},Object.entries(N).map(([k,n])=>{const v=r.inputs[k];const d=v?.definition;
+   return h('div',{class:'panel inp'},h('div',{class:'panel-b'},h('div',{class:'muted',style:'font-size:13px'},n),h('div',{class:'v num'},usd(v?.value)),h('div',{class:'f'},v?.formula||''),
+    d?h('blockquote',null,d.quote):h('p',{class:'msg err'},'Definition not found.'),
+    d?h('div',{class:'cite'},`${d.source_document}, characters ${d.start}–${d.end} · SHA-256 ${d.sha256.slice(0,12)}…`):null));})));
+}
+const TS={pass:['ok','check','Pass'],fail:['bad','x','Fail'],not_available:['na','minus','Not available']};
+function tieoutTable(){
+ const t=S.review.tieouts;
+ return h('section',{class:'sec','aria-labelledby':'toH'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'toH'},'Tie-outs'),h('p',null,'A failed blocking check stops the row. A difference from loan_covenants_extended.csv is flagged for you but does not block. The TTM-sum checks compare a figure with the same extracted values, so they never support a location-only value.'))),
+  h('div',{class:'tbl'},h('table',{class:'data'},h('caption',{class:'vh'},'Tie-out results'),
+   h('thead',null,h('tr',null,h('th',{scope:'col'},'Check'),h('th',{scope:'col',class:'r'},'Expected'),h('th',{scope:'col',class:'r'},'Extracted'),h('th',{scope:'col',class:'r'},'Difference'),h('th',{scope:'col'},'Result'))),
+   h('tbody',null,t.map(x=>{const [c,ic,l]=TS[x.status]||TS.not_available;
+    return h('tr',null,h('td',null,x.label,x.evidence===false?h('small',{class:'muted',style:'display:block'},'Consistency check (not evidence)'):null),
+     h('td',{class:'num r'},usd(x.expected)),h('td',{class:'num r'},usd(x.actual)),h('td',{class:'num r'},x.difference==null?'—':usd(x.difference)),
+     h('td',null,h('span',{class:'st st-'+(x.status==='fail'&&!x.blocking?'warn':c)},icon(x.status==='fail'&&!x.blocking?'alert':ic,15),x.status==='fail'&&!x.blocking?'Flagged':l)));})))));
+}
+const CN={leverage:'Leverage',dscr:'Debt-service coverage',fccr:'Fixed-charge coverage',current_ratio:'Current ratio'};
+const CS={pass:['ok','check','Within limit'],breach:['bad','x','Outside limit'],dormant:['na','minus','Springing, not triggered'],unevaluable:['warn','alert','Cannot be evaluated'],off:['na','minus','Not applied']};
+function resultPanel(){
+ const r=S.result;if(!r)return null;
+ if(r.error)return h('div',{class:'note bad',role:'alert'},icon('x',18),h('div',null,h('b',null,'Could not run the covenant tests'),r.error));
+ if(r.blocked){const b=r.blockers;return h('div',{class:'note bad',role:'alert'},icon('alert',18),h('div',null,h('b',null,`The covenant row is blocked (${b.length} reason${b.length>1?'s':''})`),
+  h('ul',null,b.slice(0,12).map(x=>h('li',null,x)),b.length>12?h('li',null,`and ${b.length-12} more`):null)));}
+ const e=r.engine,id=r.borrower_id;
+ const flags=r.csv_match?.flags||[];
+ const toDesigner=()=>{try{sessionStorage.setItem('cm.statements.designer',JSON.stringify({csv:r.statements_csv,company:`${id} (${S.meta?.synthetic?'synthetic ':''}statements ${r.period})`,source:r.source_document}));}catch{}location.href='/app#design';};
+ return h('section',{class:'sec','aria-labelledby':'rsH',id:'result',tabindex:'-1'},
+  h('div',{class:'sh'},h('div',null,h('h2',{id:'rsH'},`Covenant test result for ${id}, ${r.period}`),h('p',null,`Run by the covenant engine on the row built from your confirmed values (source document ${r.source_document}). A failed test is a calculation, not a legal determination of default.`))),
+  h('div',{class:'note '+(e.status==='pass'?'ok':'bad')},icon(e.status==='pass'?'check':'alert',18),h('div',null,h('b',null,e.status==='pass'?'All applied covenant tests are within their limits.':e.status==='exception'?'At least one covenant test is outside its limit.':`Engine status: ${e.status}`),
+   flags.length?`This row differs from loan_covenants_extended.csv in: ${flags.join(', ')}.`:'Every figure matches the existing CSV row for this borrower and quarter.')),
+  h('div',{class:'covs'},Object.entries(e.covenants||{}).map(([k,c])=>{const [cl,ic,l]=CS[c.status]||CS.unevaluable;
+   return h('div',{class:'cov'},h('div',{class:'n'},CN[k]||k),h('div',{class:'v num'},c.value==null?'—':c.value.toFixed(2)+'x'),
+    h('div',{class:'muted',style:'font-size:12.5px'},`${c.direction==='max'?'Maximum':'Minimum'} ${c.limit}x · ${c.mode}`),h('span',{class:'st st-'+cl},icon(ic,15),c.status==='dormant'&&c.would_status?`${l} (would ${c.would_status==='pass'?'pass':'fail'})`:l));})),
+  h('div',{class:'row2'},h('a',{class:'btn btn-primary',href:'/app#borrower-'+encodeURIComponent(id)},`Open ${id} in the application`),
+   r.statements_csv?h('button',{class:'btn',type:'button',onclick:toDesigner},'Use these line items in the Covenant Designer'):null),
+  h('details',{style:'margin-top:16px'},h('summary',null,'Covenant row (loan_covenants_extended.csv format)'),
+   h('div',{class:'tbl',style:'margin-top:10px'},h('table',{class:'data'},h('tbody',null,Object.entries(r.row).map(([k,v])=>h('tr',null,h('th',{scope:'row',style:'text-align:left;font-weight:500;color:var(--ink-3);padding:8px 14px'},k),h('td',{class:'num'},v||'—'))))))));
+}
+async function runTests(){
+ S.busy=true;renderWork();
+ const body={confirmed:[...S.confirmed],...(S.src.saved?{saved:S.src.saved}:{job_id:S.src.job_id,name:S.src.name})};
+ try{S.result=await getJSON('/api/statements/confirm',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});}
+ catch(e){S.result={error:e.message};}
+ S.busy=false;renderWork();const t=$('result');if(t)t.focus();
+}
+function renderWork(focusId){
+ const r=S.review;if(!r)return;
+ const cs=r.citation_summary,used=new Set(r.used);
+ const confirmable=r.items.filter(i=>used.has(i.id)&&i.confirmable).length;
+ const usedN=used.size;
+ const head=h('div',null,
+  h('div',{class:'sh',style:'margin-top:8px'},h('div',null,h('h2',null,`${r.borrower_id} · ${r.period}`,' ',S.meta?.synthetic?h('span',{class:'tag tag-syn'},'Synthetic'):null))),
+  h('div',{class:'meta'},h('span',null,'Document ',h('b',null,r.source_document||'—')),
+   S.meta?.live?h('span',null,h('b',null,'Extracted live with LlamaExtract')):h('span',null,h('b',null,`Extracted offline with LlamaExtract on ${fmtDate(S.meta?.extracted_at)}`)),
+   S.meta?.pdf_sha256?h('span',null,'PDF SHA-256 ',h('b',{class:'num'},S.meta.pdf_sha256.slice(0,16)+'…')):null,
+   h('span',null,'Quarters ',h('b',null,r.periods.join(', ')))),
+  h('div',{class:'notes'},
+   cs.location_only?h('div',{class:'note warn'},icon('pin',18),h('div',null,h('b',null,cs.message+'.'),
+    'LlamaExtract returned a page and bounding box for these values but no quoted text. Each is marked “Located on page N (no quoted text)” and can be confirmed only if it passes a tie-out, which is named next to it. Check them on the page first.')):null,
+   h('div',{class:'note'},icon('info',18),h('div',null,h('b',null,`${cs.quoted} of ${cs.values} values have quoted source text.`),
+    `${confirmable} of the ${usedN} values the covenant row uses can be confirmed. LlamaExtract only reads; the server calculates every figure below.`)),
+   r.problems?.length?h('div',{class:'note warn'},icon('alert',18),h('div',null,h('b',null,'Extraction notes'),h('ul',null,r.problems.map(p=>h('li',null,p))))):null));
+ const usedConfirmed=[...S.confirmed].filter(id=>used.has(id)).length;
+ const run=h('div',{class:'run'},h('span',{class:'count'},`${usedConfirmed} of ${usedN} values used by the covenant row confirmed`),
+  h('button',{class:'btn btn-primary',type:'button',id:'runBtn',disabled:S.busy,onclick:runTests},icon('play',15),S.busy?'Running…':'Run covenant tests'));
+ $('work').replaceChildren(head,reviewTable(),inputsPanel(),tieoutTable(),run,resultPanel(),
+  h('p',{class:'foot'},'Values, citations and confidence scores come from LlamaExtract; confirmations are yours. Tie-outs, covenant inputs, the covenant row and the test result are calculated on the server (lib/statements.js and the covenant engine). The synthetic statements were generated by scripts/make-statement-fixtures.py.'));
+ if(focusId){const el=$('cf-'+focusId);if(el)el.focus();}
+}
+
+/* ---------- start ---------- */
+(async()=>{
+ await loadSources();
+ if(qs.get('saved'))openSaved(qs.get('saved'));
+ else if(qs.get('job'))openJob(qs.get('job'),qs.get('name')||'');
+ else if(S.saved.length===1)openSaved(S.saved[0].name);
+ if(forDesign&&!qs.get('job')&&!qs.get('saved')){$('upMsg').className='msg';$('upMsg').textContent=S.key?'Choose the statements PDF to review it for the Covenant Designer.':'PDF extraction is switched off on this server. Review a saved extraction; once its covenant row builds, you can send its line items to the Covenant Designer.';}
+})();
+</script>
+</body></html>
