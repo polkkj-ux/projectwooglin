@@ -1,0 +1,137 @@
+{
+ "type": "object",
+ "description": "Quarterly financial statements. One entry in quarters per quarterly column, oldest first.",
+ "properties": {
+  "quarters": {
+   "type": "array",
+   "description": "One object per quarterly column printed in the statements, oldest first.",
+   "items": {
+    "type": "object",
+    "properties": {
+     "period": {
+      "type": "string",
+      "description": "The quarter this column reports, written as YYYY-QN (for example 2026-Q3)."
+     },
+     "revenue": {
+      "type": "string",
+      "description": "Revenue. Revenue / net sales for the quarter (income statement). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "ebitda": {
+      "type": "string",
+      "description": "EBITDA. Only if a line labelled EBITDA is printed. Do not calculate it. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "operating_income": {
+      "type": "string",
+      "description": "Operating income. Operating income for the quarter (income statement). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "depreciation_amortization": {
+      "type": "string",
+      "description": "Depreciation and amortization. Depreciation and amortization for the quarter. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "net_income": {
+      "type": "string",
+      "description": "Net income. Net income for the quarter. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "income_tax_expense": {
+      "type": "string",
+      "description": "Income tax expense. Income tax expense for the quarter (income statement), not taxes paid. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "interest_expense": {
+      "type": "string",
+      "description": "Interest expense. Interest expense for the quarter (income statement). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "scheduled_principal": {
+      "type": "string",
+      "description": "Scheduled principal. Scheduled principal payments for the quarter (term loan and finance leases), usually under supplemental cash flow information. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "current_portion_ltd": {
+      "type": "string",
+      "description": "Current portion of long-term debt. Current portion of long-term debt at quarter end (balance sheet). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "short_term_debt": {
+      "type": "string",
+      "description": "Short-term debt. Short-term debt or notes payable at quarter end, if a separate line is printed. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "long_term_debt": {
+      "type": "string",
+      "description": "Long-term debt. Long-term debt, net of current portion, at quarter end (balance sheet). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "total_debt": {
+      "type": "string",
+      "description": "Total debt. Total debt at quarter end, as printed (for example in a debt summary). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "capex": {
+      "type": "string",
+      "description": "Capital expenditures. Purchases of property and equipment paid in cash for the quarter (cash flow statement). Exclude equipment acquired under finance leases. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "cash_taxes": {
+      "type": "string",
+      "description": "Cash taxes paid. Income taxes paid in cash for the quarter (supplemental cash flow information). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "distributions": {
+      "type": "string",
+      "description": "Distributions. Distributions to owners or dividends paid for the quarter (cash flow statement). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "current_assets": {
+      "type": "string",
+      "description": "Current assets. Total current assets at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "current_liabilities": {
+      "type": "string",
+      "description": "Current liabilities. Total current liabilities at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "total_assets": {
+      "type": "string",
+      "description": "Total assets. Total assets at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "cash": {
+      "type": "string",
+      "description": "Cash. Cash and cash equivalents at quarter end (balance sheet). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "revolver_commitment": {
+      "type": "string",
+      "description": "Revolver commitment. Revolving credit commitment (facility size) at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "revolver_drawn": {
+      "type": "string",
+      "description": "Revolver drawn. Revolving loan balance outstanding at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "operating_expenses": {
+      "type": "string",
+      "description": "Operating expenses. Total operating expenses for the quarter (income statement). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "total_liabilities": {
+      "type": "string",
+      "description": "Total liabilities. Total liabilities at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "total_equity": {
+      "type": "string",
+      "description": "Total equity. Total equity at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "total_liabilities_and_equity": {
+      "type": "string",
+      "description": "Total liabilities and equity. Total liabilities and equity at quarter end. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "term_loan": {
+      "type": "string",
+      "description": "Term loan. Term loan balance at quarter end, including its current portion (debt summary). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "finance_lease": {
+      "type": "string",
+      "description": "Finance lease. Finance lease liabilities at quarter end, including their current portion (debt summary). Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     },
+     "change_in_working_capital": {
+      "type": "string",
+      "description": "Change in working capital. Decrease (increase) in operating working capital for the quarter (cash flow statement), with its printed sign. Copy the amount exactly as printed, as text, including commas and any parentheses or minus sign (for example \"(12,500.00)\"). Leave it empty if the line is not printed. Never calculate or estimate."
+     }
+    },
+    "required": [
+     "period"
+    ]
+   }
+  }
+ },
+ "required": [
+  "quarters"
+ ]
+}
