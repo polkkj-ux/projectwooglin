@@ -74,7 +74,7 @@ a{color:inherit}
 .menu-btn[aria-expanded=true] svg{transform:rotate(180deg)}
 
 /* hero */
-.hero{position:relative;--shot-pb:clamp(56px,6vw,88px);--cap-h:48px;--ov:calc(var(--shot-w) * .2 + var(--shot-pb) + var(--cap-h));background:linear-gradient(var(--midnight) 0,var(--midnight) calc(100% - var(--ov)),var(--ivory) calc(100% - var(--ov)));color:var(--d-ink-2);--focus:var(--champagne);overflow:hidden}
+.hero{position:relative;--shot-pb:clamp(56px,6vw,88px);--cap-h:48px;--ov:calc(var(--shot-w) * .17 + var(--shot-pb) + var(--cap-h));background:linear-gradient(var(--midnight) 0,var(--midnight) calc(100% - var(--ov)),var(--ivory) calc(100% - var(--ov)));color:var(--d-ink-2);--focus:var(--champagne);overflow:hidden}
 .hgrid{position:absolute;top:0;bottom:var(--ov);left:50%;width:min(100%,calc(1240px + 2 * var(--pad)));transform:translateX(-50%);padding:0 var(--pad);display:grid;grid-template-columns:repeat(4,1fr);pointer-events:none}
 .hgrid span{border-left:1px solid var(--d-grid)}.hgrid span:last-child{border-right:1px solid var(--d-grid)}
 .hero-in{position:relative;padding-top:calc(72px + clamp(44px,6.5vh,84px))}
@@ -90,11 +90,7 @@ a{color:inherit}
 .demo-note i{display:block;width:7px;height:7px;border-radius:50%;background:var(--champagne)}
 .hero-shot{margin:clamp(48px,7vh,80px) 0 0;padding-bottom:var(--shot-pb);perspective:1800px}
 .board{position:relative;transform-origin:50% 72%;transform:rotateX(var(--tilt,0deg)) scale(var(--sc,1))}
-.f-main{width:68%}
-.f-strip{position:relative;z-index:1;width:70%;margin:-1.5% 0 0 auto}
-.f-card{display:none}
-.shortfall{display:flex;align-items:baseline;gap:10px;margin:14px 0 0;padding:10px 14px;border-left:2px solid var(--champagne);background:var(--navy);color:var(--d-ink-2);font-size:14px;line-height:1.45;border-radius:0 4px 4px 0;width:fit-content;max-width:100%;margin-left:auto}
-.shortfall b{font:300 26px/1 var(--display);color:var(--d-ink);letter-spacing:-.01em;white-space:nowrap}
+.frame picture{display:block}
 .frame{position:relative;border-radius:8px;overflow:hidden;background:var(--ivory);outline:1px solid rgba(180,190,204,.26);outline-offset:0;box-shadow:0 40px 80px -24px rgba(6,10,20,.55),0 18px 36px -18px rgba(6,10,20,.35)}
 .frame img{width:100%}
 .hero-shot figcaption{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:16px;font-size:13.5px;color:var(--ink-3)}
@@ -229,8 +225,7 @@ html.js .step-media{display:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes lift{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 
-@media (max-width:1000px){.f-main{width:100%}.f-strip{width:92%;margin-top:-2%}}
-@media (max-width:700px){.f-main,.f-strip{display:none}.f-card{display:block;max-width:420px;margin:0 auto}}
+@media (max-width:700px){.hero .frame{max-width:420px;margin:0 auto}.hero{--ov:calc(min(var(--shot-w),420px) * .23 + var(--shot-pb) + var(--cap-h))}}
 @media (max-width:1100px){
  html.js .stage{display:none}
  html.js .step-media{display:block}
@@ -309,15 +304,9 @@ html.js .step-media{display:none}
   </div>
   <figure class="hero-shot">
    <div class="board">
-    <div class="frame f-main"><img src="/assets/hero-bor01.webp" srcset="/assets/hero-bor01.webp 912w, /assets/hero-bor01@2x.webp 1824w" sizes="(min-width:1368px) 844px, (min-width:1000px) 68vw, 100vw" width="912" height="342" fetchpriority="high" alt="Screenshot of the BOR-01 investigation for Q3 2026: 1 test failed, moved into exception. Executive summary: BOR-01 failed its debt-service coverage covenant; debt-service coverage is 1.15x, below the 1.20x minimum; cash flow of $300,000.00 against $260,000.00 of debt service; meeting the minimum required $312,000.00, a shortfall of $12,000.00."></div>
-    <div class="f-strip">
-     <div class="frame"><img src="/assets/hero-change.webp" srcset="/assets/hero-change.webp 780w, /assets/hero-change@2x.webp 1560w" sizes="(min-width:1368px) 868px, (min-width:1000px) 70vw, 92vw" width="780" height="236" alt="Screenshot of the Covenant status table for BOR-01: debt-service coverage fails at 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026, crossed the 1.20x minimum.">
-      <span class="ann" style="left:56.39%;top:61.51%;width:20.92%;height:38.24%"></span></div>
-     <p class="shortfall"><b data-k="short">$12,000</b><span>short of the <span data-k="need">$312,000</span> of cash flow the <span data-k="dscr_min">1.20x</span> minimum requires</span></p>
-    </div>
-    <div class="frame f-card"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 388w, /assets/s2b@2x.webp 776w" sizes="100vw" width="388" height="456" loading="lazy" alt="BOR-01 debt-service coverage in the covenant status table: fail, 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026; to comply, raise cash flow by $12,000.00 to $312,000.00."></div>
+    <div class="frame"><picture><source media="(max-width:700px)" srcset="/assets/hero-attention-m.webp 398w, /assets/hero-attention-m@2x.webp 796w" sizes="(max-width:460px) calc(100vw - 40px), 420px" width="398" height="228"><img src="/assets/hero-attention.webp" srcset="/assets/hero-attention.webp 1240w, /assets/hero-attention@2x.webp 2480w" sizes="(min-width:1368px) 1240px, calc(100vw - 2 * clamp(20px, 4.5vw, 64px))" width="1240" height="592" fetchpriority="high" alt="Borrowers requiring attention in Q3 2026, captured from the application and ordered by priority. BOR-02: 2 tests failed, moved into exception; its springing fixed-charge coverage now applies and fails at 1.04x against a 1.10x minimum, $16,000 short of the $286,000 required. BOR-03: 2 tests failed; debt-service coverage fell from 1.23x to 1.15x, below the 1.20x minimum, $12,000 short of the $312,000 required, and leverage of 3.07x is above the 3.00x maximum. BOR-01: 1 test failed; debt-service coverage fell from 1.23x to 1.15x, $12,000 short of the $312,000 required, while leverage and current ratio still pass."></picture></div>
    </div>
-   <figcaption><span>BOR-01 investigation, captured from the working application.</span><span>Debt-service coverage fell from <span data-k="dscr_q2">1.23x</span> in Q2 to <span data-k="dscr_q3">1.15x</span> in Q3 2026.</span></figcaption>
+   <figcaption><span>Borrowers requiring attention, captured from the working application.</span><span>Fictional borrowers and synthetic data, quarter ended September 30, 2026.</span></figcaption>
   </figure>
  </div>
 </section>

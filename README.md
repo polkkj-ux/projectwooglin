@@ -1,3 +1,11 @@
+## Product page hero (v16)
+
+The hero on `/` now shows one real screenshot: the application's **Borrowers requiring attention** list for Q3 2026. BOR-02, BOR-03 and BOR-01 appear in priority order, each with its plain-English reason and ratio-against-limit bar. It answers the headline directly: which borrowers need attention, and exactly why.
+
+- **Replaced:** the overlapping BOR-01 summary and "Change since Q2" screenshots, the "$12,000 short…" callout and the old caption. The headline, intro text, buttons and scroll tilt are unchanged.
+- **Phones (700 px and below):** a `<picture>` source swaps in BOR-01's row alone, captured from the application at phone width, so the text stays readable.
+- **Assets:** `public/assets/hero-attention.webp` (1240 and 2480 px) and `hero-attention-m.webp` (398 and 796 px), captured from production. `hero-bor01*` and `hero-change*` are removed, and `tests/policy-api.test.js` and the smoke test now check `hero-attention@2x.webp`.
+
 ## Built for the lower middle market (v14)
 
 Covenant Monitor now has features for lower-middle-market (LMM) lending: owner-operated borrowers with roughly $10M–$100M of revenue, lent to by community banks, SBA lenders and smaller private credit funds. In this market borrowers often send financials late or incomplete, and one banker covers dozens of relationships with little analyst support. Two features sit beside the covenant engine and never change it: `/api/covenants`, `/api/cure`, `/api/recommend` and `/api/policy` return byte-identical responses (`tests/invariance.test.js`).
