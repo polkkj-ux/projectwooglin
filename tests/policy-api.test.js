@@ -52,8 +52,22 @@ test('the product page is at /, the application at /app, legacy hash links are f
   assert.match(lh,/Know which borrowers/);assert.match(lh,/href="\/app"/);assert.match(lh,/location\.replace\('\/app#'\+h\)/);assert.match(lh,/addEventListener\('hashchange',go\)/);
   assert.match(land.headers.get('content-security-policy'),/img-src 'self'/);
   for(const path of ['/app','/app/','/app.html']){const r=await fetch(base+path);assert.equal(r.status,200,path);assert.match(await r.text(),/<title>Covenant Monitor<\/title>/);assert.match(r.headers.get('content-security-policy'),/default-src 'none'/);}
-  const img=await fetch(base+'/assets/hero@2x.webp');assert.equal(img.status,200);assert.equal(img.headers.get('content-type'),'image/webp');
+  const img=await fetch(base+'/assets/hero-bor01@2x.webp');assert.equal(img.status,200);assert.equal(img.headers.get('content-type'),'image/webp');
   assert.equal((await fetch(base+'/assets/nope.webp')).status,404);
   assert.equal((await fetch(base+'/fonts/newsreader-display-300.woff')).status,200);
+ }finally{s.close();}
+});
+test('the application ships the attention list, internal-rule disclosures and browser-only review notes',async()=>{
+ const {s,base}=await start();try{
+  const html=await (await fetch(base+'/app')).text();
+  for(const t of ['Borrowers requiring attention','Applicable covenant failures','Missing, invalid or unverified data','Approaching a covenant limit','Material headroom deterioration',
+   'They are not covenant terms and are not equivalent to a covenant failure','not a determination that an event of default has occurred',
+   'Kept only in this browser. It is not shared with colleagues, is not an audit record, and does not change any covenant result.',
+   'id="rules"','id="polOk"','id="setupList"','Export findings'])assert.ok(html.includes(t),t);
+  // Rule comparisons are exact integer/BigInt arithmetic on engine cents, not floating-point ratios.
+  assert.match(html,/c100\(c\.numerator_headroom_usd\)\*1000<Math\.round\(rules\.near\*10\)\*L/);
+  assert.match(html,/\*1000n<=-BigInt\(Math\.round\(rules\.drop\*10\)\)\*La\*Lb/);
+  // The uploaded-policy run button starts disabled until the reviewer confirms the text.
+  assert.match(html,/id="usePol" type="button" disabled/);
  }finally{s.close();}
 });

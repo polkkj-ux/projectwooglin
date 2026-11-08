@@ -7,6 +7,7 @@ import {authenticate,checked,importRows} from './lib/supabase.js';
 import {validateDocument,uploadDocument,startParse,getParse,saveText,extractParseText} from './lib/documents.js';
 import {searchEvidence} from './lib/citations.js';
 import {monitorCovenants,covenantColumnsError} from './lib/covenants.js';
+import {curePlan} from './lib/cure.js';
 import {recommendCovenants} from './lib/recommend.js';
 // Default monitoring data: the organizer's loan_covenants.csv values plus team-made synthetic FCCR, current ratio
 // and revolver columns (scripts/make-extended-fixture.js). Definitions missing from the organizer policy come
@@ -33,6 +34,9 @@ export async function handleRequest(req,res){
   // Covenant Designer: statements CSV in, recommended covenant package out. Stateless; nothing is stored.
   if(req.method==='GET'&&p==='/api/recommend/sample')return send(200,{name:'sample-statements.csv',csv:await rdData(SAMPLE_STATEMENTS)});
   if(req.method==='POST'&&p==='/api/recommend'){const b=await body(req);if(typeof b.csv!=='string')throw Error('csv (the statements file as text) is required');return send(200,recommendCovenants(b.csv,{cushion_pct:b.cushion_pct??undefined,company:b.company??null}));}
+  // Cure planner (v11): Gurobi proposes via OPT_URL, the exact engine re-checks; snapshot fallback for GET.
+  if(req.method==='GET'&&p==='/api/cure'){const r=await curePlan({borrower:url.searchParams.get('borrower'),period:url.searchParams.get('period')});return send(r.code,r.body);}
+  if(req.method==='POST'&&p==='/api/cure'){const b=await body(req);if(b===null||typeof b!=='object'||Array.isArray(b))throw Error('JSON object body required');const r=await curePlan({borrower:b.borrower,period:b.period,overrides:b.overrides,settings:b.settings});return send(r.code,r.body);}
   // Stateless policy parsing (no database). PDF goes to LlamaParse and may incur account usage; TXT is returned as-is.
   if(req.method==='POST'&&p==='/api/policy/parse'){const b=await body(req);if(typeof b.base64!=='string'||!/^[A-Za-z0-9+/]*={0,2}$/.test(b.base64)||typeof b.filename!=='string')throw Error('filename and base64 file required');const bytes=Buffer.from(b.base64,'base64');if(/\.txt$/i.test(b.filename)){validateDocument(bytes,b.filename);return send(200,{status:'completed',text:bytes.toString('utf8')});}if(!/\.pdf$/i.test(b.filename))throw Error('Use a PDF or TXT policy');if(!process.env.LLAMA_CLOUD_API_KEY)return send(503,{error:'PDF parsing is not enabled on this server (LLAMA_CLOUD_API_KEY is not set). Upload the policy as a .txt file instead, or add the key to the server environment.'});const r=await startParse(bytes,b.filename);const id=r?.job?.id||r?.id||r?.job_id;if(!id)return send(502,{error:'Parser did not return a job id',providerResult:r});return send(202,{status:'pending',job_id:id});}
   const pm=p.match(/^\/api\/policy\/parse\/([A-Za-z0-9-]+)$/);

@@ -12,8 +12,9 @@ ok(land.status===200&&lhtml.includes('Know which borrowers')&&lhtml.includes('hr
 ok(lhtml.includes("location.replace('/app#'+h)"),'product page forwards legacy /#overview-style links to the application');
 const page=await fetch(base+'/app');const html=await page.text();
 ok(page.status===200&&html.includes('<title>Covenant Monitor</title>')&&html.includes('id="page"')&&html.includes("load('/api/covenants')"),`GET /app serves the dashboard (${page.status})`);
+ok(html.includes('Borrowers requiring attention')&&html.includes('id="rules"')&&html.includes('Kept only in this browser'),'GET /app includes the attention list, monitoring rules and browser-only review disclosure');
 for(const r of [land,page])ok(/default-src 'none'.*img-src 'self'/.test(r.headers.get('content-security-policy')||''),`${r===land?'product page':'dashboard'} has the Content-Security-Policy header with self-hosted images`);
-const img=await fetch(base+'/assets/hero@2x.webp');ok(img.status===200&&(img.headers.get('content-type')||'').startsWith('image/webp'),`application screenshot is served (${img.status})`);
+const img=await fetch(base+'/assets/hero-bor01@2x.webp');ok(img.status===200&&(img.headers.get('content-type')||'').startsWith('image/webp'),`application screenshot is served (${img.status})`);
 const font=await fetch(base+'/fonts/inter-500.woff');ok(font.status===200,`bundled Inter font is served (${font.status})`);
 const pol=await (await fetch(base+'/api/policy')).json();ok(typeof pol.text==='string'&&pol.text.includes('DSCR is trailing'),'GET /api/policy returns the policy text for the evidence panel');
 const health=await (await fetch(base+'/api/health')).json();ok(health.ok===true,'GET /api/health ok');
@@ -32,4 +33,9 @@ const smp=await (await fetch(base+'/api/recommend/sample')).json();const rec=awa
 const parsed=await post('/api/policy/parse',{filename:'policy.txt',base64:Buffer.from(await rd('documents/loan-policy.txt')).toString('base64')});ok(parsed.status===200&&(await parsed.json()).status==='completed','policy .txt parse works');
 const pdf=await post('/api/policy/parse',{filename:'p.pdf',base64:Buffer.from('%PDF-1.4 x').toString('base64')});ok(pdf.status===503,'PDF parse clearly disabled (503) without a key');
 const xo=await fetch(base+'/api/covenants',{method:'POST',headers:{'content-type':'application/json',origin:'https://evil.example'},body:'{}'});ok(xo.status===403,'cross-origin POST refused');
+// Cure planner (v9): the deployment has no live solver, so BOR-09 2026-Q3 must come from data/cure_snapshot.json, re-checked by the exact engine.
+const cure=await (await fetch(base+'/api/cure?borrower=BOR-09&period=2026-Q3')).json();const cc=cure.options?.find(o=>o.key==='cheapest');
+ok(cure.available===true&&cure.source==='snapshot'&&/^\d+\.\d+\.\d+$/.test(cure.gurobi_version||'')&&cure.solved_at,`BOR-09 Q3 cure served from the offline snapshot (${cure.source||cure.reason}, Gurobi ${cure.gurobi_version})`);
+ok(cc?.status==='plan'&&cc.plan.verified===true&&cc.plan.total_cost_usd==='78333.34'&&cc.plan.actions==='Sell Division A; sponsor contributes $68,333.34'&&/^[0-9a-f]{64}$/.test(cc.model?.lp_sha256||''),'BOR-09 Q3 cheapest cure: sell Division A + $68,333.34, $78,333.34, verified, model SHA-256 present');
+const cov=await post('/api/cure',{borrower:'BOR-09',period:'2026-Q3',overrides:{cures_remaining_4q:0}});ok(cov.status===503,'cure what-if inputs clearly need the live solver (503) on the public deployment');
 console.log(fails?`\n${fails} check(s) failed`:'\nAll checks passed');process.exit(fails?1:0);

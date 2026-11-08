@@ -74,7 +74,7 @@ a{color:inherit}
 .menu-btn[aria-expanded=true] svg{transform:rotate(180deg)}
 
 /* hero */
-.hero{position:relative;--shot-pb:clamp(56px,6vw,88px);--cap-h:48px;--ov:calc(var(--shot-w) * .24 + var(--shot-pb) + var(--cap-h));background:linear-gradient(var(--midnight) 0,var(--midnight) calc(100% - var(--ov)),var(--ivory) calc(100% - var(--ov)));color:var(--d-ink-2);--focus:var(--champagne);overflow:hidden}
+.hero{position:relative;--shot-pb:clamp(56px,6vw,88px);--cap-h:48px;--ov:calc(var(--shot-w) * .2 + var(--shot-pb) + var(--cap-h));background:linear-gradient(var(--midnight) 0,var(--midnight) calc(100% - var(--ov)),var(--ivory) calc(100% - var(--ov)));color:var(--d-ink-2);--focus:var(--champagne);overflow:hidden}
 .hgrid{position:absolute;top:0;bottom:var(--ov);left:50%;width:min(100%,calc(1240px + 2 * var(--pad)));transform:translateX(-50%);padding:0 var(--pad);display:grid;grid-template-columns:repeat(4,1fr);pointer-events:none}
 .hgrid span{border-left:1px solid var(--d-grid)}.hgrid span:last-child{border-right:1px solid var(--d-grid)}
 .hero-in{position:relative;padding-top:calc(72px + clamp(44px,6.5vh,84px))}
@@ -89,7 +89,13 @@ a{color:inherit}
 .demo-note{display:flex;align-items:center;gap:10px;margin:22px 0 0;font-size:13.5px;color:var(--d-ink-3)}
 .demo-note i{display:block;width:7px;height:7px;border-radius:50%;background:var(--champagne)}
 .hero-shot{margin:clamp(48px,7vh,80px) 0 0;padding-bottom:var(--shot-pb);perspective:1800px}
-.frame{position:relative;border-radius:8px;overflow:hidden;background:var(--ivory);transform-origin:50% 72%;transform:rotateX(var(--tilt,0deg)) scale(var(--sc,1));outline:1px solid rgba(180,190,204,.26);outline-offset:0;box-shadow:0 40px 80px -24px rgba(6,10,20,.55),0 18px 36px -18px rgba(6,10,20,.35)}
+.board{position:relative;transform-origin:50% 72%;transform:rotateX(var(--tilt,0deg)) scale(var(--sc,1))}
+.f-main{width:68%}
+.f-strip{position:relative;z-index:1;width:70%;margin:-1.5% 0 0 auto}
+.f-card{display:none}
+.shortfall{display:flex;align-items:baseline;gap:10px;margin:14px 0 0;padding:10px 14px;border-left:2px solid var(--champagne);background:var(--navy);color:var(--d-ink-2);font-size:14px;line-height:1.45;border-radius:0 4px 4px 0;width:fit-content;max-width:100%;margin-left:auto}
+.shortfall b{font:300 26px/1 var(--display);color:var(--d-ink);letter-spacing:-.01em;white-space:nowrap}
+.frame{position:relative;border-radius:8px;overflow:hidden;background:var(--ivory);outline:1px solid rgba(180,190,204,.26);outline-offset:0;box-shadow:0 40px 80px -24px rgba(6,10,20,.55),0 18px 36px -18px rgba(6,10,20,.35)}
 .frame img{width:100%}
 .hero-shot figcaption{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:16px;font-size:13.5px;color:var(--ink-3)}
 
@@ -223,6 +229,8 @@ html.js .step-media{display:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes lift{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 
+@media (max-width:1000px){.f-main{width:100%}.f-strip{width:92%;margin-top:-2%}}
+@media (max-width:700px){.f-main,.f-strip{display:none}.f-card{display:block;max-width:420px;margin:0 auto}}
 @media (max-width:1100px){
  html.js .stage{display:none}
  html.js .step-media{display:block}
@@ -300,8 +308,16 @@ html.js .step-media{display:none}
    </div>
   </div>
   <figure class="hero-shot">
-   <div class="frame"><img src="/assets/hero.webp" srcset="/assets/hero.webp 1440w, /assets/hero@2x.webp 2880w" sizes="(min-width:1368px) 1240px, calc(100vw - 2 * clamp(20px, 4.5vw, 64px))" width="1440" height="1060" fetchpriority="high" alt="Screenshot of the Covenant Monitor Portfolio Overview for Q3 2026: 9 borrowers monitored, 9 requiring review, 7 leverage breaches and 9 debt-service coverage breaches, the four covenants in force, and the start of the borrower table."></div>
-   <figcaption><span>Portfolio Overview, captured from the working application.</span><span>Nine fictional borrowers, quarter ended September 30, 2026.</span></figcaption>
+   <div class="board">
+    <div class="frame f-main"><img src="/assets/hero-bor01.webp" srcset="/assets/hero-bor01.webp 912w, /assets/hero-bor01@2x.webp 1824w" sizes="(min-width:1368px) 844px, (min-width:1000px) 68vw, 100vw" width="912" height="342" fetchpriority="high" alt="Screenshot of the BOR-01 investigation for Q3 2026: 1 test failed, moved into exception. Executive summary: BOR-01 failed its debt-service coverage covenant; debt-service coverage is 1.15x, below the 1.20x minimum; cash flow of $300,000.00 against $260,000.00 of debt service; meeting the minimum required $312,000.00, a shortfall of $12,000.00."></div>
+    <div class="f-strip">
+     <div class="frame"><img src="/assets/hero-change.webp" srcset="/assets/hero-change.webp 780w, /assets/hero-change@2x.webp 1560w" sizes="(min-width:1368px) 868px, (min-width:1000px) 70vw, 92vw" width="780" height="236" alt="Screenshot of the Covenant status table for BOR-01: debt-service coverage fails at 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026, crossed the 1.20x minimum.">
+      <span class="ann" style="left:56.39%;top:61.51%;width:20.92%;height:38.24%"></span></div>
+     <p class="shortfall"><b data-k="short">$12,000</b><span>short of the <span data-k="need">$312,000</span> of cash flow the <span data-k="dscr_min">1.20x</span> minimum requires</span></p>
+    </div>
+    <div class="frame f-card"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 388w, /assets/s2b@2x.webp 776w" sizes="100vw" width="388" height="456" loading="lazy" alt="BOR-01 debt-service coverage in the covenant status table: fail, 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026; to comply, raise cash flow by $12,000.00 to $312,000.00."></div>
+   </div>
+   <figcaption><span>BOR-01 investigation, captured from the working application.</span><span>Debt-service coverage fell from <span data-k="dscr_q2">1.23x</span> in Q2 to <span data-k="dscr_q3">1.15x</span> in Q3 2026.</span></figcaption>
   </figure>
  </div>
 </section>
@@ -326,11 +342,11 @@ html.js .step-media{display:none}
      <span class="node" aria-hidden="true">1</span>
      <h3>Detect</h3>
      <p class="claim">Identify the borrowers that need attention.</p>
-     <p class="body">Track each borrower against its covenant thresholds every quarter and highlight potential violations, including tests that cannot be calculated.</p>
+     <p class="body">Track each borrower against its covenant thresholds every quarter. A priority-ordered list puts covenant failures first, then results that cannot be calculated or verified, then borrowers nearing a limit.</p>
      <div class="art">
       <ul class="minilist" id="detectList">
-       <li><b>BOR-01</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b1_status">1 test failed</span></span><span class="tag">New this quarter</span></li>
-       <li><b>BOR-02</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b2_status">2 tests failed</span></span><span class="tag">New this quarter</span></li>
+       <li><b>BOR-01</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b1_status">1 test failed</span></span><span class="tag">Moved into exception</span></li>
+       <li><b>BOR-02</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b2_status">2 tests failed</span></span><span class="tag">Moved into exception</span></li>
        <li><b>BOR-07</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b7_status">4 tests failed</span></span></li>
       </ul>
       <p class="art-cap">Status in Q3 2026, from the application’s results.</p>
@@ -387,7 +403,7 @@ html.js .step-media{display:none}
       <dt>Debt-service coverage</dt><dd class="bad"><span data-k="dscr_q3">1.15x</span><span class="sub">Below the <span data-k="dscr_min">1.20x</span> minimum</span></dd>
      </dl>
      <div class="step-media">
-      <figure class="shot"><img src="/assets/s1.webp" srcset="/assets/s1.webp 814w, /assets/s1@2x.webp 1628w" sizes="(min-width:1100px) 760px, 100vw" width="814" height="512" loading="lazy" alt="Borrower table sorted by borrower. BOR-01, new this quarter: 1 test failed; leverage 2.82x within the 3.00x maximum; DSCR 1.15x below the 1.20x minimum; FCCR 1.13x not triggered; current ratio 1.41x."></figure>
+      <figure class="shot"><img src="/assets/s1.webp" srcset="/assets/s1.webp 994w, /assets/s1@2x.webp 1988w" sizes="(min-width:1100px) 760px, 100vw" width="994" height="584" loading="lazy" alt="Borrower monitoring table sorted by borrower. BOR-01: 1 test failed; leverage 2.82x within the 3.00x maximum; DSCR 1.15x below the 1.20x minimum; FCCR not triggered; current ratio 1.41x; deteriorating and moved into exception; $12,000 short."></figure>
       <p class="cap-line">Portfolio Overview, borrower table sorted by borrower.</p>
      </div>
     </li>
@@ -403,14 +419,14 @@ html.js .step-media{display:none}
       <dt>Shortfall</dt><dd class="bad" data-k="short">$12,000</dd>
      </dl>
      <div class="step-media">
-      <figure class="shot"><img src="/assets/s2a.webp" srcset="/assets/s2a.webp 780w, /assets/s2a@2x.webp 1560w" sizes="(min-width:1100px) 760px, 100vw" width="780" height="632" loading="lazy" alt="BOR-01 debt-service coverage by quarter: 1.31x in Q1, 1.23x in Q2 and 1.15x in Q3 2026, the first breach of the 1.20x minimum, with the quarterly history table below."></figure>
+      <figure class="shot"><img src="/assets/s2a.webp" srcset="/assets/s2a.webp 780w, /assets/s2a@2x.webp 1560w" sizes="(min-width:1100px) 760px, 100vw" width="780" height="670" loading="lazy" alt="BOR-01 debt-service coverage by quarter: 1.31x in Q1, 1.23x in Q2 and 1.15x in Q3 2026, the first breach of the 1.20x minimum, with the quarterly history table below."></figure>
       <p class="cap-line">BOR-01 investigation: quarterly trend and history.</p>
      </div>
     </li>
     <li class="step" id="step-3" data-step="3">
      <span class="step-n" aria-hidden="true">3</span>
      <h3>Verify the evidence</h3>
-     <p>The test card shows the inputs, the result and what compliance would take. Beside it, the sentence in the loan policy that sets the 1.20x minimum is highlighted at its exact position, with a hash that proves the quotation is unaltered.</p>
+     <p>The covenant status row shows the result, the shortfall and what compliance would take, with the full calculation one click away. Beside it, the sentence in the loan policy that sets the 1.20x minimum is highlighted at its exact position, with a hash that proves the quotation is unaltered.</p>
      <dl class="figs">
       <dt>Calculation</dt><dd><span data-k="cf">$300,000</span> ÷ <span data-k="ds">$260,000</span> = <span data-k="dscr_exact">1.1538</span></dd>
       <dt>Source</dt><dd>documents/loan-policy.txt<span class="sub">Characters <span data-k="dscr_pos">101–211</span></span></dd>
@@ -418,13 +434,13 @@ html.js .step-media{display:none}
      <p class="note">Covenant Monitor flags potential breaches for an analyst to review. Whether a contractual default has occurred depends on the full agreement, cure periods and the lender’s decisions, which the tool does not assess.</p>
      <div class="step-media">
       <div class="pair">
-       <figure class="shot"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 390w, /assets/s2b@2x.webp 780w" sizes="(min-width:600px) 390px, 100vw" width="390" height="437" loading="lazy" alt="BOR-01 debt-service coverage test card: 1.15x against a 1.20x minimum; available cash flow $300,000.00, debt service $260,000.00, cash-flow headroom −$12,000.00; to comply, raise cash flow by $12,000.00 to $312,000.00."></figure>
+       <figure class="shot"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 388w, /assets/s2b@2x.webp 776w" sizes="(min-width:600px) 390px, 100vw" width="388" height="456" loading="lazy" alt="BOR-01 debt-service coverage in the covenant status table: fail, 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026; to comply, raise cash flow by $12,000.00 to $312,000.00."></figure>
        <div class="col">
         <figure class="shot"><img src="/assets/s3b.webp" srcset="/assets/s3b.webp 346w, /assets/s3b@2x.webp 692w" sizes="(min-width:600px) 346px, 100vw" width="346" height="286" loading="lazy" alt="Policy evidence panel showing documents/loan-policy.txt with the DSCR definition highlighted as failed this quarter."></figure>
         <figure class="shot"><img src="/assets/s3c.webp" srcset="/assets/s3c.webp 346w, /assets/s3c@2x.webp 692w" sizes="(min-width:600px) 346px, 100vw" width="346" height="153" loading="lazy" alt="DSCR definition citation: characters 101 to 211 of documents/loan-policy.txt, the 1.20x minimum appears in the sentence, with its SHA-256 hash."></figure>
        </div>
       </div>
-      <p class="cap-line">BOR-01 investigation: test card and policy evidence.</p>
+      <p class="cap-line">BOR-01 investigation: covenant status and policy evidence.</p>
      </div>
     </li>
    </ol>
@@ -433,18 +449,18 @@ html.js .step-media{display:none}
     <div class="stage-bar"><span id="stageCap">Portfolio Overview, sorted by borrower. Outlined: BOR-01, flagged with 1 failed test.</span>
      <div class="dots" role="group" aria-label="Story steps"><button type="button" data-go="1" aria-current="step">Detect</button><button type="button" data-go="2">Quantify</button><button type="button" data-go="3">Verify</button></div></div>
     <div class="panel on" data-panel="1" data-cap="Portfolio Overview, sorted by borrower. Outlined: BOR-01, flagged with 1 failed test.">
-     <figure class="shot"><img src="/assets/s1.webp" srcset="/assets/s1.webp 814w, /assets/s1@2x.webp 1628w" sizes="760px" width="814" height="512" alt="Borrower table sorted by borrower. BOR-01, new this quarter: 1 test failed; leverage 2.82x within the 3.00x maximum; DSCR 1.15x below the 1.20x minimum.">
-      <span class="ann" style="left:1.97%;top:10.02%;width:96.07%;height:22.36%"></span>
+     <figure class="shot"><img src="/assets/s1.webp" srcset="/assets/s1.webp 994w, /assets/s1@2x.webp 1988w" sizes="760px" width="994" height="584" alt="Borrower monitoring table sorted by borrower. BOR-01: 1 test failed; leverage 2.82x within the 3.00x maximum; DSCR 1.15x below the 1.20x minimum; $12,000 short.">
+      <span class="ann" style="left:1.61%;top:11.22%;width:96.78%;height:22.02%"></span>
      </figure>
     </div>
     <div class="panel" data-panel="2" data-cap="BOR-01 investigation. The ringed point is Q3 2026, the first quarter below the minimum.">
-     <figure class="shot"><img src="/assets/s2a.webp" srcset="/assets/s2a.webp 780w, /assets/s2a@2x.webp 1560w" sizes="760px" width="780" height="632" loading="lazy" alt="BOR-01 debt-service coverage by quarter: 1.31x in Q1, 1.23x in Q2 and 1.15x in Q3 2026, the first breach of the 1.20x minimum.">
+     <figure class="shot"><img src="/assets/s2a.webp" srcset="/assets/s2a.webp 780w, /assets/s2a@2x.webp 1560w" sizes="760px" width="780" height="670" loading="lazy" alt="BOR-01 debt-service coverage by quarter: 1.31x in Q1, 1.23x in Q2 and 1.15x in Q3 2026, the first breach of the 1.20x minimum.">
      </figure>
     </div>
-    <div class="panel" data-panel="3" data-cap="BOR-01 test card and policy evidence. Outlined: the cash-flow shortfall.">
+    <div class="panel" data-panel="3" data-cap="BOR-01 covenant status and policy evidence. Outlined: the cash-flow shortfall.">
      <div class="pair">
-      <figure class="shot"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 390w, /assets/s2b@2x.webp 780w" sizes="390px" width="390" height="437" loading="lazy" alt="BOR-01 debt-service coverage test card: 1.15x against a 1.20x minimum; cash-flow headroom −$12,000.00; to comply, raise cash flow by $12,000.00 to $312,000.00.">
-       <span class="ann" style="left:7%;top:70.2%;width:86%;height:7%"></span>
+      <figure class="shot"><img src="/assets/s2b.webp" srcset="/assets/s2b.webp 388w, /assets/s2b@2x.webp 776w" sizes="390px" width="388" height="456" loading="lazy" alt="BOR-01 debt-service coverage in the covenant status table: fail, 1.15x against a 1.20x minimum, $12,000 short, 3.8% past the limit; 1.23x in Q2 2026; to comply, raise cash flow by $12,000.00 to $312,000.00.">
+       <span class="ann" style="left:1%;top:29%;width:50%;height:19.5%"></span>
       </figure>
       <div class="col">
        <figure class="shot"><img src="/assets/s3b.webp" srcset="/assets/s3b.webp 346w, /assets/s3b@2x.webp 692w" sizes="346px" width="346" height="286" loading="lazy" alt="Policy evidence panel showing documents/loan-policy.txt with the DSCR definition highlighted."></figure>
@@ -528,7 +544,7 @@ if('IntersectionObserver' in window){
 }
 addEventListener('resize',placeInd);
 /* hero: the application view settles from a slight tilt as the page scrolls (off for reduced motion and small screens) */
-const frame=$('.frame'),still=matchMedia('(prefers-reduced-motion: reduce)'),wide=matchMedia('(min-width: 900px)');let queued=false;
+const frame=$('.board'),still=matchMedia('(prefers-reduced-motion: reduce)'),wide=matchMedia('(min-width: 900px)');let queued=false;
 function tilt(){queued=false;if(still.matches||!wide.matches){frame.style.removeProperty('--tilt');frame.style.removeProperty('--sc');return;}
  const p=Math.min(1,Math.max(0,scrollY/Math.max(320,innerHeight*.5)));frame.style.setProperty('--tilt',(9*(1-p)).toFixed(2)+'deg');frame.style.setProperty('--sc',(.955+.045*p).toFixed(4));}
 addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(tilt);}},{passive:true});addEventListener('resize',tilt);tilt();
