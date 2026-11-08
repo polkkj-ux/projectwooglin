@@ -1,6 +1,6 @@
 ## Product page capabilities (v15)
 
-The product page at `/` has a new **Capabilities** section (`#capabilities`, linked from the nav and footer) between *How it works* and *Methodology*. It explains what the submission does beyond the challenge's minimum, which is one of three covenant checks with no interface. It walks the credit cycle in five rows, each with live figures, a deep link and a real screenshot:
+The product page at `/` has a new **Capabilities** section (`#capabilities`, linked from the nav and footer) between *How it works* and *Methodology*. It explains what the submission does beyond the challenge's minimum, which is one of three covenant checks with no interface. It walks the credit cycle in five steps, each with live figures, a deep link and a real screenshot. As in *How it works*, a sticky screenshot stage follows the step being read (with buttons to jump between steps); below 1100 px each screenshot sits under its step:
 
 | Row | Feature | Figures (refreshed from) | Screenshot |
 |---|---|---|---|
