@@ -52,7 +52,7 @@ test('the product page is at /, the application at /app, legacy hash links are f
   assert.match(lh,/Know which borrowers/);assert.match(lh,/href="\/app"/);assert.match(lh,/location\.replace\('\/app#'\+h\)/);assert.match(lh,/addEventListener\('hashchange',go\)/);
   assert.match(land.headers.get('content-security-policy'),/img-src 'self'/);
   for(const path of ['/app','/app/','/app.html']){const r=await fetch(base+path);assert.equal(r.status,200,path);assert.match(await r.text(),/<title>Covenant Monitor<\/title>/);assert.match(r.headers.get('content-security-policy'),/default-src 'none'/);}
-  const img=await fetch(base+'/assets/hero@2x.webp');assert.equal(img.status,200);assert.equal(img.headers.get('content-type'),'image/webp');
+  const img=await fetch(base+'/assets/hero-bor01@2x.webp');assert.equal(img.status,200);assert.equal(img.headers.get('content-type'),'image/webp');
   assert.equal((await fetch(base+'/assets/nope.webp')).status,404);
   assert.equal((await fetch(base+'/fonts/newsreader-display-300.woff')).status,200);
  }finally{s.close();}

@@ -1,3 +1,10 @@
+## Hero preview, quarter-to-quarter movement and synthetic Q4 (v12)
+
+- **Hero preview:** the product page now shows the BOR-01 investigation instead of the dense portfolio table: the title and executive summary, and the "Change since Q2 2026" row (DSCR 1.23x to 1.15x, crossed the 1.20x minimum, $12,000.00 short). Both are screenshots of the working application at close to their native size; the shortfall callout and caption are refreshed from `/api/covenants`. Phones show the BOR-01 DSCR test card.
+- **Movement on the dashboard:** Portfolio Overview has a "Moved into exception" panel listing borrowers that passed every applicable covenant last quarter and failed one this quarter, with each covenant's previous and current ratio against its limit and the dollar gap. Borrowers already in exception with a newly failed test are listed separately. Each borrower page has a "Change since" table, and Borrower Monitoring marks the quarter each borrower moved into exception. A springing test that is not triggered is shown for context and never counted as a failure.
+- **Q4 2026 is a synthetic scenario.** The data runs to 30 September 2026; the Q4 rows are fictional figures with no forecasting method behind them. Every label, notice, chart, the methodology page and the engine's assumption text now say "synthetic scenario", not "projected". Q4 is never selected by default.
+- These are display changes only; the calculation engine's results are unchanged (independent recomputation: 773 values, 0 differences).
+
 ## Cure planner (v11)
 
 For every borrower-quarter in breach, the borrower page now shows **Cure options**: the cheapest cure the (synthetic) agreement allows, or, when none exists, proof of why not and the smallest waiver that would work. **Gurobi proposes; the exact engine decides.** Every plan is re-checked by `lib/covenants.js` in BigInt cents against every covenant the monitor applies, with the same covenant terms. A plan is shown only if it passes.
@@ -110,7 +117,7 @@ Fixed after a design, usability and functionality audit:
 - **Malformed quarter labels** (for example `Q3-2026`) are listed under Data quality and no longer appear in the quarter selector.
 - **Successful CSV uploads are confirmed** with row and borrower counts and the file name.
 - **"New this quarter"** marks borrowers that passed both tests last quarter and failed this quarter (derived only from engine statuses).
-- Status text colours now meet WCAG AA contrast; one keyboard stop per borrower; phone layout for the borrower table; plain-English definitions of EBITDA, trailing-12-month and debt service; projected quarters are worded as projected on the borrower page.
+- Status text colours now meet WCAG AA contrast; one keyboard stop per borrower; phone layout for the borrower table; plain-English definitions of EBITDA, trailing-12-month and debt service; quarters after the reporting date are labelled on the borrower page (now as synthetic scenarios, see v12).
 
 ### Two-minute demo
 

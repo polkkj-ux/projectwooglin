@@ -13,7 +13,7 @@ ok(lhtml.includes("location.replace('/app#'+h)"),'product page forwards legacy /
 const page=await fetch(base+'/app');const html=await page.text();
 ok(page.status===200&&html.includes('<title>Covenant Monitor</title>')&&html.includes('id="page"')&&html.includes("load('/api/covenants')"),`GET /app serves the dashboard (${page.status})`);
 for(const r of [land,page])ok(/default-src 'none'.*img-src 'self'/.test(r.headers.get('content-security-policy')||''),`${r===land?'product page':'dashboard'} has the Content-Security-Policy header with self-hosted images`);
-const img=await fetch(base+'/assets/hero@2x.webp');ok(img.status===200&&(img.headers.get('content-type')||'').startsWith('image/webp'),`application screenshot is served (${img.status})`);
+const img=await fetch(base+'/assets/hero-bor01@2x.webp');ok(img.status===200&&(img.headers.get('content-type')||'').startsWith('image/webp'),`application screenshot is served (${img.status})`);
 const font=await fetch(base+'/fonts/inter-500.woff');ok(font.status===200,`bundled Inter font is served (${font.status})`);
 const pol=await (await fetch(base+'/api/policy')).json();ok(typeof pol.text==='string'&&pol.text.includes('DSCR is trailing'),'GET /api/policy returns the policy text for the evidence panel');
 const health=await (await fetch(base+'/api/health')).json();ok(health.ok===true,'GET /api/health ok');
