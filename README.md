@@ -1,3 +1,4 @@
+
 ## Product page hero (v16)
 
 The hero on `/` now shows one real screenshot: the application's **Borrowers requiring attention** list for Q3 2026. BOR-02, BOR-03 and BOR-01 appear in priority order, each with its plain-English reason and ratio-against-limit bar. It answers the headline directly: which borrowers need attention, and exactly why.
@@ -5,6 +6,24 @@ The hero on `/` now shows one real screenshot: the application's **Borrowers req
 - **Replaced:** the overlapping BOR-01 summary and "Change since Q2" screenshots, the "$12,000 short…" callout and the old caption. The headline, intro text, buttons and scroll tilt are unchanged.
 - **Phones (700 px and below):** a `<picture>` source swaps in BOR-01's row alone, captured from the application at phone width, so the text stays readable.
 - **Assets:** `public/assets/hero-attention.webp` (1240 and 2480 px) and `hero-attention-m.webp` (398 and 796 px), captured from production. `hero-bor01*` and `hero-change*` are removed, and `tests/policy-api.test.js` and the smoke test now check `hero-attention@2x.webp`.
+
+## Product page capabilities (v15)
+
+The product page at `/` has a new **Capabilities** section (`#capabilities`, linked from the nav and footer) between *How it works* and *Methodology*. It explains what the submission does beyond the challenge's minimum, which is one of three covenant checks with no interface. It walks the credit cycle in five steps, each with live figures, a deep link and a real screenshot. As in *How it works*, a sticky screenshot stage follows the step being read (with buttons to jump between steps); below 1100 px each screenshot sits under its step:
+
+| Row | Feature | Figures (refreshed from) | Screenshot |
+|---|---|---|---|
+| 1 Set the terms | Four covenants, springing terms, Covenant Designer (CSV or PDF) | `POST /api/recommend` with the sample (leverage ≤ 4.00x at a 25% cushion, FCCR ≥ 1.10x springing at 35%); `/api/covenants` (BOR-02 Q2 springing FCCR 1.08x, $6,000 short of $286,000 as maintenance) | `cap-designer` |
+| 2 Collect the reports | Reporting compliance tracker | `/api/reporting` (Q3 2026: 2 of 9 late or missing; BOR-03 14 days late, 3 quarters running; BOR-07 certificate 17 days overdue) | `cap-reporting` |
+| 3 Read the statements | Statements extraction and analyst confirmation; certificate check | `/api/statements/saved` (BOR-09 96 values, 60 location-only; BOR-01 104, 64) | `cap-statements` |
+| 4 Find the cure | Cure planner: cheapest verified cure, or the smallest waiver | `/api/cure` (BOR-09 Q3 $78,333.34; BOR-07 Q3 no cure, waiver to a 1.21x minimum current ratio) | `cap-cure` |
+| 5 Prepare the call | Call prep one-pager | `/api/callprep?borrower=BOR-03&period=2026-Q2` (approaching limit, late 2 quarters running, 1 question) | `cap-callprep` |
+
+- **Figures:** each has a default checked against the production API and a `data-k` key. Every API has its own fetch, which fails silently to the default. The certificate check is described in words only, because no API serves its figures.
+- **Caveats shown on the page:** cure terms, the covenant addendum, reporting dates and the statement PDFs are synthetic. The live site serves cure plans from the saved snapshot (solved offline with Gurobi 13.0.3) and has no extraction key, so upload is off and saved extractions are shown. Extraction: our code calculates, the analyst confirms, and nothing is auto-accepted; some values have a page location but no quoted text. A cure plan or waiver is decision support, not a legal determination.
+- **Also changed:** the Platform *Detect* text names all four covenants and springing tests, and the *Deterministic calculations* ledger entry says optimisation proposals are re-checked by the exact engine before they are shown.
+- **Screenshots:** captured from production in headless Chromium at 2×, saved as 620 px and 1240 px WebP in `public/assets/cap-*.webp`. The call prep was captured at 900 px, where it is one column.
+- **Call prep layout fix (`public/app.html`, screen only):** at desktop widths the scorecard table overflowed into the *Questions* column. Status text now wraps, the prior-quarter change sits under its value, and the two columns stack at 1300 px and below. The print layout is unchanged.
 
 ## Built for the lower middle market (v14)
 

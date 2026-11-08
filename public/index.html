@@ -182,6 +182,17 @@ html.js .step-media{display:none}
 .story-cta p{margin:0 auto 0 0;font-size:15.5px;color:var(--ink-3);max-width:46ch}
 .story-cta .btn-primary{--focus:var(--navy)}
 
+/* capabilities: the rest of the credit cycle, one row per stage */
+.caps-head{align-items:end;row-gap:24px;margin-bottom:clamp(40px,5vw,64px)}
+.caps-head h2{grid-column:1/span 7;max-width:18ch}
+.caps-head .intro{grid-column:9/span 4;font-size:16.5px;color:var(--ink-3)}
+.caps .figs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.caps .step{padding-bottom:64px}
+.caps .step .tlink{display:inline-block;margin-top:14px}
+.caps .stage-bar{flex-wrap:wrap}
+.caps .panel .shot{width:min(100%,calc((100vh - 220px) * var(--ar,1)))}
+@media (min-width:1101px){.caps .step-n{background:var(--ivory)}}
+
 /* trust, methodology, closing */
 .trust{background:var(--midnight)}
 .trust-head{align-items:end;row-gap:24px;margin-bottom:clamp(48px,6vw,80px)}
@@ -236,6 +247,8 @@ html.js .step-media{display:none}
  .hero-side{grid-column:1/span 8}
  .problem h2,.flow-head h2,.story-head h2,.trust-head h2,.closing h2{grid-column:1/-1}
  .problem-copy,.flow-head p,.story-head .intro,.trust-head .intro,.closing>div{grid-column:1/span 9}
+ .caps-head h2{grid-column:1/-1}
+ .caps-head .intro{grid-column:1/span 9}
 }
 @media (max-width:900px){
  .links{display:none}
@@ -255,6 +268,7 @@ html.js .step-media{display:none}
  .ledger>div,.ledger>div:nth-child(even){padding:28px 0;border-left:0}
  .foot-in{grid-template-columns:minmax(0,1fr)}
  .hero-side,.problem-copy,.flow-head p,.story-head .intro,.trust-head .intro,.closing>div{grid-column:1/-1}
+ .caps-head .intro{grid-column:1/-1}
 }
 @media (max-width:600px){
  body{font-size:16px}
@@ -282,6 +296,7 @@ html.js .step-media{display:none}
   <nav class="links" id="links" aria-label="Primary">
    <a href="#platform">Platform</a>
    <a href="#how-it-works">How It Works</a>
+   <a href="#capabilities">Capabilities</a>
    <a href="#methodology">Methodology</a>
    <a class="btn btn-primary btn-sm" href="/app">Open Application</a>
    <span class="ind" id="ind" aria-hidden="true"></span>
@@ -331,7 +346,7 @@ html.js .step-media{display:none}
      <span class="node" aria-hidden="true">1</span>
      <h3>Detect</h3>
      <p class="claim">Identify the borrowers that need attention.</p>
-     <p class="body">Track each borrower against its covenant thresholds every quarter. A priority-ordered list puts covenant failures first, then results that cannot be calculated or verified, then borrowers nearing a limit.</p>
+     <p class="body">Track each borrower every quarter against leverage, debt-service coverage, fixed-charge coverage and the current ratio; springing tests run only when the revolver is drawn past its trigger. A priority-ordered list puts covenant failures first, then results that cannot be calculated or verified, then borrowers nearing a limit.</p>
      <div class="art">
       <ul class="minilist" id="detectList">
        <li><b>BOR-01</b><span class="st"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/></svg><span data-k="b1_status">1 test failed</span></span><span class="tag">Moved into exception</span></li>
@@ -468,6 +483,119 @@ html.js .step-media{display:none}
  </div>
 </section>
 
+<section class="sec caps" id="capabilities" aria-labelledby="capsH">
+ <div class="wrap">
+  <div class="g caps-head">
+   <h2 class="h-display" id="capsH">From the term sheet to the client call.</h2>
+   <p class="intro">The challenge asks for one of three covenant checks, with no interface required. Covenant Monitor runs all three, then follows the rest of the credit cycle. Cure terms, reporting dates, the covenant addendum and the statement PDFs are synthetic.</p>
+  </div>
+
+  <div class="story-g" id="capsG">
+   <ol class="steps">
+    <li class="step on" id="cap-1" data-step="1">
+     <span class="step-n" aria-hidden="true">1</span>
+     <h3>Set the terms</h3>
+     <p>Fixed-charge coverage and the current ratio join leverage and debt-service coverage. Each covenant can be tested every quarter, only when the revolver is at least <span data-k="des_trig">35%</span> drawn, or not at all, for the portfolio or a single borrower. The Covenant Designer reads a company’s statements as a CSV or a PDF and recommends a package with a cushion, a springing suggestion and draft term-sheet language for credit review. The fixed-charge, current-ratio and springing terms come from a team-written synthetic addendum.</p>
+     <dl class="figs">
+      <dt>Designer leverage maximum</dt><dd><span data-k="des_lev">4.00x</span><span class="sub">Sample statements, <span data-k="des_cush">25%</span> cushion</span></dd>
+      <dt>Designer fixed-charge minimum</dt><dd><span data-k="des_fccr">1.10x</span><span class="sub">Springing at <span data-k="des_trig">35%</span> revolver use</span></dd>
+      <dt>BOR-02 springing FCCR, Q2 2026</dt><dd><span data-k="b2_fccr">1.08x</span><span class="sub">Not triggered; would fail</span></dd>
+      <dt>Tested as maintenance</dt><dd class="bad"><span data-k="b2_fccr_short">$6,000</span> short<span class="sub">Of the <span data-k="b2_fccr_need">$286,000</span> required</span></dd>
+     </dl>
+     <a class="tlink" href="/app#design">Open the Covenant Designer</a>
+     <div class="step-media">
+      <figure class="shot"><img src="/assets/cap-designer.webp" srcset="/assets/cap-designer.webp 620w, /assets/cap-designer@2x.webp 1240w" sizes="100vw" width="620" height="574" loading="lazy" alt="Covenant Designer recommendation for the fictional sample company: leverage at most 4.00x, 2.86x today, 28.6% cushion, maintenance; fixed-charge coverage at least 1.10x, springing at 35% revolver use; debt-service coverage at least 1.70x, optional; current ratio at least 1.20x."></figure>
+      <p class="cap-line">Covenant Designer with the sample statements. Outlined: the recommended leverage maximum.</p>
+     </div>
+    </li>
+    <li class="step" id="cap-2" data-step="2">
+     <span class="step-n" aria-hidden="true">2</span>
+     <h3>Collect the reports</h3>
+     <p>Each quarter, the tracker shows whether the quarterly financials, the compliance certificate and the annual statements arrived on time, arrived late or are missing, most overdue first, and flags statements below the required quality. It never changes a covenant result. Received dates are synthetic; the <span data-k="rep_due_q">45</span>- and <span data-k="rep_due_a">120</span>-day deadlines are defaults the lender can change.</p>
+     <dl class="figs">
+      <dt>Late or missing, Q3 2026</dt><dd><span data-k="rep_q3">2 of 9</span> borrowers</dd>
+      <dt>BOR-03 quarterly financials</dt><dd><span data-k="rep_b3">14 days late</span><span class="sub"><span data-k="rep_b3_run">3 quarters</span> running</span></dd>
+      <dt>BOR-07 compliance certificate</dt><dd class="bad">Missing<span class="sub"><span data-k="rep_b7">17 days</span> overdue</span></dd>
+     </dl>
+     <a class="tlink" href="/app#reporting">Open Reporting</a>
+     <div class="step-media">
+      <figure class="shot"><img src="/assets/cap-reporting.webp" srcset="/assets/cap-reporting.webp 620w, /assets/cap-reporting@2x.webp 1240w" sizes="100vw" width="620" height="566" loading="lazy" alt="Reporting Compliance for Q3 2026: 2 of 9 borrowers have late or missing reports. BOR-07’s compliance certificate is not received, 17 days overdue; BOR-03’s financials and certificate arrived November 28, 14 days late, 3 quarters running; the other seven borrowers are on time."></figure>
+      <p class="cap-line">Reporting view, Q3 2026, checked as of the synthetic review date of 1 December 2026. Outlined: BOR-07 and BOR-03.</p>
+     </div>
+    </li>
+    <li class="step" id="cap-3" data-step="3">
+     <span class="step-n" aria-hidden="true">3</span>
+     <h3>Read the statements</h3>
+     <p>Each line item in a borrower’s statements PDF comes back with its page and, where available, its quoted text. Our code calculates, the analyst confirms; nothing is auto-accepted. Some values have a page location but no quoted text, and those can be confirmed only through a passing tie-out. A separate check compares a compliance certificate’s certified ratios with the engine’s. The statement PDFs are synthetic, and the live site has no extraction key, so upload is switched off and saved extractions are shown.</p>
+     <dl class="figs">
+      <dt>BOR-09 statements, Q3 2026</dt><dd><span data-k="st9_n">96</span> values<span class="sub"><span data-k="st9_loc">60</span> with a page location only</span></dd>
+      <dt>BOR-01 statements, Q3 2026</dt><dd><span data-k="st1_n">104</span> values<span class="sub"><span data-k="st1_loc">64</span> with a page location only</span></dd>
+     </dl>
+     <a class="tlink" href="/statements">Open the saved extractions</a>
+     <div class="step-media">
+      <figure class="shot"><img src="/assets/cap-statements.webp" srcset="/assets/cap-statements.webp 620w, /assets/cap-statements@2x.webp 1240w" sizes="100vw" width="620" height="433" loading="lazy" alt="Statements review for BOR-09, 2026-Q3: 60 of 96 values have a page location but no quoted text; 36 of 96 have quoted source text, and all 36 values the covenant row uses can be confirmed. The review table lists location-only values first, each with its page, box and the tie-out it passes, and an unticked Confirm box."></figure>
+      <p class="cap-line">Saved BOR-09 extraction under review. Outlined: the count of values with a page location but no quoted text.</p>
+     </div>
+    </li>
+    <li class="step" id="cap-4" data-step="4">
+     <span class="step-n" aria-hidden="true">4</span>
+     <h3>Find the cure</h3>
+     <p>For a borrower in breach, an optimisation model proposes the cheapest cure the agreement allows: an equity cure, early repayment or an asset sale. The exact engine re-checks every plan in whole cents against all four covenants and shows a plan only if it passes. When no cure exists, the tool names the blocking terms and the smallest waiver. Cure terms are synthetic. On this site the plans were solved offline with Gurobi <span data-k="cure_ver">13.0.3</span> and are served from a saved snapshot. A plan or waiver is decision support, not a legal determination.</p>
+     <dl class="figs">
+      <dt>BOR-09 cheapest cure, Q3 2026</dt><dd><span data-k="cure9_total">$78,333.34</span><span class="sub" data-k="cure9_act">Sell Division A; sponsor contributes $68,333.34</span></dd>
+      <dt>BOR-07, Q3 2026</dt><dd class="bad">No cure within the agreement<span class="sub">Smallest waiver: a <span data-k="cure7_cr">1.21x</span> minimum current ratio</span></dd>
+     </dl>
+     <a class="tlink" href="/app#borrower-BOR-09">Open BOR-09’s cure options</a>
+     <div class="step-media">
+      <figure class="shot"><img src="/assets/cap-cure.webp" srcset="/assets/cap-cure.webp 620w, /assets/cap-cure@2x.webp 1240w" sizes="100vw" width="620" height="467" loading="lazy" alt="Cure options for BOR-09, Q3 2026, on synthetic cure terms. Cheapest cure, verified by exact engine: sell Division A and the sponsor contributes $68,333.34, total cost $78,333.34; leverage after 2.9999x against a 3.00x maximum, DSCR 1.47x, fixed-charge coverage 1.39x, current ratio 1.50x. Without an asset sale: sponsor contributes $98,333.34."></figure>
+      <p class="cap-line">BOR-09 cure options, served from the saved snapshot. Outlined: the cheapest plan, verified by the exact engine.</p>
+     </div>
+    </li>
+    <li class="step" id="cap-5" data-step="5">
+     <span class="step-n" aria-hidden="true">5</span>
+     <h3>Prepare the call</h3>
+     <p>Each borrower and quarter gets one printable US-letter page: the covenant scorecard, the trend, what compliance would take, the reporting status and up to six questions for the owner. The questions come from fixed rules in code, not generated text, and every number names the API field it came from.</p>
+     <dl class="figs">
+      <dt>BOR-03 status, Q2 2026</dt><dd><span data-k="cp_status">Approaching limit</span><span class="sub">Every tested covenant passes</span></dd>
+      <dt>Reporting</dt><dd>Late <span data-k="cp_run">2 quarters</span> running</dd>
+      <dt>Questions for the owner</dt><dd data-k="cp_q">1</dd>
+     </dl>
+     <a class="tlink" href="/app#callprep-BOR-03">Open BOR-03’s call prep</a>
+     <div class="step-media">
+      <figure class="shot"><img src="/assets/cap-callprep.webp" srcset="/assets/cap-callprep.webp 620w, /assets/cap-callprep@2x.webp 1240w" sizes="100vw" width="620" height="735" loading="lazy" alt="BOR-03 call prep for Q2 2026, approaching limit: leverage 2.99x within 3.00x, DSCR 1.23x above 1.20x, FCCR dormant and would pass, current ratio 1.60x; one question for the owner: reporting has been late 2 quarters in a row; financials and certificate 12 days late."></figure>
+      <p class="cap-line">BOR-03 call prep with Q2 2026 selected; the application opens on the latest quarter. Outlined: the question for the owner.</p>
+     </div>
+    </li>
+   </ol>
+
+   <div class="stage" id="capsStage">
+    <div class="stage-bar"><span id="capsCap">Covenant Designer with the sample statements. Outlined: the recommended leverage maximum.</span>
+     <div class="dots" role="group" aria-label="Capability steps"><button type="button" data-go="1" aria-current="step">Terms</button><button type="button" data-go="2">Reports</button><button type="button" data-go="3">Statements</button><button type="button" data-go="4">Cure</button><button type="button" data-go="5">Call prep</button></div></div>
+    <div class="panel on" data-panel="1" data-cap="Covenant Designer with the sample statements. Outlined: the recommended leverage maximum.">
+     <figure class="shot" style="--ar:1.080"><img src="/assets/cap-designer.webp" srcset="/assets/cap-designer.webp 620w, /assets/cap-designer@2x.webp 1240w" sizes="780px" width="620" height="574" loading="lazy" alt="Covenant Designer recommendation for the fictional sample company: leverage at most 4.00x, 2.86x today, 28.6% cushion, maintenance; fixed-charge coverage at least 1.10x, springing at 35% revolver use; debt-service coverage at least 1.70x, optional; current ratio at least 1.20x.">
+      <span class="ann" style="left:1.04%;top:12.97%;width:48.62%;height:9.16%"></span></figure>
+    </div>
+    <div class="panel" data-panel="2" data-cap="Reporting view, Q3 2026, checked as of the synthetic review date of 1 December 2026. Outlined: BOR-07 and BOR-03.">
+     <figure class="shot" style="--ar:1.095"><img src="/assets/cap-reporting.webp" srcset="/assets/cap-reporting.webp 620w, /assets/cap-reporting@2x.webp 1240w" sizes="780px" width="620" height="566" loading="lazy" alt="Reporting Compliance for Q3 2026: 2 of 9 borrowers have late or missing reports. BOR-07’s compliance certificate is not received, 17 days overdue; BOR-03’s financials and certificate arrived November 28, 14 days late, 3 quarters running; the other seven borrowers are on time.">
+      <span class="ann" style="left:1.39%;top:23.82%;width:97.23%;height:16.57%"></span></figure>
+    </div>
+    <div class="panel" data-panel="3" data-cap="Saved BOR-09 extraction under review. Outlined: the count of values with a page location but no quoted text.">
+     <figure class="shot" style="--ar:1.432"><img src="/assets/cap-statements.webp" srcset="/assets/cap-statements.webp 620w, /assets/cap-statements@2x.webp 1240w" sizes="780px" width="620" height="433" loading="lazy" alt="Statements review for BOR-09, 2026-Q3: 60 of 96 values have a page location but no quoted text; 36 of 96 have quoted source text, and all 36 values the covenant row uses can be confirmed. The review table lists location-only values first, each with its page, box and the tie-out it passes, and an unticked Confirm box.">
+      <span class="ann" style="left:1.38%;top:10.31%;width:97.23%;height:10.74%"></span></figure>
+    </div>
+    <div class="panel" data-panel="4" data-cap="BOR-09 cure options, served from the saved snapshot. Outlined: the cheapest plan, verified by the exact engine.">
+     <figure class="shot" style="--ar:1.328"><img src="/assets/cap-cure.webp" srcset="/assets/cap-cure.webp 620w, /assets/cap-cure@2x.webp 1240w" sizes="780px" width="620" height="467" loading="lazy" alt="Cure options for BOR-09, Q3 2026, on synthetic cure terms. Cheapest cure, verified by exact engine: sell Division A and the sponsor contributes $68,333.34, total cost $78,333.34; leverage after 2.9999x against a 3.00x maximum, DSCR 1.47x, fixed-charge coverage 1.39x, current ratio 1.50x. Without an asset sale: sponsor contributes $98,333.34.">
+      <span class="ann" style="left:2.85%;top:33.97%;width:45.34%;height:29.01%"></span></figure>
+    </div>
+    <div class="panel" data-panel="5" data-cap="BOR-03 call prep with Q2 2026 selected; the application opens on the latest quarter. Outlined: the question for the owner.">
+     <figure class="shot" style="--ar:0.844"><img src="/assets/cap-callprep.webp" srcset="/assets/cap-callprep.webp 620w, /assets/cap-callprep@2x.webp 1240w" sizes="780px" width="620" height="735" loading="lazy" alt="BOR-03 call prep for Q2 2026, approaching limit: leverage 2.99x within 3.00x, DSCR 1.23x above 1.20x, FCCR dormant and would pass, current ratio 1.60x; one question for the owner: reporting has been late 2 quarters in a row; financials and certificate 12 days late.">
+      <span class="ann" style="left:2.19%;top:66.43%;width:95.62%;height:4.51%"></span></figure>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
 <section class="sec trust dark" id="methodology" aria-labelledby="trustH">
  <div class="wrap">
   <div class="g trust-head">
@@ -476,7 +604,7 @@ html.js .step-media{display:none}
   </div>
   <dl class="ledger">
    <div><dt><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h11v17h-11z"/><path d="M9.5 7h5M9.5 11h.01M12 11h.01M14.5 11h.01M9.5 14.5h.01M12 14.5h.01M14.5 14.5h.01"/></svg>Deterministic calculations</dt>
-    <dd>Covenant ratios and dollar headroom are calculated in code, not generated by a language model.<span>Exact whole-cent arithmetic; a ratio exactly at its limit passes.</span></dd></div>
+    <dd>Covenant ratios and dollar headroom are calculated in code, not generated by a language model.<span>Exact whole-cent arithmetic; a ratio exactly at its limit passes. Optimisation proposals are re-checked by the exact engine before they are shown.</span></dd></div>
    <div><dt><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4.5 4.5v12.5H7z"/><path d="M14 3.5V8h4.5M9.8 12.5h5.6M9.8 16h5.6"/></svg>Agreement-based thresholds</dt>
     <dd>Each covenant limit comes from the supplied fictional loan policy and the borrower’s data row.<span>If a row’s threshold does not appear in the policy sentence, the tool says so.</span></dd></div>
    <div><dt><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>Traceable evidence</dt>
@@ -508,7 +636,7 @@ html.js .step-media{display:none}
    <p class="sub">Private Credit Intelligence</p>
    <p class="tagline">Clarity in every covenant review.</p>
   </div>
-  <nav aria-label="Footer"><ul><li><a href="/app">Application</a></li><li><a href="/app#method">Methodology</a></li><li><a href="#how-it-works">How It Works</a></li></ul></nav>
+  <nav aria-label="Footer"><ul><li><a href="/app">Application</a></li><li><a href="/app#method">Methodology</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#capabilities">Capabilities</a></li></ul></nav>
   <p class="disc">A Redhawk Builds 2026 hackathon prototype. All borrowers and figures are fictional, synthetic data. Not affiliated with any financial institution, and not investment, credit or legal advice.</p>
  </div>
  <div class="wrap foot-base"><p>Typefaces: Newsreader and Inter, both under the SIL Open Font License.</p></div>
@@ -538,11 +666,13 @@ function tilt(){queued=false;if(still.matches||!wide.matches){frame.style.remove
  const p=Math.min(1,Math.max(0,scrollY/Math.max(320,innerHeight*.5)));frame.style.setProperty('--tilt',(9*(1-p)).toFixed(2)+'deg');frame.style.setProperty('--sc',(.955+.045*p).toFixed(4));}
 addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(tilt);}},{passive:true});addEventListener('resize',tilt);tilt();
 /* product story: the sticky view follows the step being read */
-const steps=$$('.step'),panels=$$('.panel'),dots=$$('.dots button'),cap=$('#stageCap');
+function story(g,cap){const steps=[...g.querySelectorAll('.step')],panels=[...g.querySelectorAll('.panel')],dots=[...g.querySelectorAll('.dots button')];
 function show(n){steps.forEach(s=>s.classList.toggle('on',s.dataset.step===n));panels.forEach(p=>{const on=p.dataset.panel===n;if(on&&!p.classList.contains('on'))cap.textContent=p.dataset.cap;p.classList.toggle('on',on);});dots.forEach(d=>d.dataset.go===n?d.setAttribute('aria-current','step'):d.removeAttribute('aria-current'));}
 if('IntersectionObserver' in window){const io2=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting)show(e.target.dataset.step);},{rootMargin:'-40% 0px -55% 0px'});steps.forEach(s=>io2.observe(s));}
-dots.forEach(d=>d.addEventListener('click',()=>{show(d.dataset.go);document.getElementById('step-'+d.dataset.go).scrollIntoView({block:'start'});}));
+dots.forEach(d=>d.addEventListener('click',()=>{show(d.dataset.go);steps.find(s=>s.dataset.step===d.dataset.go).scrollIntoView({block:'start'});}));}
+story($('#storyG'),$('#stageCap'));story($('#capsG'),$('#capsCap'));
 /* figures: the defaults above were checked against the engine; refresh them from the live API so they cannot drift */
+const put=V=>{for(const [k,v] of Object.entries(V))$$(`[data-k="${k}"]`).forEach(el=>{if(el.textContent!==v)el.textContent=v;});};
 const x2=v=>v.toFixed(2)+'x',usd=s=>'$'+Math.abs(Number(s)).toLocaleString('en-US',{maximumFractionDigits:2});
 fetch('/api/covenants').then(r=>r.ok?r.json():null).then(j=>{
  if(!j)return;const row=(b,p)=>j.results.find(r=>r.borrower_id===b&&r.period===p);
@@ -553,7 +683,36 @@ fetch('/api/covenants').then(r=>r.ok?r.json():null).then(j=>{
   dscr_exact:q3.dscr.value.toFixed(4),cf:usd(q3.dscr.numerator_usd??q3.inputs.ttm_available_cashflow_usd),ds:usd(q3.dscr.denominator_usd??q3.inputs.ttm_debt_service_usd),need:usd(q3.dscr.cashflow_required_usd),short:usd(q3.dscr.cashflow_headroom_usd),
   b1_status:lbl(fails(q3)),b2_status:lbl(fails(row('BOR-02','2026-Q3'))),b7_status:lbl(fails(row('BOR-07','2026-Q3')))};
  if(d){V.dscr_quote=d.quote;V.dscr_pos=`${d.start}–${d.end}`;}
- for(const [k,v] of Object.entries(V))$$(`[data-k="${k}"]`).forEach(el=>{if(el.textContent!==v)el.textContent=v;});
+ const f2=(row('BOR-02','2026-Q2')||{}).covenants?.fccr;
+ if(f2&&f2.value!=null&&f2.numerator_headroom_usd!=null){V.b2_fccr=x2(f2.value);V.b2_fccr_short=usd(f2.numerator_headroom_usd);V.b2_fccr_need=usd(f2.numerator_limit_usd);}
+ put(V);
+}).catch(()=>{});
+/* capabilities: each API refreshes its own figures and fails silently to the checked default */
+const pl=(n,w)=>`${n} ${w}${n===1?'':'s'}`;
+const api=(u,o)=>fetch(u,o).then(r=>r.ok?r.json():null);
+api('/api/recommend/sample').then(s=>s&&s.csv?api('/api/recommend',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({csv:s.csv})}):null).then(j=>{
+ if(!j||!j.recommendations)return;const rc=k=>j.recommendations.find(r=>r.key===k),lv=rc('leverage'),fc=rc('fccr'),V={};
+ if(lv)V.des_lev=x2(Number(lv.threshold));if(fc)V.des_fccr=x2(Number(fc.threshold));if(fc&&fc.trigger_pct!=null)V.des_trig=Number(fc.trigger_pct)+'%';if(j.cushion_pct!=null)V.des_cush=Number(j.cushion_pct)+'%';put(V);
+}).catch(()=>{});
+api('/api/reporting').then(j=>{
+ if(!j||!j.summary)return;const s=j.summary.find(x=>x.period==='2026-Q3');if(!s)return;const by=b=>s.late_or_missing.borrowers.find(x=>x.borrower_id===b),it=(b,d)=>(by(b)?.items||[]).find(i=>i.document===d);
+ const V={rep_q3:`${s.late_or_missing.count} of ${s.borrowers}`},b3=it('BOR-03','financials'),b7=it('BOR-07','compliance_cert');
+ if(b3&&b3.days_late!=null){V.rep_b3=pl(b3.days_late,'day')+' late';V.rep_b3_run=pl(by('BOR-03').consecutive_late_or_missing,'quarter');}
+ if(b7&&b7.status==='missing')V.rep_b7=pl(b7.days_overdue,'day');
+ const dd=j.settings&&j.settings.due_days;if(dd){V.rep_due_q=String(dd.financials);V.rep_due_a=String(dd.annual_statements);}put(V);
+}).catch(()=>{});
+api('/api/statements/saved').then(j=>{
+ if(!j||!j.saved)return;const V={};
+ for(const [b,k] of [['BOR-09','st9'],['BOR-01','st1']]){const c=j.saved.find(x=>x.borrower_id===b&&x.period==='2026-Q3')?.citation_summary;if(c){V[k+'_n']=String(c.values);V[k+'_loc']=String(c.location_only);}}put(V);
+}).catch(()=>{});
+api('/api/cure?borrower=BOR-09&period=2026-Q3').then(j=>{
+ const o=j&&j.options&&j.options[0];if(!o||o.status!=='plan')return;const V={cure9_total:usd(o.plan.total_cost_usd),cure9_act:o.plan.actions};if(j.gurobi_version)V.cure_ver=j.gurobi_version;put(V);
+}).catch(()=>{});
+api('/api/cure?borrower=BOR-07&period=2026-Q3').then(j=>{
+ const o=j&&j.options&&j.options[0];if(!o||o.status!=='no_cure'||!o.waiver||o.waiver.min_current_ratio==null)return;put({cure7_cr:x2(Number(o.waiver.min_current_ratio))});
+}).catch(()=>{});
+api('/api/callprep?borrower=BOR-03&period=2026-Q2').then(j=>{
+ if(!j||!j.header)return;const V={cp_status:j.header.status.label};if(j.questions)V.cp_q=String(j.questions.length);if(j.reporting&&j.reporting.consecutive_late_or_missing!=null)V.cp_run=pl(j.reporting.consecutive_late_or_missing,'quarter');put(V);
 }).catch(()=>{});
 </script>
 </body></html>
