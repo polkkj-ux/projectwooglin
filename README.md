@@ -1,4 +1,16 @@
 
+## Cure visibility in the application (v17)
+
+The cure planner is now easy to find in `/app`. Results are unchanged: every figure still comes from `/api/cure`, and no API response changes.
+
+- **Top of the borrower page:** when `/api/cure` returns a result, the executive summary and the dark "Suggested review step" card each show one line, for example "Cheapest verified cure: Sell Division A; sponsor contributes $68,333.34, $78,333.34 total cost (synthetic terms) · Solved offline. See cure options". With no compliant plan, the line gives the smallest waiver instead. Nothing is shown when no cure is needed or the planner is unavailable.
+- **Jump links:** a row under the borrower header (Executive summary, Covenant status, Cure options, Quarterly trend, Evidence) uses the `.seg` control. The links scroll instantly and never change the `#borrower-…` route.
+- **Order:** Cure options now comes before Quarterly trend.
+- **Covenant status:** only the failing test with the largest dollar shortfall opens automatically; the others are one click away. Tests that cannot be calculated still open.
+- **Overview:** each priority-1 borrower in "Borrowers requiring attention" gets a link, "Cheapest verified cure $X" or "No cure; waiver needed", that opens that borrower's cure options. The lines load one borrower at a time after the list renders, and fail silently.
+- **One request:** `getCure()` shares the result and any in-flight request, so the summary, the rail, the section and the Overview call `/api/cure` once per borrower, quarter and terms. Before, a page called it twice.
+- **Effect at 1440×900 (Q3 2026):** "Cure options" moved from 5,848 px to 2,728 px on BOR-09, and from 3,249 px to 2,560 px on BOR-01. The cure line is visible without scrolling.
+
 ## Product page hero (v16)
 
 The hero on `/` now shows one real screenshot: the application's **Borrowers requiring attention** list for Q3 2026. BOR-02, BOR-03 and BOR-01 appear in priority order, each with its plain-English reason and ratio-against-limit bar. It answers the headline directly: which borrowers need attention, and exactly why.
