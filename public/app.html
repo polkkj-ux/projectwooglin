@@ -1453,11 +1453,12 @@ function calcTable(r,k,c){
 }
 function showEvidence(k){
  const m=document.querySelector(`.doctext mark[data-k="${CSS.escape(k)}"]`);if(!m)return;
- const pre=m.closest('.doctext'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
- pre.closest('.panel')?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+ // An instant jump: smooth scrolling is not run by every browser, and the highlight marks where the reader landed.
+ const pre=m.closest('.doctext');
+ pre.closest('.panel')?.scrollIntoView({block:'start'});
  pre.scrollTop=Math.max(0,m.offsetTop-pre.offsetTop-28);
  m.classList.remove('flash');void m.getBoundingClientRect();m.classList.add('flash');
- setTimeout(()=>pre.focus({preventScroll:true}),reduce?0:450);
+ pre.focus({preventScroll:true});
 }
 function agreement(k,c){
  const d=data.policy?.definitions?.[k],mism=(data.policy?.warnings||[]).some(w=>w.includes(`for ${k} `)),sp=c.mode==='springing'?data.policy?.definitions?.springing:null;
