@@ -4,7 +4,7 @@
   "outputDirectory": "public",
   "functions": {
     "api/index.js": {
-      "includeFiles": "{data/**,public/index.html,public/app.html,public/fonts/**}",
+      "includeFiles": "{data/**,public/index.html,public/app.html,public/statements.html,public/fonts/**}",
       "maxDuration": 30
     }
   },
@@ -16,6 +16,14 @@
     {
       "source": "/app/",
       "destination": "/app.html"
+    },
+    {
+      "source": "/statements",
+      "destination": "/statements.html"
+    },
+    {
+      "source": "/statements/",
+      "destination": "/statements.html"
     },
     {
       "source": "/api/:path*",

@@ -10,6 +10,10 @@ const ctx={csvRows,definitionsText:await loadDefinitions(),policyText:await rd('
 const run=(id,job,opts={})=>{const norm=normalizeExtraction(job);const items=reviewItems(norm);
  return computeStatement(norm,{borrower_id:id,period:'2026-Q3',source_document:`${id}_2026-Q3.pdf`,confirmed:opts.confirmed??allConfirmable(items),...ctx});};
 const without=(o,...ks)=>{const c=structuredClone(o);for(const k of ks)delete c[k];return c;};
+// Compare only the financial and covenant columns: other branches add reporting columns (received dates,
+// statement quality) to loan_covenants_extended.csv, which statements extraction does not produce.
+const FIN_COLS=CSV_COLUMNS.filter(k=>!['record_id','source_document','synthetic'].includes(k));
+const pick=(o,ks)=>Object.fromEntries(ks.map(k=>[k,o[k]??'']));
 
 test('schema fields are exactly the Covenant Designer ITEMS keys per quarter, plus tie-out-only fields',async()=>{
  const s=JSON.parse(await rd('statements/schema.json'));
@@ -65,9 +69,9 @@ for(const id of ['BOR-09','BOR-01'])test(`clean ${id} extraction yields exactly 
  assert.equal(r.blocked,false,r.blockers.join(' | '));
  const csvRow=csvRows.find(x=>x.borrower_id===id&&x.period==='2026-Q3');
  assert.deepEqual(Object.keys(r.row),CSV_COLUMNS);
- assert.deepEqual(without(r.row,'source_document'),without(csvRow,'source_document'));
- assert.equal(r.row.source_document,`${id}_2026-Q3.pdf`);
- assert.deepEqual(without(r.engine,'source_document'),without(evaluateRow(csvRow),'source_document'));
+ assert.deepEqual(pick(r.row,FIN_COLS),pick(csvRow,FIN_COLS));
+ assert.equal(r.row.source_document,`${id}_2026-Q3.pdf`);assert.equal(r.row.record_id,csvRow.record_id);
+ assert.deepEqual(without(r.engine,'source_document'),without(evaluateRow(pick(csvRow,CSV_COLUMNS)),'source_document'));
  assert.deepEqual(r.csv_match.flags,[]);
  assert.ok(r.tieouts.filter(t=>t.blocking).every(t=>t.status==='pass'));
  assert.equal(r.tieouts.filter(t=>t.id.endsWith(':balance_sheet')).length,4);
