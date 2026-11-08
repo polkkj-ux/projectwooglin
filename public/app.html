@@ -750,6 +750,9 @@ mark.cite.flash{animation:flash 1.6s ease-out}
 .cp-cites{margin:4px 0 6px;padding-left:16px;display:grid;gap:3px}
 .cp-cites span{color:var(--ink-3)}
 .cp-legal{display:flex;gap:6px;align-items:flex-start;font-weight:500;color:var(--ink-2)}
+/* On screen the scorecard must fit its column: status text wraps, the prior-quarter change sits under its value, and the two columns stack where the content area is narrow. Print keeps its own layout. */
+@media screen{.cp-tbl .st{white-space:normal}.cp-tbl td .cp-chg{display:flex;justify-content:flex-end;margin-top:2px}}
+@media screen and (max-width:1300px){.cp-cols{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:900px){.cp-cols{grid-template-columns:minmax(0,1fr)}.cp{padding:20px 18px}}
 @media (max-width:720px){.cp-tbl{font-size:12px}.cp-tbl th,.cp-tbl td{padding:5px 4px}.cp-scroll,.cp-sec{overflow-x:auto}.cp h1{font-size:23px}.cp-rep li{grid-template-columns:minmax(0,1fr)}}
 /* Printing: only while the call prep view is showing (body.cp-print); every other view prints as before. */
